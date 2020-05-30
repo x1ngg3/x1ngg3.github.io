@@ -5,8 +5,6 @@
   <!-- SEO相关 -->
   
     
-      <meta name="robots" content="noindex,follow">
-    
   
   <!-- 渲染优化 -->
   <meta name="renderer" content="webkit">
@@ -18,8 +16,12 @@
 
   <!-- 页面元数据 -->
   
-    <title>Archive: 2020/5 - X1ngg3</title>
+    <title>Here I Love You - X1ngg3</title>
   
+    <meta name="keywords" content="XCTF">
+  
+  
+    <meta name="description" content="XCTF-RE进阶区部分题解（持续更新）">
   
 
   <!-- feed -->
@@ -70,85 +72,7 @@
 
 <body>
   
-  <div class="cover-wrapper">
-    
-      <cover class='cover  half'>
-        <div class='cover-body'>
-  <div class='a'>
-    
-    
-      <p class="title">X1ngg3</p>
-    
-    
-      <p class="subtitle">Welcome to my little world</p>
-    
-  </div>
-  <div class='b'>
-    
-      <div class="m_search">
-        <form name="searchform" class="form u-search-form">
-          <input type="text" class="input u-search-input" placeholder="" />
-          <i class="icon fas fa-search fa-fw"></i>
-        </form>
-      </div>
-    
-    <div class='menu navigation'>
-      <ul class='cover-list-h'>
-        
-          
-            <li>
-              <a class="nav home"
-                href="/categories/"
-                
-                
-                id="categories">
-                <i class='fas fa-book fa-fw'></i>DOC
-              </a>
-            </li>
-          
-            <li>
-              <a class="nav home"
-                href="/archives/"
-                
-                
-                id="archives">
-                <i class='fas fa-rss fa-fw'></i>BLOG
-              </a>
-            </li>
-          
-            <li>
-              <a class="nav home"
-                href="https://github.com/x1ngg3"
-                
-                  rel="external nofollow noopener noreferrer"
-                
-                
-                  target="_blank"
-                
-                id="https:githubcomx1ngg3">
-                <i class='fas fa-file-code fa-fw'></i>CODE
-              </a>
-            </li>
-          
-            <li>
-              <a class="nav home"
-                href="/linkto/"
-                
-                
-                id="linkto">
-                <i class='fas fa-handshake fa-fw'></i>LINKS
-              </a>
-            </li>
-          
-        
-      </ul>
-    </div>
-  </div>
-</div>
-
-      </cover>
-    
-    <div id="loading-bar-wrapper">
+  <div id="loading-bar-wrapper">
   <div id="loading-bar"></div>
 </div>
 <header class="l_header shadow blur">
@@ -401,34 +325,18 @@
 
 <script>setLoadingBarProgress(40);</script>
 
-  </div>
 
 
-  <div class="l_body">
+  <div class="l_body nocover">
     <div class='body-wrapper'>
       
 
 <div class='l_main'>
-	
-		
-  <section class="post-list ">
-    
-      
-        
-          
-        
-          
-        
-          
-        
-      
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
   
+
+  
+    <article id="post" class="post white-box reveal shadow article-type-post" itemscope itemprop="blogPost">
+      
 
 
   <section class='meta'>
@@ -438,11 +346,11 @@
       <div class="meta" id="header-meta">
         
           
-  <h2 class="title">
+  <h1 class="title">
     <a href="/2020/05/30/%E4%BA%BF%E5%A4%A9%E4%B8%80%E9%81%93RE/">
       Here I Love You
     </a>
-  </h2>
+  </h1>
 
 
         
@@ -489,11 +397,6 @@
 
             
           
-            
-              
-
-            
-          
         </div>
         
           <hr>
@@ -503,299 +406,74 @@
   </section>
 
 
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>XCTF-RE进阶区部分题解（持续更新）</p>
-      
-    </div>
-    
-      
-        <div class="button readmore">
-          <a href="/2020/05/30/%E4%BA%BF%E5%A4%A9%E4%B8%80%E9%81%93RE/">
-            阅读全文 <i class="fas fa-chevron-right"></i>
-          </a>
-        </div>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
           
-  <h2 class="title">
-    <a href="/2020/05/25/LR%E8%B0%83%E8%89%B2/">
-      如何调出好莱坞中爱用的的橙青色调
-    </a>
-  </h2>
+          <p>XCTF-RE进阶区部分题解（持续更新）</p>
+<a id="more"></a>
 
+<h3 id="tt3441810"><a href="#tt3441810" class="headerlink" title="tt3441810"></a>tt3441810</h3><p>这题说是逆向确实有些勉强了，但是了解到了一点<strong>xxd指令</strong>（皮毛）</p>
+<p>首先用exeinfope或者file指令查看文件类型：ASCII text, with CRLF line terminators</p>
+<p>拖进sublime查看一下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">00400080  68 66 6C 00 00 48 BF 01  00 00 00 00 00 00 00 48</span><br><span class="line">00400090  8D 34 24 48 BA 02 00 00  00 00 00 00 00 48 B8 01</span><br><span class="line">004000A0  00 00 00 00 00 00 00 0F  05 68 61 67 00 00 48 BF</span><br><span class="line">004000B0  01 00 00 00 00 00 00 00  48 8D 34 24 48 BA 02 00</span><br><span class="line">004000C0  00 00 00 00 00 00 48 B8  01 00 00 00 00 00 00 00</span><br><span class="line">004000D0  0F 05 68 7B 70 00 00 48  BF 01 00 00 00 00 00 00</span><br><span class="line">004000E0  00 48 8D 34 24 48 BA 02  00 00 00 00 00 00 00 48</span><br><span class="line">004000F0  B8 01 00 00 00 00 00 00  00 0F 05 68 6F 70 00 00</span><br><span class="line">00400100  48 BF 01 00 00 00 00 00  00 00 48 8D 34 24 48 BA</span><br><span class="line">00400110  02 00 00 00 00 00 00 00  48 B8 01 00 00 00 00 00</span><br><span class="line">00400120  00 00 0F 05 68 70 6F 00  00 48 BF 01 00 00 00 00</span><br><span class="line">00400130  00 00 00 48 8D 34 24 48  BA 02 00 00 00 00 00 00</span><br><span class="line">00400140  00 48 B8 01 00 00 00 00  00 00 00 0F 05 68 70 72</span><br><span class="line">00400150  00 00 48 BF 01 00 00 00  00 00 00 00 48 8D 34 24</span><br><span class="line">00400160  48 BA 02 00 00 00 00 00  00 00 48 B8 01 00 00 00</span><br><span class="line">00400170  00 00 00 00 0F 05 68 65  74 00 00 48 BF 01 00 00</span><br><span class="line">00400180  00 00 00 00 00 48 8D 34  24 48 BA 02 00 00 00 00</span><br><span class="line">00400190  00 00 00 48 B8 01 00 00  00 00 00 00 00 0F 05 68</span><br><span class="line">004001A0  7D 0A 00 00 48 BF 01 00  00 00 00 00 00 00 48 8D</span><br><span class="line">004001B0  34 24 48 BA 02 00 00 00  00 00 00 00 48 B8 01 00</span><br><span class="line">004001C0  00 00 00 00 00 00 0F 05  48 31 FF 48 B8 3C 00 00</span><br><span class="line">004001D0  00 00 00 00 00 0F 05</span><br></pre></td></tr></table></figure>
 
-        
-        <div class='new-meta-box'>
+<p>这里可以写脚本把16进制转为ASCII码，这里介绍学到的用xxd指令转换</p>
+<p>关于xxd指令的内容，我没有找到一篇说写的很好的，这里放两篇勉强能冲的：</p>
+<p>1.<a href="https://www.sohu.com/a/341144249_610671" target="_blank" rel="noopener">https://www.sohu.com/a/341144249_610671</a></p>
+<p>2.<a href="https://blog.csdn.net/xingyyn78/article/details/79438853" target="_blank" rel="noopener">https://blog.csdn.net/xingyyn78/article/details/79438853</a></p>
+<p><img src="https://i.loli.net/2020/05/30/P5W3ukyeviQx7jr.png" alt="image-20200530222808369"></p>
+<p>到这里可以直接进行分析了，规律还是很明显的，或者嫌看着难受可以先选出可打印字符：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="string">"@�hflH�H@��4$H�H�@�hagH�@�H�4$H�@�H�@�h&#123;pH�@�H�4$H�H@��hop@H�H�4$H�@H�@ hpoH�@0H�4$H�@@H�hpr@PH�H�4$@`H�H�@phetH�@�H�4$H�@�H�h@�&#125;H�H�@�4$H�H�@�H1�H�&lt;@� "</span></span><br><span class="line">flag = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(a)):</span><br><span class="line">  <span class="keyword">if</span>(ord(a[i]) &gt;= <span class="number">32</span> <span class="keyword">and</span> ord(a[i]) &lt;= <span class="number">125</span>):</span><br><span class="line">    flag += a[i]</span><br><span class="line">print(flag)</span><br></pre></td></tr></table></figure>
+
+<p>得到字符串：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@hflHH@4$HH@hagH@H4$H@H@h&#123;pH@H4$HH@hop@HH4$H@H@ hpoH@0H4$H@@Hhpr@PHH4$@&#96;HH@phetH@H4$H@Hh@&#125;HH@4$HH@H1H&lt;@</span><br></pre></td></tr></table></figure>
+
+<p>很明显可以观察到我们需要的是h后面H之前（有时是@）的字符</p>
+<p>得到flag：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag&#123;poppopret&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后交了很多次发现不对，<strong>去掉flag{}即可</strong></p>
+<p>这里额外介绍一个一条指令秒的题解，连接<a href="https://github.com/ctfs/write-ups-2014/tree/master/tinyctf-2014/tt3441810" target="_blank" rel="noopener">https://github.com/ctfs/write-ups-2014/tree/master/tinyctf-2014/tt3441810</a></p>
+
           
-            
-          
-            
+            <div class='article_footer'>
               
-<div class='new-meta-item author'>
-  <a href="https://x1ngg3.github.io" rel="nofollow">
-    <img src="https://i.loli.net/2020/05/24/ud4apZVzXN3lnMS.jpg">
-    <p>x1ngg3</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/LR/' rel="nofollow">
-      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>LR</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：May 25, 2020</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>新开了个人博客，先写个调色分享练练手，奥里给~</p>
-      
-    </div>
-    
-      
-        <div class="button readmore">
-          <a href="/2020/05/25/LR%E8%B0%83%E8%89%B2/">
-            阅读全文 <i class="fas fa-chevron-right"></i>
-          </a>
-        </div>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2020/05/24/%E4%BA%8C%E5%8D%81%E9%A6%96%E6%83%85%E8%AF%97%E5%92%8C%E4%B8%80%E9%A6%96%E7%BB%9D%E6%9C%9B%E7%9A%84%E6%AD%8C%E4%B9%8B%E5%8D%81%E5%85%AB/">
-      Here I Love You
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a href="https://x1ngg3.github.io" rel="nofollow">
-    <img src="https://i.loli.net/2020/05/24/ud4apZVzXN3lnMS.jpg">
-    <p>x1ngg3</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/Poem/' rel="nofollow">
-      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>Poem</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：May 24, 2020</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在此我爱你</p>
-      
-    </div>
-    
-      
-        <div class="button readmore">
-          <a href="/2020/05/24/%E4%BA%8C%E5%8D%81%E9%A6%96%E6%83%85%E8%AF%97%E5%92%8C%E4%B8%80%E9%A6%96%E7%BB%9D%E6%9C%9B%E7%9A%84%E6%AD%8C%E4%B9%8B%E5%8D%81%E5%85%AB/">
-            阅读全文 <i class="fas fa-chevron-right"></i>
-          </a>
-        </div>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-    
-  </section>
-  
-    
-    <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
-    
-    
-
-  
-
-
-	
-</div>
-<aside class='l_side'>
-  
+                
   
     
     
 
-<section class="widget blogger shadow desktop mobile">
+
+
+  
+
+  
+    
+    
+
+
+
+  
+
+  
+    
+    
+
+<section class="widget copyright  desktop mobile">
   <div class='content'>
     
-      
-        <a class='avatar flat-box' href='/'>
-          <img no-lazy src='https://i.loli.net/2020/05/24/ud4apZVzXN3lnMS.jpg'/>
-        </a>
-      
-    
-    
-      <div class='text'>
-        
-        
-        
-          <p><span id="jinrishici-sentence">X1ngg3</span></p>
-          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
-        
-      </div>
-    
-    
-      <div class="social-wrapper">
+      <blockquote>
         
           
-            <a href="https://x1ngg3.github.io"
-              class="social fas fa-rss flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
+            <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
           
         
           
-            <a href="mailto:x1ngg3@foxmail.com"
-              class="social fas fa-envelope flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
+            <p>本文永久链接是：<a href=http://x1ngg3.github.io/2020/05/30/%E4%BA%BF%E5%A4%A9%E4%B8%80%E9%81%93RE/>http://x1ngg3.github.io/2020/05/30/%E4%BA%BF%E5%A4%A9%E4%B8%80%E9%81%93RE/</a></p>
           
         
-          
-            <a href="https://github.com/x1ngg3"
-              class="social fab fa-github flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
-          
-        
-          
-            <a href="https://music.163.com/#/user/home?id=395984459"
-              class="social fas fa-headphones-alt flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
-          
-        
-      </div>
+      </blockquote>
     
   </div>
 </section>
@@ -805,63 +483,190 @@
   
     
     
+
+<section class="widget qrcode  desktop mobile">
   
 
-  <section class="widget category shadow desktop">
+  <div class='content article-entry'>
+    
+  </div>
+</section>
+
+  
+
+
+              
+            </div>
+          
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-05-30T22:47:28+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：May 30, 2020</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/XCTF/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>XCTF</p></a></div>
+
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://connect.qq.com/widget/shareqq/index.html?url=http://x1ngg3.github.io/2020/05/30/%E4%BA%BF%E5%A4%A9%E4%B8%80%E9%81%93RE/&title=Here I Love You - X1ngg3&summary=XCTF-RE进阶区部分题解（持续更新）"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://x1ngg3.github.io/2020/05/30/%E4%BA%BF%E5%A4%A9%E4%B8%80%E9%81%93RE/&title=Here I Love You - X1ngg3&summary=XCTF-RE进阶区部分题解（持续更新）"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://service.weibo.com/share/share.php?url=http://x1ngg3.github.io/2020/05/30/%E4%BA%BF%E5%A4%A9%E4%B8%80%E9%81%93RE/&title=Here I Love You - X1ngg3&summary=XCTF-RE进阶区部分题解（持续更新）"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+          <div class="prev-next">
+            
+            
+              <a class='next' href='/2020/05/25/LR%E8%B0%83%E8%89%B2/'>
+                <p class='title'>如何调出好莱坞中爱用的的橙青色调<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>新开了个人博客，先写个调色分享练练手，奥里给~
+
+
+调色思路橙青色调的整体思路其实很简单，高光偏橙黄，阴影偏青蓝。饱和适度，对比适度，大体跟着感觉走就行。
+基本面板首先，进入LR，可以看到图片长...</p>
+              </a>
+            
+          </div>
+        
+      </section>
+    </article>
+  
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box reveal comments shadow">
+    <section class="article typo">
+      <p ct><i class='fas fa-comments'></i> 评论</p>
+      
+      
+      
+      
+      
+      
+        <section id="comments">
+          <div id="valine_container" class="valine_thread">
+            <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
+          </div>
+        </section>
+      
+      
+    </section>
+  </article>
+
+
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: 'Here I Love You',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<aside class='l_side'>
+  
+  
+
+  
+    
+    
+
+
+  <section class="widget toc-wrapper shadow desktop mobile">
     
   <header>
     
-      <a href='/blog/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
     
   </header>
 
 
     <div class='content'>
-      <ul class="entry navigation">
-        
-          <li><a class="flat-box"
-            title="/categories/LR/" href="/categories/LR/"
-            id="categoriesLR"
-            ><div class='name'>LR</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/Poem/" href="/categories/Poem/"
-            id="categoriesPoem"
-            ><div class='name'>Poem</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/RE/" href="/categories/RE/"
-            id="categoriesRE"
-            ><div class='name'>RE</div><div class='badge'>(1)</div></a></li>
-        
-      </ul>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#tt3441810"><span class="toc-text">tt3441810</span></a></li></ol>
     </div>
   </section>
 
-
-  
-
-  
-    
-    
-  
-
-  <section class="widget tagcloud shadow desktop mobile">
-    
-  <header>
-    
-      <a href='/blog/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
-    
-  </header>
-
-
-    <div class='content'>
-      <a href="/tags/XCTF/" style="font-size: 14px; color: #999">XCTF</a> <a href="/tags/poem/" style="font-size: 14px; color: #999">poem</a> <a href="/tags/%E6%A9%99%E9%9D%92/" style="font-size: 14px; color: #999">橙青</a> <a href="/tags/%E7%94%B5%E5%BD%B1%E6%84%9F/" style="font-size: 14px; color: #999">电影感</a> <a href="/tags/%E8%B0%83%E8%89%B2/" style="font-size: 14px; color: #999">调色</a>
-    </div>
-  </section>
-
-
-  
 
   
 
@@ -960,14 +765,6 @@
   </footer>
 
 <script>setLoadingBarProgress(80);</script>
-
-
-
-
-	<!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
-	
-
-	
 
 
       <script>setLoadingBarProgress(60);</script>
@@ -1082,6 +879,60 @@
 
 
 
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4/dist/Valine.min.js"></script>
+
+  
+  <script>
+  var GUEST_INFO = ['nick','mail','link'];
+  var meta = 'nick,mail,link'.split(',').filter(function(item){
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var REQUIRED_FIELDS = ['nick','mail','link'];
+  var requiredFields = 'nick,mail'.split(',').filter(function(item){
+    return REQUIRED_FIELDS.indexOf(item) > -1
+  });
+  var valine = new Valine();
+  function emoji(path, idx, ext) {
+      return path + "/" + path + "-" + idx + "." + ext;
+  }
+  var emojiMaps = {};
+  for (var i = 1; i <= 54; i++) {
+    emojiMaps['tieba-' + i] = emoji('tieba', i, 'png');
+  }
+  for (var i = 1; i <= 101; i++) {
+    emojiMaps['qq-' + i] = emoji('qq', i, 'gif');
+  }
+  for (var i = 1; i <= 116; i++) {
+    emojiMaps['aru-' + i] = emoji('aru', i, 'gif');
+  }
+  for (var i = 1; i <= 125; i++) {
+    emojiMaps['twemoji-' + i] = emoji('twemoji', i, 'png');
+  }
+  for (var i = 1; i <= 4; i++) {
+    emojiMaps['weibo-' + i] = emoji('weibo', i, 'png');
+  }
+  valine.init({
+    el: '#valine_container',
+    meta: meta,
+    
+    appId: "VqJdqrLLhJVaQMiPLwPCBSc3-gzGzoHsz",
+    appKey: "5yKLlbbNmjEzqjXsB8Xq3vfL",
+    placeholder: "快来评论吧~",
+    pageSize:'10',
+    avatar:'robohash',
+    lang:'zh-cn',
+    visitor: 'true',
+    highlight: 'true',
+    mathJax: 'false',
+    enableQQ: 'true',
+    requiredFields: requiredFields,
+    emojiCDN: 'https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/emoji/valine/',
+    emojiMaps: emojiMaps
+  })
+  </script>
 
 
 
