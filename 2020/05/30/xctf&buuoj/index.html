@@ -435,19 +435,19 @@
 <p>然后交了很多次发现不对，<strong>去掉flag{}即可</strong></p>
 <p>这里额外介绍一个一条指令秒的题解，连接<a href="https://github.com/ctfs/write-ups-2014/tree/master/tinyctf-2014/tt3441810" target="_blank" rel="noopener">https://github.com/ctfs/write-ups-2014/tree/master/tinyctf-2014/tt3441810</a></p>
 <h3 id="secret-galaxy-300"><a href="#secret-galaxy-300" class="headerlink" title="secret-galaxy-300"></a>secret-galaxy-300</h3><p>文件夹里三个文件，exe跑一下发现闪退，kali下跑如下图</p>
-<p><img src="C:%5CUsers%5Cyi%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200531233638134.png" alt="image-20200531233638134"></p>
+<p><img src="https://i.loli.net/2020/06/01/Utxuy2CkMQPe4X7.png" alt="image-20200531233638134"></p>
 <p>给的这也不知道是啥，IDA查看一下，对应上图可以看出输出逻辑，但好像并没有什么用</p>
-<p><img src="C:%5CUsers%5Cyi%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200531234057582.png" alt="image-20200531234057582"></p>
+<p><img src="https://i.loli.net/2020/06/01/MBA7rUWn8GE3Cja.png" alt="image-20200531234057582"></p>
 <p>好的没思路这个时候是时候shift+f12走一波了</p>
-<p><img src="C:%5CUsers%5Cyi%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200531234607862.png" alt="image-20200531234607862"></p>
+<p><img src="https://i.loli.net/2020/06/01/jKV2lp1q5sgNrIb.png" alt="image-20200531234607862"></p>
 <p>发现了一个存在但是没有输出显示的黑色神秘星系，然后一路交叉引用</p>
-<p><img src="C:%5CUsers%5Cyi%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200531234809616.png" alt="image-20200531234809616"></p>
+<p><img src="https://i.loli.net/2020/06/01/LQiPranWFqKv2mO.png" alt="image-20200531234809616"></p>
 <p>好家伙，都是赋值操作，建议彻查，这里记录下结尾处的地址，然后去OD中调试</p>
 <p>这里额外说一下（因为当初这个问题困扰了我），如何查看地址，如下图进入text view就OK了</p>
-<p><img src="https://i.loli.net/2020/05/31/qGHZwea4MoJSEQm.png" alt="image-20200531235427498"></p>
+<p><img src="https://i.loli.net/2020/06/01/2MqoAOjPZxJEk4v.png" alt="image-20200531235427498"></p>
 <p>选中，右键-在数据窗口中跟随-内存地址，然后运行</p>
-<p><img src="C:%5CUsers%5Cyi%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200531235957693.png" alt="image-20200531235957693"></p>
-<p><img src="C:%5CUsers%5Cyi%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200531235920665.png" alt="image-20200531235920665"></p>
+<p><img src="https://i.loli.net/2020/06/01/apnPxU5dftAQ2wJ.png" alt="image-20200531235957693"></p>
+<p><img src="https://i.loli.net/2020/06/01/qpceQg6kDIRhCia.png" alt="image-20200531235920665"></p>
 <p>字符串直接提交即可，挺简单一个题，但是自己没想到，一通胡乱分析猛如虎，然后看了题解才明白，捞的不谈。</p>
 
           
@@ -522,7 +522,7 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-06-01T00:04:08+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-06-01T00:10:25+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>更新于：Jun 1, 2020</p>
