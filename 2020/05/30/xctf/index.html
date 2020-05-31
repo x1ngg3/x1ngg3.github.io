@@ -5,8 +5,6 @@
   <!-- SEO相关 -->
   
     
-      <meta name="robots" content="noindex,follow">
-    
   
   <!-- 渲染优化 -->
   <meta name="renderer" content="webkit">
@@ -18,8 +16,12 @@
 
   <!-- 页面元数据 -->
   
-    <title>Tag: BUUOJ - X1ngg3</title>
+    <title>亿天一道RE题（XCTF） - X1ngg3</title>
   
+    <meta name="keywords" content="XCTF">
+  
+  
+    <meta name="description" content="XCTF-RE进阶区部分题解（持续更新）">
   
 
   <!-- feed -->
@@ -329,25 +331,12 @@
     <div class='body-wrapper'>
       
 
-
 <div class='l_main'>
   
-    
-      
-  <section class="post-list ">
-    
-      
-        
-          
-        
-      
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
+
   
+    <article id="post" class="post white-box reveal shadow article-type-post" itemscope itemprop="blogPost">
+      
 
 
   <section class='meta'>
@@ -357,11 +346,11 @@
       <div class="meta" id="header-meta">
         
           
-  <h2 class="title">
-    <a href="/2020/05/30/xctf&buuoj/">
-      亿天一道RE题
+  <h1 class="title">
+    <a href="/2020/05/30/xctf/">
+      亿天一道RE题（XCTF）
     </a>
-  </h2>
+  </h1>
 
 
         
@@ -408,11 +397,6 @@
 
             
           
-            
-              
-
-            
-          
         </div>
         
           <hr>
@@ -422,102 +406,89 @@
   </section>
 
 
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>XCTF-RE进阶区&amp;BUUOJ-RE部分题解（持续更新）</p>
-      
-    </div>
-    
-      
-        <div class="button readmore">
-          <a href="/2020/05/30/xctf&buuoj/">
-            阅读全文 <i class="fas fa-chevron-right"></i>
-          </a>
-        </div>
-      
-    
-  </section>
-</article>
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          
+          <p>XCTF-RE进阶区部分题解（持续更新）</p>
+<a id="more"></a>
 
-          </div>
-        
-      
-    
-  </section>
+<h3 id="tt3441810"><a href="#tt3441810" class="headerlink" title="tt3441810"></a>tt3441810</h3><p>这题说是逆向确实有些勉强了，但是了解到了一点<strong>xxd指令</strong>（皮毛）</p>
+<p>首先用exeinfope或者file指令查看文件类型：ASCII text, with CRLF line terminators</p>
+<p>拖进sublime查看一下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">00400080  68 66 6C 00 00 48 BF 01  00 00 00 00 00 00 00 48</span><br><span class="line">00400090  8D 34 24 48 BA 02 00 00  00 00 00 00 00 48 B8 01</span><br><span class="line">004000A0  00 00 00 00 00 00 00 0F  05 68 61 67 00 00 48 BF</span><br><span class="line">004000B0  01 00 00 00 00 00 00 00  48 8D 34 24 48 BA 02 00</span><br><span class="line">004000C0  00 00 00 00 00 00 48 B8  01 00 00 00 00 00 00 00</span><br><span class="line">004000D0  0F 05 68 7B 70 00 00 48  BF 01 00 00 00 00 00 00</span><br><span class="line">004000E0  00 48 8D 34 24 48 BA 02  00 00 00 00 00 00 00 48</span><br><span class="line">004000F0  B8 01 00 00 00 00 00 00  00 0F 05 68 6F 70 00 00</span><br><span class="line">00400100  48 BF 01 00 00 00 00 00  00 00 48 8D 34 24 48 BA</span><br><span class="line">00400110  02 00 00 00 00 00 00 00  48 B8 01 00 00 00 00 00</span><br><span class="line">00400120  00 00 0F 05 68 70 6F 00  00 48 BF 01 00 00 00 00</span><br><span class="line">00400130  00 00 00 48 8D 34 24 48  BA 02 00 00 00 00 00 00</span><br><span class="line">00400140  00 48 B8 01 00 00 00 00  00 00 00 0F 05 68 70 72</span><br><span class="line">00400150  00 00 48 BF 01 00 00 00  00 00 00 00 48 8D 34 24</span><br><span class="line">00400160  48 BA 02 00 00 00 00 00  00 00 48 B8 01 00 00 00</span><br><span class="line">00400170  00 00 00 00 0F 05 68 65  74 00 00 48 BF 01 00 00</span><br><span class="line">00400180  00 00 00 00 00 48 8D 34  24 48 BA 02 00 00 00 00</span><br><span class="line">00400190  00 00 00 48 B8 01 00 00  00 00 00 00 00 0F 05 68</span><br><span class="line">004001A0  7D 0A 00 00 48 BF 01 00  00 00 00 00 00 00 48 8D</span><br><span class="line">004001B0  34 24 48 BA 02 00 00 00  00 00 00 00 48 B8 01 00</span><br><span class="line">004001C0  00 00 00 00 00 00 0F 05  48 31 FF 48 B8 3C 00 00</span><br><span class="line">004001D0  00 00 00 00 00 0F 05</span><br></pre></td></tr></table></figure>
+
+<p>这里可以写脚本把16进制转为ASCII码，这里介绍学到的用xxd指令转换</p>
+<p>关于xxd指令的内容，我没有找到一篇说写的很好的，这里放两篇勉强能冲的：</p>
+<p>1.<a href="https://www.sohu.com/a/341144249_610671" target="_blank" rel="noopener">https://www.sohu.com/a/341144249_610671</a></p>
+<p>2.<a href="https://blog.csdn.net/xingyyn78/article/details/79438853" target="_blank" rel="noopener">https://blog.csdn.net/xingyyn78/article/details/79438853</a></p>
+<p><img src="https://i.loli.net/2020/05/30/P5W3ukyeviQx7jr.png" alt="image-20200530222808369"></p>
+<p>到这里可以直接进行分析了，规律还是很明显的，或者嫌看着难受可以先选出可打印字符：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="string">"@�hflH�H@��4$H�H�@�hagH�@�H�4$H�@�H�@�h&#123;pH�@�H�4$H�H@��hop@H�H�4$H�@H�@ hpoH�@0H�4$H�@@H�hpr@PH�H�4$@`H�H�@phetH�@�H�4$H�@�H�h@�&#125;H�H�@�4$H�H�@�H1�H�&lt;@� "</span></span><br><span class="line">flag = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(a)):</span><br><span class="line">  <span class="keyword">if</span>(ord(a[i]) &gt;= <span class="number">32</span> <span class="keyword">and</span> ord(a[i]) &lt;= <span class="number">125</span>):</span><br><span class="line">    flag += a[i]</span><br><span class="line">print(flag)</span><br></pre></td></tr></table></figure>
+
+<p>得到字符串：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@hflHH@4$HH@hagH@H4$H@H@h&#123;pH@H4$HH@hop@HH4$H@H@ hpoH@0H4$H@@Hhpr@PHH4$@&#96;HH@phetH@H4$H@Hh@&#125;HH@4$HH@H1H&lt;@</span><br></pre></td></tr></table></figure>
+
+<p>很明显可以观察到我们需要的是h后面H之前（有时是@）的字符</p>
+<p>得到flag：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag&#123;poppopret&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后交了很多次发现不对，<strong>去掉flag{}即可</strong></p>
+<p>这里额外介绍一个一条指令秒的题解，连接<a href="https://github.com/ctfs/write-ups-2014/tree/master/tinyctf-2014/tt3441810" target="_blank" rel="noopener">https://github.com/ctfs/write-ups-2014/tree/master/tinyctf-2014/tt3441810</a></p>
+<h3 id="secret-galaxy-300"><a href="#secret-galaxy-300" class="headerlink" title="secret-galaxy-300"></a>secret-galaxy-300</h3><p>文件夹里三个文件，exe跑一下发现闪退，kali下跑如下图</p>
+<p><img src="https://i.loli.net/2020/06/01/Utxuy2CkMQPe4X7.png" alt="image-20200531233638134"></p>
+<p>给的这也不知道是啥，IDA查看一下，对应上图可以看出输出逻辑，但好像并没有什么用</p>
+<p><img src="https://i.loli.net/2020/06/01/MBA7rUWn8GE3Cja.png" alt="image-20200531234057582"></p>
+<p>好的没思路这个时候是时候shift+f12走一波了</p>
+<p><img src="https://i.loli.net/2020/06/01/jKV2lp1q5sgNrIb.png" alt="image-20200531234607862"></p>
+<p>发现了一个存在但是没有输出显示的黑色神秘星系，然后一路交叉引用</p>
+<p><img src="https://i.loli.net/2020/06/01/LQiPranWFqKv2mO.png" alt="image-20200531234809616"></p>
+<p>好家伙，都是赋值操作，建议彻查，这里记录下结尾处的地址，然后去OD中调试</p>
+<p>这里额外说一下（因为当初这个问题困扰了我），如何查看地址，如下图进入text view就OK了</p>
+<p><img src="https://i.loli.net/2020/06/01/2MqoAOjPZxJEk4v.png" alt="image-20200531235427498"></p>
+<p>选中，右键-在数据窗口中跟随-内存地址，然后运行</p>
+<p><img src="https://i.loli.net/2020/06/01/apnPxU5dftAQ2wJ.png" alt="image-20200531235957693"></p>
+<p><img src="https://i.loli.net/2020/06/01/qpceQg6kDIRhCia.png" alt="image-20200531235920665"></p>
+<p>字符串直接提交即可，挺简单一个题，但是自己没想到，一通胡乱分析猛如虎，然后看了题解才明白，捞的不谈。</p>
+
+          
+            <div class='article_footer'>
+              
+                
   
     
-    <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
     
-    
+
+
 
   
 
-
-    
-  
-</div>
-<aside class='l_side'>
-  
   
     
     
 
-<section class="widget blogger shadow desktop mobile">
+
+
+  
+
+  
+    
+    
+
+<section class="widget copyright  desktop mobile">
   <div class='content'>
     
-      
-        <a class='avatar flat-box' href='/'>
-          <img no-lazy src='https://i.loli.net/2020/05/24/ud4apZVzXN3lnMS.jpg'/>
-        </a>
-      
-    
-    
-      <div class='text'>
-        
-        
-        
-          <p><span id="jinrishici-sentence">X1ngg3</span></p>
-          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
-        
-      </div>
-    
-    
-      <div class="social-wrapper">
+      <blockquote>
         
           
-            <a href="https://x1ngg3.github.io"
-              class="social fas fa-rss flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
+            <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
           
         
           
-            <a href="mailto:x1ngg3@foxmail.com"
-              class="social fas fa-envelope flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
+            <p>本文永久链接是：<a href=http://x1ngg3.github.io/2020/05/30/xctf/>http://x1ngg3.github.io/2020/05/30/xctf/</a></p>
           
         
-          
-            <a href="https://github.com/x1ngg3"
-              class="social fab fa-github flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
-          
-        
-          
-            <a href="https://music.163.com/#/user/home?id=395984459"
-              class="social fas fa-headphones-alt flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
-          
-        
-      </div>
+      </blockquote>
     
   </div>
 </section>
@@ -527,63 +498,189 @@
   
     
     
+
+<section class="widget qrcode  desktop mobile">
   
 
-  <section class="widget category shadow desktop">
+  <div class='content article-entry'>
+    
+  </div>
+</section>
+
+  
+
+
+              
+            </div>
+          
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-06-01T02:00:41+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：Jun 1, 2020</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/XCTF/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>XCTF</p></a></div>
+
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://connect.qq.com/widget/shareqq/index.html?url=http://x1ngg3.github.io/2020/05/30/xctf/&title=亿天一道RE题（XCTF） - X1ngg3&summary=XCTF-RE进阶区部分题解（持续更新）"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://x1ngg3.github.io/2020/05/30/xctf/&title=亿天一道RE题（XCTF） - X1ngg3&summary=XCTF-RE进阶区部分题解（持续更新）"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://service.weibo.com/share/share.php?url=http://x1ngg3.github.io/2020/05/30/xctf/&title=亿天一道RE题（XCTF） - X1ngg3&summary=XCTF-RE进阶区部分题解（持续更新）"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+          <div class="prev-next">
+            
+            
+              <a class='next' href='/2020/05/25/VEINTE%20POEMAS%20DE%20AMOR%20Y%20UNA%20CANCI%C3%93N%20DESESPERADA,%20LOS%20VERSOS%20DEL%20CAPIT%C3%81N,%20CIEN%20SONETOS%20DE%20AMOR/'>
+                <p class='title'>Here I Love You<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>在此我爱你
+
+
+在此我爱你。风在幽暗的松林里解开自己。月亮在游荡的水上发出磷光。同样的日子相互追逐纠缠。雾气散开成舞蹈的形体。一只银色的海鸥从西天滑落。有时一片帆。高高，高高在上的星星。或者一条...</p>
+              </a>
+            
+          </div>
+        
+      </section>
+    </article>
+  
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box reveal comments shadow">
+    <section class="article typo">
+      <p ct><i class='fas fa-comments'></i> 评论</p>
+      
+      
+      
+      
+      
+      
+        <section id="comments">
+          <div id="valine_container" class="valine_thread">
+            <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
+          </div>
+        </section>
+      
+      
+    </section>
+  </article>
+
+
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: '亿天一道RE题（XCTF）',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<aside class='l_side'>
+  
+  
+
+  
+    
+    
+
+
+  <section class="widget toc-wrapper shadow desktop mobile">
     
   <header>
     
-      <a href='/blog/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
     
   </header>
 
 
     <div class='content'>
-      <ul class="entry navigation">
-        
-          <li><a class="flat-box"
-            title="/categories/LR/" href="/categories/LR/"
-            id="categoriesLR"
-            ><div class='name'>LR</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/Poem/" href="/categories/Poem/"
-            id="categoriesPoem"
-            ><div class='name'>Poem</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/RE/" href="/categories/RE/"
-            id="categoriesRE"
-            ><div class='name'>RE</div><div class='badge'>(1)</div></a></li>
-        
-      </ul>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#tt3441810"><span class="toc-text">tt3441810</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#secret-galaxy-300"><span class="toc-text">secret-galaxy-300</span></a></li></ol>
     </div>
   </section>
 
-
-  
-
-  
-    
-    
-  
-
-  <section class="widget tagcloud shadow desktop mobile">
-    
-  <header>
-    
-      <a href='/blog/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
-    
-  </header>
-
-
-    <div class='content'>
-      <a href="/tags/BUUOJ/" style="font-size: 14px; color: #999">BUUOJ</a> <a href="/tags/XCTF/" style="font-size: 14px; color: #999">XCTF</a> <a href="/tags/poem/" style="font-size: 14px; color: #999">poem</a> <a href="/tags/%E6%A9%99%E9%9D%92/" style="font-size: 14px; color: #999">橙青</a> <a href="/tags/%E7%94%B5%E5%BD%B1%E6%84%9F/" style="font-size: 14px; color: #999">电影感</a> <a href="/tags/%E8%B0%83%E8%89%B2/" style="font-size: 14px; color: #999">调色</a>
-    </div>
-  </section>
-
-
-  
 
   
 
@@ -796,6 +893,60 @@
 
 
 
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4/dist/Valine.min.js"></script>
+
+  
+  <script>
+  var GUEST_INFO = ['nick','mail','link'];
+  var meta = 'nick,mail,link'.split(',').filter(function(item){
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var REQUIRED_FIELDS = ['nick','mail','link'];
+  var requiredFields = 'nick,mail'.split(',').filter(function(item){
+    return REQUIRED_FIELDS.indexOf(item) > -1
+  });
+  var valine = new Valine();
+  function emoji(path, idx, ext) {
+      return path + "/" + path + "-" + idx + "." + ext;
+  }
+  var emojiMaps = {};
+  for (var i = 1; i <= 54; i++) {
+    emojiMaps['tieba-' + i] = emoji('tieba', i, 'png');
+  }
+  for (var i = 1; i <= 101; i++) {
+    emojiMaps['qq-' + i] = emoji('qq', i, 'gif');
+  }
+  for (var i = 1; i <= 116; i++) {
+    emojiMaps['aru-' + i] = emoji('aru', i, 'gif');
+  }
+  for (var i = 1; i <= 125; i++) {
+    emojiMaps['twemoji-' + i] = emoji('twemoji', i, 'png');
+  }
+  for (var i = 1; i <= 4; i++) {
+    emojiMaps['weibo-' + i] = emoji('weibo', i, 'png');
+  }
+  valine.init({
+    el: '#valine_container',
+    meta: meta,
+    
+    appId: "VqJdqrLLhJVaQMiPLwPCBSc3-gzGzoHsz",
+    appKey: "5yKLlbbNmjEzqjXsB8Xq3vfL",
+    placeholder: "快来评论吧~",
+    pageSize:'10',
+    avatar:'robohash',
+    lang:'zh-cn',
+    visitor: 'true',
+    highlight: 'true',
+    mathJax: 'false',
+    enableQQ: 'true',
+    requiredFields: requiredFields,
+    emojiCDN: 'https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/emoji/valine/',
+    emojiMaps: emojiMaps
+  })
+  </script>
 
 
 
