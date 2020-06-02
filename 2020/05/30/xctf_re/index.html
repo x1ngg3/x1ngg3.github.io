@@ -415,6 +415,17 @@
 
 
 <h3 id="写在前面的话"><a href="#写在前面的话" class="headerlink" title="写在前面的话"></a>写在前面的话</h3><p>还是决定把进阶区以前写过也都记录一下，也算是一个温故知新的过程吧。另外希望自己能早点把进阶区百人以上的题目刷完，加油！（2020.6.2）。</p>
+<h3 id="Guess-the-Number"><a href="#Guess-the-Number" class="headerlink" title="Guess-the-Number"></a>Guess-the-Number</h3><p>拿到程序，是个jar文件，拖进jd-jui查看，可以直接看到主函数。可以看到，当判断成立时，经过异或运算后会直接输出flag</p>
+<p><img src="https://i.loli.net/2020/06/03/CGlrEVM18eKHx7O.png" alt="image-20200603002726482"></p>
+<p><strong>my_number</strong>的数值已经直接给出了，直接运算<strong>向下取整</strong>作为输入</p>
+<p><img src="https://i.loli.net/2020/06/03/szXpl7x6VB98jet.png" alt="image-20200603002909690"></p>
+<p>或者也可以按照程序给的数值<strong>直接运算出flag</strong>，这个代码我目前实在不会写，直接照着别人的代码写的，等有自己的理解的再来更</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="string">'4b64ca12ace755516c178f72d05d7061'</span></span><br><span class="line">b = <span class="string">'ecd44646cfe5994ebeb35bf922e25dba'</span></span><br><span class="line">c = bytes.fromhex(a)</span><br><span class="line">d = bytes.fromhex(b)</span><br><span class="line">flag = [<span class="number">0</span>] * <span class="number">16</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(c)):</span><br><span class="line">  flag[i] = c[i] ^ d[i]</span><br><span class="line">  flag[i] = hex(flag[i])</span><br><span class="line">print(flag)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
 <h3 id="secret-galaxy-300"><a href="#secret-galaxy-300" class="headerlink" title="secret-galaxy-300"></a>secret-galaxy-300</h3><p>文件夹里三个文件，exe跑一下发现闪退，kali下跑如下图</p>
 <p><img src="https://i.loli.net/2020/06/01/Utxuy2CkMQPe4X7.png" alt="image-20200531233638134"></p>
 <p>给的这也不知道是啥，IDA查看一下，对应上图可以看出输出逻辑，但好像并没有什么用</p>
@@ -539,10 +550,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-06-02T22:15:18+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-06-03T00:53:28+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：Jun 2, 2020</p>
+    <p>更新于：Jun 3, 2020</p>
   </a>
 </div>
 
@@ -697,7 +708,7 @@
 
 
     <div class='content'>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#写在前面的话"><span class="toc-text">写在前面的话</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#secret-galaxy-300"><span class="toc-text">secret-galaxy-300</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#elrond32"><span class="toc-text">elrond32</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tt3441810"><span class="toc-text">tt3441810</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#写在前面的话"><span class="toc-text">写在前面的话</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Guess-the-Number"><span class="toc-text">Guess-the-Number</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#secret-galaxy-300"><span class="toc-text">secret-galaxy-300</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#elrond32"><span class="toc-text">elrond32</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tt3441810"><span class="toc-text">tt3441810</span></a></li></ol>
     </div>
   </section>
 
