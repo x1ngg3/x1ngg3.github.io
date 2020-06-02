@@ -412,6 +412,38 @@
           <p>XCTF-RE进阶区部分题解（持续更新）</p>
 <a id="more"></a>
 
+
+
+<h3 id="写在前面的话"><a href="#写在前面的话" class="headerlink" title="写在前面的话"></a>写在前面的话</h3><p>还是决定把进阶区以前写过也都记录一下，也算是一个温故知新的过程吧。另外希望自己能早点把进阶区百人以上的题目刷完，加油！（2020.6.2）。</p>
+<h3 id="secret-galaxy-300"><a href="#secret-galaxy-300" class="headerlink" title="secret-galaxy-300"></a>secret-galaxy-300</h3><p>文件夹里三个文件，exe跑一下发现闪退，kali下跑如下图</p>
+<p><img src="https://i.loli.net/2020/06/01/Utxuy2CkMQPe4X7.png" alt="image-20200531233638134"></p>
+<p>给的这也不知道是啥，IDA查看一下，对应上图可以看出输出逻辑，但好像并没有什么用</p>
+<p><img src="https://i.loli.net/2020/06/01/MBA7rUWn8GE3Cja.png" alt="image-20200531234057582"></p>
+<p>好的没思路这个时候是时候shift+f12走一波了</p>
+<p><img src="https://i.loli.net/2020/06/01/jKV2lp1q5sgNrIb.png" alt="image-20200531234607862"></p>
+<p>发现了一个存在但是没有输出显示的黑色神秘星系，然后一路交叉引用</p>
+<p><img src="https://i.loli.net/2020/06/01/LQiPranWFqKv2mO.png" alt="image-20200531234809616"></p>
+<p>好家伙，都是赋值操作，建议彻查，这里记录下结尾处的地址，然后去OD中调试</p>
+<p>这里额外说一下（因为当初这个问题困扰了我），如何快速查看地址，如下图进入text view就OK了</p>
+<p><img src="https://i.loli.net/2020/06/01/2MqoAOjPZxJEk4v.png" alt="image-20200531235427498"></p>
+<p>选中，右键-在数据窗口中跟随-内存地址，然后运行</p>
+<p><img src="https://i.loli.net/2020/06/01/apnPxU5dftAQ2wJ.png" alt="image-20200531235957693"></p>
+<p><img src="https://i.loli.net/2020/06/01/qpceQg6kDIRhCia.png" alt="image-20200531235920665"></p>
+<p>字符串直接提交即可。</p>
+<p>其实挺简单一个题，但刚开始自己没想到，一通胡乱分析猛如虎，之后然后看了题解才明白，捞的不谈。</p>
+<h3 id="elrond32"><a href="#elrond32" class="headerlink" title="elrond32"></a>elrond32</h3><p>先说题目大概思路，先一个if判断，成功就输出<strong>“Access granted”</strong>，同时执行puts下面的函数。</p>
+<p><img src="https://i.loli.net/2020/06/02/RHkdVtvSqwQxDJ1.png" alt="image-20200602214620888"></p>
+<p>进入<strong>sub_8048414</strong>函数，程序还是很简单的，直接手撕，得到a2：<strong>isengard</strong></p>
+<p>继续分析，进入<strong>sub_8048538</strong>，函数的参数用到了上面我们刚得到的a2，大体上这是一个输出过程，猜测输出的就是flag，那对<strong>unk_8048760</strong>里的数据进行数据提取，然后进行简单的异或后应该</p>
+<p><img src="https://i.loli.net/2020/06/02/ocdTYqslzJDLXGU.png" alt="image-20200602215523646"></p>
+<p>数据提取：<strong>IDA里选中数据按shift+e可以进行数据提取</strong>，提取的数据有无用的部分，需要进行再提取，比如int四个字节那每四个取第一个就OK，脚本如下（因为python学艺不精，所以用的c++）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int a[] &#x3D; &#123;  0x0F, 0x00, 0x00, 0x00, 0x1F, 0x00, 0x00, 0x00, 0x04, 0x00, </span><br><span class="line">  0x00, 0x00, 0x09, 0x00, 0x00, 0x00, 0x1C, 0x00, 0x00, 0x00, </span><br><span class="line">  0x12, 0x00, 0x00, 0x00, 0x42, 0x00, 0x00, 0x00, 0x09, 0x00, </span><br><span class="line">  0x00, 0x00, 0x0C, 0x00, 0x00, 0x00, 0x44, 0x00, 0x00, 0x00, </span><br><span class="line">  0x0D, 0x00, 0x00, 0x00, 0x07, 0x00, 0x00, 0x00, 0x09, 0x00, </span><br><span class="line">  0x00, 0x00, 0x06, 0x00, 0x00, 0x00, 0x2D, 0x00, 0x00, 0x00, </span><br><span class="line">  0x37, 0x00, 0x00, 0x00, 0x59, 0x00, 0x00, 0x00, 0x1E, 0x00, </span><br><span class="line">  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x59, 0x00, 0x00, 0x00, </span><br><span class="line">  0x0F, 0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00, 0x1C, 0x00, </span><br><span class="line">  0x00, 0x00, 0x23, 0x00, 0x00, 0x00, 0x36, 0x00, 0x00, 0x00, </span><br><span class="line">  0x07, 0x00, 0x00, 0x00, 0x55, 0x00, 0x00, 0x00, 0x02, 0x00, </span><br><span class="line">  0x00, 0x00, 0x0C, 0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00, </span><br><span class="line">  0x41, 0x00, 0x00, 0x00, 0x0A, 0x00, 0x00, 0x00, 0x14, 0x00, </span><br><span class="line">  0x00, 0x00&#125;;</span><br><span class="line">  int j &#x3D; 0;</span><br><span class="line">  int x &#x3D; sizeof(a)&#x2F;16;</span><br><span class="line">  int b[x];</span><br><span class="line">  cout&lt;&lt;&quot;length is:&quot;&lt;&lt;x&lt;&lt;endl;</span><br><span class="line">  for(int i &#x3D;0;i&lt;sizeof(a)&#x2F;4;i++)</span><br><span class="line">  &#123;</span><br><span class="line">    if (i%4&#x3D;&#x3D;0)</span><br><span class="line">    &#123;</span><br><span class="line">        b[j++] &#x3D; a[i];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  for(int c &#x3D; 0;c&lt;sizeof(b)&#x2F;4;c++)&#123;</span><br><span class="line">    cout&lt;&lt;b[c]&lt;&lt;&#39;,&#39;;</span><br><span class="line">  &#125;</span><br><span class="line">  return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>提取到了数据，开始写flag脚本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">105</span>,<span class="number">115</span>,<span class="number">101</span>,<span class="number">110</span>,<span class="number">103</span>,<span class="number">97</span>,<span class="number">114</span>,<span class="number">100</span>]</span><br><span class="line">b = [<span class="number">15</span>,<span class="number">31</span>,<span class="number">4</span>,<span class="number">9</span>,<span class="number">28</span>,<span class="number">18</span>,<span class="number">66</span>,<span class="number">9</span>,<span class="number">12</span>,<span class="number">68</span>,<span class="number">13</span>,<span class="number">7</span>,<span class="number">9</span>,<span class="number">6</span>,<span class="number">45</span>,<span class="number">55</span>,<span class="number">89</span>,<span class="number">30</span>,<span class="number">0</span>,<span class="number">89</span>,<span class="number">15</span>,<span class="number">8</span>,<span class="number">28</span>,<span class="number">35</span>,<span class="number">54</span>,<span class="number">7</span>,<span class="number">85</span>,<span class="number">2</span>,<span class="number">12</span>,<span class="number">8</span>,<span class="number">65</span>,<span class="number">10</span>,<span class="number">20</span>]</span><br><span class="line">flag = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(b)):</span><br><span class="line">  flag += chr(b[i] ^ a[i % <span class="number">8</span>])</span><br><span class="line">print(flag)</span><br></pre></td></tr></table></figure>
+
+<p>或者更简单的方法是，既然判断成功就会输出，并且我们已经知道输入了，那直接在kali中运行</p>
+<p><img src="https://i.loli.net/2020/06/02/B9LFP1SZRWntfDV.png" alt="image-20200602221156459"></p>
 <h3 id="tt3441810"><a href="#tt3441810" class="headerlink" title="tt3441810"></a>tt3441810</h3><p>这题说是逆向确实有些勉强了，但是了解到了一点<strong>xxd指令</strong>（皮毛）</p>
 <p>首先用exeinfope或者file指令查看文件类型：ASCII text, with CRLF line terminators</p>
 <p>拖进sublime查看一下</p>
@@ -434,22 +466,6 @@
 
 <p>然后交了很多次发现不对，<strong>去掉flag{}即可</strong></p>
 <p>这里额外介绍一个一条指令秒的题解，连接<a href="https://github.com/ctfs/write-ups-2014/tree/master/tinyctf-2014/tt3441810" target="_blank" rel="noopener">https://github.com/ctfs/write-ups-2014/tree/master/tinyctf-2014/tt3441810</a></p>
-<h3 id="secret-galaxy-300"><a href="#secret-galaxy-300" class="headerlink" title="secret-galaxy-300"></a>secret-galaxy-300</h3><p>文件夹里三个文件，exe跑一下发现闪退，kali下跑如下图</p>
-<p><img src="https://i.loli.net/2020/06/01/Utxuy2CkMQPe4X7.png" alt="image-20200531233638134"></p>
-<p>给的这也不知道是啥，IDA查看一下，对应上图可以看出输出逻辑，但好像并没有什么用</p>
-<p><img src="https://i.loli.net/2020/06/01/MBA7rUWn8GE3Cja.png" alt="image-20200531234057582"></p>
-<p>好的没思路这个时候是时候shift+f12走一波了</p>
-<p><img src="https://i.loli.net/2020/06/01/jKV2lp1q5sgNrIb.png" alt="image-20200531234607862"></p>
-<p>发现了一个存在但是没有输出显示的黑色神秘星系，然后一路交叉引用</p>
-<p><img src="https://i.loli.net/2020/06/01/LQiPranWFqKv2mO.png" alt="image-20200531234809616"></p>
-<p>好家伙，都是赋值操作，建议彻查，这里记录下结尾处的地址，然后去OD中调试</p>
-<p>这里额外说一下（因为当初这个问题困扰了我），如何快速查看地址，如下图进入text view就OK了</p>
-<p><img src="https://i.loli.net/2020/06/01/2MqoAOjPZxJEk4v.png" alt="image-20200531235427498"></p>
-<p>选中，右键-在数据窗口中跟随-内存地址，然后运行</p>
-<p><img src="https://i.loli.net/2020/06/01/apnPxU5dftAQ2wJ.png" alt="image-20200531235957693"></p>
-<p><img src="https://i.loli.net/2020/06/01/qpceQg6kDIRhCia.png" alt="image-20200531235920665"></p>
-<p>字符串直接提交即可。</p>
-<p>其实挺简单一个题，但刚开始自己没想到，一通胡乱分析猛如虎，之后然后看了题解才明白，捞的不谈。</p>
 
           
             <div class='article_footer'>
@@ -523,7 +539,7 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-06-02T20:32:34+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-06-02T22:12:57+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>更新于：Jun 2, 2020</p>
@@ -681,7 +697,7 @@
 
 
     <div class='content'>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#tt3441810"><span class="toc-text">tt3441810</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#secret-galaxy-300"><span class="toc-text">secret-galaxy-300</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#写在前面的话"><span class="toc-text">写在前面的话</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#secret-galaxy-300"><span class="toc-text">secret-galaxy-300</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#elrond32"><span class="toc-text">elrond32</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tt3441810"><span class="toc-text">tt3441810</span></a></li></ol>
     </div>
   </section>
 
