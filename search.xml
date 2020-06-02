@@ -13,6 +13,8 @@
       
       <categories>
           
+          <category> CTF </category>
+          
           <category> RE </category>
           
       </categories>
@@ -20,7 +22,7 @@
       
         <tags>
             
-            <tag> XCTF </tag>
+            <tag> XCTF_RE </tag>
             
         </tags>
       
