@@ -459,6 +459,22 @@
 <p>然后仔细看了下主函数，发现有一部把输入进行MD5加密的过程，所以需要解MD5，直接在线解就可以了</p>
 <p><img src="https://i.loli.net/2020/06/03/Rrsjgw3EW19e7ZY.png" alt="image-20200603162736952"></p>
 <p><img src="https://i.loli.net/2020/06/03/SCWt4wZ3iLYDaU1.png" alt="image-20200603162845079"></p>
+<h3 id="parallel-comparator-200"><a href="#parallel-comparator-200" class="headerlink" title="parallel-comparator-200"></a>parallel-comparator-200</h3><p>给的是c代码，从结果进行反推</p>
+<p>首先is_ok必须为1，那么下图两个字符串必须相等</p>
+<p><img src="https://i.loli.net/2020/06/03/9LY3XutgeTWnIa7.png" alt="image-20200603180332033"></p>
+<p>要想相等则result必须为0</p>
+<p><img src="https://i.loli.net/2020/06/03/CwfJcuHQMS7tT9X.png" alt="image-20200603180533548"></p>
+<p>则checking函数反回为0</p>
+<p><img src="https://i.loli.net/2020/06/03/vkp3AWLzQEXMrVh.png" alt="image-20200603180622433"></p>
+<p>则<strong>(argument[0]+argument[1])与argument[2]必须相同</strong></p>
+<p><img src="https://i.loli.net/2020/06/03/WvJ5KO9LqBUHhzj.png" alt="image-20200603180748185"></p>
+<p>然后我们知道arg[0]是产生的随机数，范围在97到97+26之间，开始爆破</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">0</span>, <span class="number">9</span>, <span class="number">-9</span>, <span class="number">-1</span>, <span class="number">13</span>, <span class="number">-13</span>, <span class="number">-4</span>, <span class="number">-11</span>, <span class="number">-9</span>, <span class="number">-1</span>, <span class="number">-7</span>, <span class="number">6</span>, <span class="number">-13</span>, <span class="number">13</span>, <span class="number">3</span>, <span class="number">9</span>, <span class="number">-13</span>, <span class="number">-11</span>, <span class="number">6</span>, <span class="number">-7</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">97</span>,<span class="number">123</span>):</span><br><span class="line">	flag = <span class="string">''</span></span><br><span class="line">	<span class="keyword">for</span> j <span class="keyword">in</span> range(len(a)):</span><br><span class="line">		flag += chr(i + a[j])</span><br><span class="line">	print(flag)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
 <h3 id="secret-galaxy-300"><a href="#secret-galaxy-300" class="headerlink" title="secret-galaxy-300"></a>secret-galaxy-300</h3><p>文件夹里三个文件，exe跑一下发现闪退，kali下跑如下图</p>
 <p><img src="https://i.loli.net/2020/06/01/Utxuy2CkMQPe4X7.png" alt="image-20200531233638134"></p>
 <p>给的这也不知道是啥，IDA查看一下，对应上图可以看出输出逻辑，但好像并没有什么用</p>
@@ -583,7 +599,7 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-06-03T16:29:13+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-06-03T18:09:44+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>最后更新于：Jun 3, 2020</p>
@@ -738,7 +754,7 @@ Here I Love You - - - 5.25风在幽暗的松林里解开自己。月亮在游荡
 
 
     <div class='content'>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#写在前面的话"><span class="toc-text">写在前面的话</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Guess-the-Number"><span class="toc-text">Guess-the-Number</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#EasyRE"><span class="toc-text">EasyRE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Shuffle"><span class="toc-text">Shuffle</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#re-for-50-plz-50"><span class="toc-text">re-for-50-plz-50</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dmd-50"><span class="toc-text">dmd-50</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#secret-galaxy-300"><span class="toc-text">secret-galaxy-300</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#elrond32"><span class="toc-text">elrond32</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tt3441810"><span class="toc-text">tt3441810</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#写在前面的话"><span class="toc-text">写在前面的话</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Guess-the-Number"><span class="toc-text">Guess-the-Number</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#EasyRE"><span class="toc-text">EasyRE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Shuffle"><span class="toc-text">Shuffle</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#re-for-50-plz-50"><span class="toc-text">re-for-50-plz-50</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dmd-50"><span class="toc-text">dmd-50</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#parallel-comparator-200"><span class="toc-text">parallel-comparator-200</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#secret-galaxy-300"><span class="toc-text">secret-galaxy-300</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#elrond32"><span class="toc-text">elrond32</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tt3441810"><span class="toc-text">tt3441810</span></a></li></ol>
     </div>
   </section>
 
