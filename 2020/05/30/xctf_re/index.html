@@ -516,6 +516,22 @@
 
 
 
+<h3 id="answer-to-everything"><a href="#answer-to-everything" class="headerlink" title="answer_to_everything"></a>answer_to_everything</h3><p>直接看程序</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">"Gimme: "</span>, argv, envp);</span><br><span class="line">__isoc99_scanf((__int64)<span class="string">"%d"</span>, (__int64)&amp;v4);  <span class="comment">// 给一个输入，为int</span></span><br><span class="line">not_the_flag(v4);                             <span class="comment">// 关键判断</span></span><br></pre></td></tr></table></figure>
+
+<p>not_the_flag</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ( a1 == <span class="number">42</span> )</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"Cipher from Bill \nSubmit without any tags\n#kdudpeh"</span>);<span class="comment">// 注意格式</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"YOUSUCK"</span>);                            <span class="comment">// 你爬</span></span><br></pre></td></tr></table></figure>
+
+<p>如果输入为42，就会输出来自bill的密码，又说不要任何标签，所以判断密码就是<strong>kdudpeh</strong>，然后提交会发现错误，这个时候就体现读题的重要性了，来自sha1的密码，OK，sha1加密</p>
+<p>程序运行测试：</p>
+<p><img src="C:%5CUsers%5Cyi%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200607181210187.png" alt="image-20200607181210187"></p>
+<p>加密脚本（也可选择在线加密）：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line">a=<span class="string">'kdudpeh'</span></span><br><span class="line">b=hashlib.sha1(a.encode(<span class="string">'utf-8'</span>))</span><br><span class="line">print(b.hexdigest())</span><br></pre></td></tr></table></figure>
+
+
+
+
+
 <h3 id="elrond32"><a href="#elrond32" class="headerlink" title="elrond32"></a>elrond32</h3><p>先说题目大概思路，先一个if判断，成功就输出<strong>“Access granted”</strong>，同时执行puts下面的函数。</p>
 <p><img src="https://i.loli.net/2020/06/02/RHkdVtvSqwQxDJ1.png" alt="image-20200602214620888"></p>
 <p>进入<strong>sub_8048414</strong>函数，程序还是很简单的，直接手撕，得到a2：<strong>isengard</strong></p>
@@ -624,10 +640,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-06-06T20:06:27+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-06-07T18:13:08+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>最后更新于：Jun 6, 2020</p>
+    <p>最后更新于：Jun 7, 2020</p>
   </a>
 </div>
 
@@ -779,7 +795,7 @@ Here I Love You - - - 5.25风在幽暗的松林里解开自己。月亮在游荡
 
 
     <div class='content'>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#写在前面的话"><span class="toc-text">写在前面的话</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Guess-the-Number"><span class="toc-text">Guess-the-Number</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#EasyRE"><span class="toc-text">EasyRE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Shuffle"><span class="toc-text">Shuffle</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#re-for-50-plz-50"><span class="toc-text">re-for-50-plz-50</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dmd-50"><span class="toc-text">dmd-50</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#parallel-comparator-200"><span class="toc-text">parallel-comparator-200</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#secret-galaxy-300"><span class="toc-text">secret-galaxy-300</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#srm-50"><span class="toc-text">srm-50</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mysterious"><span class="toc-text">Mysterious</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#re1-100"><span class="toc-text">re1-100</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#elrond32"><span class="toc-text">elrond32</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tt3441810"><span class="toc-text">tt3441810</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#写在前面的话"><span class="toc-text">写在前面的话</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Guess-the-Number"><span class="toc-text">Guess-the-Number</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#EasyRE"><span class="toc-text">EasyRE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Shuffle"><span class="toc-text">Shuffle</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#re-for-50-plz-50"><span class="toc-text">re-for-50-plz-50</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dmd-50"><span class="toc-text">dmd-50</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#parallel-comparator-200"><span class="toc-text">parallel-comparator-200</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#secret-galaxy-300"><span class="toc-text">secret-galaxy-300</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#srm-50"><span class="toc-text">srm-50</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mysterious"><span class="toc-text">Mysterious</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#re1-100"><span class="toc-text">re1-100</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#answer-to-everything"><span class="toc-text">answer_to_everything</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#elrond32"><span class="toc-text">elrond32</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tt3441810"><span class="toc-text">tt3441810</span></a></li></ol>
     </div>
   </section>
 
