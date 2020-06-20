@@ -5,6 +5,10 @@
   <!-- SEO相关 -->
   
     
+      
+        <meta name="robots" content="noindex,follow">
+      
+    
   
   <!-- 渲染优化 -->
   <meta name="renderer" content="webkit">
@@ -16,12 +20,8 @@
 
   <!-- 页面元数据 -->
   
-    <title>随便调调，关于暮色 - X1ngg3</title>
+    <title>X1ngg3</title>
   
-    <meta name="keywords" content="调色,日暮">
-  
-  
-    <meta name="description" content="突然出现的调色分享，yeah~">
   
 
   <!-- feed -->
@@ -335,10 +335,16 @@
 
 <div class='l_main'>
   
-
-  
-    <article id="post" class="post white-box reveal shadow article-type-post" itemscope itemprop="blogPost">
+  <section class="post-list ">
+    
+    
       
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post white-box shadow reveal ">
+  
 
 
   <section class='meta'>
@@ -348,11 +354,11 @@
       <div class="meta" id="header-meta">
         
           
-  <h1 class="title">
-    <a href="/2020/06/17/lr2/">
-      随便调调，关于暮色
+  <h2 class="title">
+    <a href="/2020/05/25/lr1/">
+      如何调出好莱坞中爱用的的橙青色调
     </a>
-  </h1>
+  </h2>
 
 
         
@@ -388,9 +394,14 @@
               <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Jun 17, 2020</p>
+    <p>发布于：May 25, 2020</p>
   </a>
 </div>
+
+            
+          
+            
+              
 
             
           
@@ -408,283 +419,191 @@
   </section>
 
 
-      <section class="article typo">
-        <div class="article-entry" itemprop="articleBody">
-          
-          <p>突然出现的调色分享，yeah~</p>
-<a id="more"></a>
-
-<h3 id="写在前面的话"><a href="#写在前面的话" class="headerlink" title="写在前面的话"></a>写在前面的话</h3><p>最近一阵考试刚考完，趁着下一波考试还未到来之际，记录一下最近的调色（其实是之前调的，只是做了点微调）。</p>
-<h3 id="照片分析"><a href="#照片分析" class="headerlink" title="照片分析"></a>照片分析</h3><p><img src="https://i.loli.net/2020/06/17/6JpO1dG4beRFU93.png" alt="原图"></p>
-<p>拍摄图片的时候，天其实已经很黑了，得益于大疆的防抖系统，我在ISO200下曝光了0.5s得到了一张还算纯净的照片（其实ISO还可以再高点，400不过分，我没测试过但3200下应该都能用）。对直方图简单分析一下发现图片其实是偏暗的，不少地方死黑了，中间调很少几乎要没了，高光部分倒是保留的很好。欣慰的是图书馆和教学楼的灯光保留的很不错。</p>
-<h3 id="调色思路"><a href="#调色思路" class="headerlink" title="调色思路"></a>调色思路</h3><p>最近其实我一直很想拍一点暗调城市风的人文和建筑，但无奈纸面上还不能出校门，只能等放假回去了再拍了。</p>
-<p>这里我打算采用比较经典的日落场景色调：高光偏黄，阴影偏蓝，低对比，中高饱和度。</p>
-<h3 id="实现部分"><a href="#实现部分" class="headerlink" title="实现部分"></a>实现部分</h3><p>因为调色过程并不是按照面板顺序往下走的，所以我其实不知道如何准确的表达，那这里我直接取最后的面板数据，然后分享一下我的思路。</p>
-<h3 id="基本"><a href="#基本" class="headerlink" title="基本"></a>基本</h3><p>​        因为这张照片曝光是不足的，所以可以先拉高一点曝光，这里注意到其实我并没有拉多少，为什么，因为这里的曝光度调整是对整个画面的，但是有些地方我们并不需要提太高，比如高光；<strong>所以合理的做法应该是利用曲线工具来对不同明亮度区域进行不同的调整</strong>，这里下一步会有体现。        </p>
-<p>​        高光全压，阴影提高，基操。</p>
-<p>​        纹理、清晰度和去朦胧主要看个人喜好了，有的人就是喜欢图片灰一点锐度低一点。</p>
-<p>​        加鲜艳度是为了使那些不那么饱和的色彩变得饱和，这里主要对低饱和的颜色影响多。</p>
-<p>​        然后再整体拉一点饱和下来。</p>
-<p><img src="https://i.loli.net/2020/06/17/qzh6aZvkAPY7GWU.png" alt="基本"></p>
-<h3 id="色调曲线"><a href="#色调曲线" class="headerlink" title="色调曲线"></a>色调曲线</h3><p>这里我对中间调做了非常大的提升，同时压制了高光，对阴影也只是微微拉了一点，理由看上一步。</p>
-<p><img src="https://i.loli.net/2020/06/17/FmcANgdb2IPL8pl.png" alt="曲线-RGB"></p>
-<p>解释一下曲线，红色曲线使为了给高光加点红，蓝色曲线是为了给阴影加点蓝，没错就是这么直接。</p>
-<p>​                                                                <img src="https://i.loli.net/2020/06/17/R7Y9gv5sN1S6lcO.png" alt="曲线-红">)<img src="https://i.loli.net/2020/06/17/CBhvjTbMALmsr5e.png" alt="曲线-蓝"></p>
-<h3 id="颜色-HSL"><a href="#颜色-HSL" class="headerlink" title="颜色/HSL"></a>颜色/HSL</h3><p>还是朝着我们的想法靠，高光偏黄，阴影偏蓝。</p>
-<p><img src="https://i.loli.net/2020/06/17/WLaOrRYXbhfZiIU.png" alt="HSL"></p>
-<h3 id="分离色调"><a href="#分离色调" class="headerlink" title="分离色调"></a>分离色调</h3><p>50和210附近分别是黄色和蓝色，这个常用，要记住。</p>
-<p><img src="https://i.loli.net/2020/06/17/mi7Ne8EAX5lsbrV.png" alt="分离色调"></p>
-<h3 id="细节"><a href="#细节" class="headerlink" title="细节"></a>细节</h3><p>注意噪点消除的话明亮度不能拉太高，不然会丢失过多细节，颜色就没问题可以随便拉。</p>
-<p><img src="https://i.loli.net/2020/06/17/mfNVTSRh546ePux.png" alt="细节"></p>
-<h3 id="校准"><a href="#校准" class="headerlink" title="校准"></a>校准</h3><p>这一步可以和HSL同步进行，</p>
-<p>​                                                                                                    <img src="https://i.loli.net/2020/06/17/JXvlfgKtVdWa63w.png" alt="校准"></p>
-<h3 id="成品图"><a href="#成品图" class="headerlink" title="成品图"></a>成品图</h3><p><img src="https://i.loli.net/2020/06/17/BbyoJvlznL7geTk.png" alt="image-20200617205028736"></p>
-<h3 id="立个flag"><a href="#立个flag" class="headerlink" title="立个flag"></a>立个flag</h3><p>​        很多地方我没有细讲，考虑到每次如果都说一次太麻烦了，<strong>之后放假了应该会写一篇关于如何正确使用这些工具的分享吧</strong>（虽然没人看，但自己能学到很多），希望假期能拍到满意的作品，yeah~</p>
-<h3 id="图片分享"><a href="#图片分享" class="headerlink" title="图片分享"></a>图片分享</h3><p>一起修的几张图片，希望大家喜欢~</p>
-<p> <img src="https://i.loli.net/2020/06/17/a3WzQAxyMqr4ceP.jpg" alt="20.6.17- (3 - 6)"></p>
-<p><img src="https://i.loli.net/2020/06/17/zy1RQio5d9DreVh.jpg" alt="20.6.17- (2 - 6)"></p>
-<p><img src="https://i.loli.net/2020/06/17/T3G69UKc5Cdr8Pp.jpg" alt="20.6.17- (5 - 6)"></p>
-<p><img src="https://i.loli.net/2020/06/17/O4tjBKISFrhA7gR.jpg" alt="20.6.17- (6 - 6)"></p>
-<p><img src="https://i.loli.net/2020/06/17/art6KCyxqsAdhwV.jpg" alt="20.6.17- (1 - 6)"></p>
-<p><img src="https://i.loli.net/2020/06/17/OCko8gcsFSxP52K.jpg" alt="20.6.17- (4 - 6)"></p>
-
-          
-            <div class='article_footer'>
-              
-                
-  
-    
-    
-
-
-
-  
-
-  
-    
-    
-
-
-
-  
-
-  
-    
-    
-
-<section class="widget copyright  desktop mobile">
-  <div class='content'>
-    
-      <blockquote>
-        
-          
-            <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
-
-          
-        
-          
-            <p>本文永久链接是：<a href=http://x1ngg3.github.io/2020/06/17/lr2/>http://x1ngg3.github.io/2020/06/17/lr2/</a></p>
-          
-        
-      </blockquote>
-    
-  </div>
-</section>
-
-  
-
-  
-    
-    
-
-<section class="widget qrcode  desktop mobile">
-  
-
-  <div class='content article-entry'>
-    
-  </div>
-</section>
-
-  
-
-
-              
-            </div>
-          
-        </div>
-        
-          
-
-
-  <section class='meta' id="footer-meta">
-    <div class='new-meta-box'>
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
       
-        
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-06-17T21:06:51+08:00">
-  <a class='notlink'>
-    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>最后更新于：Jun 17, 2020</p>
-  </a>
-</div>
-
-        
-      
-        
-          
-  
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E8%B0%83%E8%89%B2/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>调色</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E6%97%A5%E6%9A%AE/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>日暮</p></a></div>
-
-
-        
-      
-        
-          
-
-        
-      
-        
-          
-  <div class="new-meta-item share -mob-share-list">
-  <div class="-mob-share-list share-body">
-    
-      
-        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
-          
-          href="http://connect.qq.com/widget/shareqq/index.html?url=http://x1ngg3.github.io/2020/06/17/lr2/&title=随便调调，关于暮色 - X1ngg3&summary=突然出现的调色分享，yeah~"
-          
-          >
-          
-            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qq.png">
-          
-        </a>
-      
-    
-      
-        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
-          
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://x1ngg3.github.io/2020/06/17/lr2/&title=随便调调，关于暮色 - X1ngg3&summary=突然出现的调色分享，yeah~"
-          
-          >
-          
-            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qzone.png">
-          
-        </a>
-      
-    
-      
-        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
-          
-          href="http://service.weibo.com/share/share.php?url=http://x1ngg3.github.io/2020/06/17/lr2/&title=随便调调，关于暮色 - X1ngg3&summary=突然出现的调色分享，yeah~"
-          
-          >
-          
-            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/weibo.png">
-          
-        </a>
-      
-    
-  </div>
-</div>
-
-
-
-        
+        <p>新开了个人博客，先写个调色分享练练手，奥里给~</p>
       
     </div>
+    
+      
+        <div class="button readmore">
+          <a href="/2020/05/25/lr1/">
+            阅读全文 <i class="fas fa-chevron-right"></i>
+          </a>
+        </div>
+      
+    
   </section>
+</article>
 
-
-        
-        
-          <div class="prev-next">
-            
-              <a class='prev' href='/2020/06/20/%E4%BB%96/'>
-                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>他</p>
-                <p class='content'></p>
-              </a>
-            
-            
-              <a class='next' href='/2020/06/14/wangdingcup_2020/'>
-                <p class='title'>网鼎杯2020回顾<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-                <p class='content'>宜观星辰辩南北，勿随萤火逐东西！
-
-
-写在前面的话前几天受了小队群里师傅们的刺激，整的人还挺颓然的，但想一下感觉自己之前确实是安逸的有点过分了，好吧，那加油，努力请从今日始！
-signal其他的...</p>
-              </a>
-            
           </div>
         
-      </section>
-    </article>
+      
+    
+  </section>
   
-
-  
-    <!-- 显示推荐文章和评论 -->
-
-
-
-  <article class="post white-box reveal comments shadow">
-    <section class="article typo">
-      <p ct><i class='fas fa-comments'></i> 评论</p>
-      
-      
-      
-      
-      
-      
-        <section id="comments">
-          <div id="valine_container" class="valine_thread">
-            <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
-          </div>
-        </section>
-      
-      
-    </section>
-  </article>
-
+    
+      <br>
+      <div class="prev-next">
+        
+          <a class="prev" rel="prev" href="/">
+            <section class="post prev white-box shadow" >
+              <i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;Previous&nbsp;
+            </section>
+          </a>
+        
+        <p class="current">
+          2 / 2
+        </p>
+        
+      </div>
+    
+    <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
+    
+    
 
   
-
-
-
-
-<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
-
-
-
-  <script>
-    window.subData = {
-      title: '随便调调，关于暮色',
-      tools: true
-    }
-  </script>
 
 
 </div>
 <aside class='l_side'>
   
   
+    
+    
+
+<section class="widget blogger shadow desktop mobile">
+  <div class='content'>
+    
+      
+        <a class='avatar flat-box' href='/'>
+          <img no-lazy src='https://i.loli.net/2020/05/24/ud4apZVzXN3lnMS.jpg'/>
+        </a>
+      
+    
+    
+      <div class='text'>
+        
+        
+        
+          <p><span id="jinrishici-sentence">X1ngg3</span></p>
+          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="https://x1ngg3.github.io"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="mailto:x1ngg3@foxmail.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://github.com/x1ngg3"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://music.163.com/#/user/home?id=395984459"
+              class="social fas fa-headphones-alt flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+  
 
   
     
     
+  
 
-
-  <section class="widget toc-wrapper shadow desktop mobile">
+  <section class="widget category shadow desktop">
     
   <header>
     
-      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+      <a href='/blog/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
     
   </header>
 
 
     <div class='content'>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#写在前面的话"><span class="toc-text">写在前面的话</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#照片分析"><span class="toc-text">照片分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#调色思路"><span class="toc-text">调色思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现部分"><span class="toc-text">实现部分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基本"><span class="toc-text">基本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#色调曲线"><span class="toc-text">色调曲线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#颜色-HSL"><span class="toc-text">颜色&#x2F;HSL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分离色调"><span class="toc-text">分离色调</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#细节"><span class="toc-text">细节</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#校准"><span class="toc-text">校准</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#成品图"><span class="toc-text">成品图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#立个flag"><span class="toc-text">立个flag</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#图片分享"><span class="toc-text">图片分享</span></a></li></ol>
+      <ul class="entry navigation">
+        
+          <li><a class="flat-box"
+            title="/categories/CTF/" href="/categories/CTF/"
+            id="categoriesCTF"
+            ><div class='name'>CTF</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/CTF/RE/" href="/categories/CTF/RE/"
+            id="categoriesCTFRE"
+            ><div class='name'>RE</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/CTF/WangDingCup-2020/" href="/categories/CTF/WangDingCup-2020/"
+            id="categoriesCTFWangDingCup-2020"
+            ><div class='name'>WangDingCup_2020</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/LR/" href="/categories/LR/"
+            id="categoriesLR"
+            ><div class='name'>LR</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/Poem/" href="/categories/Poem/"
+            id="categoriesPoem"
+            ><div class='name'>Poem</div><div class='badge'>(1)</div></a></li>
+        
+      </ul>
     </div>
   </section>
 
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget tagcloud shadow desktop mobile">
+    
+  <header>
+    
+      <a href='/blog/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <a href="/tags/WangDingCup-2020/" style="font-size: 14px; color: #999">WangDingCup_2020</a> <a href="/tags/XCTF-RE/" style="font-size: 14px; color: #999">XCTF_RE</a> <a href="/tags/poem/" style="font-size: 14px; color: #999">poem</a> <a href="/tags/%E6%97%A5%E6%9A%AE/" style="font-size: 14px; color: #999">日暮</a> <a href="/tags/%E6%A9%99%E9%9D%92/" style="font-size: 14px; color: #999">橙青</a> <a href="/tags/%E7%94%B5%E5%BD%B1%E6%84%9F/" style="font-size: 14px; color: #999">电影感</a> <a href="/tags/%E8%B0%83%E8%89%B2/" style="font-size: 24px; color: #555">调色</a>
+    </div>
+  </section>
+
+
+  
 
   
 
@@ -897,60 +816,6 @@ signal其他的...</p>
 
 
 
-
-  
-    
-<script src="https://cdn.jsdelivr.net/npm/valine@1.4/dist/Valine.min.js"></script>
-
-  
-  <script>
-  var GUEST_INFO = ['nick','mail','link'];
-  var meta = 'nick,mail,link'.split(',').filter(function(item){
-    return GUEST_INFO.indexOf(item) > -1
-  });
-  var REQUIRED_FIELDS = ['nick','mail','link'];
-  var requiredFields = 'nick,mail'.split(',').filter(function(item){
-    return REQUIRED_FIELDS.indexOf(item) > -1
-  });
-  var valine = new Valine();
-  function emoji(path, idx, ext) {
-      return path + "/" + path + "-" + idx + "." + ext;
-  }
-  var emojiMaps = {};
-  for (var i = 1; i <= 54; i++) {
-    emojiMaps['tieba-' + i] = emoji('tieba', i, 'png');
-  }
-  for (var i = 1; i <= 101; i++) {
-    emojiMaps['qq-' + i] = emoji('qq', i, 'gif');
-  }
-  for (var i = 1; i <= 116; i++) {
-    emojiMaps['aru-' + i] = emoji('aru', i, 'gif');
-  }
-  for (var i = 1; i <= 125; i++) {
-    emojiMaps['twemoji-' + i] = emoji('twemoji', i, 'png');
-  }
-  for (var i = 1; i <= 4; i++) {
-    emojiMaps['weibo-' + i] = emoji('weibo', i, 'png');
-  }
-  valine.init({
-    el: '#valine_container',
-    meta: meta,
-    
-    appId: "VqJdqrLLhJVaQMiPLwPCBSc3-gzGzoHsz",
-    appKey: "5yKLlbbNmjEzqjXsB8Xq3vfL",
-    placeholder: "快来评论吧~",
-    pageSize:'10',
-    avatar:'robohash',
-    lang:'zh-cn',
-    visitor: 'true',
-    highlight: 'true',
-    mathJax: 'false',
-    enableQQ: 'true',
-    requiredFields: requiredFields,
-    emojiCDN: 'https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/emoji/valine/',
-    emojiMaps: emojiMaps
-  })
-  </script>
 
 
 
