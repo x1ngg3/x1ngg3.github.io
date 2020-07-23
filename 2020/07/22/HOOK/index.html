@@ -16,12 +16,12 @@
 
   <!-- 页面元数据 -->
   
-    <title>从0开始的PWN学习(XCTF) - X1ngg3</title>
+    <title>hook(updating) - X1ngg3</title>
   
-    <meta name="keywords" content="XCTF_PWN_Greenhand">
+    <meta name="keywords" content="hook">
   
   
-    <meta name="description" content="pwn!pwn!pwn!">
+    <meta name="description" content="事情得从一道名为EASYHOOK的题目说起…….">
   
 
   <!-- feed -->
@@ -349,8 +349,8 @@
         
           
   <h1 class="title">
-    <a href="/2020/06/28/xctf_pwn_greenhand/">
-      从0开始的PWN学习(XCTF)
+    <a href="/2020/07/22/HOOK/">
+      hook(updating)
     </a>
   </h1>
 
@@ -375,9 +375,9 @@
               
   
   <div class='new-meta-item category'>
-    <a href='/categories/CTF/PWN/' rel="nofollow">
+    <a href='/categories/CTF/RE/' rel="nofollow">
       <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>CTF/PWN</p>
+      <p>CTF/RE</p>
     </a>
   </div>
 
@@ -388,7 +388,7 @@
               <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Jun 28, 2020</p>
+    <p>发布于：Jul 22, 2020</p>
   </a>
 </div>
 
@@ -411,15 +411,64 @@
       <section class="article typo">
         <div class="article-entry" itemprop="articleBody">
           
-          <p>pwn!pwn!pwn!</p>
+          <p>事情得从一道名为EASYHOOK的题目说起…….</p>
 <a id="more"></a>
 
-<h3 id="写在前面的话"><a href="#写在前面的话" class="headerlink" title="写在前面的话"></a>写在前面的话</h3><p>最近发现旁边做RE的小伙伴们好像都或多或少对PWN也有些理解，那菜鸡我也决定紧随大佬们的脚步，不求有什么造诣，但当涉猎而已。</p>
-<h3 id="什么是PWN"><a href="#什么是PWN" class="headerlink" title="什么是PWN"></a>什么是PWN</h3><p>CTF比赛主要表现以下几个技能上：逆向工程、密码 学、ACM编程、Web漏洞、二进制溢出、网络和取证等。在国际CTF赛事中，二进制溢出也称之为PWN。</p>
-<p>PWN是一个黑客语法的俚语词，自”own”这个字引申出来的，这个词的含意在于，玩家在整个游戏对战中处在胜利的优势，或是说明竞争对手处在完全惨败的 情形下，这个词习惯上在网络游戏文化主要用于嘲笑竞争对手在整个游戏对战中已经完全被击败（例如：”You just got pwned!”）。有一个非常著名的国际赛事叫做Pwn2Own，相信你现在已经能够理解这个名字的含义了，即通过打败对手来达到拥有的目的。</p>
-<p>CTF中PWN题型通常会直接给定一个已经编译好的二进制程序（Windows下的EXE或者Linux下的ELF文件等），然后参赛选手通过对二进制程 序进行逆向分析和调试来找到利用漏洞，并编写利用代码，通过远程代码执行来达到溢出攻击的效果，最终拿到目标机器的shell夺取flag。</p>
-<p>漏洞一般是1、gets函数这种对输入没有限制导致溢出。2、格式化字符串漏洞。3、数据类型转换的时候产生了溢出。 总的来说就是对输入的值限制的不够让用户的输入影响了执行流。 那么如何利用漏洞呢？ 在linux中有一个system函数system(“/bin/bash”)这条语句就可以调出shell。让程序执行这个函数就能实现对shell的调用了。</p>
-<h3 id="level0"><a href="#level0" class="headerlink" title="level0"></a>level0</h3>
+<p>写题目的时候发现了一道名为EASYHOOK的题目，想起《加密与解密》中有HOOK技术的相关篇幅，于是有了此篇总结性博客。</p>
+<p>PS：以前听讲座的时候某位带佬说会了HOOK逆向就算是入门了，合着自己还在门外徘徊</p>
+<h3 id="WHAT-IS-HOOK"><a href="#WHAT-IS-HOOK" class="headerlink" title="WHAT IS HOOK"></a>WHAT IS HOOK</h3><p>在计算机中，当程序执行时，指令流也像水流一样，只要在合适的位置下钩子，就可以对程序的运行流程进行监控、拦截。HOOK的关键就是通过一定手段埋下“钩子”，“钩”住我们关心的重要流程，然后根据对需要对执行过程进行干预。</p>
+<h3 id="Address-Hook"><a href="#Address-Hook" class="headerlink" title="Address Hook"></a>Address Hook</h3><p>Address Hook是指通过修改数据进行hook的方法。<strong>这里的’‘数据“通常指一些函数的地址（也可能是偏移量）</strong></p>
+<p>它们通常存放在<strong>各类表或结构中</strong>，或者<strong>某个指定的地址处</strong>，抑或<strong>特殊的寄存器中</strong>。他们的共同点是，<strong>在某个时刻会成为程序运行的eip。</strong>因此只要把这些地址替换成我们的Detour函数地址，就可以轻松拿到程序的控制权了。</p>
+<h4 id="各类表中的地址"><a href="#各类表中的地址" class="headerlink" title="各类表中的地址"></a>各类表中的地址</h4><h5 id="PE的IAT"><a href="#PE的IAT" class="headerlink" title="PE的IAT"></a>PE的IAT</h5><p>IAT模块具体指某个PE模块的IAT，<strong>所以它的作用范围只针对被HOOK的模块，且必须在以静态链接的方式调用API时才会被HOOK</strong>，在使用LoadLibrary或GetProcAddress进行动态调用时不受影响（在其他模块调用被HOOK的API时也没有影响）。</p>
+<blockquote>
+<p>IAT的全称是Import Address Table。</p>
+<p>IAT表是执行程序或者dll为了实现动态加载和重定位函数地址，用到的一个导入函数地址表。这里面记录了每个导入函数的名字和所在的dll名称，在pe加载的时候系统会加载这些dll到用户的地址空间然后把函数地址覆盖这个表里的函数地址，然后重构所有用到这个表的代码，让其调用直接指向实际函数地址（PE是否覆盖不确定，驱动会这么做），PE的IAT表会留在内存，驱动的就丢弃了。</p>
+</blockquote>
+<h5 id="PE的EAT"><a href="#PE的EAT" class="headerlink" title="PE的EAT"></a>PE的EAT</h5><p>HOOK后，<strong>所有试图通过输出表获取函数地址的行为都会受到影响</strong>（主程序及其输入表中所有模块的IAT在程序初始化的时候就已经被填充了，因此，之后通过IAT进行调用不受EAT HOOK的影响）。<strong>EAT并不直接起作用，它只能影响Hook之后对该函数的地址的获取</strong>（例如IAT拦截不到的LoadLibrary或GetProcAddress调用方式）或者后续加载的模块的IAT。</p>
+<blockquote>
+<p>Export Address Table</p>
+<p>在windows系统中，“库”是为了方便其他程序调用而集中包含相关的函数的文件(dll,sys).win32 API是最具有代表性的库。<br>EAT是一种核心机制，它使不同的应用程序可以调用库文件中提供的函数。也就是说，只有通过EAT表才能准确的求得从相应的库中导出函数的起始地址。</p>
+<p>EAT中存放的不是函数地址，而是函数的偏移地址，使用时需要加上模块基址</p>
+</blockquote>
+<h5 id="user32-dll的回调函数表"><a href="#user32-dll的回调函数表" class="headerlink" title="user32.dll的回调函数表"></a>user32.dll的回调函数表</h5><blockquote>
+<p>被作为实参传入另一函数，并在该外部函数内被调用，用以来完成某些任务的函数，称为回调函数。</p>
+</blockquote>
+<h5 id="IDT"><a href="#IDT" class="headerlink" title="IDT"></a>IDT</h5><blockquote>
+<p>中断描述符表（Interrupt Descriptor Table，IDT）将每个异常或中断向量分别与它们的处理过程联系起来。</p>
+<p>IDT的表基址存放在idtl寄存器中，每个中断项的中断处理例程称为ISR(Interrupt Service Routine)</p>
+</blockquote>
+<h5 id="SSDT和Shadow-SSDT"><a href="#SSDT和Shadow-SSDT" class="headerlink" title="SSDT和Shadow SSDT"></a>SSDT和Shadow SSDT</h5><blockquote>
+<p>SSDT(System Srevice Descriptor Table)，系统服务描述符表</p>
+<p>SSDT：主要处理 Kernel32.dll中的系统调用，如openProcess,ReadFile等，主要在ntoskrnl.exe中实现（微软有给出 ntoskrnl源代码）</p>
+<p>ShadowSSDT: 1.主要处理，user32.dll,GDI32.dll中调用的函数，如postMessage,SendMessage,FindWindow,主要在win32k.sys中实现.（微软未给出win32k代码）</p>
+</blockquote>
+<p>c++在使用虚函数和重载时，使用了一个地址表来保存寻函数的地址，称为虚函数表（Virtual Function Table，VFT）.一旦子类重载了某个函数，编译器就会用子类中该函数的地址替换虚函数表中对应的函数地址。<strong>重载就是用子类的方法去覆盖父类的方法，也就是地址替换（实际上在HOOK时也是这么做的）。</strong></p>
+<h5 id="COM接口的功能函数表"><a href="#COM接口的功能函数表" class="headerlink" title="COM接口的功能函数表"></a>COM接口的功能函数表</h5><p><strong>com接口同样存在vftable，与c++中的vftable完全一样。替换vftable中的地址，就可以实现对COM接口的HOOK。</strong></p>
+<p>开发人员通常只会根据需要替换表中的个别地址来进行HOOK，但如果直接替换这个地址表的基址就会可以在不修改原表内容的情况下对全部项目进行HOOK了（实际使一种大规模的Address Hook）。</p>
+<h4 id="特殊寄存器中的地址"><a href="#特殊寄存器中的地址" class="headerlink" title="特殊寄存器中的地址"></a>特殊寄存器中的地址</h4><p>Windows使用MST寄存器组中IA32_SYSENTER_EIP的值作为内核调用的入口，当在ntdll中调用汇编指令stsenter进入内核时，CPU会首先执行到这里。</p>
+<p>因此，通过修改MSR寄存器中保存的快速调用入口函数地址，同样可以进行Hook。</p>
+<h3 id="Inline-Hook"><a href="#Inline-Hook" class="headerlink" title="Inline Hook"></a>Inline Hook</h3><p><strong>直接修改指令的Hook，一般使用jmp,call,retn之类的转移指令。</strong></p>
+<h4 id="jmp-xxxxx（5字节）"><a href="#jmp-xxxxx（5字节）" class="headerlink" title="jmp xxxxx（5字节）"></a>jmp xxxxx（5字节）</h4><p>直接跳转到某地址</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#HOOK前</span><br><span class="line">mov edi,edi</span><br><span class="line">push ebp</span><br><span class="line">mov ebp,esp</span><br><span class="line"></span><br><span class="line">#HOOK后</span><br><span class="line">jmp inlinehook.123456</span><br></pre></td></tr></table></figure>
+
+<h4 id="push-xxxxxxx-retn（6字节）"><a href="#push-xxxxxxx-retn（6字节）" class="headerlink" title="push xxxxxxx/retn（6字节）"></a>push xxxxxxx/retn（6字节）</h4><p>通过压栈返回实现跳转</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#HOOK前</span><br><span class="line">mov edi,edi</span><br><span class="line">push ebp</span><br><span class="line">mov ebp,esp</span><br><span class="line"></span><br><span class="line">#HOOK后</span><br><span class="line">push 123456</span><br><span class="line">retn</span><br></pre></td></tr></table></figure>
+
+<h4 id="mov-eax-xxxxxxx-jmp-eax（7字节）"><a href="#mov-eax-xxxxxxx-jmp-eax（7字节）" class="headerlink" title="mov eax,xxxxxxx/jmp eax（7字节）"></a>mov eax,xxxxxxx/jmp eax（7字节）</h4><p>先将转移地址放入寄存器，再实现跳转</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#HOOK前</span><br><span class="line">push 10</span><br><span class="line">push kernel132.123456</span><br><span class="line"></span><br><span class="line">#HOOK后</span><br><span class="line">mov eax,123456</span><br><span class="line">jmp eax</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>选用eax寄存器的原因是因为eax寄存器通常用于保存函数的返回值，在函数入口修改它不会影响函数执行结果</p>
+</blockquote>
+<h4 id="call-Hook（更换指令或输入表）"><a href="#call-Hook（更换指令或输入表）" class="headerlink" title="call Hook（更换指令或输入表）"></a>call Hook（更换指令或输入表）</h4><h5 id="更换指令"><a href="#更换指令" class="headerlink" title="更换指令"></a>更换指令</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#HOOK前</span><br><span class="line">call kernel132.VirtualAllocEx</span><br><span class="line">pop ebp</span><br><span class="line">retn 10</span><br><span class="line"></span><br><span class="line">#HOOK后</span><br><span class="line">call InLineHo.123456</span><br><span class="line">pop ebp</span><br><span class="line">retn 10</span><br></pre></td></tr></table></figure>
+
+<h5 id="更换输入表"><a href="#更换输入表" class="headerlink" title="更换输入表"></a>更换输入表</h5><p>与IAT Hook类似</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#HOOK前</span><br><span class="line">call dword ptr ds:[&lt;%Kernel32.VirtualAlloc&gt;]</span><br><span class="line">retn</span><br><span class="line"></span><br><span class="line">#HOOK后</span><br><span class="line">call dword ptr ds:[3C1590]</span><br><span class="line">retn</span><br></pre></td></tr></table></figure>
+
+<h5 id="HotPatch-Hook"><a href="#HotPatch-Hook" class="headerlink" title="HotPatch Hook"></a>HotPatch Hook</h5><p>一个短跳加一个长跳</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#HOOK前</span><br><span class="line">nop</span><br><span class="line">nop</span><br><span class="line">nop</span><br><span class="line">nop</span><br><span class="line">nop</span><br><span class="line">mov edi,edi</span><br><span class="line"></span><br><span class="line">#HOOK后</span><br><span class="line">jmp InlineHo.123456</span><br><span class="line">jmp short USER32.67890</span><br></pre></td></tr></table></figure>
+
+
           
             <div class='article_footer'>
               
@@ -455,7 +504,7 @@
           
         
           
-            <p>本文永久链接是：<a href=http://x1ngg3.github.io/2020/06/28/xctf_pwn_greenhand/>http://x1ngg3.github.io/2020/06/28/xctf_pwn_greenhand/</a></p>
+            <p>本文永久链接是：<a href=http://x1ngg3.github.io/2020/07/22/HOOK/>http://x1ngg3.github.io/2020/07/22/HOOK/</a></p>
           
         
       </blockquote>
@@ -492,10 +541,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-07-22T14:54:59+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-07-23T19:41:10+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>最后更新于：Jul 22, 2020</p>
+    <p>最后更新于：Jul 23, 2020</p>
   </a>
 </div>
 
@@ -504,7 +553,7 @@
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/XCTF-PWN-Greenhand/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>XCTF_PWN_Greenhand</p></a></div>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/hook/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>hook</p></a></div>
 
 
         
@@ -522,7 +571,7 @@
       
         <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=http://x1ngg3.github.io/2020/06/28/xctf_pwn_greenhand/&title=从0开始的PWN学习(XCTF) - X1ngg3&summary=pwn!pwn!pwn!"
+          href="http://connect.qq.com/widget/shareqq/index.html?url=http://x1ngg3.github.io/2020/07/22/HOOK/&title=hook(updating) - X1ngg3&summary=事情得从一道名为EASYHOOK的题目说起……."
           
           >
           
@@ -534,7 +583,7 @@
       
         <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://x1ngg3.github.io/2020/06/28/xctf_pwn_greenhand/&title=从0开始的PWN学习(XCTF) - X1ngg3&summary=pwn!pwn!pwn!"
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://x1ngg3.github.io/2020/07/22/HOOK/&title=hook(updating) - X1ngg3&summary=事情得从一道名为EASYHOOK的题目说起……."
           
           >
           
@@ -546,7 +595,7 @@
       
         <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
           
-          href="http://service.weibo.com/share/share.php?url=http://x1ngg3.github.io/2020/06/28/xctf_pwn_greenhand/&title=从0开始的PWN学习(XCTF) - X1ngg3&summary=pwn!pwn!pwn!"
+          href="http://service.weibo.com/share/share.php?url=http://x1ngg3.github.io/2020/07/22/HOOK/&title=hook(updating) - X1ngg3&summary=事情得从一道名为EASYHOOK的题目说起……."
           
           >
           
@@ -570,24 +619,14 @@
         
           <div class="prev-next">
             
-              <a class='prev' href='/2020/07/22/HOOK/'>
-                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>hook(updating)</p>
-                <p class='content'>事情得从一道名为EASYHOOK的题目说起…….
-
-
-写题目的时候发现了一道名为EASYHOOK的题目，想起《加密与解密》中有HOOK技术的相关篇幅，于是有了此篇总结性博客。
-PS：以前听讲座的...</p>
-              </a>
             
-            
-              <a class='next' href='/2020/06/17/lr2/'>
-                <p class='title'>随便调调，关于暮色<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-                <p class='content'>突然出现的调色分享，yeah~
+              <a class='next' href='/2020/06/28/xctf_pwn_greenhand/'>
+                <p class='title'>从0开始的PWN学习(XCTF)<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>pwn!pwn!pwn!
 
 
-写在前面的话最近一阵考试刚考完，趁着下一波考试还未到来之际，记录一下最近的调色（其实是之前调的，只是做了点微调）。
-照片分析
-拍摄图片的时候，天其实已经很黑了...</p>
+写在前面的话最近发现旁边做RE的小伙伴们好像都或多或少对PWN也有些理解，那菜鸡我也决定紧随大佬们的脚步，不求有什么造诣，但当涉猎而已。
+什么是PWNCTF比赛主要...</p>
               </a>
             
           </div>
@@ -632,7 +671,7 @@ PS：以前听讲座的...</p>
 
   <script>
     window.subData = {
-      title: '从0开始的PWN学习(XCTF)',
+      title: 'hook(updating)',
       tools: true
     }
   </script>
@@ -658,7 +697,7 @@ PS：以前听讲座的...</p>
 
 
     <div class='content'>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#写在前面的话"><span class="toc-text">写在前面的话</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是PWN"><span class="toc-text">什么是PWN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#level0"><span class="toc-text">level0</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#WHAT-IS-HOOK"><span class="toc-text">WHAT IS HOOK</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Address-Hook"><span class="toc-text">Address Hook</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#各类表中的地址"><span class="toc-text">各类表中的地址</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#PE的IAT"><span class="toc-text">PE的IAT</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#PE的EAT"><span class="toc-text">PE的EAT</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#user32-dll的回调函数表"><span class="toc-text">user32.dll的回调函数表</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#IDT"><span class="toc-text">IDT</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#SSDT和Shadow-SSDT"><span class="toc-text">SSDT和Shadow SSDT</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#COM接口的功能函数表"><span class="toc-text">COM接口的功能函数表</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#特殊寄存器中的地址"><span class="toc-text">特殊寄存器中的地址</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Inline-Hook"><span class="toc-text">Inline Hook</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#jmp-xxxxx（5字节）"><span class="toc-text">jmp xxxxx（5字节）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#push-xxxxxxx-retn（6字节）"><span class="toc-text">push xxxxxxx&#x2F;retn（6字节）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mov-eax-xxxxxxx-jmp-eax（7字节）"><span class="toc-text">mov eax,xxxxxxx&#x2F;jmp eax（7字节）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#call-Hook（更换指令或输入表）"><span class="toc-text">call Hook（更换指令或输入表）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#更换指令"><span class="toc-text">更换指令</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#更换输入表"><span class="toc-text">更换输入表</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#HotPatch-Hook"><span class="toc-text">HotPatch Hook</span></a></li></ol></li></ol></li></ol>
     </div>
   </section>
 
