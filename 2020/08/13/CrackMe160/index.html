@@ -414,7 +414,35 @@
           <p>CrackMe!!!</p>
 <a id="more"></a>
 
-<h3 id="Acid-burn"><a href="#Acid-burn" class="headerlink" title="Acid_burn"></a>Acid_burn</h3>
+<h3 id="Acid-burn"><a href="#Acid-burn" class="headerlink" title="Acid_burn"></a>Acid_burn</h3><hr>
+<p>本题主要用到了暂停查看堆栈法。当我们执行到check那一步的时候，无论对错它都会弹出一个对话框，思路就是根据这个对话框找到关键的代码，可以根据弹窗内容查找字符串，也可以查看调用堆栈查看messagebox的调用者。</p>
+<h4 id="serial-amp-name"><a href="#serial-amp-name" class="headerlink" title="serial&amp;name"></a>serial&amp;name</h4><hr>
+<p>按照思路我先随便输入了一下</p>
+<p><img src="https://i.loli.net/2020/08/15/MGFXl6iwfzhUSom.png" alt="image-20200815124733942"></p>
+<p>然后在OD中F12暂停掉，按K查看调用堆栈，是这个K</p>
+<p><img src="https://i.loli.net/2020/08/15/rs5CKxDieT7dZUB.png" alt="image-20200815125108362"></p>
+<p>然后果然我们发现了一个messagebox，不出意外应该就是我们的错误弹窗提示了，右键-显示调用跟踪过去</p>
+<p><img src="https://i.loli.net/2020/08/15/NXtuh8j7z1GsRAr.png" alt="image-20200815125304845"></p>
+<p>调用弹窗的应该就是关键判断函数了，在函数开始处下个断，然后运行结束暂停</p>
+<p><img src="https://i.loli.net/2020/08/15/dMWzaox2guwA9fO.png" alt="image-20200815131243635"></p>
+<p>回到程序弹出的那个窗口，我们再点击一下check,程序停在了我们下断的地方，然后右下角有一个返回地址，应该就是调用判断函数的函数，右键在反汇编窗口中跟随，或者跟上面一样查看调用堆栈也是可以的。</p>
+<p><img src="https://i.loli.net/2020/08/15/BJa9UKDShTo2XVQ.png" alt="image-20200815131501862"></p>
+<p>然后我们读读汇编，你看这个JNZ是不是很可疑，在它上面下个断点，运行一下看看。</p>
+<p><img src="https://i.loli.net/2020/08/15/ZyzNbOltRLupocK.png" alt="image-20200815131939042"></p>
+<p>重新运行之后，程序断在了我们下断的位置，这个时候观察寄存器和堆栈，可以发现我们输入的serial和name都出现在了堆栈上，同时下面还有一串字符串，有理由怀疑他就是程序运行出来的serial。</p>
+<p><img src="https://i.loli.net/2020/08/15/nxF2toYrgCZvkw7.png" alt="image-20200815132457691"></p>
+<p>验证一下。</p>
+<p><img src="https://i.loli.net/2020/08/15/KPRJo6DWrxajQT8.png" alt="image-20200815132351387"></p>
+<h4 id="serial"><a href="#serial" class="headerlink" title="serial"></a>serial</h4><hr>
+<p>同样的方式可以轻松得到serial</p>
+<p><img src="https://i.loli.net/2020/08/15/4sgjLzUVND5Slpk.png" alt="image-20200815132647724"></p>
+<h3 id="注册机"><a href="#注册机" class="headerlink" title="注册机"></a>注册机</h3><hr>
+<p>这里折磨了我好久，主要是我一直以为是在某个CALL函数里面完成的加密，因为每次一步过上文下断的JNZ附近的几个CALL时，堆栈上都有和完成加密有关系的数据产生，误导了我很久。其实早该看出来的，汇编段有很明显的”-“字符，这和最后serial的格式中的字符一样，应该想到是分部拼接起来了，格式为“CW-生成的serial-CRACKED“。</p>
+<p>然后从JNZ开始往上逐渐下断点，慢慢摸就行了。</p>
+<p><img src="https://i.loli.net/2020/08/15/1VYUpblTsqMPIEW.png" alt="image-20200815184537138"></p>
+<p>所以序列号就是“CW-‘name的第一个字节 * 0x29 * 2’-CRACKED”.。</p>
+<p>到这里第一个CRACKME就完成啦，从当时从鼎哥和炜昊哥那了解到CRACKME，到现在开始更硬是拖了几个月，希望能趁着暑假多更几篇吧，哈哈哈哈哈哈~菜鸡大笑。</p>
+
           
             <div class='article_footer'>
               
@@ -487,7 +515,7 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-08-15T11:39:40+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-08-15T18:55:27+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>最后更新于：Aug 15, 2020</p>
@@ -645,7 +673,7 @@ get_up
 
 
     <div class='content'>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Acid-burn"><span class="toc-text">Acid_burn</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Acid-burn"><span class="toc-text">Acid_burn</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#serial-amp-name"><span class="toc-text">serial&amp;name</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#serial"><span class="toc-text">serial</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#注册机"><span class="toc-text">注册机</span></a></li></ol>
     </div>
   </section>
 
