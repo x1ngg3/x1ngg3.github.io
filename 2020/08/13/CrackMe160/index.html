@@ -436,7 +436,7 @@
 <h4 id="serial"><a href="#serial" class="headerlink" title="serial"></a>serial</h4><hr>
 <p>同样的方式可以轻松得到serial</p>
 <p><img src="https://i.loli.net/2020/08/15/4sgjLzUVND5Slpk.png" alt="image-20200815132647724"></p>
-<h3 id="注册机"><a href="#注册机" class="headerlink" title="注册机"></a>注册机</h3><hr>
+<h4 id="注册机"><a href="#注册机" class="headerlink" title="注册机"></a>注册机</h4><hr>
 <p>这里折磨了我好久，主要是我一直以为是在某个CALL函数里面完成的加密，因为每次一步过上文下断的JNZ附近的几个CALL时，堆栈上都有和完成加密有关系的数据产生，误导了我很久。其实早该看出来的，汇编段有很明显的”-“字符，这和最后serial的格式中的字符一样，应该想到是分部拼接起来了，格式为“CW-生成的serial-CRACKED“。</p>
 <p>然后从JNZ开始往上逐渐下断点，慢慢摸就行了。</p>
 <p><img src="https://i.loli.net/2020/08/15/1VYUpblTsqMPIEW.png" alt="image-20200815184537138"></p>
@@ -515,7 +515,7 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-08-15T18:55:27+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-08-15T22:22:47+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>最后更新于：Aug 15, 2020</p>
@@ -673,7 +673,7 @@ get_up
 
 
     <div class='content'>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Acid-burn"><span class="toc-text">Acid_burn</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#serial-amp-name"><span class="toc-text">serial&amp;name</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#serial"><span class="toc-text">serial</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#注册机"><span class="toc-text">注册机</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Acid-burn"><span class="toc-text">Acid_burn</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#serial-amp-name"><span class="toc-text">serial&amp;name</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#serial"><span class="toc-text">serial</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#注册机"><span class="toc-text">注册机</span></a></li></ol></li></ol>
     </div>
   </section>
 
