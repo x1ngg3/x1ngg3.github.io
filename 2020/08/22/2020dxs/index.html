@@ -425,9 +425,9 @@
 <p>之前在XCTF有接触到过一道HOOK的题目，也不能说对HOOK完全不理解，大概就是构造一个长得一样的函数然后通过手段替换掉（不知道这样说对不对），所以关键就是找到这个函数了。</p>
 <p>跟HOOK相关的也就那么几行，就是一个一个点也能试出来。</p>
 <p><img src="https://i.loli.net/2020/08/22/K4bJWL7QPv1uojV.png" alt="image-20200822020917166"></p>
-<p>过去之后这样，我也没感觉有啥不对，push ebp. move ebp, esp. 感觉是个很规范的开头，然后就没有然后了，愣是没做出来。</p>
+<p>过去之后这样，我也没感觉有啥不对，push ebp. move ebp, esp. 感觉是个很规范的开头，然后就没有然后了。</p>
 <p><img src="https://i.loli.net/2020/08/22/8NwKFQ7sSMrDOIm.png" alt="image-20200822021156277"></p>
-<p>然后时间就来到了今晚，看到上面那一大段数据，菜鸡心里突然感到一阵不安，然后一顿u+p，好家伙，果然是段程序。</p>
+<p>时间就来到今晚，再次看到上面那一大段数据，菜鸡心里突然感到一阵不安，然后一顿u+p，好家伙，果然是段程序。</p>
 <p><img src="https://i.loli.net/2020/08/22/YMvTpcLIRjFhntC.png" alt="image-20200822021718310"></p>
 <p><img src="https://i.loli.net/2020/08/22/WPzniO4Mf7GcCkY.png" alt="image-20200822021857318"></p>
 <p>我们需要关注的就是主函数中参与最终比较的<strong>byte_40336C</strong>。这段代码是可以反汇编的，但是下面的那个再加上0x23的那段函数并不在反汇编出来的函数之中，因为毕竟是我们u+P出来的，有点错误可以接受，猜测应该是jmp那里出了问题没有反编译完整，所以好的做法是根据汇编代码中<strong>byte_40336C</strong>的高亮提示逐步排查一下。</p>
@@ -516,7 +516,7 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-08-22T02:29:07+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-08-22T02:31:42+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>最后更新于：Aug 22, 2020</p>
