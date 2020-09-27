@@ -484,7 +484,7 @@
 
 
 
-<h2 id="OGeek2019-babyrop-buuoj"><a href="#OGeek2019-babyrop-buuoj" class="headerlink" title="[OGeek2019]babyrop - - buuoj"></a>[OGeek2019]babyrop - - buuoj</h2><p>关键判断：</p>
+<h3 id="OGeek2019-babyrop-buuoj"><a href="#OGeek2019-babyrop-buuoj" class="headerlink" title="[OGeek2019]babyrop - - buuoj"></a>[OGeek2019]babyrop - - buuoj</h3><p>关键判断：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">buf_len = <span class="built_in">strlen</span>(buf);						  <span class="comment">//strlen遇到字符串'\x0'截至</span></span><br><span class="line"><span class="keyword">if</span> ( <span class="built_in">strncmp</span>(buf, &amp;s, buf_len) )              <span class="comment">// 比较前buf_len个字节，如果buf_len为0则可绕过</span></span><br><span class="line">	<span class="built_in">exit</span>(<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
 
 <p>利用栈溢出覆盖v5为一个足够大的数以此来为下一步的栈溢出覆盖返回地址做准备。</p>
@@ -564,7 +564,7 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-09-27T15:47:24+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-09-27T15:51:21+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>最后更新于：Sep 27, 2020</p>
@@ -732,7 +732,7 @@ PS：以前听讲座的...</p>
 
 
     <div class='content'>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#写在前面的话"><span class="toc-text">写在前面的话</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是PWN"><span class="toc-text">什么是PWN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#get-shell-XCTF"><span class="toc-text">get_shell - - XCTF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hello-pwn-XCTF"><span class="toc-text">hello_pwn - - XCTF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#when-did-you-born-XCTF"><span class="toc-text">when_did_you_born - - XCTF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#level0-XCTF"><span class="toc-text">level0 - - XCTF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#level2-XCTF"><span class="toc-text">level2 - - XCTF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cgfsb-XCTF"><span class="toc-text">Cgfsb - - XCTF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cgpwn2-XCTF"><span class="toc-text">cgpwn2 - - XCTF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#guess-num-XCTF"><span class="toc-text">guess_num - - XCTF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#int-overflow-XCTF"><span class="toc-text">int_overflow - - XCTF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ciscn-2019-c-1-buuoj"><span class="toc-text">ciscn_2019_c_1 - - buuoj</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OGeek2019-babyrop-buuoj"><span class="toc-text">[OGeek2019]babyrop - - buuoj</span></a>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#写在前面的话"><span class="toc-text">写在前面的话</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是PWN"><span class="toc-text">什么是PWN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#get-shell-XCTF"><span class="toc-text">get_shell - - XCTF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hello-pwn-XCTF"><span class="toc-text">hello_pwn - - XCTF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#when-did-you-born-XCTF"><span class="toc-text">when_did_you_born - - XCTF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#level0-XCTF"><span class="toc-text">level0 - - XCTF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#level2-XCTF"><span class="toc-text">level2 - - XCTF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cgfsb-XCTF"><span class="toc-text">Cgfsb - - XCTF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cgpwn2-XCTF"><span class="toc-text">cgpwn2 - - XCTF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#guess-num-XCTF"><span class="toc-text">guess_num - - XCTF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#int-overflow-XCTF"><span class="toc-text">int_overflow - - XCTF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ciscn-2019-c-1-buuoj"><span class="toc-text">ciscn_2019_c_1 - - buuoj</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OGeek2019-babyrop-buuoj"><span class="toc-text">[OGeek2019]babyrop - - buuoj</span></a></li></ol>
     </div>
   </section>
 
