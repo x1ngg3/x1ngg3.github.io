@@ -16,9 +16,9 @@
 
   <!-- 页面元数据 -->
   
-    <title>亿天一道RE题（XCTF） - X1ngg3</title>
+    <title>亿天一道RE题（XCTF&amp;&amp;buuoj） - X1ngg3</title>
   
-    <meta name="keywords" content="XCTF_RE">
+    <meta name="keywords" content="XCTF_RE,buuoj_re">
   
   
     <meta name="description" content="XCTF-RE进阶区部分实现（持续更新）">
@@ -349,8 +349,8 @@
         
           
   <h1 class="title">
-    <a href="/2020/05/30/xctf_re/">
-      亿天一道RE题（XCTF）
+    <a href="/2020/05/30/xctf&&buuoj_re/">
+      亿天一道RE题（XCTF&&buuoj）
     </a>
   </h1>
 
@@ -651,6 +651,34 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line">n = <span class="number">103461035900816914121390101299049044413950405173712170434161686539878160984549</span></span><br><span class="line">p = <span class="number">366669102002966856876605669837014229419</span></span><br><span class="line">q = <span class="number">282164587459512124844245113950593348271</span></span><br><span class="line">l = (p - <span class="number">1</span>) * (q - <span class="number">1</span>)</span><br><span class="line">e = <span class="number">65537</span></span><br><span class="line">d = int(gmpy2.invert(e, l))</span><br><span class="line">c = <span class="number">0xad939ff59f6e70bcbfad406f2494993757eee98b91bc244184a377520d06fc35</span></span><br><span class="line">m = pow(c, d, n)					<span class="comment">#或者用gmpy2.powmod(c, d, n)</span></span><br><span class="line">flag0 = hex(m)[<span class="number">2</span>:]                  <span class="comment">#去掉0x头</span></span><br><span class="line">print(flag0)</span><br><span class="line">flag1 = bytes.fromhex(flag0)		<span class="comment">#这部已经解释为字符了</span></span><br><span class="line">print(flag1)</span><br><span class="line">flag = str(flag1, <span class="string">'utf-8'</span>)			<span class="comment">#从bytes转为str</span></span><br><span class="line">print(flag)</span><br></pre></td></tr></table></figure>
 
 <p>suctf{Pwn_@_hundred_years}</p>
+<h3 id="梅津美治郎"><a href="#梅津美治郎" class="headerlink" title="梅津美治郎"></a>梅津美治郎</h3><p>首先Level1直接是个字符串比较，很好通过，然后就没有什么显而易见的线索了，分析一下代码。</p>
+<p>原代码里定义了非常多的变量，咋一看好像都是些没啥用的字符串，跟进sub_401500()</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> __cdecl <span class="title">sub_401500</span><span class="params">(<span class="keyword">signed</span> <span class="keyword">int</span> a1)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> result; <span class="comment">// eax</span></span><br><span class="line">  _BYTE *i; <span class="comment">// [esp+1Ch] [ebp-Ch]</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> ( a1 &lt;= <span class="number">9</span> )</span><br><span class="line">    <span class="keyword">return</span> sub_401500(a1 + <span class="number">1</span>);</span><br><span class="line">  <span class="keyword">for</span> ( i = (_BYTE *)dword_40AD94; ; ++i )</span><br><span class="line">  &#123;</span><br><span class="line">    result = dword_40ADA0;</span><br><span class="line">    <span class="keyword">if</span> ( (<span class="keyword">unsigned</span> <span class="keyword">int</span>)i &gt;= dword_40ADA0 )</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    *i ^= <span class="number">1u</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到函数对定义的那部分变量进行了 ^ 1的处理，然后发现其实就是弹窗里提示的字符。</p>
+<p>继续分析，v3,v4,v5看着有点像hook来着。</p>
+<p>继续分析，来到sub_40157F()</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> __cdecl __noreturn <span class="title">sub_40157F</span><span class="params">(<span class="keyword">int</span> a1)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> v1; <span class="comment">// [esp+18h] [ebp-20h]</span></span><br><span class="line">  <span class="keyword">int</span> v2; <span class="comment">// [esp+2Ch] [ebp-Ch]</span></span><br><span class="line"></span><br><span class="line">  v2 = *(_DWORD *)(*(_DWORD *)(a1 + <span class="number">4</span>) + <span class="number">184</span>);</span><br><span class="line">  <span class="keyword">if</span> ( v2 == dword_40ADA8 + <span class="number">6</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%20s"</span>, &amp;v1);</span><br><span class="line">    <span class="keyword">if</span> ( !sub_401547(&amp;v1, (_BYTE *)dword_40AD98) )<span class="comment">// 返回0</span></span><br><span class="line">      <span class="built_in">puts</span>(dword_40ADA4);                       <span class="comment">// you win congratulations</span></span><br><span class="line">  &#125;</span><br><span class="line">  ExitProcess(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>继续跟进sub_401547()，找出使if判断成功的条件。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">signed</span> <span class="keyword">int</span> __cdecl <span class="title">sub_401547</span><span class="params">(_BYTE *a1, _BYTE *a2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">while</span> ( *a2 != <span class="number">2</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">if</span> ( *a1 != (*a2 ^ <span class="number">2</span>) )</span><br><span class="line">      <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    ++a1;</span><br><span class="line">    ++a2;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>v1是我们的输入，那关键就是v2了，对dword_40AD98进行交叉引用，发现是定义的变量&amp;v28</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="string">'t0oog3mf'</span></span><br><span class="line">flag = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> a:</span><br><span class="line">	flag += chr(ord(i) ^ <span class="number">1</span> ^ <span class="number">2</span>)</span><br><span class="line">print(flag) <span class="comment">#w3lld0ne</span></span><br></pre></td></tr></table></figure>
+
+<p>继续分析进入sub_4015EA(0)</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> __cdecl <span class="title">sub_4015EA</span><span class="params">(<span class="keyword">signed</span> <span class="keyword">int</span> a1)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">if</span> ( a1 &lt;= <span class="number">9</span> )</span><br><span class="line">    <span class="keyword">return</span> sub_4015EA(a1 + <span class="number">1</span>);</span><br><span class="line">  <span class="built_in">puts</span>(dword_40AD90);</span><br><span class="line">  dword_40ADA8 = <span class="number">0x401619</span>;</span><br><span class="line">  __debugbreak();</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>程序对<strong>dword_40ADA8</strong>进行了修改，对其进行交叉引用，发现来到了sub_40157F()，那这应该就是程序第二部分了。过关密码应该就是我们上面破译的w3lld0ne。</p>
+<p>最后的flag就是把两个密码用<strong>‘_’</strong>链接起来就可以了，至于为什么我没想明白。</p>
+<p>另外网上说可以动调直接在Level1后来到level2，我没试出来，没想明白。</p>
+<p>flag{r0b0RUlez!_w3lld0ne}</p>
+<h3 id="76号"><a href="#76号" class="headerlink" title="76号"></a>76号</h3><h2 id="2019红帽杯-buuoj"><a href="#2019红帽杯-buuoj" class="headerlink" title="2019红帽杯 - - buuoj"></a>2019红帽杯 - - buuoj</h2><h3 id="easyRE"><a href="#easyRE" class="headerlink" title="easyRE"></a>easyRE</h3><p>很久没在buuoj上刷过题了，一上来就遇到个有趣的。</p>
+<p>本题主逻辑可以说是相当签到了，但是都是虚晃一枪，解题关键在于.fini_array段，<a href="https://www.lhyerror404.cn/2019/12/19/fini_array%E6%AE%B5%E5%8A%AB%E6%8C%81/" target="_blank" rel="noopener">有关博客</a></p>
+<blockquote>
+<p>大多数可执行文件是通过链接 libc 来进行编译的，因此 gcc 会将 glibc 初始化代码放入编译好的可执行文件和共享库中。 <code>.init_array</code>和 <code>.fini_array</code> 节（早期版本被称为 .ctors和 .dtors ）中存放了指向初始化代码和终止代码的函数指针。 <code>.init_array</code> 函数指针会在 main() 函数调用之前触发。这就意味着，可以通过重写某个指向正确地址的指针来将控制流指向病毒或者寄生代码。 <code>.fini_array</code> 函数指针在 main() 函数执行完之后才被触发，在某些场景下这一点会非常有用。例如，特定的堆溢出漏洞（如曾经的 <a href="http://phrack.org/issues/57/9.html" target="_blank" rel="noopener">Once upon a free()</a>）会允许攻击者在任意位置写4个字节，攻击者通常会使用一个指向 shellcode 地址的函数指针来重写<code>.fini_array</code> 函数指针。对于大多数病毒或者恶意软件作者来说， <code>.init_array</code> 函数指针是最常被攻击的目标，因为它通常可以使得寄生代码在程序的其他部分执行之前就能够先运行。</p>
+</blockquote>
+<h3 id="Youngter-drive"><a href="#Youngter-drive" class="headerlink" title="Youngter-drive"></a>Youngter-drive</h3><p>这个也有点意思，大概就是创建了两个线程，共用了一个临界资源，轮流使用这样子。</p>
 
           
             <div class='article_footer'>
@@ -687,7 +715,7 @@
           
         
           
-            <p>本文永久链接是：<a href=http://x1ngg3.github.io/2020/05/30/xctf_re/>http://x1ngg3.github.io/2020/05/30/xctf_re/</a></p>
+            <p>本文永久链接是：<a href=http://x1ngg3.github.io/2020/05/30/xctf&&buuoj_re/>http://x1ngg3.github.io/2020/05/30/xctf&&buuoj_re/</a></p>
           
         
       </blockquote>
@@ -724,10 +752,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-08-17T16:30:45+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-09-27T15:47:29+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>最后更新于：Aug 17, 2020</p>
+    <p>最后更新于：Sep 27, 2020</p>
   </a>
 </div>
 
@@ -736,7 +764,7 @@
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/XCTF-RE/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>XCTF_RE</p></a></div>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/XCTF-RE/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>XCTF_RE</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/buuoj-re/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>buuoj_re</p></a></div>
 
 
         
@@ -754,7 +782,7 @@
       
         <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=http://x1ngg3.github.io/2020/05/30/xctf_re/&title=亿天一道RE题（XCTF） - X1ngg3&summary=XCTF-RE进阶区部分实现（持续更新）"
+          href="http://connect.qq.com/widget/shareqq/index.html?url=http://x1ngg3.github.io/2020/05/30/xctf&&buuoj_re/&title=亿天一道RE题（XCTF&&buuoj） - X1ngg3&summary=XCTF-RE进阶区部分实现（持续更新）"
           
           >
           
@@ -766,7 +794,7 @@
       
         <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://x1ngg3.github.io/2020/05/30/xctf_re/&title=亿天一道RE题（XCTF） - X1ngg3&summary=XCTF-RE进阶区部分实现（持续更新）"
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://x1ngg3.github.io/2020/05/30/xctf&&buuoj_re/&title=亿天一道RE题（XCTF&&buuoj） - X1ngg3&summary=XCTF-RE进阶区部分实现（持续更新）"
           
           >
           
@@ -778,7 +806,7 @@
       
         <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
           
-          href="http://service.weibo.com/share/share.php?url=http://x1ngg3.github.io/2020/05/30/xctf_re/&title=亿天一道RE题（XCTF） - X1ngg3&summary=XCTF-RE进阶区部分实现（持续更新）"
+          href="http://service.weibo.com/share/share.php?url=http://x1ngg3.github.io/2020/05/30/xctf&&buuoj_re/&title=亿天一道RE题（XCTF&&buuoj） - X1ngg3&summary=XCTF-RE进阶区部分实现（持续更新）"
           
           >
           
@@ -866,7 +894,7 @@ In the dark pines the wind disentangles it...</p>
 
   <script>
     window.subData = {
-      title: '亿天一道RE题（XCTF）',
+      title: '亿天一道RE题（XCTF&&buuoj）',
       tools: true
     }
   </script>
@@ -892,7 +920,7 @@ In the dark pines the wind disentangles it...</p>
 
 
     <div class='content'>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#写在前面的话"><span class="toc-text">写在前面的话</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Guess-the-Number"><span class="toc-text">Guess-the-Number</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#EasyRE"><span class="toc-text">EasyRE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Shuffle"><span class="toc-text">Shuffle</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#re-for-50-plz-50"><span class="toc-text">re-for-50-plz-50</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dmd-50"><span class="toc-text">dmd-50</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#parallel-comparator-200"><span class="toc-text">parallel-comparator-200</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#secret-galaxy-300"><span class="toc-text">secret-galaxy-300</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#srm-50"><span class="toc-text">srm-50</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mysterious"><span class="toc-text">Mysterious</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#re1-100"><span class="toc-text">re1-100</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#answer-to-everything"><span class="toc-text">answer_to_everything</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#elrond32"><span class="toc-text">elrond32</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tt3441810"><span class="toc-text">tt3441810</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#流浪者"><span class="toc-text">流浪者</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#666"><span class="toc-text">666</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Windows-Reverse1"><span class="toc-text">Windows_Reverse1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#EASYHOOK"><span class="toc-text">EASYHOOK</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#signin"><span class="toc-text">signin</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#写在前面的话"><span class="toc-text">写在前面的话</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Guess-the-Number"><span class="toc-text">Guess-the-Number</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#EasyRE"><span class="toc-text">EasyRE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Shuffle"><span class="toc-text">Shuffle</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#re-for-50-plz-50"><span class="toc-text">re-for-50-plz-50</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dmd-50"><span class="toc-text">dmd-50</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#parallel-comparator-200"><span class="toc-text">parallel-comparator-200</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#secret-galaxy-300"><span class="toc-text">secret-galaxy-300</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#srm-50"><span class="toc-text">srm-50</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mysterious"><span class="toc-text">Mysterious</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#re1-100"><span class="toc-text">re1-100</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#answer-to-everything"><span class="toc-text">answer_to_everything</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#elrond32"><span class="toc-text">elrond32</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tt3441810"><span class="toc-text">tt3441810</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#流浪者"><span class="toc-text">流浪者</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#666"><span class="toc-text">666</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Windows-Reverse1"><span class="toc-text">Windows_Reverse1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#EASYHOOK"><span class="toc-text">EASYHOOK</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#signin"><span class="toc-text">signin</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#梅津美治郎"><span class="toc-text">梅津美治郎</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#76号"><span class="toc-text">76号</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2019红帽杯-buuoj"><span class="toc-text">2019红帽杯 - - buuoj</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#easyRE"><span class="toc-text">easyRE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Youngter-drive"><span class="toc-text">Youngter-drive</span></a></li></ol>
     </div>
   </section>
 
