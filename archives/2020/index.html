@@ -753,16 +753,14 @@
 
 <p>因为wiki上讲的已经很详细了，这里就记录一下wiki上没有说的几个小点（可能wiki觉得太简单了没说，但我又太菜了不会…….）</p>
 <blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload += <span class="string">'a'</span> * <span class="number">0x38</span></span><br></pre></td></tr></table></figure>
-
 <ul>
-<li><p>为什么是0x38而不是0x30，注意0x400616    rsp,    8</p>
+<li><p>payload += 0x38 * ‘a’, 为什么是0x38而不是0x30，注意0x400616    rsp,    8</p>
 <p>这里rsp指针向高地址走了8个字节，所以用八个‘a’给补上</p>
 </li>
 </ul>
 <ul>
 <li><p>为什么r12放的是要执行的地址，注意0x400609    call    qword ptr [r12+rbx*8]</p>
-<p>因为我们把rbx设置的是0，所以这里直接就相当于call    r1</p>
+<p>因为我们把rbx设置的是0，所以这里直接就相当于call    r12</p>
 </li>
 </ul>
 <ul>
