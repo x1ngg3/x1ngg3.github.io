@@ -474,25 +474,21 @@
 
 <h3 id="NPUCTF2020-EzRSA"><a href="#NPUCTF2020-EzRSA" class="headerlink" title="[NPUCTF2020]EzRSA"></a>[NPUCTF2020]EzRSA</h3><p><a href="https://www.cnblogs.com/vict0r/p/13723450.html" target="_blank" rel="noopener">参考博客:NPUCTF2020 EzRSA</a></p>
 <p><a href="https://baike.baidu.com/item/%E6%9C%80%E5%B0%8F%E5%85%AC%E5%80%8D%E6%95%B0/6192375?fr=aladdin" target="_blank" rel="noopener">百度百科:最小公倍数性质</a></p>
-<p><a href="https://www.jianshu.com/p/e74eb43960a1" target="_blank" rel="noopener">Markdown数学公式语法</a></p>
+<p><strong>首先先得知道这个公式：(a, b) * [a, b] = a * b</strong></p>
 <ul>
-<li>首先先得知道这个公式：</li>
+<li><p>(a, b)表示a,b的最大公因数</p>
+</li>
+<li><p>[a, b]表示a,b的最小公倍数</p>
+<p><strong>由rsa公式有:n = p * q</strong></p>
+</li>
 </ul>
-<p>$$<br>(a, b) * [a, b] = a * b<br>$$</p>
-<p>​        (a, b)表示a,b的最大公因数</p>
-<p>​        [a, b]表示a,b的最小公倍数</p>
-<p>​        由rsa公式有<br>$$<br>n \ = p \ * \ q<br>\phi \ = \ (p \ - \ 1) \ * \ (q \ - \ 1)<br>$$<br>​        <strong>所以n 和 phi 应该是两个大小长度差不多的数</strong></p>
-<p>​        <strong>计算 n 与 gift 的倍数差值</strong></p>
-<p>​        <strong>以这个值为上界爆破得到phi</strong></p>
-<ul>
-<li>根据rsa基本原理有公式</li>
-</ul>
-<p>$$<br>c = (m^e) \ mod \ d<br>$$</p>
+<p>​                             <strong>phi = (p - 1) * (q - 1)</strong></p>
+<p><strong>所以n 和 phi 应该是两个大小长度差不多的数</strong></p>
+<p><strong>计算 n 与 gift 的倍数差值</strong></p>
+<p><strong>以这个值为上界爆破得到phi</strong></p>
+<p><strong>根据rsa基本原理有公式:    c = m<sup>e</sup> mod d</strong></p>
 <p>​        <strong>但是这个题的坑就在于 e 并不是素数，e/2才是</strong></p>
-<ul>
-<li>公式改写为</li>
-</ul>
-<p>$$<br>c = (m^2)^{e/2}\ mod \ d<br>$$</p>
+<p><strong>公式改写为:    c = (m<sup>2</sup>)<sup>e/2</sup> mod d</strong></p>
 <p>​        所以我们计算出来的应该是m<sup>2</sup>，开方得到m</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="keyword">import</span> sympy</span><br><span class="line"><span class="keyword">from</span> gmpy2 <span class="keyword">import</span> *</span><br><span class="line">n = <span class="number">17083941230213489700426636484487738282426471494607098847295335339638177583685457921198569105417734668692072727759139358207667248703952436680183153327606147421932365889983347282046439156176685765143620637107347870401946946501620531665573668068349080410807996582297505889946205052879002028936125315312256470583622913646319779125559691270916064588684997382451412747432722966919513413709987353038375477178385125453567111965259721484997156799355617642131569095810304077131053588483057244340742751804935494087687363416921314041547093118565767609667033859583125275322077617576783247853718516166743858265291135353895239981121</span></span><br><span class="line">gift = <span class="number">2135492653776686212553329560560967285303308936825887355911916917454772197960682240149821138177216833586509090969892419775958406087994054585022894165950768427741545736247918410255804894522085720642952579638418483800243368312702566458196708508543635051350999572787188236243275631609875253617015664414032058822919469443284453403064076232765024248435543326597418851751586308514540124571309152787559712950209357825576896132278045112177910266019741013995106579484868768251084453338417115483515132869594712162052362083414163954681306259137057581036657441897428432575924018950961141822554251369262248368899977337886190114104</span></span><br><span class="line">c = <span class="number">3738960639194737957667684143565005503596276451617922474669745529299929395507971435311181578387223323429323286927370576955078618335757508161263585164126047545413028829873269342924092339298957635079736446851837414357757312525158356579607212496060244403765822636515347192211817658170822313646743520831977673861869637519843133863288550058359429455052676323196728280408508614527953057214779165450356577820378810467527006377296194102671360302059901897977339728292345132827184227155061326328585640019916328847372295754472832318258636054663091475801235050657401857262960415898483713074139212596685365780269667500271108538319</span></span><br><span class="line">e = <span class="number">54722</span> / <span class="number">2</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">10</span>):</span><br><span class="line">	phi = i * gift</span><br><span class="line">	e = mpz(e)</span><br><span class="line">	phi = mpz(phi)</span><br><span class="line">	<span class="keyword">if</span>(gcd(phi, e) == <span class="number">1</span>):</span><br><span class="line">		d = gmpy2.invert(e, phi)</span><br><span class="line">		m = pow(c, d, n)</span><br><span class="line">		flag = str(long_to_bytes(gmpy2.iroot(m, <span class="number">2</span>)[<span class="number">0</span>]))</span><br><span class="line">		print(flag)</span><br><span class="line">		<span class="keyword">if</span> <span class="string">"NPUCTF"</span> <span class="keyword">in</span> flag:</span><br><span class="line">			print(flag)</span><br></pre></td></tr></table></figure>
 
@@ -569,7 +565,7 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-10-10T16:56:33+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-10-10T17:03:49+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>最后更新于：Oct 10, 2020</p>
