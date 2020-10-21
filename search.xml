@@ -4,6 +4,85 @@
   
     
     <entry>
+      <title>x1ngg3&#39;s memo</title>
+      <link href="/2020/10/20/xx1ngg3&#39;s_memo/"/>
+      <url>/2020/10/20/xx1ngg3&#39;s_memo/</url>
+      
+        <content type="html"><![CDATA[<p>我的备忘录，仅此而已</p><a id="more"></a><h3 id="linux关闭地址随机化"><a href="#linux关闭地址随机化" class="headerlink" title="linux关闭地址随机化"></a>linux关闭地址随机化</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">echo 0 &gt;/proc/sys/kernel/randomize_va_space </span><br><span class="line">0 - 表示关闭进程地址空间随机化。</span><br><span class="line">1 - 表示将mmap的基址，stack和vdso页面随机化。</span><br><span class="line">2 - 表示在1的基础上增加栈（heap）的随机化。</span><br></pre></td></tr></table></figure><p>可通过该程序来检测：</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="keyword">int</span> bss_end;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">void</span> *tret;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"bss end:    %p\n"</span>, (<span class="keyword">char</span> *)(&amp;bss_end) + <span class="number">4</span>);</span><br><span class="line">    tret = sbrk(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">if</span> (tret != (<span class="keyword">void</span> *)<span class="number">-1</span>)</span><br><span class="line">        <span class="built_in">printf</span> (<span class="string">"heap start: %p\n"</span>, tret);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> NOTHING </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> memo </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>heap</title>
+      <link href="/2020/10/19/heap/"/>
+      <url>/2020/10/19/heap/</url>
+      
+        <content type="html"><![CDATA[<p>heap~</p><a id="more"></a><h3 id="sbrk-amp-amp-brk"><a href="#sbrk-amp-amp-brk" class="headerlink" title="sbrk()&amp;&amp;brk()"></a>sbrk()&amp;&amp;brk()</h3><p><strong>reference:</strong><a href="https://linux.die.net/man/2/sbrk" target="_blank" rel="noopener">sbrk(2) - Linux man page</a></p><blockquote><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p><strong>brk</strong>() and <strong>sbrk</strong>() change the location of the <em>program break</em>, which defines the end of the process’s data segment (i.e., the program break is the first location after the end of the uninitialized data segment). Increasing the program break has the effect of allocating memory to the process; decreasing the break deallocates memory.</p><p><strong>brk</strong>() sets the end of the data segment to the value specified by <em>addr</em>, when that value is reasonable, the system has enough memory, and the process does not exceed its maximum data size (see <strong><a href="https://linux.die.net/man/2/setrlimit" target="_blank" rel="noopener">setrlimit</a></strong>(2)).</p><p><strong>sbrk</strong>() increments the program’s data space by <em>increment</em> bytes. Calling <strong>sbrk</strong>() with an <em>increment</em> of 0 can be used to find the current location of the program break.</p><h2 id="Return-Value"><a href="#Return-Value" class="headerlink" title="Return Value"></a>Return Value</h2><p>On success, <strong>brk</strong>() returns zero. On error, -1 is returned, and <em>errno</em> is set to <strong>ENOMEM</strong>. (But see <em>Linux Notes</em> below.)</p><p>On success, <strong>sbrk</strong>() returns the previous program break. (If the break was increased, then this value is a pointer to the start of the newly allocated memory). On error, <em>(void \</em>) -1* is returned, and <em>errno</em> is set to <strong>ENOMEM</strong>.</p></blockquote><p><strong>大概就是：</strong></p><p><strong>sbrk()用来增加堆块的大小，但是调用sbrk(0)的话是会返回当前的program break;</strong></p><p><strong>brk()用来重新设置program break;</strong></p><p><strong>这里用ctf-wiki上的例子可以很好理解。</strong></p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">/* sbrk <span class="keyword">and</span> brk example */</span><br><span class="line"><span class="comment">#include &lt;stdio.h&gt;</span></span><br><span class="line"><span class="comment">#include &lt;unistd.h&gt;</span></span><br><span class="line"><span class="comment">#include &lt;sys/types.h&gt;</span></span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">        void *curr_brk, *tmp_brk = NULL;</span><br><span class="line"></span><br><span class="line">        printf(<span class="string">"Welcome to sbrk example:%d\n"</span>, getpid());</span><br><span class="line"></span><br><span class="line">        /* sbrk(<span class="number">0</span>) gives current program <span class="keyword">break</span> location */</span><br><span class="line">        tmp_brk = curr_brk = sbrk(<span class="number">0</span>);</span><br><span class="line">        printf(<span class="string">"Program Break Location1:%p\n"</span>, curr_brk);</span><br><span class="line">        getchar();</span><br><span class="line"></span><br><span class="line">        /* brk(addr) increments/decrements program <span class="keyword">break</span> location */</span><br><span class="line">        brk(curr_brk+<span class="number">4096</span>);</span><br><span class="line"></span><br><span class="line">        curr_brk = sbrk(<span class="number">0</span>);</span><br><span class="line">        printf(<span class="string">"Program break Location2:%p\n"</span>, curr_brk);</span><br><span class="line">        getchar();</span><br><span class="line"></span><br><span class="line">        brk(tmp_brk);</span><br><span class="line"></span><br><span class="line">        curr_brk = sbrk(<span class="number">0</span>);</span><br><span class="line">        printf(<span class="string">"Program Break Location3:%p\n"</span>, curr_brk);</span><br><span class="line">        getchar();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">program output:</span></span><br><span class="line"><span class="string">Welcome to sbrk example:3336</span></span><br><span class="line"><span class="string">Program Break Location1:0x55555557a000</span></span><br><span class="line"><span class="string">a</span></span><br><span class="line"><span class="string">Program break Location2:0x55555557b000</span></span><br><span class="line"><span class="string">Program Break Location3:0x55555557a000</span></span><br><span class="line"><span class="string">a</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> CTF </category>
+          
+          <category> PWN </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> pwn_heap </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>网络安全逼我学web</title>
+      <link href="/2020/10/12/xctf_web_greenhand/"/>
+      <url>/2020/10/12/xctf_web_greenhand/</url>
+      
+        <content type="html"><![CDATA[<p>因为课程需要，菜鸡被迫了解一下web。</p><a id="more"></a><h3 id="view-source"><a href="#view-source" class="headerlink" title="view_source"></a>view_source</h3><p>我他妈直接F12</p><h3 id="robots"><a href="#robots" class="headerlink" title="robots"></a>robots</h3><blockquote><p>robots协议也叫robots.txt（统一小写）是一种存放于网站根目录下的ASCII编码的文本文件，它通常告诉网络搜索引擎的漫游器（又称网络蜘蛛），此网站中的哪些内容是不应被搜索引擎的漫游器获取的，哪些是可以被漫游器获取的。因为一些系统中的URL是大小写敏感的，所以robots.txt的文件名应统一为小写。robots.txt应放置于网站的根目录下。如果想单独定义搜索引擎的漫游器访问子目录时的行为，那么可以将自定的设置合并到根目录下的robots.txt，或者使用robots元数据（Metadata，又称元数据）。</p><p>/robots.txt</p><p>/flag</p></blockquote><h3 id="backup"><a href="#backup" class="headerlink" title="backup"></a>backup</h3><blockquote><p>常见的备份文件后缀名有 .git .svn .swp .~ .bak .bash_history</p><p>/index.php.bak</p></blockquote><h3 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h3><blockquote><p> Cookie是当主机访问Web服务器时，由 Web 服务器创建的，将信息存储在用户计算机上的文件。一般网络用户习惯用其复数形式 </p></blockquote><p>在火狐浏览器下，F12查储存，可以发现cookie.php的数据包，查看数据包得到flag</p><h3 id="disabled-button"><a href="#disabled-button" class="headerlink" title="disabled_button"></a>disabled_button</h3><p>F12把disable = “”删掉即可</p><h3 id="weak-auth"><a href="#weak-auth" class="headerlink" title="weak_auth"></a>weak_auth</h3><blockquote><p>1.配置浏览器代理</p><p>2.开始爆破（爆破鬼才文桑直呼内行），返回包有个长度不一样的，就是这个了。</p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> CTF </category>
+          
+          <category> WEB </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> webweb </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>buuoj_crypto</title>
       <link href="/2020/10/03/buuoj_crypto/"/>
       <url>/2020/10/03/buuoj_crypto/</url>
