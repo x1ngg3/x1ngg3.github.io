@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Algorithm_review</title>
+      <link href="/2020/10/24/algorithm_review/"/>
+      <url>/2020/10/24/algorithm_review/</url>
+      
+        <content type="html"><![CDATA[<p>算法课复习~~</p><a id="more"></a>]]></content>
+      
+      
+      <categories>
+          
+          <category> Algorithm </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm_review </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>x1ngg3&#39;s memo</title>
       <link href="/2020/10/20/xx1ngg3&#39;s_memo/"/>
       <url>/2020/10/20/xx1ngg3&#39;s_memo/</url>
@@ -38,8 +63,6 @@
       
       <categories>
           
-          <category> CTF </category>
-          
           <category> PWN </category>
           
       </categories>
@@ -64,8 +87,6 @@
       
       
       <categories>
-          
-          <category> CTF </category>
           
           <category> WEB </category>
           
@@ -92,8 +113,6 @@
       
       <categories>
           
-          <category> CTF </category>
-          
           <category> CRYPTO </category>
           
       </categories>
@@ -118,8 +137,6 @@
       
       
       <categories>
-          
-          <category> CTF </category>
           
           <category> PWN </category>
           
@@ -146,8 +163,6 @@
       
       <categories>
           
-          <category> CTF </category>
-          
           <category> PWN </category>
           
       </categories>
@@ -173,9 +188,7 @@
       
       <categories>
           
-          <category> CTF </category>
-          
-          <category> RE </category>
+          <category> Contest </category>
           
       </categories>
       
@@ -199,8 +212,6 @@
       
       
       <categories>
-          
-          <category> CTF </category>
           
           <category> RE </category>
           
@@ -227,9 +238,7 @@
       
       <categories>
           
-          <category> CTF </category>
-          
-          <category> RE </category>
+          <category> Contest </category>
           
       </categories>
       
@@ -253,8 +262,6 @@
       
       
       <categories>
-          
-          <category> CTF </category>
           
           <category> RE </category>
           
@@ -280,8 +287,6 @@
       
       
       <categories>
-          
-          <category> CTF </category>
           
           <category> PWN </category>
           
@@ -335,9 +340,7 @@
       
       <categories>
           
-          <category> CTF </category>
-          
-          <category> WangDingCup_2020 </category>
+          <category> Contest </category>
           
       </categories>
       
@@ -361,8 +364,6 @@
       
       
       <categories>
-          
-          <category> CTF </category>
           
           <category> RE </category>
           
