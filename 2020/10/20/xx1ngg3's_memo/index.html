@@ -418,6 +418,9 @@
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="keyword">int</span> bss_end;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">void</span> *tret;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"bss end:    %p\n"</span>, (<span class="keyword">char</span> *)(&amp;bss_end) + <span class="number">4</span>);</span><br><span class="line">    tret = sbrk(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">if</span> (tret != (<span class="keyword">void</span> *)<span class="number">-1</span>)</span><br><span class="line">        <span class="built_in">printf</span> (<span class="string">"heap start: %p\n"</span>, tret);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
+
+<h3 id="关于lower-bound-和upper-bound-的常见用法"><a href="#关于lower-bound-和upper-bound-的常见用法" class="headerlink" title="关于lower_bound( )和upper_bound( )的常见用法"></a>关于lower_bound( )和upper_bound( )的常见用法</h3><p><a href="https://blog.csdn.net/qq_40160605/article/details/80150252" target="_blank" rel="noopener">关于lower_bound( )和upper_bound( )的常见用法</a></p>
+
           
             <div class='article_footer'>
               
@@ -490,10 +493,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-10-20T18:59:18+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-10-24T22:06:00+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>最后更新于：Oct 20, 2020</p>
+    <p>最后更新于：Oct 24, 2020</p>
   </a>
 </div>
 
@@ -571,7 +574,12 @@
               <a class='prev' href='/2020/10/24/algorithm_review/'>
                 <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>Algorithm_review</p>
                 <p class='content'>算法课复习~~
-</p>
+
+
+CUMTOJ例题最长上升子序列 — dp，贪心+二分参考博客：最长上升子序列 (LIS) 详解+例题模板 (全)
+
+题目描述
+给定一个长度为n的字符串S（只包含小写字母），给...</p>
               </a>
             
             
@@ -653,7 +661,7 @@ Descriptionbrk() and sbrk() chan...</p>
 
 
     <div class='content'>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#linux关闭地址随机化"><span class="toc-text">linux关闭地址随机化</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#linux关闭地址随机化"><span class="toc-text">linux关闭地址随机化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于lower-bound-和upper-bound-的常见用法"><span class="toc-text">关于lower_bound( )和upper_bound( )的常见用法</span></a></li></ol>
     </div>
   </section>
 
