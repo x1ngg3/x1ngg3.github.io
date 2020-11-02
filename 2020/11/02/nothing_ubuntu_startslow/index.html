@@ -5,8 +5,6 @@
   <!-- SEO相关 -->
   
     
-      <meta name="robots" content="noindex,follow">
-    
   
   <!-- 渲染优化 -->
   <meta name="renderer" content="webkit">
@@ -18,8 +16,12 @@
 
   <!-- 页面元数据 -->
   
-    <title>Tag: 电影感 - X1ngg3</title>
+    <title>关于ubuntu启动很慢这件小事 - X1ngg3</title>
   
+    <meta name="keywords" content="ubuntu">
+  
+  
+    <meta name="description" content="人生苦短，我用Kali">
   
 
   <!-- feed -->
@@ -329,25 +331,12 @@
     <div class='body-wrapper'>
       
 
-
 <div class='l_main'>
   
-    
-      
-  <section class="post-list ">
-    
-      
-        
-          
-        
-      
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
+
   
+    <article id="post" class="post white-box reveal shadow article-type-post" itemscope itemprop="blogPost">
+      
 
 
   <section class='meta'>
@@ -357,11 +346,11 @@
       <div class="meta" id="header-meta">
         
           
-  <h2 class="title">
-    <a href="/2020/05/25/lr1/">
-      如何调出好莱坞中爱用的的橙青色调
+  <h1 class="title">
+    <a href="/2020/11/02/nothing_ubuntu_startslow/">
+      关于ubuntu启动很慢这件小事
     </a>
-  </h2>
+  </h1>
 
 
         
@@ -384,9 +373,9 @@
               
   
   <div class='new-meta-item category'>
-    <a href='/categories/LR/' rel="nofollow">
+    <a href='/categories/NOTHING/' rel="nofollow">
       <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>LR</p>
+      <p>NOTHING</p>
     </a>
   </div>
 
@@ -397,14 +386,9 @@
               <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：May 25, 2020</p>
+    <p>发布于：Nov 2, 2020</p>
   </a>
 </div>
-
-            
-          
-            
-              
 
             
           
@@ -422,102 +406,87 @@
   </section>
 
 
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>新开了个人博客，先写个调色分享练练手，奥里给~</p>
-      
-    </div>
-    
-      
-        <div class="button readmore">
-          <a href="/2020/05/25/lr1/">
-            阅读全文 <i class="fas fa-chevron-right"></i>
-          </a>
-        </div>
-      
-    
-  </section>
-</article>
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          
+          <p>人生苦短，我用Kali</p>
+<a id="more"></a>
 
-          </div>
-        
-      
-    
-  </section>
-  
-    
-    <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
-    
-    
+<h3 id="ubuntu-16-04"><a href="#ubuntu-16-04" class="headerlink" title="ubuntu 16.04"></a>ubuntu 16.04</h3><p>ubuntu16好处理一点，首先查看各个进程的占用时间。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemd-analyze blame</span><br></pre></td></tr></table></figure>
 
-  
+<p>可以发现主要是一个进程占用时间过多。</p>
+<blockquote>
+<p>systemd-journal-flush.service</p>
+</blockquote>
+<p>更改记录方式即可：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo vim &#x2F;etc&#x2F;systemd&#x2F;journald.conf</span><br><span class="line">不会用vim可以用gedit代替</span><br></pre></td></tr></table></figure>
+
+<p>修改：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[Journal]</span><br><span class="line">Storage&#x3D;auto</span><br><span class="line">SystemMaxFileSize&#x3D;1G</span><br><span class="line">SystemMaxFiles&#x3D;5</span><br></pre></td></tr></table></figure>
 
 
-    
-  
-</div>
-<aside class='l_side'>
-  
+
+<h3 id="ubuntu-18-04"><a href="#ubuntu-18-04" class="headerlink" title="ubuntu 18.04"></a>ubuntu 18.04</h3><p>同样先查看启动时间，主要是如下几个进程占用过多。</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">plymouth-quit-wait.service</span><br><span class="line">apt-daily.service</span><br><span class="line">NetworkManager-wait-online.service</span><br><span class="line">systemd-journal-flush.service</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>第一项：位开机动画，直接 mask 禁用，恢复用 unmask 。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl mask plymouth-quit-wait.service</span><br></pre></td></tr></table></figure>
+
+<p>第二项：延迟 apt-daily 服务。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl edit apt-daily.timer</span><br></pre></td></tr></table></figure>
+
+<p>插入内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># apt-daily timer configuration override</span><br><span class="line">[Timer]</span><br><span class="line">OnBootSec&#x3D;15min</span><br><span class="line">OnUnitActiveSec&#x3D;1d</span><br><span class="line">AccuracySec&#x3D;1h</span><br><span class="line">RandomizedDelaySec&#x3D;30min</span><br></pre></td></tr></table></figure>
+
+<p>第三项：直接 disable，恢复用 enable。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl disable NetworkManager-wait-online.service</span><br></pre></td></tr></table></figure>
+
+<p>第四项：和上面 ubuntu 16.04 处理一样</p>
+<h3 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h3><p><a href="https://www.cnblogs.com/gaowengang/p/10854042.html" target="_blank" rel="noopener">Ubuntu 18.04 启动太慢不能忍</a></p>
+<p><a href="https://askubuntu.com/questions/1094389/what-is-the-use-of-systemd-journal-flush-service" target="_blank" rel="noopener">What is the use of systemd-journal-flush.service?</a></p>
+<p><a href="https://juniorprincewang.github.io/2019/02/27/解决Ubuntu18-04开机启动缓慢/" target="_blank" rel="noopener">解决Ubuntu18.04开机启动缓慢</a></p>
+
+          
+            <div class='article_footer'>
+              
+                
   
     
     
 
-<section class="widget blogger shadow desktop mobile">
+
+
+  
+
+  
+    
+    
+
+
+
+  
+
+  
+    
+    
+
+<section class="widget copyright  desktop mobile">
   <div class='content'>
     
-      
-        <a class='avatar flat-box' href='/'>
-          <img no-lazy src='https://i.loli.net/2020/05/24/ud4apZVzXN3lnMS.jpg'/>
-        </a>
-      
-    
-    
-      <div class='text'>
-        
-        
-        
-          <p><span id="jinrishici-sentence">X1ngg3</span></p>
-          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
-        
-      </div>
-    
-    
-      <div class="social-wrapper">
+      <blockquote>
         
           
-            <a href="https://x1ngg3.github.io"
-              class="social fas fa-rss flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
+            <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
           
         
           
-            <a href="mailto:x1ngg3@foxmail.com"
-              class="social fas fa-envelope flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
+            <p>本文永久链接是：<a href=http://x1ngg3.github.io/2020/11/02/nothing_ubuntu_startslow/>http://x1ngg3.github.io/2020/11/02/nothing_ubuntu_startslow/</a></p>
           
         
-          
-            <a href="https://github.com/x1ngg3"
-              class="social fab fa-github flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
-          
-        
-          
-            <a href="https://music.163.com/#/user/home?id=395984459"
-              class="social fas fa-headphones-alt flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
-          
-        
-      </div>
+      </blockquote>
     
   </div>
 </section>
@@ -527,88 +496,192 @@
   
     
     
+
+<section class="widget qrcode  desktop mobile">
   
 
-  <section class="widget category shadow desktop">
+  <div class='content article-entry'>
+    
+  </div>
+</section>
+
+  
+
+
+              
+            </div>
+          
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-11-02T10:58:06+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>最后更新于：Nov 2, 2020</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/ubuntu/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>ubuntu</p></a></div>
+
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://connect.qq.com/widget/shareqq/index.html?url=http://x1ngg3.github.io/2020/11/02/nothing_ubuntu_startslow/&title=关于ubuntu启动很慢这件小事 - X1ngg3&summary=人生苦短，我用Kali"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://x1ngg3.github.io/2020/11/02/nothing_ubuntu_startslow/&title=关于ubuntu启动很慢这件小事 - X1ngg3&summary=人生苦短，我用Kali"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://service.weibo.com/share/share.php?url=http://x1ngg3.github.io/2020/11/02/nothing_ubuntu_startslow/&title=关于ubuntu启动很慢这件小事 - X1ngg3&summary=人生苦短，我用Kali"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+          <div class="prev-next">
+            
+            
+              <a class='next' href='/2020/10/26/web_xss/'>
+                <p class='title'>XSS<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>网络安全课作业需要，菜鸡被迫了解一下xss。
+
+
+alert("X1NGG3")
+
+环境搭建首先下载好这三个工具：phpstudy + pikachu + firefox
+以及一个好用的编辑器来...</p>
+              </a>
+            
+          </div>
+        
+      </section>
+    </article>
+  
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box reveal comments shadow">
+    <section class="article typo">
+      <p ct><i class='fas fa-comments'></i> 评论</p>
+      
+      
+      
+      
+      
+      
+        <section id="comments">
+          <div id="valine_container" class="valine_thread">
+            <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
+          </div>
+        </section>
+      
+      
+    </section>
+  </article>
+
+
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: '关于ubuntu启动很慢这件小事',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<aside class='l_side'>
+  
+  
+
+  
+    
+    
+
+
+  <section class="widget toc-wrapper shadow desktop mobile">
     
   <header>
     
-      <a href='/blog/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
     
   </header>
 
 
     <div class='content'>
-      <ul class="entry navigation">
-        
-          <li><a class="flat-box"
-            title="/categories/Algorithm/" href="/categories/Algorithm/"
-            id="categoriesAlgorithm"
-            ><div class='name'>Algorithm</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/CRYPTO/" href="/categories/CRYPTO/"
-            id="categoriesCRYPTO"
-            ><div class='name'>CRYPTO</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/Contest/" href="/categories/Contest/"
-            id="categoriesContest"
-            ><div class='name'>Contest</div><div class='badge'>(3)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/LR/" href="/categories/LR/"
-            id="categoriesLR"
-            ><div class='name'>LR</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/NOTHING/" href="/categories/NOTHING/"
-            id="categoriesNOTHING"
-            ><div class='name'>NOTHING</div><div class='badge'>(3)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/PWN/" href="/categories/PWN/"
-            id="categoriesPWN"
-            ><div class='name'>PWN</div><div class='badge'>(4)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/RE/" href="/categories/RE/"
-            id="categoriesRE"
-            ><div class='name'>RE</div><div class='badge'>(3)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/WEB/" href="/categories/WEB/"
-            id="categoriesWEB"
-            ><div class='name'>WEB</div><div class='badge'>(2)</div></a></li>
-        
-      </ul>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#ubuntu-16-04"><span class="toc-text">ubuntu 16.04</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ubuntu-18-04"><span class="toc-text">ubuntu 18.04</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考博客"><span class="toc-text">参考博客</span></a></li></ol>
     </div>
   </section>
 
-
-  
-
-  
-    
-    
-  
-
-  <section class="widget tagcloud shadow desktop mobile">
-    
-  <header>
-    
-      <a href='/blog/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
-    
-  </header>
-
-
-    <div class='content'>
-      <a href="/tags/Algorithm-review/" style="font-size: 14px; color: #999">Algorithm_review</a> <a href="/tags/CrackMe160/" style="font-size: 14px; color: #999">CrackMe160</a> <a href="/tags/SCTF/" style="font-size: 14px; color: #999">SCTF</a> <a href="/tags/WangDingCup-2020/" style="font-size: 14px; color: #999">WangDingCup_2020</a> <a href="/tags/XCTF-RE/" style="font-size: 14px; color: #999">XCTF_RE</a> <a href="/tags/buuoj-re/" style="font-size: 14px; color: #999">buuoj_re</a> <a href="/tags/crypto-buuoj/" style="font-size: 14px; color: #999">crypto_buuoj</a> <a href="/tags/hook/" style="font-size: 14px; color: #999">hook</a> <a href="/tags/memo/" style="font-size: 14px; color: #999">memo</a> <a href="/tags/poem/" style="font-size: 14px; color: #999">poem</a> <a href="/tags/pwn-buuoj/" style="font-size: 14px; color: #999">pwn_buuoj</a> <a href="/tags/pwn-heap/" style="font-size: 14px; color: #999">pwn_heap</a> <a href="/tags/pwn-xctf/" style="font-size: 14px; color: #999">pwn_xctf</a> <a href="/tags/stackoverflow/" style="font-size: 14px; color: #999">stackoverflow</a> <a href="/tags/ubuntu/" style="font-size: 14px; color: #999">ubuntu</a> <a href="/tags/webweb/" style="font-size: 14px; color: #999">webweb</a> <a href="/tags/xss/" style="font-size: 14px; color: #999">xss</a> <a href="/tags/%E5%9B%BD%E8%B5%9B/" style="font-size: 14px; color: #999">国赛</a> <a href="/tags/%E6%97%A5%E6%9A%AE/" style="font-size: 14px; color: #999">日暮</a> <a href="/tags/%E6%A9%99%E9%9D%92/" style="font-size: 14px; color: #999">橙青</a> <a href="/tags/%E7%94%B5%E5%BD%B1%E6%84%9F/" style="font-size: 14px; color: #999">电影感</a> <a href="/tags/%E8%B0%83%E8%89%B2/" style="font-size: 24px; color: #555">调色</a>
-    </div>
-  </section>
-
-
-  
 
   
 
@@ -795,6 +868,60 @@
 
 
 
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4/dist/Valine.min.js"></script>
+
+  
+  <script>
+  var GUEST_INFO = ['nick','mail','link'];
+  var meta = 'nick,mail,link'.split(',').filter(function(item){
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var REQUIRED_FIELDS = ['nick','mail','link'];
+  var requiredFields = 'nick,mail'.split(',').filter(function(item){
+    return REQUIRED_FIELDS.indexOf(item) > -1
+  });
+  var valine = new Valine();
+  function emoji(path, idx, ext) {
+      return path + "/" + path + "-" + idx + "." + ext;
+  }
+  var emojiMaps = {};
+  for (var i = 1; i <= 54; i++) {
+    emojiMaps['tieba-' + i] = emoji('tieba', i, 'png');
+  }
+  for (var i = 1; i <= 101; i++) {
+    emojiMaps['qq-' + i] = emoji('qq', i, 'gif');
+  }
+  for (var i = 1; i <= 116; i++) {
+    emojiMaps['aru-' + i] = emoji('aru', i, 'gif');
+  }
+  for (var i = 1; i <= 125; i++) {
+    emojiMaps['twemoji-' + i] = emoji('twemoji', i, 'png');
+  }
+  for (var i = 1; i <= 4; i++) {
+    emojiMaps['weibo-' + i] = emoji('weibo', i, 'png');
+  }
+  valine.init({
+    el: '#valine_container',
+    meta: meta,
+    
+    appId: "VqJdqrLLhJVaQMiPLwPCBSc3-gzGzoHsz",
+    appKey: "5yKLlbbNmjEzqjXsB8Xq3vfL",
+    placeholder: "快来评论吧~",
+    pageSize:'10',
+    avatar:'robohash',
+    lang:'zh-cn',
+    visitor: 'true',
+    highlight: 'true',
+    mathJax: 'false',
+    enableQQ: 'true',
+    requiredFields: requiredFields,
+    emojiCDN: 'https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/emoji/valine/',
+    emojiMaps: emojiMaps
+  })
+  </script>
 
 
 
