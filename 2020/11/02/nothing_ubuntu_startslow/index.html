@@ -429,7 +429,7 @@
 
 <h3 id="ubuntu-18-04"><a href="#ubuntu-18-04" class="headerlink" title="ubuntu 18.04"></a>ubuntu 18.04</h3><p>同样先查看启动时间，主要是如下几个进程占用过多。</p>
 <blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">plymouth-quit-wait.service</span><br><span class="line">apt-daily.service</span><br><span class="line">NetworkManager-wait-online.service</span><br><span class="line">systemd-journal-flush.service</span><br></pre></td></tr></table></figure>
+<p>plymouth-quit-wait.service<br>apt-daily.service<br>NetworkManager-wait-online.service<br>systemd-journal-flush.service</p>
 </blockquote>
 <p>第一项：位开机动画，直接 mask 禁用，恢复用 unmask 。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl mask plymouth-quit-wait.service</span><br></pre></td></tr></table></figure>
@@ -520,7 +520,7 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-11-02T10:58:06+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-11-02T11:32:59+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>最后更新于：Nov 2, 2020</p>
