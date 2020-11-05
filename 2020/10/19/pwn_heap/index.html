@@ -433,6 +433,13 @@
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">void</span> *cur=<span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">	cur = sbrk(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"cur_brk at: %p\n"</span>, cur);</span><br><span class="line"></span><br><span class="line">	cur = sbrk(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"cur_brk at: %p\n"</span>, cur);</span><br><span class="line"></span><br><span class="line">	cur = sbrk(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"cur_brk at: %p\n"</span>, cur);</span><br><span class="line"></span><br><span class="line">	cur = sbrk(<span class="number">0x1000</span>);</span><br><span class="line">	cur = sbrk(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"cur_brk at: %p\n"</span>, cur);</span><br><span class="line"></span><br><span class="line">	cur = sbrk(<span class="number">0x1000</span>);</span><br><span class="line">	cur = sbrk(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"cur_brk at: %p\n"</span>, cur);</span><br><span class="line">	</span><br><span class="line">	cur = sbrk(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"cur_brk at: %p\n"</span>, cur);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">output:</span></span><br><span class="line"><span class="comment">cur_brk at: 0x55e680100000</span></span><br><span class="line"><span class="comment">cur_brk at: 0x55e680121000</span></span><br><span class="line"><span class="comment">cur_brk at: 0x55e680121000</span></span><br><span class="line"><span class="comment">cur_brk at: 0x55e680122000</span></span><br><span class="line"><span class="comment">cur_brk at: 0x55e680123000</span></span><br><span class="line"><span class="comment">cur_brk at: 0x55e680123000</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
 
 <p><img src="https://i.loli.net/2020/10/22/VH8wAYEZe25qQfu.png" alt="program_virtual_address_memory_space"></p>
+<h3 id="mmap"><a href="#mmap" class="headerlink" title="mmap"></a>mmap</h3><blockquote>
+<p>使用cat /proc/进程 id/maps 查看c程序进程内存映射</p>
+<p>1.首先把 c 程序编译成 a.out 文件 </p>
+<p>2.gdb a.out</p>
+<p>3.查看执行该文件对应的进程 #ps au</p>
+<p>4.a.out 所对应的PID即为所需</p>
+</blockquote>
 
           
             <div class='article_footer'>
@@ -506,7 +513,7 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-11-05T17:19:47+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-11-05T17:38:20+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>最后更新于：Nov 5, 2020</p>
@@ -671,7 +678,7 @@ robots协议也叫robots.txt（统一小写）是一种存放于网站根目录�
 
 
     <div class='content'>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#sbrk-amp-amp-brk"><span class="toc-text">sbrk()&amp;&amp;brk()</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Description"><span class="toc-text">Description</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Return-Value"><span class="toc-text">Return Value</span></a>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#sbrk-amp-amp-brk"><span class="toc-text">sbrk()&amp;&amp;brk()</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Description"><span class="toc-text">Description</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Return-Value"><span class="toc-text">Return Value</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#mmap"><span class="toc-text">mmap</span></a></li></ol>
     </div>
   </section>
 
