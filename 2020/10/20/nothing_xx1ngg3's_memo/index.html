@@ -419,15 +419,27 @@
 
 
 
-<h3 id="关于lower-bound-和upper-bound-的常见用法"><a href="#关于lower-bound-和upper-bound-的常见用法" class="headerlink" title="关于lower_bound( )和upper_bound( )的常见用法"></a>关于lower_bound( )和upper_bound( )的常见用法</h3><p><a href="https://blog.csdn.net/qq_40160605/article/details/80150252" target="_blank" rel="noopener">关于lower_bound( )和upper_bound( )的常见用法</a></p>
-<p>lower_bound( )和upper_bound( )都是利用二分查找的方法<strong>在一个排好序的数组中进行查找的。</strong></p>
-<p>在从小到大的排序数组中，</p>
-<p>lower_bound( begin,end,num)：从数组的begin位置到end-1位置二分查找<strong>第一个大于或等于num的数字**</strong>，**找到返回该数字的地址，不存在则返回end。通过返回的地址减去起始地址begin,得到找到数字在数组中的下标。</p>
-<p>upper_bound( begin,end,num)：从数组的begin位置到end-1位置二分查找<strong>第一个大于num的数字**</strong>，**找到返回该数字的地址，不存在则返回end。通过返回的地址减去起始地址begin,得到找到数字在数组中的下标。</p>
-<p>在从大到小的排序数组中，重载lower_bound()和upper_bound()</p>
-<p>lower_bound( begin,end,num,greater<type>() ):从数组的begin位置到end-1位置二分查找<strong>第一个小于或等于num的数字，</strong>找到返回该数字的地址，不存在则返回end。通过返回的地址减去起始地址begin,得到找到数字在数组中的下标。</p>
-<p>upper_bound( begin,end,num,greater<type>() ):从数组的begin位置到end-1位置二分查找<strong>第一个小于num的数字，</strong>找到返回该数字的地址，不存在则返回end。通过返回的地址减去起始地址begin,得到找到数字在数组中的下标。</p>
 <h3 id="linux多版本pyhton"><a href="#linux多版本pyhton" class="headerlink" title="linux多版本pyhton"></a>linux多版本pyhton</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;usr&#x2F;bin&#x2F;python3 -m pip install --upgrade pip</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="什么是0xdeadbeef"><a href="#什么是0xdeadbeef" class="headerlink" title="什么是0xdeadbeef"></a>什么是0xdeadbeef</h3><p>做题的时候看到有把返回地址填成0Xdeadbeef的，0xdeadbeef 是一个16进制魔术数字，是一种类似Leet的英文单词转写形式，相当于汉语拼音吧。看下翻译就知道了。</p>
+<h3 id="gdb查看返回地址"><a href="#gdb查看返回地址" class="headerlink" title="gdb查看返回地址"></a>gdb查看返回地址</h3><p><a href="https://stackoverflow.com/questions/32345320/get-return-address-gdb" target="_blank" rel="noopener">get return address GDB</a></p>
+<p>之前在做校赛的时候用到了这个，当时不知道，好一顿找才找到。用stackoverflow上的例子解释。</p>
+<p>To get the location of the stored return address of a specific function, you can place a breakpoint at that function and use the <code>info frame</code> command.</p>
+<p>Here is an example:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">gdb &#x2F;path&#x2F;to&#x2F;binary</span><br><span class="line">(gdb) br main</span><br><span class="line">(gdb) run</span><br><span class="line">Starting program: &#x2F;path&#x2F;to&#x2F;binary </span><br><span class="line"></span><br><span class="line">Breakpoint 1, 0x08048480 in main ()</span><br><span class="line">(gdb) info frame</span><br><span class="line">Stack level 0, frame at 0xffffd700:</span><br><span class="line">eip &#x3D; 0x8048480 in main; saved eip &#x3D; 0xf7e3ca63</span><br><span class="line">Arglist at 0xffffd6f8, args: </span><br><span class="line">Locals at 0xffffd6f8, Previous frame&#39;s sp is 0xffffd700</span><br><span class="line">Saved registers:</span><br><span class="line">ebp at 0xffffd6f8, eip at 0xffffd6fc</span><br></pre></td></tr></table></figure>
+
+<p>Note the <code>saved eip = 0xf7e3ca63</code> and <code>eip at 0xffffd6fc</code>. In this case you will want to overwrite the value at <code>0xffffd6fc</code> so that when the function returns execution will continue at the value you stored there.</p>
+<h3 id="gdb查看汇编代码"><a href="#gdb查看汇编代码" class="headerlink" title="gdb查看汇编代码"></a>gdb查看汇编代码</h3><p><a href="https://blog.csdn.net/hejinjing_tom_com/article/details/26704487" target="_blank" rel="noopener">用gdb 查看,执行汇编代码</a></p>
+<p>使用<code>disassemble</code>和<code>x</code>命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">disassemble &#x2F;m main 源码和汇编一起排列</span><br><span class="line">disassemble &#x2F;r main 查看十六进制代码</span><br></pre></td></tr></table></figure>
+
+<p><code>x/i</code>查看</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x&#x2F;15i main</span><br></pre></td></tr></table></figure>
+
+<p><code>$pc</code>指向程序当前运行地址</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x&#x2F;5i $pc</span><br></pre></td></tr></table></figure>
 
 
           
@@ -502,10 +514,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-11-02T11:17:20+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-11-06T19:48:28+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>最后更新于：Nov 2, 2020</p>
+    <p>最后更新于：Nov 6, 2020</p>
   </a>
 </div>
 
@@ -669,7 +681,7 @@ Descriptionbrk() and sbrk() chan...</p>
 
 
     <div class='content'>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#linux关闭地址随机化"><span class="toc-text">linux关闭地址随机化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于lower-bound-和upper-bound-的常见用法"><span class="toc-text">关于lower_bound( )和upper_bound( )的常见用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#linux多版本pyhton"><span class="toc-text">linux多版本pyhton</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#linux关闭地址随机化"><span class="toc-text">linux关闭地址随机化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#linux多版本pyhton"><span class="toc-text">linux多版本pyhton</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是0xdeadbeef"><span class="toc-text">什么是0xdeadbeef</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#gdb查看返回地址"><span class="toc-text">gdb查看返回地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#gdb查看汇编代码"><span class="toc-text">gdb查看汇编代码</span></a></li></ol>
     </div>
   </section>
 
