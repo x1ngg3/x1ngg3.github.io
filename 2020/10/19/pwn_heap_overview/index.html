@@ -16,12 +16,12 @@
 
   <!-- 页面元数据 -->
   
-    <title>x1ngg3&#39;s memo - X1ngg3</title>
+    <title>Heap Overview - X1ngg3</title>
   
-    <meta name="keywords" content="memo">
+    <meta name="keywords" content="pwn_heap">
   
   
-    <meta name="description" content="我的备忘录，仅此而已">
+    <meta name="description" content="heap~">
   
 
   <!-- feed -->
@@ -347,8 +347,8 @@
         
           
   <h1 class="title">
-    <a href="/2020/10/20/nothing_xx1ngg3's_memo/">
-      x1ngg3's memo
+    <a href="/2020/10/19/pwn_heap_overview/">
+      Heap Overview
     </a>
   </h1>
 
@@ -373,9 +373,9 @@
               
   
   <div class='new-meta-item category'>
-    <a href='/categories/NOTHING/' rel="nofollow">
+    <a href='/categories/PWN/' rel="nofollow">
       <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>NOTHING</p>
+      <p>PWN</p>
     </a>
   </div>
 
@@ -386,7 +386,7 @@
               <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Oct 20, 2020</p>
+    <p>发布于：Oct 19, 2020</p>
   </a>
 </div>
 
@@ -409,38 +409,38 @@
       <section class="article typo">
         <div class="article-entry" itemprop="articleBody">
           
-          <p>我的备忘录，仅此而已</p>
+          <p>heap~</p>
 <a id="more"></a>
 
-<h3 id="linux关闭地址随机化"><a href="#linux关闭地址随机化" class="headerlink" title="linux关闭地址随机化"></a>linux关闭地址随机化</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">echo 0 &gt;/proc/sys/kernel/randomize_va_space </span><br><span class="line">0 - 表示关闭进程地址空间随机化。</span><br><span class="line">1 - 表示将mmap的基址，stack和vdso页面随机化。</span><br><span class="line">2 - 表示在1的基础上增加栈（heap）的随机化。</span><br></pre></td></tr></table></figure>
+<h3 id="sbrk-amp-amp-brk"><a href="#sbrk-amp-amp-brk" class="headerlink" title="sbrk()&amp;&amp;brk()"></a>sbrk()&amp;&amp;brk()</h3><p><strong>reference:</strong><a href="https://linux.die.net/man/2/sbrk" target="_blank" rel="noopener">sbrk(2) - Linux man page</a></p>
+<blockquote>
+<h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p><strong>brk</strong>() and <strong>sbrk</strong>() change the location of the <em>program break</em>, which defines the end of the process’s data segment (i.e., the program break is the first location after the end of the uninitialized data segment). Increasing the program break has the effect of allocating memory to the process; decreasing the break deallocates memory.</p>
+<p><strong>brk</strong>() sets the end of the data segment to the value specified by <em>addr</em>, when that value is reasonable, the system has enough memory, and the process does not exceed its maximum data size (see <strong><a href="https://linux.die.net/man/2/setrlimit" target="_blank" rel="noopener">setrlimit</a></strong>(2)).</p>
+<p><strong>sbrk</strong>() increments the program’s data space by <em>increment</em> bytes. Calling <strong>sbrk</strong>() with an <em>increment</em> of 0 can be used to find the current location of the program break.</p>
+<h2 id="Return-Value"><a href="#Return-Value" class="headerlink" title="Return Value"></a>Return Value</h2><p>On success, <strong>brk</strong>() returns zero. On error, -1 is returned, and <em>errno</em> is set to <strong>ENOMEM</strong>. (But see <em>Linux Notes</em> below.)</p>
+<p>On success, <strong>sbrk</strong>() returns the previous program break. (If the break was increased, then this value is a pointer to the start of the newly allocated memory). On error, <em>(void \</em>) -1* is returned, and <em>errno</em> is set to <strong>ENOMEM</strong>.</p>
+</blockquote>
+<p><strong>大概就是：</strong></p>
+<p><strong>sbrk()用来增加堆块的大小，但是调用sbrk(0)的话是会返回当前的program break;</strong></p>
+<p><strong>brk()用来重新设置program break;</strong></p>
+<p><strong>这里用ctf-wiki上的例子可以很好理解。</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* sbrk and brk example */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="keyword">void</span> *curr_brk, *tmp_brk = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Welcome to sbrk example:%d\n"</span>, getpid());</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* sbrk(0) gives current program break location */</span></span><br><span class="line">        tmp_brk = curr_brk = sbrk(<span class="number">0</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Program Break Location1:%p\n"</span>, curr_brk);</span><br><span class="line">        getchar();</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* brk(addr) increments/decrements program break location */</span></span><br><span class="line">        brk(curr_brk+<span class="number">4096</span>);</span><br><span class="line"></span><br><span class="line">        curr_brk = sbrk(<span class="number">0</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Program break Location2:%p\n"</span>, curr_brk);</span><br><span class="line">        getchar();</span><br><span class="line"></span><br><span class="line">        brk(tmp_brk);</span><br><span class="line"></span><br><span class="line">        curr_brk = sbrk(<span class="number">0</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Program Break Location3:%p\n"</span>, curr_brk);</span><br><span class="line">        getchar();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">output:</span></span><br><span class="line"><span class="comment">Welcome to sbrk example:3336</span></span><br><span class="line"><span class="comment">Program Break Location1:0x55555557a000</span></span><br><span class="line"><span class="comment">a</span></span><br><span class="line"><span class="comment">Program break Location2:0x55555557b000</span></span><br><span class="line"><span class="comment">Program Break Location3:0x55555557a000</span></span><br><span class="line"><span class="comment">a</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
 
-<p>可通过该程序来检测：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="keyword">int</span> bss_end;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">void</span> *tret;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"bss end:    %p\n"</span>, (<span class="keyword">char</span> *)(&amp;bss_end) + <span class="number">4</span>);</span><br><span class="line">    tret = sbrk(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">if</span> (tret != (<span class="keyword">void</span> *)<span class="number">-1</span>)</span><br><span class="line">        <span class="built_in">printf</span> (<span class="string">"heap start: %p\n"</span>, tret);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
+<p><strong>另外我进行了如下的测试，在程序开始的时候，我两次sbrk(0)，但是返回的值却不一样，但在这之后的sbrk(0)都能返回同一个值。</strong></p>
+<p><strong>猜测可能是因为第一次返回的是bss_end的位置，第二次才是返回了正确的heap起始位置，</strong>因为bss_end的位置和heap之间是有一段空缺的嘛，可以看下面的示意图。这些都是我的猜测，我也还没动调试一下，如果有错欢迎留言指正。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">void</span> *cur=<span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">	cur = sbrk(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"cur_brk at: %p\n"</span>, cur);</span><br><span class="line"></span><br><span class="line">	cur = sbrk(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"cur_brk at: %p\n"</span>, cur);</span><br><span class="line"></span><br><span class="line">	cur = sbrk(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"cur_brk at: %p\n"</span>, cur);</span><br><span class="line"></span><br><span class="line">	cur = sbrk(<span class="number">0x1000</span>);</span><br><span class="line">	cur = sbrk(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"cur_brk at: %p\n"</span>, cur);</span><br><span class="line"></span><br><span class="line">	cur = sbrk(<span class="number">0x1000</span>);</span><br><span class="line">	cur = sbrk(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"cur_brk at: %p\n"</span>, cur);</span><br><span class="line">	</span><br><span class="line">	cur = sbrk(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"cur_brk at: %p\n"</span>, cur);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">output:</span></span><br><span class="line"><span class="comment">cur_brk at: 0x55e680100000</span></span><br><span class="line"><span class="comment">cur_brk at: 0x55e680121000</span></span><br><span class="line"><span class="comment">cur_brk at: 0x55e680121000</span></span><br><span class="line"><span class="comment">cur_brk at: 0x55e680122000</span></span><br><span class="line"><span class="comment">cur_brk at: 0x55e680123000</span></span><br><span class="line"><span class="comment">cur_brk at: 0x55e680123000</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="linux多版本pyhton"><a href="#linux多版本pyhton" class="headerlink" title="linux多版本pyhton"></a>linux多版本pyhton</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;usr&#x2F;bin&#x2F;python3 -m pip install --upgrade pip</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="什么是0xdeadbeef"><a href="#什么是0xdeadbeef" class="headerlink" title="什么是0xdeadbeef"></a>什么是0xdeadbeef</h3><p>做题的时候看到有把返回地址填成0Xdeadbeef的，0xdeadbeef 是一个16进制魔术数字，是一种类似Leet的英文单词转写形式，相当于汉语拼音吧。看下翻译就知道了。</p>
-<h3 id="gdb查看返回地址"><a href="#gdb查看返回地址" class="headerlink" title="gdb查看返回地址"></a>gdb查看返回地址</h3><p><a href="https://stackoverflow.com/questions/32345320/get-return-address-gdb" target="_blank" rel="noopener">get return address GDB</a></p>
-<p>之前在做校赛的时候用到了这个，当时不知道，好一顿找才找到。用stackoverflow上的例子解释。</p>
-<p>To get the location of the stored return address of a specific function, you can place a breakpoint at that function and use the <code>info frame</code> command.</p>
-<p>Here is an example:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">gdb &#x2F;path&#x2F;to&#x2F;binary</span><br><span class="line">(gdb) br main</span><br><span class="line">(gdb) run</span><br><span class="line">Starting program: &#x2F;path&#x2F;to&#x2F;binary </span><br><span class="line"></span><br><span class="line">Breakpoint 1, 0x08048480 in main ()</span><br><span class="line">(gdb) info frame</span><br><span class="line">Stack level 0, frame at 0xffffd700:</span><br><span class="line">eip &#x3D; 0x8048480 in main; saved eip &#x3D; 0xf7e3ca63</span><br><span class="line">Arglist at 0xffffd6f8, args: </span><br><span class="line">Locals at 0xffffd6f8, Previous frame&#39;s sp is 0xffffd700</span><br><span class="line">Saved registers:</span><br><span class="line">ebp at 0xffffd6f8, eip at 0xffffd6fc</span><br></pre></td></tr></table></figure>
-
-<p>Note the <code>saved eip = 0xf7e3ca63</code> and <code>eip at 0xffffd6fc</code>. In this case you will want to overwrite the value at <code>0xffffd6fc</code> so that when the function returns execution will continue at the value you stored there.</p>
-<h3 id="gdb查看汇编代码"><a href="#gdb查看汇编代码" class="headerlink" title="gdb查看汇编代码"></a>gdb查看汇编代码</h3><p><a href="https://blog.csdn.net/hejinjing_tom_com/article/details/26704487" target="_blank" rel="noopener">用gdb 查看,执行汇编代码</a></p>
-<p>使用<code>disassemble</code>和<code>x</code>命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">disassemble &#x2F;m main 源码和汇编一起排列</span><br><span class="line">disassemble &#x2F;r main 查看十六进制代码</span><br></pre></td></tr></table></figure>
-
-<p><code>x/i</code>查看</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x&#x2F;15i main</span><br></pre></td></tr></table></figure>
-
-<p><code>$pc</code>指向程序当前运行地址</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x&#x2F;5i $pc</span><br></pre></td></tr></table></figure>
-
+<p><img src="https://i.loli.net/2020/10/22/VH8wAYEZe25qQfu.png" alt="program_virtual_address_memory_space"></p>
+<h3 id="mmap"><a href="#mmap" class="headerlink" title="mmap"></a>mmap</h3><p>malloc 会使用 <a href="http://lxr.free-electrons.com/source/mm/mmap.c?v=3.8#L1285" target="_blank" rel="noopener">mmap</a> 来创建独立的匿名映射段。匿名映射的目的主要是可以申请以 0 填充的内存，并且这块内存仅被调用进程所使用。</p>
+<blockquote>
+<p>使用cat /proc/进程 id/maps 查看c程序进程内存映射</p>
+<p>1.首先把 c 程序编译成 a.out 文件 </p>
+<p>2.gdb a.out</p>
+<p>3.查看执行该文件对应的进程 #ps au</p>
+<p>4.a.out 所对应的PID即为所需</p>
+</blockquote>
 
           
             <div class='article_footer'>
@@ -477,7 +477,7 @@
           
         
           
-            <p>本文永久链接是：<a href=http://x1ngg3.github.io/2020/10/20/nothing_xx1ngg3's_memo/>http://x1ngg3.github.io/2020/10/20/nothing_xx1ngg3's_memo/</a></p>
+            <p>本文永久链接是：<a href=http://x1ngg3.github.io/2020/10/19/pwn_heap_overview/>http://x1ngg3.github.io/2020/10/19/pwn_heap_overview/</a></p>
           
         
       </blockquote>
@@ -514,7 +514,7 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-11-06T19:48:28+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-11-06T20:00:50+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>最后更新于：Nov 6, 2020</p>
@@ -526,7 +526,7 @@
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/memo/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>memo</p></a></div>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/pwn-heap/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>pwn_heap</p></a></div>
 
 
         
@@ -544,7 +544,7 @@
       
         <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=http://x1ngg3.github.io/2020/10/20/nothing_xx1ngg3's_memo/&title=x1ngg3's memo - X1ngg3&summary=我的备忘录，仅此而已"
+          href="http://connect.qq.com/widget/shareqq/index.html?url=http://x1ngg3.github.io/2020/10/19/pwn_heap_overview/&title=Heap Overview - X1ngg3&summary=heap~"
           
           >
           
@@ -556,7 +556,7 @@
       
         <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://x1ngg3.github.io/2020/10/20/nothing_xx1ngg3's_memo/&title=x1ngg3's memo - X1ngg3&summary=我的备忘录，仅此而已"
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://x1ngg3.github.io/2020/10/19/pwn_heap_overview/&title=Heap Overview - X1ngg3&summary=heap~"
           
           >
           
@@ -568,7 +568,7 @@
       
         <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
           
-          href="http://service.weibo.com/share/share.php?url=http://x1ngg3.github.io/2020/10/20/nothing_xx1ngg3's_memo/&title=x1ngg3's memo - X1ngg3&summary=我的备忘录，仅此而已"
+          href="http://service.weibo.com/share/share.php?url=http://x1ngg3.github.io/2020/10/19/pwn_heap_overview/&title=Heap Overview - X1ngg3&summary=heap~"
           
           >
           
@@ -592,25 +592,23 @@
         
           <div class="prev-next">
             
-              <a class='prev' href='/2020/10/24/algorithm_review/'>
-                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>Algorithm_review</p>
-                <p class='content'>算法课复习~~
+              <a class='prev' href='/2020/10/20/nothing_xx1ngg3's_memo/'>
+                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>x1ngg3's memo</p>
+                <p class='content'>我的备忘录，仅此而已
 
 
-写在前面的话要考试了，整理一下之前做过的OJ，希望考试能做出一道题稳个及格。
-文章末尾记录了一下常用函数和其头文件。
-递归&amp;&amp;回溯其实我分不太清递归与回溯。。...</p>
+linux关闭地址随机化1234echo 0 &gt;/proc/sys/kernel/randomize_va_space 0 - 表示关闭进程地址空间随机化。1 -...</p>
               </a>
             
             
-              <a class='next' href='/2020/10/19/pwn_heap_overview/'>
-                <p class='title'>Heap Overview<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-                <p class='content'>heap~
+              <a class='next' href='/2020/10/12/xctf_web_greenhand/'>
+                <p class='title'>网络安全逼我学web<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>因为课程需要，菜鸡被迫了解一下web。
 
 
-sbrk()&amp;&amp;brk()reference:sbrk(2) - Linux man page
-
-Descriptionbrk() and sbrk() chan...</p>
+view_source我他妈直接F12
+robots
+robots协议也叫robots.txt（统一小写）是一种存放于网站根目录下的ASCII编码的文...</p>
               </a>
             
           </div>
@@ -655,7 +653,7 @@ Descriptionbrk() and sbrk() chan...</p>
 
   <script>
     window.subData = {
-      title: 'x1ngg3's memo',
+      title: 'Heap Overview',
       tools: true
     }
   </script>
@@ -681,7 +679,7 @@ Descriptionbrk() and sbrk() chan...</p>
 
 
     <div class='content'>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#linux关闭地址随机化"><span class="toc-text">linux关闭地址随机化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#linux多版本pyhton"><span class="toc-text">linux多版本pyhton</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是0xdeadbeef"><span class="toc-text">什么是0xdeadbeef</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#gdb查看返回地址"><span class="toc-text">gdb查看返回地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#gdb查看汇编代码"><span class="toc-text">gdb查看汇编代码</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#sbrk-amp-amp-brk"><span class="toc-text">sbrk()&amp;&amp;brk()</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Description"><span class="toc-text">Description</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Return-Value"><span class="toc-text">Return Value</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#mmap"><span class="toc-text">mmap</span></a></li></ol>
     </div>
   </section>
 
