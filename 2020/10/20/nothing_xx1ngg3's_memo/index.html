@@ -442,6 +442,24 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x&#x2F;5i $pc</span><br></pre></td></tr></table></figure>
 
 
+
+<h3 id="fgets"><a href="#fgets" class="headerlink" title="fgets"></a>fgets</h3><p><a href="https://blog.csdn.net/zhongyoubing/article/details/77652150" target="_blank" rel="noopener">fgets()函数</a></p>
+<p><code>fgets()</code>函数原型如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">char*  fgets(char* s int n, FILE* stream)</span><br></pre></td></tr></table></figure>
+
+<p>参数：</p>
+<pre><code>s: 字符型指针，指向存储读入数据的缓冲区的地址。
+
+n: 从流中读入n-1个字符
+
+stream ： 指向读取的流。譬如stdin，从输入流读</code></pre><h3 id="C语言中的格式化字符串"><a href="#C语言中的格式化字符串" class="headerlink" title="C语言中的格式化字符串"></a>C语言中的格式化字符串</h3><p><a href="https://blog.csdn.net/MyLinChi/article/details/53116760" target="_blank" rel="noopener">C语言中的格式化字符串</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">字符                                    意义</span><br><span class="line">a                 浮点数、十六进制数字和p-计数法(C99)</span><br><span class="line">A                 浮点数、十六进制数字和p-计数法(C99)</span><br><span class="line">c                 输出单个字符</span><br><span class="line">d                 以十进制形式输出带符号整数(正数不输出符号)</span><br><span class="line">e                 以指数形式输出单、双精度实数</span><br><span class="line">E                 以指数形式输出单、双精度实数</span><br><span class="line">f                  以小数形式输出单、双精度实数</span><br><span class="line">g                 以%f%e中较短的输出宽度输出单、双精度实数,%e格式在指数小于-4或者大 于等于精度时使用</span><br><span class="line">G                以%f%e中较短的输出宽度输出单、双精度实数,%e格式在指数小于-4或者大于等于精度时使用</span><br><span class="line">i                  有符号十进制整数(与%d相同)</span><br><span class="line">o                 以八进制形式输出无符号整数(不输出前缀O)</span><br><span class="line">p                 指针</span><br><span class="line">s                  输出字符串</span><br><span class="line">x                  以十六进制形式输出无符号整数(不输出前缀OX)</span><br><span class="line">X                  以十六进制形式输出无符号整数 (不输出前缀OX)</span><br><span class="line">u                  以十进制形式输出无符号整数</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="fflush（stdout）"><a href="#fflush（stdout）" class="headerlink" title="fflush（stdout）"></a>fflush（stdout）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在使用多个输出函数连续进行多次输出时，有可能发现输出错误。因为下一个数据再上一个数据还没输出完毕，还在输出缓冲区中时，下一个printf就把另一个数据加入输出缓冲区，结果冲掉了原来的数据，出现输出错误。 在 prinf（）；后加上fflush(stdout); 强制马上输出，避免错误。</span><br></pre></td></tr></table></figure>
+
+
           
             <div class='article_footer'>
               
@@ -514,10 +532,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-11-06T19:48:28+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-11-15T15:10:14+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>最后更新于：Nov 6, 2020</p>
+    <p>最后更新于：Nov 15, 2020</p>
   </a>
 </div>
 
@@ -681,7 +699,7 @@ Descriptionbrk() and sbrk() chan...</p>
 
 
     <div class='content'>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#linux关闭地址随机化"><span class="toc-text">linux关闭地址随机化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#linux多版本pyhton"><span class="toc-text">linux多版本pyhton</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是0xdeadbeef"><span class="toc-text">什么是0xdeadbeef</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#gdb查看返回地址"><span class="toc-text">gdb查看返回地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#gdb查看汇编代码"><span class="toc-text">gdb查看汇编代码</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#linux关闭地址随机化"><span class="toc-text">linux关闭地址随机化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#linux多版本pyhton"><span class="toc-text">linux多版本pyhton</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是0xdeadbeef"><span class="toc-text">什么是0xdeadbeef</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#gdb查看返回地址"><span class="toc-text">gdb查看返回地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#gdb查看汇编代码"><span class="toc-text">gdb查看汇编代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#fgets"><span class="toc-text">fgets</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#C语言中的格式化字符串"><span class="toc-text">C语言中的格式化字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#fflush（stdout）"><span class="toc-text">fflush（stdout）</span></a></li></ol>
     </div>
   </section>
 
