@@ -362,7 +362,7 @@
               
 <div class='new-meta-item author'>
   <a href="https://x1ngg3.github.io" rel="nofollow">
-    <img src="https://i.loli.net/2020/05/24/ud4apZVzXN3lnMS.jpg">
+    <img src="https://i.loli.net/2020/11/16/JlV4WshTkxutAEm.jpg">
     <p>x1ngg3</p>
   </a>
 </div>
@@ -423,7 +423,7 @@
 
 
 
-<h3 id="什么是0xdeadbeef"><a href="#什么是0xdeadbeef" class="headerlink" title="什么是0xdeadbeef"></a>什么是0xdeadbeef</h3><p>做题的时候看到有把返回地址填成0Xdeadbeef的，0xdeadbeef 是一个16进制魔术数字，是一种类似Leet的英文单词转写形式，相当于汉语拼音吧。看下翻译就知道了。</p>
+<h3 id="什么是0xdeadbeef"><a href="#什么是0xdeadbeef" class="headerlink" title="什么是0xdeadbeef"></a>什么是0xdeadbeef</h3><p>做题的时候看到有把返回地址填成0Xdeadbeef的，0xdeadbeef 是一个16进制魔术数字，是一种类似Leet的英文单词转写形式，相当于汉语拼音吧。看下翻译就知道了。另外在32位的linux的操作系统中0xc0000000-0xffffffff是内核空间，所以0xdeadbeef是内核空间的一个地址，当用这个地址把eip劫持时，用户代码访问一定出错，即可快速判定我们的payload写的是否正确（eip是否是0xdeadbeef）。</p>
 <h3 id="gdb查看返回地址"><a href="#gdb查看返回地址" class="headerlink" title="gdb查看返回地址"></a>gdb查看返回地址</h3><p><a href="https://stackoverflow.com/questions/32345320/get-return-address-gdb" target="_blank" rel="noopener">get return address GDB</a></p>
 <p>之前在做校赛的时候用到了这个，当时不知道，好一顿找才找到。用stackoverflow上的例子解释。</p>
 <p>To get the location of the stored return address of a specific function, you can place a breakpoint at that function and use the <code>info frame</code> command.</p>
@@ -532,10 +532,10 @@ stream ： 指向读取的流。譬如stdin，从输入流读</code></pre><h3 id
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-11-15T15:10:14+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-11-16T00:18:51+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>最后更新于：Nov 15, 2020</p>
+    <p>最后更新于：Nov 16, 2020</p>
   </a>
 </div>
 
