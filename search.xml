@@ -414,9 +414,9 @@
       
         <tags>
             
-            <tag> 调色 </tag>
-            
             <tag> 日暮 </tag>
+            
+            <tag> 调色 </tag>
             
         </tags>
       
@@ -477,6 +477,35 @@
     
     
     <entry>
+      <title>如何调出好莱坞中爱用的的橙青色调</title>
+      <link href="/2020/05/25/lr1/"/>
+      <url>/2020/05/25/lr1/</url>
+      
+        <content type="html"><![CDATA[<p>新开了个人博客，先写个调色分享练练手，奥里给~</p><a id="more"></a><h3 id="调色思路"><a href="#调色思路" class="headerlink" title="调色思路"></a>调色思路</h3><hr><p>橙青色调的整体思路其实很简单，高光偏橙黄，阴影偏青蓝。饱和适度，对比适度，大体跟着感觉走就行。</p><h3 id="基本面板"><a href="#基本面板" class="headerlink" title="基本面板"></a>基本面板</h3><hr><p>首先，进入LR，可以看到图片长这样</p><p><img src="https://i.loli.net/2020/05/25/OQjfHaeGAkzp7bi.png" alt="Snipaste_2020-05-25_20-04-33"></p><p>分析一下图片，其实原图拍的还可以，从直方图可以看出来，整张图的亮度分布相当标准，高光没过曝，阴影有足够多的细节，建议大家把公屏打在完美上。</p><p>那其实这样的话就不用做过多基础调整，稍微走个流程即可。<img src="https://i.loli.net/2020/05/25/l4Y8vKBpTDcdJ7O.png" alt="Snipaste_2020-05-25_20-05-18"></p><p>这里我对高光进行了全压，这样是为了<strong>还原更多的高光细节</strong>，阴影我没有做处理，因为我觉得原图还刚刚好。然后对白色和黑色进行微调。加点去朦胧效果和清晰度让图片看起来不那么灰。另外这里插一下，<strong>修人像的时候也可以通过左滑去朦胧来做磨皮效果</strong>。</p><h3 id="色调曲线"><a href="#色调曲线" class="headerlink" title="色调曲线"></a>色调曲线</h3><hr><p>这里我先对RGB曲线进行了一个小S型处理，稍微提高了一点对比度，使图片更有层次。然后再次对最亮部分进行了压低，同时对最暗部分进行了拉高，这是朴素修图基操。</p><p>对蓝色曲线进行S反拉，这样做是为了对高光上黄色，对阴影上蓝色。</p><p>对绿色曲线的阴影部分进行了小幅正拉，给隐形上上一点点点绿色，不要太多。</p><p><img src="https://i.loli.net/2020/05/25/eFkf8PsnDoQdWZr.png" alt="Snipaste_2020-05-25_20-07-57">)<img src="https://i.loli.net/2020/05/25/5CjVQXE36eFTwnr.png" alt="Snipaste_2020-05-25_20-08-00">)<img src="https://i.loli.net/2020/05/25/P4GBmZcXyuK8nr1.png" alt="Snipaste_2020-05-25_20-07-53"></p><p>经过一番操作，图片变成了这样</p><p><img src="https://i.loli.net/2020/05/25/iE6PoBJlUOhLRIg.png" alt="Snipaste_2020-05-25_20-08-45"></p><h3 id="HSL-amp-校准"><a href="#HSL-amp-校准" class="headerlink" title="HSL&amp;校准"></a>HSL&amp;校准</h3><hr><p>接下来是<strong>HSL</strong>，注入灵魂的一步。可以看到图中植物大多是绿色和黄色，而我们希望它呈现为更加饱和的橙黄色，同时我们希望阴影中的蓝色偏青。</p><p>这里的调色顺序为 <strong>绿色-黄色-橙色-红色</strong>，这样一步步下来绿色就变成了我们想要的橙黄色。</p><p>同时对蓝色色相进行调整，使其左偏偏青，这里我感觉蓝色饱和度过高，压了一点饱和度。</p><p>其他的不动就行。</p><p><img src="https://i.loli.net/2020/05/25/MGiEL8aC14uKhwd.png" alt="Snipaste_2020-05-25_20-10-11"></p><p>接着是<strong>校准</strong>，我经藏把HSL和校准配合使用，定下基本的颜色倾向，也就是高光偏橙黄阴影偏青蓝。</p><p><img src="https://i.loli.net/2020/05/25/53TxEPvlj24ZztO.png" alt="Snipaste_2020-05-25_20-10-36"></p><p>做到这一步，图片已经有内味了。<img src="https://i.loli.net/2020/05/25/3QZxRHjWyVuvc7m.png" alt="Snipaste_2020-05-25_20-10-40"></p><h3 id="分离色调"><a href="#分离色调" class="headerlink" title="分离色调"></a>分离色调</h3><hr><p>前几步下来以后，整张图的颜色还是有些杂乱，这里主要是是高光区域相邻的色系过多，所以要对图片进行跳阶，使相邻的颜色朝着同一个方向转变，让图片变得和谐。</p><p><img src="https://i.loli.net/2020/05/25/tRh6vZEUzwQKquG.png" alt="Snipaste_2020-05-25_20-12-05"></p><p>调整完之后是这个样子</p><p><img src="https://i.loli.net/2020/05/25/WVtEjmgSnY5OIo9.png" alt="Snipaste_2020-05-25_20-12-12"></p><h3 id="渐变滤镜"><a href="#渐变滤镜" class="headerlink" title="渐变滤镜"></a>渐变滤镜</h3><hr><p>这张图我拍摄的时间是傍晚，太阳很柔和，我希望增强太阳的光晕，所以我拉了这样一个渐变滤镜，对渐变滤镜的调整在图片右上角</p><p><img src="https://i.loli.net/2020/05/25/GgJiHnAyZ6Szhmq.png" alt="Snipaste_2020-05-25_20-13-09"></p><p>那做到这里整张图也就差不多完成了，你也可以选择对图片进行一个裁切，但我觉得这里这样就刚刚好。或者如果你希望高光处的橙色更明显的话也可以单独再在HSL中对黄色进行一个色相饱和度的调整（如下图），这里看个人的选择，每个人都有自己的独特审美，各自喜欢就好啦。</p><p><img src="https://i.loli.net/2020/05/25/ErDug8Lj4N5bk37.png" alt="Snipaste_2020-05-25_20-13-48"></p><p><strong>好了那就先写到这吧，也是第一次写LR调色的教程，有些地方可能有错可能表述不到位请多包涵。</strong></p><p><strong>再分享几张图片，希望大家喜欢。</strong></p><p><img src="https://i.loli.net/2020/05/25/DyRqgtY8mSedGHr.jpg" alt="DJI_0116-2"></p><p><img src="https://i.loli.net/2020/05/25/by3iDckhAWluCT8.jpg" alt="DJI_0121-2"></p><p><img src="https://i.loli.net/2020/05/25/Hdv69cYr4SWRPaw.jpg" alt="DJI_0113-4"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> LR </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 调色 </tag>
+            
+            <tag> 电影感 </tag>
+            
+            <tag> 橙青 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>为你读诗</title>
       <link href="/2020/05/25/nothing_read_for_you/"/>
       <url>/2020/05/25/nothing_read_for_you/</url>
@@ -494,35 +523,6 @@
         <tags>
             
             <tag> poem </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>如何调出好莱坞中爱用的的橙青色调</title>
-      <link href="/2020/05/25/lr1/"/>
-      <url>/2020/05/25/lr1/</url>
-      
-        <content type="html"><![CDATA[<p>新开了个人博客，先写个调色分享练练手，奥里给~</p><a id="more"></a><h3 id="调色思路"><a href="#调色思路" class="headerlink" title="调色思路"></a>调色思路</h3><hr><p>橙青色调的整体思路其实很简单，高光偏橙黄，阴影偏青蓝。饱和适度，对比适度，大体跟着感觉走就行。</p><h3 id="基本面板"><a href="#基本面板" class="headerlink" title="基本面板"></a>基本面板</h3><hr><p>首先，进入LR，可以看到图片长这样</p><p><img src="https://i.loli.net/2020/05/25/OQjfHaeGAkzp7bi.png" alt="Snipaste_2020-05-25_20-04-33"></p><p>分析一下图片，其实原图拍的还可以，从直方图可以看出来，整张图的亮度分布相当标准，高光没过曝，阴影有足够多的细节，建议大家把公屏打在完美上。</p><p>那其实这样的话就不用做过多基础调整，稍微走个流程即可。<img src="https://i.loli.net/2020/05/25/l4Y8vKBpTDcdJ7O.png" alt="Snipaste_2020-05-25_20-05-18"></p><p>这里我对高光进行了全压，这样是为了<strong>还原更多的高光细节</strong>，阴影我没有做处理，因为我觉得原图还刚刚好。然后对白色和黑色进行微调。加点去朦胧效果和清晰度让图片看起来不那么灰。另外这里插一下，<strong>修人像的时候也可以通过左滑去朦胧来做磨皮效果</strong>。</p><h3 id="色调曲线"><a href="#色调曲线" class="headerlink" title="色调曲线"></a>色调曲线</h3><hr><p>这里我先对RGB曲线进行了一个小S型处理，稍微提高了一点对比度，使图片更有层次。然后再次对最亮部分进行了压低，同时对最暗部分进行了拉高，这是朴素修图基操。</p><p>对蓝色曲线进行S反拉，这样做是为了对高光上黄色，对阴影上蓝色。</p><p>对绿色曲线的阴影部分进行了小幅正拉，给隐形上上一点点点绿色，不要太多。</p><p><img src="https://i.loli.net/2020/05/25/eFkf8PsnDoQdWZr.png" alt="Snipaste_2020-05-25_20-07-57">)<img src="https://i.loli.net/2020/05/25/5CjVQXE36eFTwnr.png" alt="Snipaste_2020-05-25_20-08-00">)<img src="https://i.loli.net/2020/05/25/P4GBmZcXyuK8nr1.png" alt="Snipaste_2020-05-25_20-07-53"></p><p>经过一番操作，图片变成了这样</p><p><img src="https://i.loli.net/2020/05/25/iE6PoBJlUOhLRIg.png" alt="Snipaste_2020-05-25_20-08-45"></p><h3 id="HSL-amp-校准"><a href="#HSL-amp-校准" class="headerlink" title="HSL&amp;校准"></a>HSL&amp;校准</h3><hr><p>接下来是<strong>HSL</strong>，注入灵魂的一步。可以看到图中植物大多是绿色和黄色，而我们希望它呈现为更加饱和的橙黄色，同时我们希望阴影中的蓝色偏青。</p><p>这里的调色顺序为 <strong>绿色-黄色-橙色-红色</strong>，这样一步步下来绿色就变成了我们想要的橙黄色。</p><p>同时对蓝色色相进行调整，使其左偏偏青，这里我感觉蓝色饱和度过高，压了一点饱和度。</p><p>其他的不动就行。</p><p><img src="https://i.loli.net/2020/05/25/MGiEL8aC14uKhwd.png" alt="Snipaste_2020-05-25_20-10-11"></p><p>接着是<strong>校准</strong>，我经藏把HSL和校准配合使用，定下基本的颜色倾向，也就是高光偏橙黄阴影偏青蓝。</p><p><img src="https://i.loli.net/2020/05/25/53TxEPvlj24ZztO.png" alt="Snipaste_2020-05-25_20-10-36"></p><p>做到这一步，图片已经有内味了。<img src="https://i.loli.net/2020/05/25/3QZxRHjWyVuvc7m.png" alt="Snipaste_2020-05-25_20-10-40"></p><h3 id="分离色调"><a href="#分离色调" class="headerlink" title="分离色调"></a>分离色调</h3><hr><p>前几步下来以后，整张图的颜色还是有些杂乱，这里主要是是高光区域相邻的色系过多，所以要对图片进行跳阶，使相邻的颜色朝着同一个方向转变，让图片变得和谐。</p><p><img src="https://i.loli.net/2020/05/25/tRh6vZEUzwQKquG.png" alt="Snipaste_2020-05-25_20-12-05"></p><p>调整完之后是这个样子</p><p><img src="https://i.loli.net/2020/05/25/WVtEjmgSnY5OIo9.png" alt="Snipaste_2020-05-25_20-12-12"></p><h3 id="渐变滤镜"><a href="#渐变滤镜" class="headerlink" title="渐变滤镜"></a>渐变滤镜</h3><hr><p>这张图我拍摄的时间是傍晚，太阳很柔和，我希望增强太阳的光晕，所以我拉了这样一个渐变滤镜，对渐变滤镜的调整在图片右上角</p><p><img src="https://i.loli.net/2020/05/25/GgJiHnAyZ6Szhmq.png" alt="Snipaste_2020-05-25_20-13-09"></p><p>那做到这里整张图也就差不多完成了，你也可以选择对图片进行一个裁切，但我觉得这里这样就刚刚好。或者如果你希望高光处的橙色更明显的话也可以单独再在HSL中对黄色进行一个色相饱和度的调整（如下图），这里看个人的选择，每个人都有自己的独特审美，各自喜欢就好啦。</p><p><img src="https://i.loli.net/2020/05/25/ErDug8Lj4N5bk37.png" alt="Snipaste_2020-05-25_20-13-48"></p><p><strong>好了那就先写到这吧，也是第一次写LR调色的教程，有些地方可能有错可能表述不到位请多包涵。</strong></p><p><strong>再分享几张图片，希望大家喜欢。</strong></p><p><img src="https://i.loli.net/2020/05/25/DyRqgtY8mSedGHr.jpg" alt="DJI_0116-2"></p><p><img src="https://i.loli.net/2020/05/25/by3iDckhAWluCT8.jpg" alt="DJI_0121-2"></p><p><img src="https://i.loli.net/2020/05/25/Hdv69cYr4SWRPaw.jpg" alt="DJI_0113-4"></p>]]></content>
-      
-      
-      <categories>
-          
-          <category> LR </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 电影感 </tag>
-            
-            <tag> 橙青 </tag>
-            
-            <tag> 调色 </tag>
             
         </tags>
       
