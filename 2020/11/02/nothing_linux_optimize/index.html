@@ -411,43 +411,39 @@
           
           <p>Life is short</p>
 <a id="more"></a>
-
-<h3 id="ubuntu-16-04-启动优化"><a href="#ubuntu-16-04-启动优化" class="headerlink" title="ubuntu 16.04 启动优化"></a>ubuntu 16.04 启动优化</h3><p>ubuntu16好处理一点，首先查看各个进程的占用时间。</p>
+<h3 id="ubuntu-16-04-启动优化">ubuntu 16.04 启动优化</h3>
+<p>ubuntu16好处理一点，首先查看各个进程的占用时间。</p>
 <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">systemd-analyze blame</span></span><br></pre></td></tr></table></figure>
-
 <p>可以发现主要是一个进程占用时间过多。</p>
 <blockquote>
 <p>systemd-journal-flush.service</p>
 </blockquote>
 <p>更改记录方式即可：</p>
 <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="keyword">vim</span> /etc/systemd/journald.<span class="keyword">conf</span></span><br><span class="line">不会用<span class="keyword">vim</span>可以用gedit代替</span><br></pre></td></tr></table></figure>
-
 <p>修改：</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[Journal]</span></span><br><span class="line"><span class="attr">Storage</span>=auto</span><br><span class="line"><span class="attr">SystemMaxFileSize</span>=<span class="number">1</span>G</span><br><span class="line"><span class="attr">SystemMaxFiles</span>=<span class="number">5</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="ubuntu-18-04-启动优化"><a href="#ubuntu-18-04-启动优化" class="headerlink" title="ubuntu 18.04 启动优化"></a>ubuntu 18.04 启动优化</h3><p>同样先查看启动时间，主要是如下几个进程占用过多。</p>
+<h3 id="ubuntu-18-04-启动优化">ubuntu 18.04 启动优化</h3>
+<p>同样先查看启动时间，主要是如下几个进程占用过多。</p>
 <blockquote>
-<p>plymouth-quit-wait.service<br>apt-daily.service<br>NetworkManager-wait-online.service<br>systemd-journal-flush.service</p>
+<p>plymouth-quit-wait.service<br>
+apt-daily.service<br>
+NetworkManager-wait-online.service<br>
+systemd-journal-flush.service</p>
 </blockquote>
 <p>第一项：位开机动画，直接 mask 禁用，恢复用 unmask 。</p>
 <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl <span class="attribute">mask</span> plymouth-quit-wait<span class="selector-class">.service</span></span><br></pre></td></tr></table></figure>
-
 <p>第二项：延迟 apt-daily 服务。</p>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl <span class="builtin-name">edit</span> apt-daily.timer</span><br></pre></td></tr></table></figure>
-
 <p>插入内容：</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># apt-daily timer configuration override</span></span><br><span class="line"><span class="section">[Timer]</span></span><br><span class="line"><span class="attr">OnBootSec</span>=<span class="number">15</span>min</span><br><span class="line"><span class="attr">OnUnitActiveSec</span>=<span class="number">1</span>d</span><br><span class="line"><span class="attr">AccuracySec</span>=<span class="number">1</span>h</span><br><span class="line"><span class="attr">RandomizedDelaySec</span>=<span class="number">30</span>min</span><br></pre></td></tr></table></figure>
-
 <p>第三项：直接 disable，恢复用 enable。</p>
 <figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl <span class="keyword">disable</span> NetworkManager-<span class="built_in">wait</span>-online.service</span><br></pre></td></tr></table></figure>
-
 <p>第四项：和上面 ubuntu 16.04 处理一样</p>
-<h3 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h3><p><a href="https://www.cnblogs.com/gaowengang/p/10854042.html" target="_blank" rel="noopener">Ubuntu 18.04 启动太慢不能忍</a></p>
+<h3 id="参考博客">参考博客</h3>
+<p><a href="https://www.cnblogs.com/gaowengang/p/10854042.html" target="_blank" rel="noopener">Ubuntu 18.04 启动太慢不能忍</a></p>
 <p><a href="https://askubuntu.com/questions/1094389/what-is-the-use-of-systemd-journal-flush-service" target="_blank" rel="noopener">What is the use of systemd-journal-flush.service?</a></p>
-<p><a href="https://juniorprincewang.github.io/2019/02/27/解决Ubuntu18-04开机启动缓慢/" target="_blank" rel="noopener">解决Ubuntu18.04开机启动缓慢</a></p>
-<p><a href="http://baijiahao.baidu.com/s?id=1641458555492546365&wfr=spider&for=pc" target="_blank" rel="noopener">Linux懒人小妙招：自动补全命令</a></p>
+<p><a href="https://juniorprincewang.github.io/2019/02/27/%E8%A7%A3%E5%86%B3Ubuntu18-04%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8%E7%BC%93%E6%85%A2/" target="_blank" rel="noopener">解决Ubuntu18.04开机启动缓慢</a></p>
+<p><a href="http://baijiahao.baidu.com/s?id=1641458555492546365&amp;wfr=spider&amp;for=pc" target="_blank" rel="noopener">Linux懒人小妙招：自动补全命令</a></p>
 
           
             <div class='article_footer'>
@@ -615,11 +611,10 @@
                 <p class='title'>XSS<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
                 <p class='content'>网络安全课作业需要，菜鸡被迫了解一下xss。
 
-
 alert("X1NGG3")
-
-环境搭建首先下载好这三个工具：phpstudy + pikachu + firefox
-以及一个好用的编辑器来...</p>
+环境搭建
+首先下载好这三个工具：phpstudy + pikachu + firefox
+以及一个好用的编辑器来方...</p>
               </a>
             
           </div>
