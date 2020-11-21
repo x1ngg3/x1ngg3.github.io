@@ -431,10 +431,10 @@
 <p><strong>每个字段的具体解释：</strong></p>
 <ul>
 <li>
-<p><strong>prev_size</strong>, 相邻的前一个堆块大小。这个字段只有在前一个堆块（且该堆块为normal chunk）处于释放状态时才有意义。这个字段最重要（甚至是唯一）的作用就是**用于堆块释放时快速和相邻的前一个空闲堆块融合。<strong>该字段不计入当前堆块的大小计算。如果该 chunk 的</strong>物理相邻的前一地址 chunk（两个指针的地址差值为前一 chunk 大小）**是空闲的话，那该字段记录的是前一个 chunk 的大小 (包括 chunk 头)。当前一个 chunk 在使用时，该字段可以用来存储物理相邻的前一个 chunk 的数据（可以作为前一个chunk的数据段，libc这么做的原因主要是可以节约4个字节的内存空间，但为了这点空间效率导致了很多安全问题。</p>
+<p><strong>prev_size</strong>, 相邻的前一个堆块大小。这个字段只有在前一个堆块（且该堆块为normal chunk）处于释放状态时才有意义。这个字段最重要（甚至是唯一）的作用就是<strong>用于堆块释放时快速和相邻的前一个空闲堆块融合</strong>。该字段不计入当前堆块的大小计算。如果该 chunk 的**物理相邻的前一地址 chunk（两个指针的地址差值为前一 chunk 大小）**是空闲的话，那该字段记录的是前一个 chunk 的大小 (包括 chunk 头)。当前一个 chunk 在使用时，该字段可以用来存储物理相邻的前一个 chunk 的数据（可以作为前一个chunk的数据段，libc这么做的原因主要是可以节约4个字节的内存空间，但为了这点空间效率导致了很多安全问题。</p>
 </li>
 <li>
-<p><strong>size</strong>，该 chunk 的大小，**大小必须是 2 * SIZE_SZ 的整数倍。**如果申请的内存大小不是 2 * SIZE_SZ 的整数倍，<strong>会被转换</strong>满足大小的最小的 2 * SIZE_SZ 的倍数。32 位系统中，SIZE_SZ 是 4；64 位系统中，SIZE_SZ 是 8。 <strong>该字段的低三个比特位对 chunk 的大小没有影响（8字节对齐，固定为0），为了充分利用内存空间，对它们进行重用，从高到低分别表示：</strong></p>
+<p><strong>size</strong>，该 chunk 的大小，<strong>大小必须是 2 * SIZE_SZ 的整数倍</strong>。如果申请的内存大小不是 2 * SIZE_SZ 的整数倍，<strong>会被转换</strong>满足大小的最小的 2 * SIZE_SZ 的倍数。32 位系统中，SIZE_SZ 是 4；64 位系统中，SIZE_SZ 是 8。 <strong>该字段的低三个比特位对 chunk 的大小没有影响（8字节对齐，固定为0），为了充分利用内存空间，对它们进行重用，从高到低分别表示：</strong></p>
 <figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- NON_MAIN_ARENA，记录当前 chunk 是否不属于主线程，<span class="number">1</span> 表示不属于，<span class="number">0</span> 表示属于。</span><br><span class="line">- IS_MAPPED，记录当前 chunk 是否是由 mmap 分配的。</span><br><span class="line">- PREV_INUSE，记录前一个 chunk 块是否被分配。一般来说，堆中第一个被分配的内存块的 size 字段的 P 位都会被设置为 <span class="number">1</span>，以便于防止访问前面的非法内存。当一个 chunk 的 size 的 P 位为 <span class="number">0</span> 时，我们能通过 prev_size 字段来获取上一个 chunk 的大小以及地址。这也方便进行空闲 chunk 之间的合并。</span><br></pre></td></tr></table></figure>
 </li>
 <li>
@@ -734,10 +734,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-11-19T17:20:36+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-11-21T11:36:56+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>最后更新于：Nov 19, 2020</p>
+    <p>最后更新于：Nov 21, 2020</p>
   </a>
 </div>
 
