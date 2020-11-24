@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<html>
-<head hexo-theme='https://volantis.js.org/#'>
+<html lang="en">
+<head hexo-theme='https://github.com/volantis-x/hexo-theme-volantis/tree/4.1.6'>
   <meta charset="utf-8">
   <!-- SEO相关 -->
   
     
   
   <!-- 渲染优化 -->
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://cdn.jsdelivr.net'>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <meta name="renderer" content="webkit">
   <meta name="force-rendering" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
@@ -16,10 +19,11 @@
 
   <!-- 页面元数据 -->
   
-    <title>SCTF2020回顾 - X1ngg3</title>
+  <title>SCTF2020回顾 - X1ngg3</title>
   
     <meta name="keywords" content="SCTF">
   
+
   
     <meta name="description" content="恼火的hin">
   
@@ -31,59 +35,40 @@
   
 
   <!-- link -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13/css/all.min.css">
   
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
-
-  
-  
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
-
-  
-
-  
-  <link rel="shortcut icon" type='image/x-icon' href="https://cdn.jsdelivr.net/gh/xaoxuu/assets@master/favicon/favicon.ico">
-  
-
-  
-
+    <link rel="shortcut icon" type='image/x-icon' href="https://cdn.jsdelivr.net/gh/xaoxuu/assets@master/favicon/favicon.ico">
   
 
   <!-- import link -->
   
 
   
-  
     
-<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/first.css">
 
   
 
-  <script>
-    function setLoadingBarProgress(num) {
-      document.getElementById('loading-bar').style.width=num+"%";
-    }
-  </script>
+  
+  <link rel="stylesheet" href="/css/style.css" media="print" onload="this.media='all';this.onload=null">
+  <noscript><link rel="stylesheet" href="/css/style.css"></noscript>
+  
 
-  
-  
+  <script id="loadcss"></script>
+
 </head>
 
 <body>
   
-  <div id="loading-bar-wrapper">
-  <div id="loading-bar"></div>
-</div>
-<header class="l_header shadow blur">
+
+<header id="l_header" class="l_header auto shadow blur show" style='opacity: 0' >
   <div class='container'>
-  <div class='wrapper'>
+  <div id='wrapper'>
     <div class='nav-sub'>
       <p class="title"></p>
-      <ul class='switcher nav-list-h'>
-        <li><a class="s-comment fas fa-comments fa-fw" target="_self" href='javascript:void(0)'></a></li>
+      <ul class='switcher nav-list-h m-phone' id="pjax-header-nav-list">
+        <li><a id="s-comment" class="fas fa-comments fa-fw" target="_self" href='javascript:void(0)'></a></li>
         
-          <li><a class="s-toc fas fa-list fa-fw" target="_self" href='javascript:void(0)'></a></li>
+          <li><a id="s-toc" class="s-toc fas fa-list fa-fw" target="_self" href='javascript:void(0)'></a></li>
         
       </ul>
     </div>
@@ -92,23 +77,22 @@
         
         <a class="title flat-box" target="_self" href='/'>
           
+            <img no-lazy class='logo' src='https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/Logo-NavBar@3x.png'/>
           
           
-          
-            X1NGG3 <b><sup style='color:#3AA757'></sup></b>
           
         </a>
       
 
 			<div class='menu navigation'>
-				<ul class='nav-list-h'>
+				<ul class='nav-list-h m-pc'>
           
           
           
             
             
               <li>
-                <a class="flat-box" href=/
+                <a class="menuitem flat-box faa-parent animated-hover" href=/
                   
                   
                   
@@ -124,7 +108,7 @@
             
             
               <li>
-                <a class="flat-box" href=/categories/
+                <a class="menuitem flat-box faa-parent animated-hover" href=/categories/
                   
                   
                   
@@ -140,7 +124,7 @@
             
             
               <li>
-                <a class="flat-box" href=/tags/
+                <a class="menuitem flat-box faa-parent animated-hover" href=/tags/
                   
                   
                   
@@ -156,7 +140,7 @@
             
             
               <li>
-                <a class="flat-box" href=/archives/
+                <a class="menuitem flat-box faa-parent animated-hover" href=/archives/
                   
                   
                   
@@ -172,11 +156,11 @@
             
             
               <li>
-                <a class="flat-box" href=/linkto/
+                <a class="menuitem flat-box faa-parent animated-hover" href=/friends/
                   
                   
                   
-                    id="linkto"
+                    id="friends"
                   >
                   <i class='fas fa-link fa-fw'></i>友链
                 </a>
@@ -188,11 +172,11 @@
             
             
               <li>
-                <a class="flat-box" href=/aboutme/
+                <a class="menuitem flat-box faa-parent animated-hover" href=/about/
                   
                   
                   
-                    id="aboutme"
+                    id="about"
                   >
                   <i class='fas fa-info-circle fa-fw'></i>关于
                 </a>
@@ -211,7 +195,7 @@
         </form>
       </div>
 
-			<ul class='switcher nav-list-h'>
+			<ul class='switcher nav-list-h m-phone'>
 				
 					<li><a class="s-search fas fa-search fa-fw" target="_self" href='javascript:void(0)'></a></li>
 				
@@ -222,7 +206,7 @@
               
             
               <li>
-                <a class="flat-box" href=/
+                <a class="menuitem flat-box faa-parent animated-hover" href=/
                   
                   
                   
@@ -238,7 +222,7 @@
               
             
               <li>
-                <a class="flat-box" href=/categories/
+                <a class="menuitem flat-box faa-parent animated-hover" href=/categories/
                   
                   
                   
@@ -254,7 +238,7 @@
               
             
               <li>
-                <a class="flat-box" href=/tags/
+                <a class="menuitem flat-box faa-parent animated-hover" href=/tags/
                   
                   
                   
@@ -270,7 +254,7 @@
               
             
               <li>
-                <a class="flat-box" href=/archives/
+                <a class="menuitem flat-box faa-parent animated-hover" href=/archives/
                   
                   
                   
@@ -286,11 +270,11 @@
               
             
               <li>
-                <a class="flat-box" href=/linkto/
+                <a class="menuitem flat-box faa-parent animated-hover" href=/friends/
                   
                   
                   
-                    id="linkto"
+                    id="friends"
                   >
                   <i class='fas fa-link fa-fw'></i>友链
                 </a>
@@ -302,11 +286,11 @@
               
             
               <li>
-                <a class="flat-box" href=/aboutme/
+                <a class="menuitem flat-box faa-parent animated-hover" href=/about/
                   
                   
                   
-                    id="aboutme"
+                    id="about"
                   >
                   <i class='fas fa-info-circle fa-fw'></i>关于
                 </a>
@@ -323,93 +307,156 @@
   </div>
 </header>
 
-<script>setLoadingBarProgress(40);</script>
+  <div id="l_body">
+    <div id="l_cover">
+  
+    
+        <div id="full" class='cover-wrapper post dock' style="display: none;">
+          
+            <div class='cover-bg lazyload placeholder' data-bg="https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/033.jpg"></div>
+          
+          <div class='cover-body'>
+  <div class='top'>
+    
+    
+      <p class="title">Volantis</p>
+    
+    
+  </div>
+  <div class='bottom'>
+    <div class='menu navigation'>
+      <div class='list-h'>
+        
+          
+            <a href="/v4/getting-started/"
+              
+              
+              id="v4getting-started">
+              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f5c3.svg'><p>文档</p>
+            </a>
+          
+            <a href="/faqs/"
+              
+              
+              id="faqs">
+              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f516.svg'><p>帮助</p>
+            </a>
+          
+            <a href="/examples/"
+              
+              
+              id="examples">
+              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f396.svg'><p>示例</p>
+            </a>
+          
+            <a href="/contributors/"
+              
+              
+              id="contributors">
+              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f389.svg'><p>社区</p>
+            </a>
+          
+            <a href="/archives/"
+              
+              
+              id="archives">
+              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f4f0.svg'><p>博客</p>
+            </a>
+          
+            <a target="_blank" rel="noopener" href="https://github.com/volantis-x/hexo-theme-volantis/"
+              
+              
+              id="https:githubcomvolantis-xhexo-theme-volantis">
+              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f9ec.svg'><p>源码</p>
+            </a>
+          
+        
+      </div>
+    </div>
+  </div>
+</div>
 
+          <div id="scroll-down" style="display: none;"><i class="fa fa-chevron-down scroll-down-effects"></i></div>
+        </div>
+    
+  
+  </div>
 
-
-  <div class="l_body nocover">
-    <div class='body-wrapper'>
-      
+    <div id='safearea'>
+      <div class='body-wrapper' id="pjax-container">
+        
 
 <div class='l_main'>
+  <article class="article post white-box reveal md shadow article-type-post" id="post" itemscope itemprop="blogPost">
   
 
+
   
-    <article id="post" class="post white-box reveal shadow article-type-post" itemscope itemprop="blogPost">
-      
-
-
-  <section class='meta'>
+  <div class="article-meta" id="top">
     
-      
-      
-      <div class="meta" id="header-meta">
+    
+    
+      <h1 class="title">
+        SCTF2020回顾
+      </h1>
+      <div class='new-meta-box'>
         
           
-  <h1 class="title">
-    <a href="/2020/08/04/contest_SCTF2020/">
-      SCTF2020回顾
-    </a>
-  </h1>
-
-
-        
-        <div class='new-meta-box'>
-          
             
-          
-            
-              
 <div class='new-meta-item author'>
-  <a href="https://x1ngg3.github.io" rel="nofollow">
-    <img src="https://i.loli.net/2020/11/16/JlV4WshTkxutAEm.jpg">
-    <p>x1ngg3</p>
+  <a class='author' href="/" rel="nofollow">
+    <img no-lazy src="">
+    <p>请设置文章作者</p>
   </a>
 </div>
 
-            
+          
+        
           
             
-              
-  
   <div class='new-meta-item category'>
-    <a href='/categories/Contest/' rel="nofollow">
+    <a class='notlink'>
       <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>Contest</p>
+      <a class="category-link" href="/categories/Contest/">Contest</a>
     </a>
   </div>
 
 
-            
           
-            
-              <div class="new-meta-item date">
+        
+          
+            <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
     <p>发布于：Aug 4, 2020</p>
   </a>
 </div>
 
-            
           
-            
-              
-
-            
-          
-        </div>
         
-          <hr>
+          
+            
+  <div class="new-meta-item browse leancloud">
+    <a class='notlink'>
+      
+      <div id="lc-pv" data-title="SCTF2020回顾" data-path="/2020/08/04/contest_SCTF2020/">
+        <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
+        <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+        次浏览
+      </div>
+    </a>
+  </div>
+
+
+          
         
       </div>
     
-  </section>
+  </div>
 
 
-      <section class="article typo">
-        <div class="article-entry" itemprop="articleBody">
-          
-          <p>恼火的hin</p>
+  
+  <p>恼火的hin</p>
 <a id="more"></a>
 <h3 id="get-up">get_up</h3>
 <hr>
@@ -425,18 +472,18 @@
 <p>那下面运用idapython来对其进行处理，代码如下，完成之后选中.reioc段数据，按u取消数据类型定义，再按p使其转成代码。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dst = <span class="number">0x405000</span></span><br><span class="line">a = <span class="string">'sycsyc'</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">16</span>):</span><br><span class="line">    PatchByte(dst + i, Byte(dst + i)^ ord(a[i % <span class="number">6</span>]))</span><br></pre></td></tr></table></figure>
 <p>转化完成后：</p>
-<p><img src="https://i.loli.net/2020/08/09/lgpuZbrfWj25t8m.png" alt="Snipaste_2020-08-08_12-08-14"></p>
+<p><img src="https://i.loli.net/2020/08/09/lgpuZbrfWj25t8m.png" class="lazyload" data-srcset="https://i.loli.net/2020/08/09/lgpuZbrfWj25t8m.png" srcset="data:image/png;base64,666" alt="Snipaste_2020-08-08_12-08-14"></p>
 <p>再f5就可以直接反编译了，主要函数如下：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">sub_4027F0</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> *v0; <span class="comment">// ST18_4</span></span><br><span class="line">  HMODULE lpAddress; <span class="comment">// ST1C_4</span></span><br><span class="line">  <span class="keyword">signed</span> <span class="keyword">int</span> i; <span class="comment">// [esp+10h] [ebp-40h]</span></span><br><span class="line">  DWORD flOldProtect; <span class="comment">// [esp+14h] [ebp-3Ch]</span></span><br><span class="line">  <span class="keyword">char</span> Dst[<span class="number">40</span>]; <span class="comment">// [esp+18h] [ebp-38h]</span></span><br><span class="line">  <span class="keyword">char</span> Str[<span class="number">12</span>]; <span class="comment">// [esp+40h] [ebp-10h]</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">memset</span>(Dst, <span class="number">0</span>, <span class="number">0x28</span>u);</span><br><span class="line">  <span class="built_in">memset</span>(Str, <span class="number">0</span>, <span class="number">0xA</span>u);</span><br><span class="line">  scanf_s(<span class="string">"%s"</span>, Dst, <span class="number">40</span>);                       <span class="comment">// 输入</span></span><br><span class="line">  <span class="keyword">if</span> ( <span class="built_in">strlen</span>(Dst) != <span class="number">30</span> )                      <span class="comment">// 输入长度为30</span></span><br><span class="line">  &#123;</span><br><span class="line">    sub_401080(<span class="built_in">std</span>::<span class="built_in">cout</span>, <span class="string">"try again"</span>);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt; <span class="number">5</span>; ++i )                     <span class="comment">// 读取输入前五位，官方格式是"SCTF&#123;"</span></span><br><span class="line">    Str[i] = Dst[i];</span><br><span class="line">  v0 = sub_402B00(<span class="string">".ebata"</span>);</span><br><span class="line">  lpAddress = GetModuleHandleW(<span class="number">0</span>) + (*((_DWORD *)v0 + <span class="number">3</span>) &gt;&gt; <span class="number">2</span>);</span><br><span class="line">  VirtualProtect(lpAddress, *((_DWORD *)v0 + <span class="number">4</span>), <span class="number">0x40</span>u, &amp;flOldProtect);</span><br><span class="line">  sub_4025B0((<span class="keyword">int</span>)lpAddress, Str);              <span class="comment">// 对.ebata段异或</span></span><br><span class="line">  sub_404000();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>再次用到idapython</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dst = <span class="number">0x404000</span></span><br><span class="line">a = <span class="string">'SCTF&#123;'</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">16</span>,<span class="number">96</span>):</span><br><span class="line">    PatchByte(dst + i, Byte(dst + i)^ ord(a[i % <span class="number">5</span>]))</span><br></pre></td></tr></table></figure>
 <p>这里就遇到一个大坑了，转化前是这样的：</p>
-<p><img src="https://i.loli.net/2020/08/09/LYNbVndscFyljwx.png" alt="image-20200808121647213"></p>
+<p><img src="https://i.loli.net/2020/08/09/LYNbVndscFyljwx.png" class="lazyload" data-srcset="https://i.loli.net/2020/08/09/LYNbVndscFyljwx.png" srcset="data:image/png;base64,666" alt="image-20200808121647213"></p>
 <p>转化后是这样的：</p>
-<p><img src="https://i.loli.net/2020/08/09/NlJijHFh21Wr3an.png" alt="image-20200808121710831"></p>
+<p><img src="https://i.loli.net/2020/08/09/NlJijHFh21Wr3an.png" class="lazyload" data-srcset="https://i.loli.net/2020/08/09/NlJijHFh21Wr3an.png" srcset="data:image/png;base64,666" alt="image-20200808121710831"></p>
 <p>因为可以看到在我们进行U和P之前，这里已经存在了一段汇编代码，然后我们进行异或的起点又是第16位，然后我就想当然觉得只要把后面的数据进行U和P就可以了，然后再解决sp analysis failed的错误就行，但是这样反汇编出来的代码特别特别难看，数据定义识别不准确，偏偏网上其他大佬的题解还都说是要分析sp analysis failed的，我真是信了他妈的邪了。</p>
 <p>这里我们直接选中全部.ebata段，取消定义然后再转成代码就可以。转化完成后：</p>
-<p><img src="https://i.loli.net/2020/08/09/jk5yqT48ielsGmZ.png" alt="image-20200808122420788"></p>
+<p><img src="https://i.loli.net/2020/08/09/jk5yqT48ielsGmZ.png" class="lazyload" data-srcset="https://i.loli.net/2020/08/09/jk5yqT48ielsGmZ.png" srcset="data:image/png;base64,666" alt="image-20200808122420788"></p>
 <p>直接f5，舒服</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> __cdecl <span class="title">sub_404000</span><span class="params">(<span class="keyword">char</span> *Str)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">size_t</span> v1; <span class="comment">// eax</span></span><br><span class="line">  <span class="keyword">int</span> v3[<span class="number">300</span>]; <span class="comment">// [esp+0h] [ebp-9ACh]</span></span><br><span class="line">  <span class="keyword">int</span> v4; <span class="comment">// [esp+4B0h] [ebp-4FCh]</span></span><br><span class="line">  <span class="keyword">int</span> v5; <span class="comment">// [esp+4B4h] [ebp-4F8h]</span></span><br><span class="line">  <span class="keyword">size_t</span> i; <span class="comment">// [esp+4B8h] [ebp-4F4h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> j; <span class="comment">// [esp+4BCh] [ebp-4F0h]</span></span><br><span class="line">  <span class="keyword">int</span> k; <span class="comment">// [esp+4C0h] [ebp-4ECh]</span></span><br><span class="line">  <span class="keyword">int</span> v9[<span class="number">300</span>]; <span class="comment">// [esp+4C4h] [ebp-4E8h]</span></span><br><span class="line">  <span class="keyword">char</span> Dst[<span class="number">40</span>]; <span class="comment">// [esp+974h] [ebp-38h]</span></span><br><span class="line">  <span class="keyword">char</span> v11; <span class="comment">// [esp+99Ch] [ebp-10h]</span></span><br><span class="line">  <span class="keyword">char</span> v12; <span class="comment">// [esp+99Dh] [ebp-Fh]</span></span><br><span class="line">  <span class="keyword">char</span> v13; <span class="comment">// [esp+99Eh] [ebp-Eh]</span></span><br><span class="line">  <span class="keyword">char</span> v14; <span class="comment">// [esp+99Fh] [ebp-Dh]</span></span><br><span class="line">  <span class="keyword">char</span> v15; <span class="comment">// [esp+9A0h] [ebp-Ch]</span></span><br><span class="line">  <span class="keyword">char</span> v16; <span class="comment">// [esp+9A1h] [ebp-Bh]</span></span><br><span class="line">  <span class="keyword">char</span> v17; <span class="comment">// [esp+9A2h] [ebp-Ah]</span></span><br><span class="line">  <span class="keyword">char</span> v18; <span class="comment">// [esp+9A3h] [ebp-9h]</span></span><br><span class="line">  <span class="keyword">char</span> v19; <span class="comment">// [esp+9A4h] [ebp-8h]</span></span><br><span class="line"></span><br><span class="line">  v11 = <span class="number">115</span>;</span><br><span class="line">  v12 = <span class="number">121</span>;</span><br><span class="line">  v13 = <span class="number">99</span>;</span><br><span class="line">  v14 = <span class="number">108</span>;</span><br><span class="line">  v15 = <span class="number">111</span>;</span><br><span class="line">  v16 = <span class="number">118</span>;</span><br><span class="line">  v17 = <span class="number">101</span>;</span><br><span class="line">  v18 = <span class="number">114</span>;</span><br><span class="line">  v19 = <span class="number">0</span>;</span><br><span class="line">  <span class="built_in">memset</span>(Dst, <span class="number">0</span>, <span class="number">0x28</span>u);</span><br><span class="line">  <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt; <span class="built_in">strlen</span>(Str); ++i )</span><br><span class="line">    Dst[i] = Str[i];</span><br><span class="line">  <span class="keyword">for</span> ( j = <span class="number">0</span>; (<span class="keyword">signed</span> <span class="keyword">int</span>)j &lt; <span class="number">256</span>; ++j )</span><br><span class="line">  &#123;</span><br><span class="line">    v9[j] = j;</span><br><span class="line">    v1 = <span class="built_in">strlen</span>(&amp;v11);</span><br><span class="line">    v3[j] = *(&amp;v11 + j % v1);</span><br><span class="line">  &#125;</span><br><span class="line">  v5 = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> ( k = <span class="number">0</span>; k &lt; <span class="number">256</span>; ++k )</span><br><span class="line">  &#123;</span><br><span class="line">    v5 = (v3[k] + v9[k] + v5) % <span class="number">256</span>;</span><br><span class="line">    v4 = v9[k];</span><br><span class="line">    v9[k] = v9[v5];</span><br><span class="line">    v9[v5] = v4;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> sub_401A70((<span class="keyword">int</span>)v9, Dst);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>然后再就是一些代码分析了，可以爆破出flag来，直接上最后的脚本:</p>
@@ -446,7 +493,7 @@
 <hr>
 <p>好的废话 不多说我们直接拖IDA，然后就看到顶部的红色警告，这一度让我怀疑程序是不是加壳了，然后一查才知道是pyhton打包过的，那说是加壳也不过分。</p>
 <p>这类文件的特点就是，前面和后面多个“_”，如下图</p>
-<p><img src="https://i.loli.net/2020/08/09/VjGyDQz4t18K9np.png" alt="image-20200809214541754"></p>
+<p><img src="https://i.loli.net/2020/08/09/VjGyDQz4t18K9np.png" class="lazyload" data-srcset="https://i.loli.net/2020/08/09/VjGyDQz4t18K9np.png" srcset="data:image/png;base64,666" alt="image-20200809214541754"></p>
 <p>那现在开始反编译，以下两种方法都可以</p>
 <h4 id="archive-viewer-py">archive_viewer.py</h4>
 <hr>
@@ -460,10 +507,10 @@
 <li>Q: quit</li>
 </ol>
 </blockquote>
-<p><img src="https://i.loli.net/2020/08/09/qr9Cje2xmkJhSsM.png" alt="image-20200809215523719"></p>
-<p><img src="https://i.loli.net/2020/08/09/9IsyrBfCwLbFue8.png" alt="image-20200809215931329"></p>
-<p><img src="https://i.loli.net/2020/08/09/Y1ishedq6EGTIxv.png" alt="image-20200809215946809"></p>
-<p><img src="https://i.loli.net/2020/08/09/5tFbCH1uGaOIpLS.png" alt="image-20200809220037551"></p>
+<p><img src="https://i.loli.net/2020/08/09/qr9Cje2xmkJhSsM.png" class="lazyload" data-srcset="https://i.loli.net/2020/08/09/qr9Cje2xmkJhSsM.png" srcset="data:image/png;base64,666" alt="image-20200809215523719"></p>
+<p><img src="https://i.loli.net/2020/08/09/9IsyrBfCwLbFue8.png" class="lazyload" data-srcset="https://i.loli.net/2020/08/09/9IsyrBfCwLbFue8.png" srcset="data:image/png;base64,666" alt="image-20200809215931329"></p>
+<p><img src="https://i.loli.net/2020/08/09/Y1ishedq6EGTIxv.png" class="lazyload" data-srcset="https://i.loli.net/2020/08/09/Y1ishedq6EGTIxv.png" srcset="data:image/png;base64,666" alt="image-20200809215946809"></p>
+<p><img src="https://i.loli.net/2020/08/09/5tFbCH1uGaOIpLS.png" class="lazyload" data-srcset="https://i.loli.net/2020/08/09/5tFbCH1uGaOIpLS.png" srcset="data:image/png;base64,666" alt="image-20200809220037551"></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#-----------------------------------------------------------------------------</span></span><br><span class="line"><span class="comment"># Copyright (c) 2013-2020, PyInstaller Development Team.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Distributed under the terms of the GNU General Public License (version 2</span></span><br><span class="line"><span class="comment"># or later) with exception for distributing the bootloader.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># The full license is in the file COPYING.txt, distributed with this software.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># SPDX-License-Identifier: (GPL-2.0-or-later WITH Bootloader-exception)</span></span><br><span class="line"><span class="comment">#-----------------------------------------------------------------------------</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Viewer for archives packaged by archive.py</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> pprint</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> tempfile</span><br><span class="line"><span class="keyword">import</span> zlib</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> PyInstaller.loader <span class="keyword">import</span> pyimod02_archive</span><br><span class="line"><span class="keyword">from</span> PyInstaller.archive.readers <span class="keyword">import</span> CArchiveReader, NotAnArchiveError</span><br><span class="line"><span class="keyword">from</span> PyInstaller.compat <span class="keyword">import</span> stdin_input</span><br><span class="line"><span class="keyword">import</span> PyInstaller.log</span><br><span class="line"></span><br><span class="line">stack = []</span><br><span class="line">cleanup = []</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">(name, brief, debug, rec_debug, **unused_options)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">global</span> stack</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> os.path.isfile(name):</span><br><span class="line">        print(name, <span class="string">"is an invalid file name!"</span>, file=sys.stderr)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    arch = get_archive(name)</span><br><span class="line">    stack.append((name, arch))</span><br><span class="line">    <span class="keyword">if</span> debug <span class="keyword">or</span> brief:</span><br><span class="line">        show_log(arch, rec_debug, brief)</span><br><span class="line">        <span class="keyword">raise</span> SystemExit(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        show(name, arch)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            toks = stdin_input(<span class="string">'? '</span>).split(<span class="literal">None</span>, <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">except</span> EOFError:</span><br><span class="line">            <span class="comment"># Ctrl-D</span></span><br><span class="line">            print(file=sys.stderr)  <span class="comment"># Clear line.</span></span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> toks:</span><br><span class="line">            usage()</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">if</span> len(toks) == <span class="number">1</span>:</span><br><span class="line">            cmd = toks[<span class="number">0</span>]</span><br><span class="line">            arg = <span class="string">''</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            cmd, arg = toks</span><br><span class="line">        cmd = cmd.upper()</span><br><span class="line">        <span class="keyword">if</span> cmd == <span class="string">'U'</span>:</span><br><span class="line">            <span class="keyword">if</span> len(stack) &gt; <span class="number">1</span>:</span><br><span class="line">                arch = stack[<span class="number">-1</span>][<span class="number">1</span>]</span><br><span class="line">                arch.lib.close()</span><br><span class="line">                <span class="keyword">del</span> stack[<span class="number">-1</span>]</span><br><span class="line">            name, arch = stack[<span class="number">-1</span>]</span><br><span class="line">            show(name, arch)</span><br><span class="line">        <span class="keyword">elif</span> cmd == <span class="string">'O'</span>:</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> arg:</span><br><span class="line">                arg = stdin_input(<span class="string">'open name? '</span>)</span><br><span class="line">            arg = arg.strip()</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                arch = get_archive(arg)</span><br><span class="line">            <span class="keyword">except</span> NotAnArchiveError <span class="keyword">as</span> e:</span><br><span class="line">                print(e, file=sys.stderr)</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">if</span> arch <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">                print(arg, <span class="string">"not found"</span>, file=sys.stderr)</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            stack.append((arg, arch))</span><br><span class="line">            show(arg, arch)</span><br><span class="line">        <span class="keyword">elif</span> cmd == <span class="string">'X'</span>:</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> arg:</span><br><span class="line">                arg = stdin_input(<span class="string">'extract name? '</span>)</span><br><span class="line">            arg = arg.strip()</span><br><span class="line">            data = get_data(arg, arch)</span><br><span class="line">            <span class="keyword">if</span> data <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">                print(<span class="string">"Not found"</span>, file=sys.stderr)</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            filename = stdin_input(<span class="string">'to filename? '</span>)</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> filename:</span><br><span class="line">                print(repr(data))</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">with</span> open(filename, <span class="string">'wb'</span>) <span class="keyword">as</span> fp:</span><br><span class="line">                    fp.write(data)</span><br><span class="line">        <span class="keyword">elif</span> cmd == <span class="string">'Q'</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            usage()</span><br><span class="line">    do_cleanup()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">do_cleanup</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">global</span> stack, cleanup</span><br><span class="line">    <span class="keyword">for</span> (name, arch) <span class="keyword">in</span> stack:</span><br><span class="line">        arch.lib.close()</span><br><span class="line">    stack = []</span><br><span class="line">    <span class="keyword">for</span> filename <span class="keyword">in</span> cleanup:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            os.remove(filename)</span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">            print(<span class="string">"couldn't delete"</span>, filename, e.args, file=sys.stderr)</span><br><span class="line">    cleanup = []</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">usage</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">"U: go Up one level"</span>, file=sys.stderr)</span><br><span class="line">    print(<span class="string">"O &lt;name&gt;: open embedded archive name"</span>, file=sys.stderr)</span><br><span class="line">    print(<span class="string">"X &lt;name&gt;: extract name"</span>, file=sys.stderr)</span><br><span class="line">    print(<span class="string">"Q: quit"</span>, file=sys.stderr)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_archive</span><span class="params">(name)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> stack:</span><br><span class="line">        <span class="keyword">if</span> name[<span class="number">-4</span>:].lower() == <span class="string">'.pyz'</span>:</span><br><span class="line">            <span class="keyword">return</span> ZlibArchive(name)</span><br><span class="line">        <span class="keyword">return</span> CArchiveReader(name)</span><br><span class="line">    parent = stack[<span class="number">-1</span>][<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">return</span> parent.openEmbedded(name)</span><br><span class="line">    <span class="keyword">except</span> KeyError:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">    <span class="keyword">except</span> (ValueError, RuntimeError):</span><br><span class="line">        ndx = parent.toc.find(name)</span><br><span class="line">        dpos, dlen, ulen, flag, typcd, name = parent.toc[ndx]</span><br><span class="line">        x, data = parent.extract(ndx)</span><br><span class="line">        tempfilename = tempfile.mktemp()</span><br><span class="line">        cleanup.append(tempfilename)</span><br><span class="line">        <span class="keyword">with</span> open(tempfilename, <span class="string">'wb'</span>) <span class="keyword">as</span> fp:</span><br><span class="line">            fp.write(data)</span><br><span class="line">        <span class="keyword">if</span> typcd == <span class="string">'z'</span>:</span><br><span class="line">            <span class="keyword">return</span> ZlibArchive(tempfilename)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> CArchiveReader(tempfilename)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_data</span><span class="params">(name, arch)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> isinstance(arch.toc, dict):</span><br><span class="line">        (ispkg, pos, length) = arch.toc.get(name, (<span class="number">0</span>, <span class="literal">None</span>, <span class="number">0</span>))</span><br><span class="line">        <span class="keyword">if</span> pos <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">        <span class="keyword">with</span> arch.lib:</span><br><span class="line">            arch.lib.seek(arch.start + pos)</span><br><span class="line">            <span class="keyword">return</span> zlib.decompress(arch.lib.read(length))</span><br><span class="line">    ndx = arch.toc.find(name)</span><br><span class="line">    dpos, dlen, ulen, flag, typcd, name = arch.toc[ndx]</span><br><span class="line">    x, data = arch.extract(ndx)</span><br><span class="line">    <span class="keyword">return</span> data</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show</span><span class="params">(name, arch)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> isinstance(arch.toc, dict):</span><br><span class="line">        print(<span class="string">" Name: (ispkg, pos, len)"</span>)</span><br><span class="line">        toc = arch.toc</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">" pos, length, uncompressed, iscompressed, type, name"</span>)</span><br><span class="line">        toc = arch.toc.data</span><br><span class="line">    pprint.pprint(toc)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_content</span><span class="params">(arch, recursive, brief, output)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> isinstance(arch.toc, dict):</span><br><span class="line">        toc = arch.toc</span><br><span class="line">        <span class="keyword">if</span> brief:</span><br><span class="line">            <span class="keyword">for</span> name, _ <span class="keyword">in</span> toc.items():</span><br><span class="line">                output.append(name)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            output.append(toc)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        toc = arch.toc.data</span><br><span class="line">        <span class="keyword">for</span> el <span class="keyword">in</span> toc:</span><br><span class="line">            <span class="keyword">if</span> brief:</span><br><span class="line">                output.append(el[<span class="number">5</span>])</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                output.append(el)</span><br><span class="line">            <span class="keyword">if</span> recursive:</span><br><span class="line">                <span class="keyword">if</span> el[<span class="number">4</span>] <span class="keyword">in</span> (<span class="string">'z'</span>, <span class="string">'a'</span>):</span><br><span class="line">                    get_content(get_archive(el[<span class="number">5</span>]), recursive, brief, output)</span><br><span class="line">                    stack.pop()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show_log</span><span class="params">(arch, recursive, brief)</span>:</span></span><br><span class="line">    output = []</span><br><span class="line">    get_content(arch, recursive, brief, output)</span><br><span class="line">    <span class="comment"># first print all TOCs</span></span><br><span class="line">    <span class="keyword">for</span> out <span class="keyword">in</span> output:</span><br><span class="line">        <span class="keyword">if</span> isinstance(out, dict):</span><br><span class="line">            pprint.pprint(out)</span><br><span class="line">    <span class="comment"># then print the other entries</span></span><br><span class="line">    pprint.pprint([out <span class="keyword">for</span> out <span class="keyword">in</span> output <span class="keyword">if</span> <span class="keyword">not</span> isinstance(out, dict)])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_archive_content</span><span class="params">(filename)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Get a list of the (recursive) content of archive `filename`.</span></span><br><span class="line"><span class="string">    This function is primary meant to be used by runtests.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    archive = get_archive(filename)</span><br><span class="line">    stack.append((filename, archive))</span><br><span class="line">    output = []</span><br><span class="line">    get_content(archive, recursive=<span class="literal">True</span>, brief=<span class="literal">True</span>, output=output)</span><br><span class="line">    do_cleanup()</span><br><span class="line">    <span class="keyword">return</span> output</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ZlibArchive</span><span class="params">(pyimod02_archive.ZlibArchiveReader)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">checkmagic</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">""" Overridable.</span></span><br><span class="line"><span class="string">            Check to see if the file object self.lib actually has a file</span></span><br><span class="line"><span class="string">            we understand.</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        self.lib.seek(self.start)  <span class="comment"># default - magic is at start of file.</span></span><br><span class="line">        <span class="keyword">if</span> self.lib.read(len(self.MAGIC)) != self.MAGIC:</span><br><span class="line">            <span class="keyword">raise</span> RuntimeError(<span class="string">"%s is not a valid %s archive file"</span></span><br><span class="line">                               % (self.path, self.__class__.__name__))</span><br><span class="line">        <span class="keyword">if</span> self.lib.read(len(self.pymagic)) != self.pymagic:</span><br><span class="line">            print(<span class="string">"Warning: pyz is from a different Python version"</span>,</span><br><span class="line">                  file=sys.stderr)</span><br><span class="line">        self.lib.read(<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">()</span>:</span></span><br><span class="line">    parser = argparse.ArgumentParser()</span><br><span class="line">    parser.add_argument(<span class="string">'-l'</span>, <span class="string">'--log'</span>,</span><br><span class="line">                        default=<span class="literal">False</span>,</span><br><span class="line">                        action=<span class="string">'store_true'</span>,</span><br><span class="line">                        dest=<span class="string">'debug'</span>,</span><br><span class="line">                        help=<span class="string">'Print an archive log (default: %(default)s)'</span>)</span><br><span class="line">    parser.add_argument(<span class="string">'-r'</span>, <span class="string">'--recursive'</span>,</span><br><span class="line">                        default=<span class="literal">False</span>,</span><br><span class="line">                        action=<span class="string">'store_true'</span>,</span><br><span class="line">                        dest=<span class="string">'rec_debug'</span>,</span><br><span class="line">                        help=<span class="string">'Recursively print an archive log (default: %(default)s). '</span></span><br><span class="line">                        <span class="string">'Can be combined with -r'</span>)</span><br><span class="line">    parser.add_argument(<span class="string">'-b'</span>, <span class="string">'--brief'</span>,</span><br><span class="line">                        default=<span class="literal">False</span>,</span><br><span class="line">                        action=<span class="string">'store_true'</span>,</span><br><span class="line">                        dest=<span class="string">'brief'</span>,</span><br><span class="line">                        help=<span class="string">'Print only file name. (default: %(default)s). '</span></span><br><span class="line">                        <span class="string">'Can be combined with -r'</span>)</span><br><span class="line">    PyInstaller.log.__add_options(parser)</span><br><span class="line">    parser.add_argument(<span class="string">'name'</span>, metavar=<span class="string">'pyi_archive'</span>,</span><br><span class="line">                        help=<span class="string">"pyinstaller archive to show content of"</span>)</span><br><span class="line"></span><br><span class="line">    args = parser.parse_args()</span><br><span class="line">    PyInstaller.log.__process_options(parser, args)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">raise</span> SystemExit(main(**vars(args)))</span><br><span class="line">    <span class="keyword">except</span> KeyboardInterrupt:</span><br><span class="line">        <span class="keyword">raise</span> SystemExit(<span class="string">"Aborted by user request."</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    run()</span><br></pre></td></tr></table></figure>
 <h4 id="pyinstxtractor-py"><a href="http://pyinstxtractor.py" target="_blank" rel="noopener">pyinstxtractor.py</a></h4>
 <hr>
@@ -472,7 +519,7 @@
 </blockquote>
 <p>打包后回生成个文件夹，里面的main和struct文件就是我们要的</p>
 <p>推荐是用这个的，用这个可以看到版本信息等其他信息，很方便。</p>
-<p><img src="https://i.loli.net/2020/08/09/pBwIO4hEcumyg6Z.png" alt="image-20200809220835060"></p>
+<p><img src="https://i.loli.net/2020/08/09/pBwIO4hEcumyg6Z.png" class="lazyload" data-srcset="https://i.loli.net/2020/08/09/pBwIO4hEcumyg6Z.png" srcset="data:image/png;base64,666" alt="image-20200809220835060"></p>
 <p>比如说本题中uncompyle6就得用pyhton3.8的环境</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">PyInstaller Extractor v1.8 (Supports pyinstaller 3.2, 3.1, 3.0, 2.1, 2.0)</span></span><br><span class="line"><span class="string">Author : Extreme Coders</span></span><br><span class="line"><span class="string">E-mail : extremecoders(at)hotmail(dot)com</span></span><br><span class="line"><span class="string">Web    : https://0xec.blogspot.com</span></span><br><span class="line"><span class="string">Date   : 28-April-2017</span></span><br><span class="line"><span class="string">Url    : https://sourceforge.net/projects/pyinstallerextractor/</span></span><br><span class="line"><span class="string">For any suggestions, leave a comment on</span></span><br><span class="line"><span class="string">https://forum.tuts4you.com/topic/34455-pyinstaller-extractor/</span></span><br><span class="line"><span class="string">This script extracts a pyinstaller generated executable file.</span></span><br><span class="line"><span class="string">Pyinstaller installation is not needed. The script has it all.</span></span><br><span class="line"><span class="string">For best results, it is recommended to run this script in the</span></span><br><span class="line"><span class="string">same version of python as was used to create the executable.</span></span><br><span class="line"><span class="string">This is just to prevent unmarshalling errors(if any) while</span></span><br><span class="line"><span class="string">extracting the PYZ archive.</span></span><br><span class="line"><span class="string">Usage : Just copy this script to the directory where your exe resides</span></span><br><span class="line"><span class="string">        and run the script with the exe file name as a parameter</span></span><br><span class="line"><span class="string">C:\path\to\exe\&gt;python pyinstxtractor.py &lt;filename&gt;</span></span><br><span class="line"><span class="string">$ /path/to/exe/python pyinstxtractor.py &lt;filename&gt;</span></span><br><span class="line"><span class="string">Licensed under GNU General Public License (GPL) v3.</span></span><br><span class="line"><span class="string">You are free to modify this source.</span></span><br><span class="line"><span class="string">CHANGELOG</span></span><br><span class="line"><span class="string">================================================</span></span><br><span class="line"><span class="string">Version 1.1 (Jan 28, 2014)</span></span><br><span class="line"><span class="string">-------------------------------------------------</span></span><br><span class="line"><span class="string">- First Release</span></span><br><span class="line"><span class="string">- Supports only pyinstaller 2.0</span></span><br><span class="line"><span class="string">Version 1.2 (Sept 12, 2015)</span></span><br><span class="line"><span class="string">-------------------------------------------------</span></span><br><span class="line"><span class="string">- Added support for pyinstaller 2.1 and 3.0 dev</span></span><br><span class="line"><span class="string">- Cleaned up code</span></span><br><span class="line"><span class="string">- Script is now more verbose</span></span><br><span class="line"><span class="string">- Executable extracted within a dedicated sub-directory</span></span><br><span class="line"><span class="string">(Support for pyinstaller 3.0 dev is experimental)</span></span><br><span class="line"><span class="string">Version 1.3 (Dec 12, 2015)</span></span><br><span class="line"><span class="string">-------------------------------------------------</span></span><br><span class="line"><span class="string">- Added support for pyinstaller 3.0 final</span></span><br><span class="line"><span class="string">- Script is compatible with both python 2.x &amp; 3.x (Thanks to Moritz Kroll @ Avira Operations GmbH &amp; Co. KG)</span></span><br><span class="line"><span class="string">Version 1.4 (Jan 19, 2016)</span></span><br><span class="line"><span class="string">-------------------------------------------------</span></span><br><span class="line"><span class="string">- Fixed a bug when writing pyc files &gt;= version 3.3 (Thanks to Daniello Alto: https://github.com/Djamana)</span></span><br><span class="line"><span class="string">Version 1.5 (March 1, 2016)</span></span><br><span class="line"><span class="string">-------------------------------------------------</span></span><br><span class="line"><span class="string">- Added support for pyinstaller 3.1 (Thanks to Berwyn Hoyt for reporting)</span></span><br><span class="line"><span class="string">Version 1.6 (Sept 5, 2016)</span></span><br><span class="line"><span class="string">-------------------------------------------------</span></span><br><span class="line"><span class="string">- Added support for pyinstaller 3.2</span></span><br><span class="line"><span class="string">- Extractor will use a random name while extracting unnamed files.</span></span><br><span class="line"><span class="string">- For encrypted pyz archives it will dump the contents as is. Previously, the tool would fail.</span></span><br><span class="line"><span class="string">Version 1.7 (March 13, 2017)</span></span><br><span class="line"><span class="string">-------------------------------------------------</span></span><br><span class="line"><span class="string">- Made the script compatible with python 2.6 (Thanks to Ross for reporting)</span></span><br><span class="line"><span class="string">Version 1.8 (April 28, 2017)</span></span><br><span class="line"><span class="string">-------------------------------------------------</span></span><br><span class="line"><span class="string">- Support for sub-directories in .pyz files (Thanks to Moritz Kroll @ Avira Operations GmbH &amp; Co. KG)</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Author: In Ming Loh</span></span><br><span class="line"><span class="string">Email: inming.loh@countercept.com</span></span><br><span class="line"><span class="string">Changes have been made to Version 1.8 (April 28, 2017).</span></span><br><span class="line"><span class="string">CHANGELOG</span></span><br><span class="line"><span class="string">================================================</span></span><br><span class="line"><span class="string">- Function extractFiles(self, custom_dir=None) has been modfied to allow custom output directory.</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> struct</span><br><span class="line"><span class="keyword">import</span> marshal</span><br><span class="line"><span class="keyword">import</span> zlib</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> imp</span><br><span class="line"><span class="keyword">import</span> types</span><br><span class="line"><span class="keyword">from</span> uuid <span class="keyword">import</span> uuid4 <span class="keyword">as</span> uniquename</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CTOCEntry</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, position, cmprsdDataSize, uncmprsdDataSize, cmprsFlag, typeCmprsData, name)</span>:</span></span><br><span class="line">        self.position = position</span><br><span class="line">        self.cmprsdDataSize = cmprsdDataSize</span><br><span class="line">        self.uncmprsdDataSize = uncmprsdDataSize</span><br><span class="line">        self.cmprsFlag = cmprsFlag</span><br><span class="line">        self.typeCmprsData = typeCmprsData</span><br><span class="line">        self.name = name</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PyInstArchive</span>:</span></span><br><span class="line">    PYINST20_COOKIE_SIZE = <span class="number">24</span>           <span class="comment"># For pyinstaller 2.0</span></span><br><span class="line">    PYINST21_COOKIE_SIZE = <span class="number">24</span> + <span class="number">64</span>      <span class="comment"># For pyinstaller 2.1+</span></span><br><span class="line">    MAGIC = <span class="string">b'MEI\014\013\012\013\016'</span>  <span class="comment"># Magic number which identifies pyinstaller</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, path)</span>:</span></span><br><span class="line">        self.filePath = path</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">open</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            self.fPtr = open(self.filePath, <span class="string">'rb'</span>)</span><br><span class="line">            self.fileSize = os.stat(self.filePath).st_size</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            print(<span class="string">'[*] Error: Could not open &#123;0&#125;'</span>.format(self.filePath))</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">close</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            self.fPtr.close()</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">checkFile</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">'[*] Processing &#123;0&#125;'</span>.format(self.filePath))</span><br><span class="line">        <span class="comment"># Check if it is a 2.0 archive</span></span><br><span class="line">        self.fPtr.seek(self.fileSize - self.PYINST20_COOKIE_SIZE, os.SEEK_SET)</span><br><span class="line">        magicFromFile = self.fPtr.read(len(self.MAGIC))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> magicFromFile == self.MAGIC:</span><br><span class="line">            self.pyinstVer = <span class="number">20</span>     <span class="comment"># pyinstaller 2.0</span></span><br><span class="line">            print(<span class="string">'[*] Pyinstaller version: 2.0'</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># Check for pyinstaller 2.1+ before bailing out</span></span><br><span class="line">        self.fPtr.seek(self.fileSize - self.PYINST21_COOKIE_SIZE, os.SEEK_SET)</span><br><span class="line">        magicFromFile = self.fPtr.read(len(self.MAGIC))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> magicFromFile == self.MAGIC:</span><br><span class="line">            print(<span class="string">'[*] Pyinstaller version: 2.1+'</span>)</span><br><span class="line">            self.pyinstVer = <span class="number">21</span>     <span class="comment"># pyinstaller 2.1+</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">        print(<span class="string">'[*] Error : Unsupported pyinstaller version or not a pyinstaller archive'</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getCArchiveInfo</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="keyword">if</span> self.pyinstVer == <span class="number">20</span>:</span><br><span class="line">                self.fPtr.seek(self.fileSize - self.PYINST20_COOKIE_SIZE, os.SEEK_SET)</span><br><span class="line"></span><br><span class="line">                <span class="comment"># Read CArchive cookie</span></span><br><span class="line">                (magic, lengthofPackage, toc, tocLen, self.pyver) = \</span><br><span class="line">                struct.unpack(<span class="string">'!8siiii'</span>, self.fPtr.read(self.PYINST20_COOKIE_SIZE))</span><br><span class="line"></span><br><span class="line">            <span class="keyword">elif</span> self.pyinstVer == <span class="number">21</span>:</span><br><span class="line">                self.fPtr.seek(self.fileSize - self.PYINST21_COOKIE_SIZE, os.SEEK_SET)</span><br><span class="line"></span><br><span class="line">                <span class="comment"># Read CArchive cookie</span></span><br><span class="line">                (magic, lengthofPackage, toc, tocLen, self.pyver, pylibname) = \</span><br><span class="line">                struct.unpack(<span class="string">'!8siiii64s'</span>, self.fPtr.read(self.PYINST21_COOKIE_SIZE))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            print(<span class="string">'[*] Error : The file is not a pyinstaller archive'</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">        print(<span class="string">'[*] Python version: &#123;0&#125;'</span>.format(self.pyver))</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Overlay is the data appended at the end of the PE</span></span><br><span class="line">        self.overlaySize = lengthofPackage</span><br><span class="line">        self.overlayPos = self.fileSize - self.overlaySize</span><br><span class="line">        self.tableOfContentsPos = self.overlayPos + toc</span><br><span class="line">        self.tableOfContentsSize = tocLen</span><br><span class="line"></span><br><span class="line">        print(<span class="string">'[*] Length of package: &#123;0&#125; bytes'</span>.format(self.overlaySize))</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parseTOC</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="comment"># Go to the table of contents</span></span><br><span class="line">        self.fPtr.seek(self.tableOfContentsPos, os.SEEK_SET)</span><br><span class="line"></span><br><span class="line">        self.tocList = []</span><br><span class="line">        parsedLen = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># Parse table of contents</span></span><br><span class="line">        <span class="keyword">while</span> parsedLen &lt; self.tableOfContentsSize:</span><br><span class="line">            (entrySize, ) = struct.unpack(<span class="string">'!i'</span>, self.fPtr.read(<span class="number">4</span>))</span><br><span class="line">            nameLen = struct.calcsize(<span class="string">'!iiiiBc'</span>)</span><br><span class="line"></span><br><span class="line">            (entryPos, cmprsdDataSize, uncmprsdDataSize, cmprsFlag, typeCmprsData, name) = \</span><br><span class="line">            struct.unpack( \</span><br><span class="line">                <span class="string">'!iiiBc&#123;0&#125;s'</span>.format(entrySize - nameLen), \</span><br><span class="line">                self.fPtr.read(entrySize - <span class="number">4</span>))</span><br><span class="line"></span><br><span class="line">            name = name.decode(<span class="string">'utf-8'</span>).rstrip(<span class="string">'\0'</span>)</span><br><span class="line">            <span class="keyword">if</span> len(name) == <span class="number">0</span>:</span><br><span class="line">                name = str(uniquename())</span><br><span class="line">                print(<span class="string">'[!] Warning: Found an unamed file in CArchive. Using random name &#123;0&#125;'</span>.format(name))</span><br><span class="line"></span><br><span class="line">            self.tocList.append( \</span><br><span class="line">                                CTOCEntry(                      \</span><br><span class="line">                                    self.overlayPos + entryPos, \</span><br><span class="line">                                    cmprsdDataSize,             \</span><br><span class="line">                                    uncmprsdDataSize,           \</span><br><span class="line">                                    cmprsFlag,                  \</span><br><span class="line">                                    typeCmprsData,              \</span><br><span class="line">                                    name                        \</span><br><span class="line">                                ))</span><br><span class="line"></span><br><span class="line">            parsedLen += entrySize</span><br><span class="line">        print(<span class="string">'[*] Found &#123;0&#125; files in CArchive'</span>.format(len(self.tocList)))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">extractFiles</span><span class="params">(self, custom_dir=None)</span>:</span></span><br><span class="line">        print(<span class="string">'[*] Beginning extraction...please standby'</span>)</span><br><span class="line">        <span class="keyword">if</span> custom_dir <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            extractionDir = os.path.join(os.getcwd(), os.path.basename(self.filePath) + <span class="string">'_extracted'</span>)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(extractionDir):</span><br><span class="line">                os.mkdir(extractionDir)</span><br><span class="line"></span><br><span class="line">            os.chdir(extractionDir)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(custom_dir):</span><br><span class="line">                os.makedirs(custom_dir)</span><br><span class="line">            os.chdir(custom_dir)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> entry <span class="keyword">in</span> self.tocList:</span><br><span class="line">            basePath = os.path.dirname(entry.name)</span><br><span class="line">            <span class="keyword">if</span> basePath != <span class="string">''</span>:</span><br><span class="line">                <span class="comment"># Check if path exists, create if not</span></span><br><span class="line">                <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(basePath):</span><br><span class="line">                    os.makedirs(basePath)</span><br><span class="line"></span><br><span class="line">            self.fPtr.seek(entry.position, os.SEEK_SET)</span><br><span class="line">            data = self.fPtr.read(entry.cmprsdDataSize)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> entry.cmprsFlag == <span class="number">1</span>:</span><br><span class="line">                data = zlib.decompress(data)</span><br><span class="line">                <span class="comment"># Malware may tamper with the uncompressed size</span></span><br><span class="line">                <span class="comment"># Comment out the assertion in such a case</span></span><br><span class="line">                <span class="keyword">assert</span> len(data) == entry.uncmprsdDataSize <span class="comment"># Sanity Check</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">with</span> open(entry.name, <span class="string">'wb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">                f.write(data)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> entry.typeCmprsData == <span class="string">b'z'</span>:</span><br><span class="line">                self._extractPyz(entry.name)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_extractPyz</span><span class="params">(self, name)</span>:</span></span><br><span class="line">        dirName =  name + <span class="string">'_extracted'</span></span><br><span class="line">        <span class="comment"># Create a directory for the contents of the pyz</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(dirName):</span><br><span class="line">            os.mkdir(dirName)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">with</span> open(name, <span class="string">'rb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">            pyzMagic = f.read(<span class="number">4</span>)</span><br><span class="line">            <span class="keyword">assert</span> pyzMagic == <span class="string">b'PYZ\0'</span> <span class="comment"># Sanity Check</span></span><br><span class="line"></span><br><span class="line">            pycHeader = f.read(<span class="number">4</span>) <span class="comment"># Python magic value</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> imp.get_magic() != pycHeader:</span><br><span class="line">                print(<span class="string">'[!] Warning: The script is running in a different python version than the one used to build the executable'</span>)</span><br><span class="line">                print(<span class="string">'    Run this script in Python&#123;0&#125; to prevent extraction errors(if any) during unmarshalling'</span>.format(self.pyver))</span><br><span class="line"></span><br><span class="line">            (tocPosition, ) = struct.unpack(<span class="string">'!i'</span>, f.read(<span class="number">4</span>))</span><br><span class="line">            f.seek(tocPosition, os.SEEK_SET)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                toc = marshal.load(f)</span><br><span class="line">            <span class="keyword">except</span>:</span><br><span class="line">                print(<span class="string">'[!] Unmarshalling FAILED. Cannot extract &#123;0&#125;. Extracting remaining files.'</span>.format(name))</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">            print(<span class="string">'[*] Found &#123;0&#125; files in PYZ archive'</span>.format(len(toc)))</span><br><span class="line"></span><br><span class="line">            <span class="comment"># From pyinstaller 3.1+ toc is a list of tuples</span></span><br><span class="line">            <span class="keyword">if</span> type(toc) == list:</span><br><span class="line">                toc = dict(toc)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> key <span class="keyword">in</span> toc.keys():</span><br><span class="line">                (ispkg, pos, length) = toc[key]</span><br><span class="line">                f.seek(pos, os.SEEK_SET)</span><br><span class="line"></span><br><span class="line">                fileName = key</span><br><span class="line">                <span class="keyword">try</span>:</span><br><span class="line">                    <span class="comment"># for Python &gt; 3.3 some keys are bytes object some are str object</span></span><br><span class="line">                    fileName = key.decode(<span class="string">'utf-8'</span>)</span><br><span class="line">                <span class="keyword">except</span>:</span><br><span class="line">                    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">                <span class="comment"># Make sure destination directory exists, ensuring we keep inside dirName</span></span><br><span class="line">                destName = os.path.join(dirName, fileName.replace(<span class="string">".."</span>, <span class="string">"__"</span>))</span><br><span class="line">                destDirName = os.path.dirname(destName)</span><br><span class="line">                <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(destDirName):</span><br><span class="line">                    os.makedirs(destDirName)</span><br><span class="line"></span><br><span class="line">                <span class="keyword">try</span>:</span><br><span class="line">                    data = f.read(length)</span><br><span class="line">                    data = zlib.decompress(data)</span><br><span class="line">                <span class="keyword">except</span>:</span><br><span class="line">                    print(<span class="string">'[!] Error: Failed to decompress &#123;0&#125;, probably encrypted. Extracting as is.'</span>.format(fileName))</span><br><span class="line">                    open(destName + <span class="string">'.pyc.encrypted'</span>, <span class="string">'wb'</span>).write(data)</span><br><span class="line">                    <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">                <span class="keyword">with</span> open(destName + <span class="string">'.pyc'</span>, <span class="string">'wb'</span>) <span class="keyword">as</span> pycFile:</span><br><span class="line">                    pycFile.write(pycHeader)      <span class="comment"># Write pyc magic</span></span><br><span class="line">                    pycFile.write(<span class="string">b'\0'</span> * <span class="number">4</span>)      <span class="comment"># Write timestamp</span></span><br><span class="line">                    <span class="keyword">if</span> self.pyver &gt;= <span class="number">33</span>:</span><br><span class="line">                        pycFile.write(<span class="string">b'\0'</span> * <span class="number">4</span>)  <span class="comment"># Size parameter added in Python 3.3</span></span><br><span class="line">                    pycFile.write(data)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">if</span> len(sys.argv) &lt; <span class="number">2</span>:</span><br><span class="line">        print(<span class="string">'[*] Usage: pyinstxtractor.py &lt;filename&gt;'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        arch = PyInstArchive(sys.argv[<span class="number">1</span>])</span><br><span class="line">        <span class="keyword">if</span> arch.open():</span><br><span class="line">            <span class="keyword">if</span> arch.checkFile():</span><br><span class="line">                <span class="keyword">if</span> arch.getCArchiveInfo():</span><br><span class="line">                    arch.parseTOC()</span><br><span class="line">                    arch.extractFiles()</span><br><span class="line">                    arch.close()</span><br><span class="line">                    print(<span class="string">'[*] Successfully extracted pyinstaller archive: &#123;0&#125;'</span>.format(sys.argv[<span class="number">1</span>]))</span><br><span class="line">                    print(<span class="string">''</span>)</span><br><span class="line">                    print(<span class="string">'You can now use a python decompiler on the pyc files within the extracted directory'</span>)</span><br><span class="line">                    <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">            arch.close()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
 <p>现在我们已经得到的.pyc文件了，下面我们把pyc转成py就可以了，但是很尴尬的是必须是3.8的环境，然后各个宣称支持3.8的在线破解网站也纷纷失败，没办法只得虚拟机下搞了个3.8，真的恼火</p>
@@ -491,82 +538,43 @@
 <p>SCTF{We1c0m3_To_Sctf_2020_re_!!}</p>
 <p>这个题算不上很完整的复现了，有个别细节没搞懂，也有点懒得搞了，先这样吧。</p>
 
-          
-            <div class='article_footer'>
+  
+  
+    
+    <div class='footer'>
+      
+      
+      
+        <div class='copyright'>
+          <blockquote>
+            
               
-                
-  
-    
-    
-
-
-
-  
-
-  
-    
-    
-
-
-
-  
-
-  
-    
-    
-
-<section class="widget copyright  desktop mobile">
-  <div class='content'>
-    
-      <blockquote>
-        
-          
-            <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
-
-          
-        
-          
-            <p>本文永久链接是：<a href=http://x1ngg3.github.io/2020/08/04/contest_SCTF2020/>http://x1ngg3.github.io/2020/08/04/contest_SCTF2020/</a></p>
-          
-        
-      </blockquote>
-    
-  </div>
-</section>
-
-  
-
-  
-    
-    
-
-<section class="widget qrcode  desktop mobile">
-  
-
-  <div class='content article-entry'>
-    
-  </div>
-</section>
-
-  
-
+                <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
 
               
-            </div>
-          
+            
+              
+                <p>本文永久链接是：<a href=http://x1ngg3.github.io/2020/08/04/contest_SCTF2020/>http://x1ngg3.github.io/2020/08/04/contest_SCTF2020/</a></p>
+              
+            
+          </blockquote>
         </div>
-        
-          
+      
+      
+    </div>
+  
+  
+    
 
 
-  <section class='meta' id="footer-meta">
+  <div class='article-meta' id="bottom">
     <div class='new-meta-box'>
       
         
           <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-10-24T19:46:08+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>最后更新于：Oct 24, 2020</p>
+    <p>更新于：Oct 24, 2020</p>
   </a>
 </div>
 
@@ -582,11 +590,6 @@
       
         
           
-
-        
-      
-        
-          
   <div class="new-meta-item share -mob-share-list">
   <div class="-mob-share-list share-body">
     
@@ -597,7 +600,7 @@
           
           >
           
-            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qq.png">
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" srcset="data:image/png;base64,666">
           
         </a>
       
@@ -609,7 +612,7 @@
           
           >
           
-            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qzone.png">
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" srcset="data:image/png;base64,666">
           
         </a>
       
@@ -621,9 +624,13 @@
           
           >
           
-            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/weibo.png">
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" srcset="data:image/png;base64,666">
           
         </a>
+      
+    
+      
+    
       
     
   </div>
@@ -634,90 +641,64 @@
         
       
     </div>
-  </section>
+  </div>
 
 
-        
-        
-          <div class="prev-next">
-            
-              <a class='prev' href='/2020/08/13/re_CrackMe160/'>
-                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>CrackMe160</p>
-                <p class='content'>CrackMe!!!
+  
+  
+
+  
+    <div class="prev-next">
+      
+        <a class='prev' href='/2020/08/13/re_CrackMe160/'>
+          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>CrackMe160</p>
+          <p class='content'>CrackMe!!!
 
 声明
 网上一些好的题解很多，这里就不详细记录了，只是做个概述这样子。
 【反汇编练习】160个CrackME索引目录1~160：https://www.52pojie.cn...</p>
-              </a>
-            
-            
-              <a class='next' href='/2020/07/22/HOOK/'>
-                <p class='title'>hook(updating)<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-                <p class='content'>事情得从一道名为EASYHOOK的题目说起…
+        </a>
+      
+      
+        <a class='next' href='/2020/07/22/HOOK/'>
+          <p class='title'>hook(updating)<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>事情得从一道名为EASYHOOK的题目说起…
 
 写题目的时候发现了一道名为EASYHOOK的题目，想起《加密与解密》中有HOOK技术的相关篇幅，于是有了此篇总结性博客。
 PS：以前听讲座的时候某...</p>
-              </a>
-            
-          </div>
-        
-      </section>
-    </article>
+        </a>
+      
+    </div>
+  
+</article>
+
+
   
 
-  
-    <!-- 显示推荐文章和评论 -->
+  <article class="post white-box reveal shadow" id="comments">
+    <p ct><i class='fas fa-comments'></i> 评论</p>
+    
+    <div id="valine_container" class="valine_thread">
+  <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
+</div>
 
-
-
-  <article class="post white-box reveal comments shadow">
-    <section class="article typo">
-      <p ct><i class='fas fa-comments'></i> 评论</p>
-      
-      
-      
-      
-      
-      
-        <section id="comments">
-          <div id="valine_container" class="valine_thread">
-            <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
-          </div>
-        </section>
-      
-      
-    </section>
   </article>
 
 
-  
 
 
-
-
-<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
-
-
-
-  <script>
-    window.subData = {
-      title: 'SCTF2020回顾',
-      tools: true
-    }
-  </script>
 
 
 </div>
 <aside class='l_side'>
   
   
-
-  
     
     
 
 
-  <section class="widget toc-wrapper shadow desktop mobile">
+
+  <section class="widget toc-wrapper shadow desktop mobile" id="toc-div" >
     
   <header>
     
@@ -727,7 +708,7 @@ PS：以前听讲座的时候某...</p>
 
 
     <div class='content'>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#get-up"><span class="toc-text">get_up</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#signin"><span class="toc-text">signin</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#archive-viewer-py"><span class="toc-text">archive_viewer.py</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pyinstxtractor-py"><span class="toc-text">pyinstxtractor.py</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#get-up"><span class="toc-text">get_up</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#signin"><span class="toc-text">signin</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#archive-viewer-py"><span class="toc-text">archive_viewer.py</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pyinstxtractor-py"><span class="toc-text">pyinstxtractor.py</span></a></li></ol></li></ol>
     </div>
   </section>
 
@@ -738,8 +719,30 @@ PS：以前听讲座的时候某...</p>
 </aside>
 
 
+
+        
+        
+          <!--此文件用来存放一些不方便取值的变量-->
+<!--思路大概是将值藏到重加载的区域内-->
+
+<script>
+  window.pdata={}
+  pdata.ispage=true;
+  pdata.postTitle="SCTF2020回顾";
+  pdata.commentPath="";
+  pdata.commentPlaceholder="";
+
+  var l_header=document.getElementById("l_header");
   
-  <footer class="clearfix">
+  l_header.classList.add("show");
+  
+</script>
+
+        
+      </div>
+      
+  
+  <footer class="footer clearfix">
     <br><br>
     
       
@@ -755,35 +758,9 @@ PS：以前听讲座的时候某...</p>
         <div class="social-wrapper">
           
             
-              <a href="https://x1ngg3.github.io"
-                class="social fas fa-rss flat-btn"
-                target="_blank"
-                rel="external nofollow noopener noreferrer">
-              </a>
-            
           
             
-              <a href="mailto:x1ngg3@foxmail.com"
-                class="social fas fa-envelope flat-btn"
-                target="_blank"
-                rel="external nofollow noopener noreferrer">
-              </a>
-            
           
-            
-              <a href="https://github.com/x1ngg3"
-                class="social fab fa-github flat-btn"
-                target="_blank"
-                rel="external nofollow noopener noreferrer">
-              </a>
-            
-          
-            
-              <a href="https://music.163.com/#/user/home?id=395984459"
-                class="social fas fa-headphones-alt flat-btn"
-                target="_blank"
-                rel="external nofollow noopener noreferrer">
-              </a>
             
           
         </div>
@@ -795,117 +772,216 @@ PS：以前听讲座的时候某...</p>
       
     
       
-        Use
-        <a href="https://x1ngg3.github.io" target="_blank" class="codename">x1ngg3</a>
-        as theme, total visits
-          <span id="busuanzi_value_site_pv"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
-          times
+        
+          <div><p><span id="lc-sv">本站总访问量为 <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 次</span> <span id="lc-uv">访客数为 <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 人</span></p>
+</div>
         
       
     
       
+        Use
+        <a href="https://github.com/volantis-x/hexo-theme-volantis/tree/4.1.6" target="_blank" class="codename">Volantis</a>
+        as theme
+      
+    
+      
         <div class='copyright'>
-        <p><a href="https://x1ngg3.github.io">Copyright © 2020-2020 X1ngg3</a></p>
+        <p><a href="/">Copyright © 2017-2020 XXX</a></p>
 
         </div>
       
     
   </footer>
 
-<script>setLoadingBarProgress(80);</script>
 
-
-      <script>setLoadingBarProgress(60);</script>
+      <a id="s-top" class="fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
     </div>
-    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
   </div>
+  <div>
+    <script>
+window.volantis={};
+window.volantis.loadcss=document.getElementById("loadcss");
+/********************脚本懒加载函数********************************/
+function loadScript(src, cb) {
+var HEAD = document.getElementsByTagName('head')[0] || document.documentElement;
+var script = document.createElement('script');
+script.setAttribute('type','text/javascript');
+if (cb) script.onload = cb;
+script.setAttribute('src', src);
+HEAD.appendChild(script);
+}
+//https://github.com/filamentgroup/loadCSS
+var loadCSS = function( href, before, media, attributes ){
+	var doc = window.document;
+	var ss = doc.createElement( "link" );
+	var ref;
+	if( before ){
+		ref = before;
+	}
+	else {
+		var refs = ( doc.body || doc.getElementsByTagName( "head" )[ 0 ] ).childNodes;
+		ref = refs[ refs.length - 1];
+	}
+	var sheets = doc.styleSheets;
+	if( attributes ){
+		for( var attributeName in attributes ){
+			if( attributes.hasOwnProperty( attributeName ) ){
+				ss.setAttribute( attributeName, attributes[attributeName] );
+			}
+		}
+	}
+	ss.rel = "stylesheet";
+	ss.href = href;
+	ss.media = "only x";
+	function ready( cb ){
+		if( doc.body ){
+			return cb();
+		}
+		setTimeout(function(){
+			ready( cb );
+		});
+	}
+	ready( function(){
+		ref.parentNode.insertBefore( ss, ( before ? ref : ref.nextSibling ) );
+	});
+	var onloadcssdefined = function( cb ){
+		var resolvedHref = ss.href;
+		var i = sheets.length;
+		while( i-- ){
+			if( sheets[ i ].href === resolvedHref ){
+				return cb();
+			}
+		}
+		setTimeout(function() {
+			onloadcssdefined( cb );
+		});
+	};
+	function loadCB(){
+		if( ss.addEventListener ){
+			ss.removeEventListener( "load", loadCB );
+		}
+		ss.media = media || "all";
+	}
+	if( ss.addEventListener ){
+		ss.addEventListener( "load", loadCB);
+	}
+	ss.onloadcssdefined = onloadcssdefined;
+	onloadcssdefined( loadCB );
+	return ss;
+};
+</script>
+<script>
   
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.4/dist/jquery.min.js"></script>
+  loadCSS("https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14/css/all.min.css", window.volantis.loadcss);
+  
+  
+  
+  
+</script>
+<!-- required -->
 
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5/dist/jquery.min.js"></script>
 
-  <script>
-    
-    var SEARCH_SERVICE = "hexo" || "hexo";
-    var ROOT = "/" || "/";
-    if (!ROOT.endsWith('/')) ROOT += '/';
-  </script>
-
-
-  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/instant_page.js" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
-
-
-  <script src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.6/dist/scrollreveal.min.js"></script>
-  <script type="text/javascript">
-    $(function() {
-      ScrollReveal().reveal('.l_main .reveal', {
-        distance: '8px',
-        duration: '800',
-        interval: '100',
-        scale: '1'
-      });
+<script>
+  function pjax_fancybox() {
+    $(".md .gallery").find("img").each(function () { //渲染 fancybox
+      var element = document.createElement("a"); // a 标签
+      $(element).attr("class", "fancybox");
+      $(element).attr("pjax-fancybox", "");  // 过滤 pjax
+      $(element).attr("href", $(this).attr("src"));
+      if ($(this).attr("data-original")) {
+        $(element).attr("href", $(this).attr("data-original"));
+      }
+      $(element).attr("data-fancybox", "images");
+      var caption = "";   // 描述信息
+      if ($(this).attr('alt')) {  // 判断当前页面是否存在描述信息
+        $(element).attr('data-caption', $(this).attr('alt'));
+        caption = $(this).attr('alt');
+      }
+      var div = document.createElement("div");
+      $(div).addClass("fancybox");
+      $(this).wrap(div); // 最外层套 div ，其实主要作用还是 class 样式
+      var span = document.createElement("span");
+      $(span).addClass("image-caption");
+      $(span).text(caption); // 加描述
+      $(this).after(span);  // 再套一层描述
+      $(this).wrap(element);  // 最后套 a 标签
+    })
+    $(".md .gallery").find("img").fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+      closeClick: true,
+      helpers: {
+        overlay: {closeClick: true}
+      },
+      buttons: [
+        "zoom",
+        "close"
+      ]
     });
-  </script>
+  };
+  function SCload_fancybox() {
+    if ($(".md .gallery").find("img").length == 0) return;
+    loadCSS("https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css", document.getElementById("loadcss"));
+    setTimeout(function() {
+      loadScript('https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', pjax_fancybox)
+    }, 1);
+  };
+  $(function () {
+    SCload_fancybox();
+  });
+</script>
+
+
+<!-- internal -->
+
+
+
+
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.1.0/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 0
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    lazyLoadInstance.update();
+  });
+  document.addEventListener('pjax:complete', function () {
+    lazyLoadInstance.update();
+  });
+</script>
+
+
 
 
   
-<script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
-
-  <script type="text/javascript">
-    $(function() {
-      Waves.attach('.flat-btn', ['waves-button']);
-      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
-      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
-      Waves.attach('.flat-box', ['waves-block']);
-      Waves.attach('.float-box', ['waves-block', 'waves-float']);
-      Waves.attach('.waves-image');
-      Waves.init();
-    });
-  </script>
-
-
-  <script defer src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script>
-
-
-
   
-  
-  
-    
-<script src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script>
-
-    <script type="text/javascript">
-      $(function(){
-        var imgs=["https://cdn.jsdelivr.net/gh/xaoxuu/cdn-wallpaper/abstract/41F215B9-261F-48B4-80B5-4E86E165259E.jpeg", "https://cdn.jsdelivr.net/gh/xaoxuu/cdn-wallpaper/abstract/BBC19066-E176-47C2-9D22-48C81EE5DF6B.jpeg", "https://cdn.jsdelivr.net/gh/xaoxuu/cdn-wallpaper/abstract/67239FBB-E15D-4F4F-8EE8-0F1C9F3C4E7C.jpeg", "https://cdn.jsdelivr.net/gh/xaoxuu/cdn-wallpaper/landscape/AEB33F9D-7294-4CF1-B8C5-3020748A9D45.jpeg", "https://cdn.jsdelivr.net/gh/xaoxuu/cdn-wallpaper/abstract/2884F904-F1F3-479E-AE27-5EBC291B63B0.jpeg", "https://cdn.jsdelivr.net/gh/xaoxuu/cdn-wallpaper/landscape/298468D7-E388-44A8-8CC5-8213BDC33CED.jpeg"];
-        if ('true' == 'true') {
-          function shuffle(arr){
-            /*From countercurrent-time*/
-            var n = arr.length;
-            while(n--) {
-              var index = Math.floor(Math.random() * n);
-              var temp = arr[index];
-              arr[index] = arr[n];
-              arr[n] = temp;
-            }
-          }
-          shuffle(imgs);
-        }
-        if ('') {
-          $('').backstretch(
-            imgs,
-          {
-            duration: "20000",
-            fade: "1500"
-          });
-        } else {
-          $.backstretch(
-            imgs,
-          {
-            duration: "20000",
-            fade: "1500"
-          });
-        }
-      });
+    <script>
+      window.FPConfig = {
+        delay: 0,
+        ignoreKeywords: [],
+        maxRPS: 5,
+        hoverDelay: 25
+      };
     </script>
+    <script defer src="https://cdn.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"></script>
   
 
 
@@ -917,25 +993,25 @@ PS：以前听讲座的时候某...</p>
 
 
 
-
   
-    
-<script src="https://cdn.jsdelivr.net/npm/valine@1.4/dist/Valine.min.js"></script>
-
   
-  <script>
-  var GUEST_INFO = ['nick','mail','link'];
-  var meta = 'nick,mail,link'.split(',').filter(function(item){
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-volantis@4.1.6/source/js/valine.min.js"></script>
+
+
+<script>
+  var GUEST_INFO = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link'.split(',').filter(function (item) {
     return GUEST_INFO.indexOf(item) > -1
   });
-  var REQUIRED_FIELDS = ['nick','mail','link'];
-  var requiredFields = 'nick,mail'.split(',').filter(function(item){
+  var REQUIRED_FIELDS = ['nick', 'mail', 'link'];
+  var requiredFields = 'nick,mail'.split(',').filter(function (item) {
     return REQUIRED_FIELDS.indexOf(item) > -1
   });
-  var valine = new Valine();
+
   function emoji(path, idx, ext) {
-      return path + "/" + path + "-" + idx + "." + ext;
+    return path + "/" + path + "-" + idx + "." + ext;
   }
+
   var emojiMaps = {};
   for (var i = 1; i <= 54; i++) {
     emojiMaps['tieba-' + i] = emoji('tieba', i, 'png');
@@ -952,160 +1028,495 @@ PS：以前听讲座的时候某...</p>
   for (var i = 1; i <= 4; i++) {
     emojiMaps['weibo-' + i] = emoji('weibo', i, 'png');
   }
-  valine.init({
-    el: '#valine_container',
-    meta: meta,
-    
-    appId: "VqJdqrLLhJVaQMiPLwPCBSc3-gzGzoHsz",
-    appKey: "5yKLlbbNmjEzqjXsB8Xq3vfL",
-    placeholder: "快来评论吧~",
-    pageSize:'10',
-    avatar:'robohash',
-    lang:'zh-cn',
-    visitor: 'true',
-    highlight: 'true',
-    mathJax: 'false',
-    enableQQ: 'true',
-    requiredFields: requiredFields,
-    emojiCDN: 'https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/emoji/valine/',
-    emojiMaps: emojiMaps
-  })
-  </script>
 
+  function pjax_valine() {
+    if(!document.querySelectorAll("#valine_container")[0])return;
 
+    let pagePlaceholder = pdata.commentPlaceholder || "快来评论吧~";
 
-
-
-  
-<script src="/js/app.js"></script>
-
-
-
-  
-<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.6.5/js/search.js"></script>
-
-
-
-  
-<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/comment_typing.js"></script>
-
-
-
-
-
-
-<!-- 复制 -->
-
-  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
-<script>
-  function wait(callback, seconds) {
-    var timelag = null;
-    timelag = window.setTimeout(callback, seconds);
-  }
-  !function (e, t, a) {
-    var initCopyCode = function(){
-      var copyHtml = '';
-      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
-      copyHtml += '<i class="fas fa-copy"></i><span>COPY</span>';
-      copyHtml += '</button>';
-      $(".highlight .code pre").before(copyHtml);
-      $(".article pre code").before(copyHtml);
-      var clipboard = new ClipboardJS('.btn-copy', {
-        target: function(trigger) {
-          return trigger.nextElementSibling;
-        }
-      });
-      clipboard.on('success', function(e) {
-        let $btn = $(e.trigger);
-        $btn.addClass('copied');
-        let $icon = $($btn.find('i'));
-        $icon.removeClass('fa-copy');
-        $icon.addClass('fa-check-circle');
-        let $span = $($btn.find('span'));
-        $span[0].innerText = 'COPIED';
-        
-        wait(function () { // 等待两秒钟后恢复
-          $icon.removeClass('fa-check-circle');
-          $icon.addClass('fa-copy');
-          $span[0].innerText = 'COPY';
-        }, 2000);
-      });
-      clipboard.on('error', function(e) {
-        e.clearSelection();
-        let $btn = $(e.trigger);
-        $btn.addClass('copy-failed');
-        let $icon = $($btn.find('i'));
-        $icon.removeClass('fa-copy');
-        $icon.addClass('fa-times-circle');
-        let $span = $($btn.find('span'));
-        $span[0].innerText = 'COPY FAILED';
-        
-        wait(function () { // 等待两秒钟后恢复
-          $icon.removeClass('fa-times-circle');
-          $icon.addClass('fa-copy');
-          $span[0].innerText = 'COPY';
-        }, 2000);
-      });
+    let path = pdata.commentPath;
+    if (path.length == 0) {
+      let defaultPath = '';
+      path = defaultPath || decodeURI(window.location.pathname);
     }
-    initCopyCode();
-  }(window, document);
-</script>
 
-
-
-
-<!-- fancybox -->
-<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
-<script>
-  function pjax_fancybox() {
-    $(".article-entry").find("img").not('.inline').not('a img').each(function () { //渲染 fancybox
-      var element = document.createElement("a"); // a 标签
-      $(element).attr("pjax-fancybox", "");  // 过滤 pjax
-      $(element).attr("href", $(this).attr("src"));
-      if ($(this).attr("data-original")) {
-        $(element).attr("href", $(this).attr("data-original"));
-      }
-      $(element).attr("data-fancybox", "images");
-      var caption = "";   // 描述信息
-      if ($(this).attr('alt')) {  // 标准 markdown 描述信息
-        $(element).attr('data-caption', $(this).attr('alt'));
-        caption = $(this).attr('alt');
-      }
-      var div = document.createElement("div");
-      $(div).addClass("fancybox");
-      $(this).wrap(div); // 最外层套 div ，其实主要作用还是 class 样式
-      var span = document.createElement("span");
-      $(span).addClass("image-caption");
-      $(span).text(caption); // 加描述
-      $(this).after(span);  // 再套一层描述
-      $(this).wrap(element);  // 最后套 a 标签
+    var valine = new Valine();
+    valine.init({
+      el: '#valine_container',
+      meta: meta,
+      placeholder: pagePlaceholder,
+      path: path,
+      appId: "",
+      appKey: "",
+      pageSize: '10',
+      avatar: 'robohash',
+      lang: 'zh-cn',
+      visitor: 'true',
+      highlight: 'true',
+      mathJax: 'false',
+      enableQQ: 'true',
+      recordIP: 'false',
+      requiredFields: requiredFields,
+      emojiCDN: 'https://cdn.jsdelivr.net/gh/volantis-x/cdn-emoji/valine/',
+      emojiMaps: emojiMaps
     })
-    $(".article-entry").find("img").fancybox({
-      selector: '[data-fancybox="images"]',
-      hash: false,
-      loop: false,
-      closeClick: true,
-      helpers: {
-        overlay: {closeClick: true}
-      },
-      buttons: [
-        "zoom",
-        "close"
-      ]
-    });
-  };
+  }
+
   $(function () {
-    pjax_fancybox();
+    pjax_valine();
   });
 </script>
 
 
 
 
-  <script>setLoadingBarProgress(100);</script>
- <!-- ҳ������Ч�� -->
-<script type="text/javascript" src="/js/firework.js">
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-volantis@4.1.6/source/js/app.min.js"></script>
+
+
+
+<!-- optional -->
+
+  <script>
+const SearchServiceimagePath="https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@master/img/";
+const ROOT =  ("/" || "/").endsWith('/') ? ("/" || "/") : ("//" || "/" );
+
+$('.input.u-search-input').one('focus',function(){
+	
+		loadScript('https://cdn.jsdelivr.net/npm/hexo-theme-volantis@4.1.6/source/js/search/hexo.min.js',setSearchService);
+	
+})
+
+function listenSearch(){
+  
+    customSearch = new HexoSearch({
+      imagePath: SearchServiceimagePath
+    });
+  
+}
+function setSearchService() {
+	listenSearch();
+	
+}
 </script>
+
+
+
+
+
+
+
+
+
+
+
+  <script defer>
+
+  const LCCounter = {
+    app_id: 'u9j57bwJod4EDmXWdxrwuqQT-MdYXbMMI',
+    app_key: 'jfHtEKVE24j0IVCGHbvuFClp',
+    custom_api_server: '',
+
+    // 查询存储的记录
+    getRecord(Counter, url, title) {
+      return new Promise(function (resolve, reject) {
+        Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({url})))
+          .then(resp => resp.json())
+          .then(({results, code, error}) => {
+            if (code === 401) {
+              throw error;
+            }
+            if (results && results.length > 0) {
+              var record = results[0];
+              resolve(record);
+            } else {
+              Counter('post', '/classes/Counter', {url, title: title, times: 0})
+                .then(resp => resp.json())
+                .then((record, error) => {
+                  if (error) {
+                    throw error;
+                  }
+                  resolve(record);
+                }).catch(error => {
+                console.error('Failed to create', error);
+                reject(error);
+              });
+            }
+          }).catch((error) => {
+          console.error('LeanCloud Counter Error:', error);
+          reject(error);
+        });
+      })
+    },
+
+    // 发起自增请求
+    increment(Counter, incrArr) {
+      return new Promise(function (resolve, reject) {
+        Counter('post', '/batch', {
+          "requests": incrArr
+        }).then((res) => {
+          res = res.json();
+          if (res.error) {
+            throw res.error;
+          }
+          resolve(res);
+        }).catch((error) => {
+          console.error('Failed to save visitor count', error);
+          reject(error);
+        });
+      });
+    },
+
+    // 构建自增请求体
+    buildIncrement(objectId) {
+      return {
+        "method": "PUT",
+        "path": `/1.1/classes/Counter/${ objectId }`,
+        "body": {
+          "times": {
+            '__op': 'Increment',
+            'amount': 1
+          }
+        }
+      }
+    },
+
+    // 校验是否为有效的 UV
+    validUV() {
+      var key = 'LeanCloudUVTimestamp';
+      var flag = localStorage.getItem(key);
+      if (flag) {
+        // 距离标记小于 24 小时则不计为 UV
+        if (new Date().getTime() - parseInt(flag) <= 86400000) {
+          return false;
+        }
+      }
+      localStorage.setItem(key, new Date().getTime().toString());
+      return true;
+    },
+
+    addCount(Counter) {
+      var enableIncr = '' === 'true' && window.location.hostname !== 'localhost';
+      enableIncr = true;
+      var getterArr = [];
+      var incrArr = [];
+      // 请求 PV 并自增
+      var pvCtn = document.querySelector('#lc-sv');
+      if (pvCtn || enableIncr) {
+        var pvGetter = this.getRecord(Counter, 'http://x1ngg3.github.io' + '/#lc-sv', 'Visits').then((record) => {
+          incrArr.push(this.buildIncrement(record.objectId))
+          var eles = document.querySelectorAll('#lc-sv #number');
+          if (eles.length > 0) {
+            eles.forEach((el,index,array)=>{
+              el.innerText = record.times + 1;
+              if (pvCtn) {
+                pvCtn.style.display = 'inline';
+              }
+            })
+          }
+        });
+        getterArr.push(pvGetter);
+      }
+
+      // 请求 UV 并自增
+      var uvCtn = document.querySelector('#lc-uv');
+      if (uvCtn || enableIncr) {
+        var uvGetter = this.getRecord(Counter, 'http://x1ngg3.github.io' + '/#lc-uv', 'Visitors').then((record) => {
+          var vuv = this.validUV();
+          vuv && incrArr.push(this.buildIncrement(record.objectId))
+          var eles = document.querySelectorAll('#lc-uv #number');
+          if (eles.length > 0) {
+            eles.forEach((el,index,array)=>{
+              el.innerText = record.times + (vuv ? 1 : 0);
+              if (uvCtn) {
+                uvCtn.style.display = 'inline';
+              }
+            })
+          }
+        });
+        getterArr.push(uvGetter);
+      }
+
+      // 请求文章的浏览数，如果是当前页面就自增
+      var allPV = document.querySelectorAll('#lc-pv');
+      if (allPV.length > 0 || enableIncr) {
+        for (i = 0; i < allPV.length; i++) {
+          let pv = allPV[i];
+          let title = pv.getAttribute('data-title');
+          var url = 'http://x1ngg3.github.io' + pv.getAttribute('data-path');
+          if (url) {
+            var viewGetter = this.getRecord(Counter, url, title).then((record) => {
+              // 是当前页面就自增
+              let curPath = window.location.pathname;
+              if (curPath.includes('index.html')) {
+                curPath = curPath.substring(0, curPath.lastIndexOf('index.html'));
+              }
+              if (pv.getAttribute('data-path') == curPath) {
+                incrArr.push(this.buildIncrement(record.objectId));
+              }
+              if (pv) {
+                var ele = pv.querySelector('#lc-pv #number');
+                if (ele) {
+                  if (pv.getAttribute('data-path') == curPath) {
+                    ele.innerText = (record.times || 0) + 1;
+                  } else {
+                    ele.innerText = record.times || 0;
+                  }
+                  pv.style.display = 'inline';
+                }
+              }
+            });
+            getterArr.push(viewGetter);
+          }
+        }
+      }
+
+      // 如果启动计数自增，批量发起自增请求
+      if (enableIncr) {
+        Promise.all(getterArr).then(() => {
+          incrArr.length > 0 && this.increment(Counter, incrArr);
+        })
+      }
+
+    },
+
+
+    fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${ api_server }/1.1${ url }`, {
+          method,
+          headers: {
+            'X-LC-Id': this.app_id,
+            'X-LC-Key': this.app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      this.addCount(Counter);
+    },
+
+    refreshCounter() {
+      var api_server = this.app_id.slice(-9) !== '-MdYXbMMI' ? this.custom_api_server : `https://${ this.app_id.slice(0, 8).toLowerCase() }.api.lncldglobal.com`;
+      if (api_server) {
+        this.fetchData(api_server);
+      } else {
+        fetch('https://app-router.leancloud.cn/2/route?appId=' + this.app_id)
+          .then(resp => resp.json())
+          .then(({api_server}) => {
+            this.fetchData('https://' + api_server);
+          });
+      }
+    }
+
+  };
+
+  LCCounter.refreshCounter();
+
+  document.addEventListener('pjax:complete', function () {
+    LCCounter.refreshCounter();
+  });
+</script>
+
+
+
+
+
+
+
+
+<script>
+function listennSidebarTOC() {
+  const navItems = document.querySelectorAll(".toc li");
+  if (!navItems.length) return;
+  const sections = [...navItems].map((element) => {
+    const link = element.querySelector(".toc-link");
+    const target = document.getElementById(
+      decodeURI(link.getAttribute("href")).replace("#", "")
+    );
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+      window.scrollTo({
+		top: target.offsetTop + 100,
+		
+		behavior: "smooth"
+		
+	  });
+    });
+    return target;
+  });
+
+  function activateNavByIndex(target) {
+    if (target.classList.contains("active-current")) return;
+
+    document.querySelectorAll(".toc .active").forEach((element) => {
+      element.classList.remove("active", "active-current");
+    });
+    target.classList.add("active", "active-current");
+    let parent = target.parentNode;
+    while (!parent.matches(".toc")) {
+      if (parent.matches("li")) parent.classList.add("active");
+      parent = parent.parentNode;
+    }
+  }
+
+  function findIndex(entries) {
+    let index = 0;
+    let entry = entries[index];
+    if (entry.boundingClientRect.top > 0) {
+      index = sections.indexOf(entry.target);
+      return index === 0 ? 0 : index - 1;
+    }
+    for (; index < entries.length; index++) {
+      if (entries[index].boundingClientRect.top <= 0) {
+        entry = entries[index];
+      } else {
+        return sections.indexOf(entry.target);
+      }
+    }
+    return sections.indexOf(entry.target);
+  }
+
+  function createIntersectionObserver(marginTop) {
+    marginTop = Math.floor(marginTop + 10000);
+    let intersectionObserver = new IntersectionObserver(
+      (entries, observe) => {
+        let scrollHeight = document.documentElement.scrollHeight + 100;
+        if (scrollHeight > marginTop) {
+          observe.disconnect();
+          createIntersectionObserver(scrollHeight);
+          return;
+        }
+        let index = findIndex(entries);
+        activateNavByIndex(navItems[index]);
+      },
+      {
+        rootMargin: marginTop + "px 0px -100% 0px",
+        threshold: 0,
+      }
+    );
+    sections.forEach((element) => {
+      element && intersectionObserver.observe(element);
+    });
+  }
+  createIntersectionObserver(document.documentElement.scrollHeight);
+}
+
+document.addEventListener("DOMContentLoaded", listennSidebarTOC);
+document.addEventListener("pjax:success", listennSidebarTOC);
+</script>
+
+<!-- more -->
+
+
+
+
+    
+      
+
+
+<script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script>
+
+
+<script>
+    var pjax;
+    document.addEventListener('DOMContentLoaded', function () {
+      pjax = new Pjax({
+        elements: 'a[href]:not([href^="#"]):not([href="javascript:void(0)"]):not([pjax-fancybox])',
+        selectors: [
+          "title",
+          "#l_cover",
+          "#pjax-container",
+          "#pjax-header-nav-list"
+        ],
+        cacheBust: false,   // url 地址追加时间戳，用以避免浏览器缓存
+        timeout: 5000
+      });
+    });
+
+    document.addEventListener('pjax:send', function (e) {
+      //window.stop(); // 相当于点击了浏览器的停止按钮
+
+      try {
+        var currentUrl = window.location.pathname;
+        var targetUrl = e.triggerElement.href;
+        var banUrl = [""];
+        if (banUrl[0] != "") {
+          banUrl.forEach(item => {
+            if(currentUrl.indexOf(item) != -1 || targetUrl.indexOf(item) != -1) {
+              window.location.href = targetUrl;
+            }
+          });
+        }
+      } catch (error) {}
+
+      window.subData = null; // 移除标题（用于一二级导航栏切换处）
+      if (typeof $.fancybox != "undefined") {
+        $.fancybox.close();    // 关闭弹窗
+      }
+      volantis.$switcher.removeClass('active'); // 关闭移动端激活的搜索框
+      volantis.$header.removeClass('z_search-open'); // 关闭移动端激活的搜索框
+      volantis.$wrapper.removeClass('sub'); // 跳转页面时关闭二级导航
+
+      // 解绑事件 避免重复监听
+      volantis.$topBtn.unbind('click');
+      $('.menu a').unbind('click');
+      $(window).unbind('resize');
+      $(window).unbind('scroll');
+      $(document).unbind('scroll');
+      $(document).unbind('click');
+      $('body').unbind('click');
+	  
+    });
+
+    document.addEventListener('pjax:complete', function () {
+      // 关于百度统计对 SPA 页面的处理：
+      // 方案一：百度统计>管理>单页应用设置中，打开开启按钮即可对SPA进行统计。 https://tongji.baidu.com/web/help/article?id=324
+      // 方案二：取消注释下列代码。 https://tongji.baidu.com/web/help/article?id=235
+       
+
+      // 关于谷歌统计对 SPA 页面的处理：
+      // 当应用以动态方式加载内容并更新地址栏中的网址时，也应该更新通过 gtag.js 存储的网页网址。
+      // https://developers.google.cn/analytics/devguides/collection/gtagjs/single-page-applications?hl=zh-cn
+      
+	 
+
+      $('.nav-main').find('.list-v').not('.menu-phone').removeAttr("style",""); // 移除小尾巴的移除
+      $('.menu-phone.list-v').removeAttr("style",""); // 移除小尾巴的移除
+      $('script[data-pjax], .pjax-reload script').each(function () {
+        $(this).parent().append($(this).remove());
+      });
+      try{
+          if (typeof $.fancybox == "undefined") {
+            SCload_fancybox();
+          } else {
+            pjax_fancybox();
+          }
+        
+        
+        
+        
+        
+        
+          pjax_valine();
+        
+        
+        
+        
+      } catch (e) {
+        console.log(e);
+      }
+	  
+    });
+
+    document.addEventListener('pjax:error', function (e) {
+	  
+      window.location.href = e.triggerElement.href;
+    });
+</script>
+
+    
+  </div>
 </body>
 </html>
-
