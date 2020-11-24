@@ -2195,7 +2195,6 @@
             }
               , F = function() {
                 var e = new AV.ACL;
-                e.setWriteAccess("role:admin",true);
                 return e.setPublicReadAccess(!0),
                 e.setPublicWriteAccess(!1),
                 e
