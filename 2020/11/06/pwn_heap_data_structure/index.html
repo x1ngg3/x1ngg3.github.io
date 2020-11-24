@@ -1,15 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
-<head hexo-theme='https://github.com/volantis-x/hexo-theme-volantis/tree/4.1.6'>
+<html>
+<head hexo-theme='https://volantis.js.org/#'>
   <meta charset="utf-8">
   <!-- SEO相关 -->
   
     
   
   <!-- 渲染优化 -->
-  <meta http-equiv='x-dns-prefetch-control' content='on' />
-  <link rel='dns-prefetch' href='https://cdn.jsdelivr.net'>
-  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <meta name="renderer" content="webkit">
   <meta name="force-rendering" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
@@ -19,11 +16,10 @@
 
   <!-- 页面元数据 -->
   
-  <title>Heap Related Data Structure - X1ngg3</title>
+    <title>Heap Related Data Structure - X1ngg3</title>
   
     <meta name="keywords" content="pwn_heap">
   
-
   
     <meta name="description" content="好难啊">
   
@@ -35,40 +31,59 @@
   
 
   <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13/css/all.min.css">
   
-    <link rel="shortcut icon" type='image/x-icon' href="https://cdn.jsdelivr.net/gh/xaoxuu/assets@master/favicon/favicon.ico">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+
+  
+
+  
+  <link rel="shortcut icon" type='image/x-icon' href="https://cdn.jsdelivr.net/gh/xaoxuu/assets@master/favicon/favicon.ico">
+  
+
+  
+
   
 
   <!-- import link -->
   
 
   
+  
     
-<link rel="stylesheet" href="/css/first.css">
+<link rel="stylesheet" href="/css/style.css">
 
   
 
-  
-  <link rel="stylesheet" href="/css/style.css" media="print" onload="this.media='all';this.onload=null">
-  <noscript><link rel="stylesheet" href="/css/style.css"></noscript>
-  
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
 
-  <script id="loadcss"></script>
-
+  
+  
 </head>
 
 <body>
   
-
-<header id="l_header" class="l_header auto shadow blur show" style='opacity: 0' >
+  <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+<header class="l_header shadow blur">
   <div class='container'>
-  <div id='wrapper'>
+  <div class='wrapper'>
     <div class='nav-sub'>
       <p class="title"></p>
-      <ul class='switcher nav-list-h m-phone' id="pjax-header-nav-list">
-        <li><a id="s-comment" class="fas fa-comments fa-fw" target="_self" href='javascript:void(0)'></a></li>
+      <ul class='switcher nav-list-h'>
+        <li><a class="s-comment fas fa-comments fa-fw" target="_self" href='javascript:void(0)'></a></li>
         
-          <li><a id="s-toc" class="s-toc fas fa-list fa-fw" target="_self" href='javascript:void(0)'></a></li>
+          <li><a class="s-toc fas fa-list fa-fw" target="_self" href='javascript:void(0)'></a></li>
         
       </ul>
     </div>
@@ -77,22 +92,23 @@
         
         <a class="title flat-box" target="_self" href='/'>
           
-            <img no-lazy class='logo' src='https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/Logo-NavBar@3x.png'/>
           
           
+          
+            X1NGG3 <b><sup style='color:#3AA757'></sup></b>
           
         </a>
       
 
 			<div class='menu navigation'>
-				<ul class='nav-list-h m-pc'>
+				<ul class='nav-list-h'>
           
           
           
             
             
               <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=/
+                <a class="flat-box" href=/
                   
                   
                   
@@ -108,7 +124,7 @@
             
             
               <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=/categories/
+                <a class="flat-box" href=/categories/
                   
                   
                   
@@ -124,7 +140,7 @@
             
             
               <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=/tags/
+                <a class="flat-box" href=/tags/
                   
                   
                   
@@ -140,7 +156,7 @@
             
             
               <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=/archives/
+                <a class="flat-box" href=/archives/
                   
                   
                   
@@ -156,11 +172,11 @@
             
             
               <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=/friends/
+                <a class="flat-box" href=/linkto/
                   
                   
                   
-                    id="friends"
+                    id="linkto"
                   >
                   <i class='fas fa-link fa-fw'></i>友链
                 </a>
@@ -172,11 +188,11 @@
             
             
               <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=/about/
+                <a class="flat-box" href=/aboutme/
                   
                   
                   
-                    id="about"
+                    id="aboutme"
                   >
                   <i class='fas fa-info-circle fa-fw'></i>关于
                 </a>
@@ -195,7 +211,7 @@
         </form>
       </div>
 
-			<ul class='switcher nav-list-h m-phone'>
+			<ul class='switcher nav-list-h'>
 				
 					<li><a class="s-search fas fa-search fa-fw" target="_self" href='javascript:void(0)'></a></li>
 				
@@ -206,7 +222,7 @@
               
             
               <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=/
+                <a class="flat-box" href=/
                   
                   
                   
@@ -222,7 +238,7 @@
               
             
               <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=/categories/
+                <a class="flat-box" href=/categories/
                   
                   
                   
@@ -238,7 +254,7 @@
               
             
               <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=/tags/
+                <a class="flat-box" href=/tags/
                   
                   
                   
@@ -254,7 +270,7 @@
               
             
               <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=/archives/
+                <a class="flat-box" href=/archives/
                   
                   
                   
@@ -270,11 +286,11 @@
               
             
               <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=/friends/
+                <a class="flat-box" href=/linkto/
                   
                   
                   
-                    id="friends"
+                    id="linkto"
                   >
                   <i class='fas fa-link fa-fw'></i>友链
                 </a>
@@ -286,11 +302,11 @@
               
             
               <li>
-                <a class="menuitem flat-box faa-parent animated-hover" href=/about/
+                <a class="flat-box" href=/aboutme/
                   
                   
                   
-                    id="about"
+                    id="aboutme"
                   >
                   <i class='fas fa-info-circle fa-fw'></i>关于
                 </a>
@@ -307,156 +323,93 @@
   </div>
 </header>
 
-  <div id="l_body">
-    <div id="l_cover">
-  
-    
-        <div id="full" class='cover-wrapper post dock' style="display: none;">
-          
-            <div class='cover-bg lazyload placeholder' data-bg="https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/033.jpg"></div>
-          
-          <div class='cover-body'>
-  <div class='top'>
-    
-    
-      <p class="title">Volantis</p>
-    
-    
-  </div>
-  <div class='bottom'>
-    <div class='menu navigation'>
-      <div class='list-h'>
-        
-          
-            <a href="/v4/getting-started/"
-              
-              
-              id="v4getting-started">
-              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f5c3.svg'><p>文档</p>
-            </a>
-          
-            <a href="/faqs/"
-              
-              
-              id="faqs">
-              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f516.svg'><p>帮助</p>
-            </a>
-          
-            <a href="/examples/"
-              
-              
-              id="examples">
-              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f396.svg'><p>示例</p>
-            </a>
-          
-            <a href="/contributors/"
-              
-              
-              id="contributors">
-              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f389.svg'><p>社区</p>
-            </a>
-          
-            <a href="/archives/"
-              
-              
-              id="archives">
-              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f4f0.svg'><p>博客</p>
-            </a>
-          
-            <a href="https://github.com/volantis-x/hexo-theme-volantis/"
-              
-              
-              id="https:githubcomvolantis-xhexo-theme-volantis">
-              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f9ec.svg'><p>源码</p>
-            </a>
-          
-        
-      </div>
-    </div>
-  </div>
-</div>
+<script>setLoadingBarProgress(40);</script>
 
-          <div id="scroll-down" style="display: none;"><i class="fa fa-chevron-down scroll-down-effects"></i></div>
-        </div>
-    
-  
-  </div>
 
-    <div id='safearea'>
-      <div class='body-wrapper' id="pjax-container">
-        
+
+  <div class="l_body nocover">
+    <div class='body-wrapper'>
+      
 
 <div class='l_main'>
-  <article class="article post white-box reveal md shadow article-type-post" id="post" itemscope itemprop="blogPost">
   
 
-
   
-  <div class="article-meta" id="top">
+    <article id="post" class="post white-box reveal shadow article-type-post" itemscope itemprop="blogPost">
+      
+
+
+  <section class='meta'>
     
-    
-    
-      <h1 class="title">
-        Heap Related Data Structure
-      </h1>
-      <div class='new-meta-box'>
+      
+      
+      <div class="meta" id="header-meta">
         
           
+  <h1 class="title">
+    <a href="/2020/11/06/pwn_heap_data_structure/">
+      Heap Related Data Structure
+    </a>
+  </h1>
+
+
+        
+        <div class='new-meta-box'>
+          
             
+          
+            
+              
 <div class='new-meta-item author'>
-  <a class='author' href="/" rel="nofollow">
-    <img no-lazy src="">
-    <p>请设置文章作者</p>
+  <a href="https://x1ngg3.github.io" rel="nofollow">
+    <img src="https://i.loli.net/2020/11/16/JlV4WshTkxutAEm.jpg">
+    <p>x1ngg3</p>
   </a>
 </div>
 
-          
-        
+            
           
             
+              
+  
   <div class='new-meta-item category'>
-    <a class='notlink'>
+    <a href='/categories/PWN/' rel="nofollow">
       <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <a class="category-link" href="/categories/PWN/">PWN</a>
+      <p>PWN</p>
     </a>
   </div>
 
 
+            
           
-        
-          
-            <div class="new-meta-item date">
+            
+              <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
     <p>发布于：Nov 6, 2020</p>
   </a>
 </div>
 
-          
-        
+            
           
             
-  <div class="new-meta-item browse leancloud">
-    <a class='notlink'>
-      
-      <div id="lc-pv" data-title="Heap Related Data Structure" data-path="/2020/11/06/pwn_heap_data_structure/">
-        <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
-        <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
-        次浏览
-      </div>
-    </a>
-  </div>
+              
 
-
+            
           
+        </div>
+        
+          <hr>
         
       </div>
     
-  </div>
+  </section>
 
 
-  
-  <p>好难啊</p>
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          
+          <p>好难啊</p>
 <a id="more"></a>
 <h3 id="Arena-heap-and-chunk">Arena, heap and chunk</h3>
 <p>Ptmalloc2通过几种数据结构来进行管理，主要有arena,heap,chunk三种层级。Chunk为分配给用户的内存的一个单位。 对于这一块内容如果感觉不是太懂，可以结合后面数据结构部分去看，其实arena和heap我感觉都是对chunk的一种组织方式，方便之后的分配，arena又是对heap的组织。</p>
@@ -468,7 +421,7 @@
 <p>malloc_state结构是我们最常用的结构，其中的重要字段如下：</p>
 <figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">fastbins：存储多个链表。每个链表由空闲的fastbin组成，是fastbin freelist。</span><br><span class="line"></span><br><span class="line"><span class="built_in">top</span>：<span class="built_in">top</span> chunk，指向的是arena中剩下的空间。如果各种freelist都为空，则从<span class="built_in">top</span> chunk开始分配堆块。</span><br><span class="line"></span><br><span class="line">bins：存储多个双向链表。意义上和堆块头部的双向链表一样，并和其组成了一个双向环状空闲列表（freelist）。这里的bins位于freelist的结构上的头部，后向指针（bk）指向freelist逻辑上的第一个节点。分配chunk时从逻辑上的第一个节点分配寻找合适大小的堆块。</span><br></pre></td></tr></table></figure>
 <p>一整个堆的结构大体如下：</p>
-<p><img src="https://i.loli.net/2020/11/18/YlDZxVNahSoC4Gj.png" class="lazyload" data-srcset="https://i.loli.net/2020/11/18/YlDZxVNahSoC4Gj.png" srcset="data:image/png;base64,666" alt="chunk_state"></p>
+<p><img src="https://i.loli.net/2020/11/18/YlDZxVNahSoC4Gj.png" alt="chunk_state"></p>
 <h3 id="malloc-chunk">malloc_chunk</h3>
 <p>在程序的执行过程中，我们称由 malloc 申请的内存为 chunk 。当程序申请的 chunk 被 free 后，会被加入到相应的空闲管理列表中。</p>
 <p>有意思的是，<strong>无论一个 chunk 的大小如何，处于分配状态还是释放状态，它们都使用一个统一的结构</strong>。</p>
@@ -501,7 +454,7 @@
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">chunk-&gt; +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">        |             Size of previous chunk, if unallocated (P clear)  |</span><br><span class="line">        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">        |             Size of chunk, in bytes                     |A|M|P|</span><br><span class="line">  mem-&gt; +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">        |             User data starts here...                          .</span><br><span class="line">        .                                                               .</span><br><span class="line">        .             (malloc_usable_size() bytes)                      .</span><br><span class="line">next    .                                                               |</span><br><span class="line">chunk-&gt; +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">        |             (<span class="built_in">size</span> of chunk, but used <span class="keyword">for</span> application data)    |</span><br><span class="line">        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">        |             Size of next chunk, in bytes                |A|<span class="number">0</span>|<span class="number">1</span>|</span><br><span class="line">        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br></pre></td></tr></table></figure>
 <p><strong>我们称前两个字段称为 chunk header (prev_size + size)，后面的部分称为 user data。每次 malloc 申请得到的内存指针，其实指向 user data 的起始处</strong>。</p>
 <p>当一个 chunk 处于使用状态时，它的下一个 chunk 的 prev_size 域无效，所以下一个 chunk 的该部分也可以被当前 chunk 使用。<strong>这就是 chunk 中的空间复用</strong>。如下图：</p>
-<p><img src="https://i.loli.net/2020/11/17/IDC7POfl6GvzE5j.png" class="lazyload" data-srcset="https://i.loli.net/2020/11/17/IDC7POfl6GvzE5j.png" srcset="data:image/png;base64,666" alt="chunk空间复用"></p>
+<p><img src="https://i.loli.net/2020/11/17/IDC7POfl6GvzE5j.png" alt="chunk空间复用"></p>
 <p><strong>下图是 free 过后的 chunk 的结构</strong>：（注意 fd 和 bk 出现在了数据段的开始）</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">chunk-&gt; +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">        |             Size of previous chunk, if unallocated (P clear)  |</span><br><span class="line">        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">`head:' |             Size of chunk, in bytes                     |A|0|P|</span><br><span class="line">  mem-&gt; +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">        |             Forward pointer to next chunk in <span class="built_in">list</span>             |</span><br><span class="line">        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">        |             Back pointer to previous chunk in <span class="built_in">list</span>            |</span><br><span class="line">        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">        |             Unused space (may be 0 bytes long)                .</span><br><span class="line">        .                                                               .</span><br><span class="line"> next   .                                                               |</span><br><span class="line">chunk-&gt; +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">`foot:' |             Size of chunk, in bytes                           |</span><br><span class="line">        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">        |             Size of next chunk, in bytes                |A|<span class="number">0</span>|<span class="number">0</span>|</span><br><span class="line">        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br></pre></td></tr></table></figure>
 <p>可以发现，如果一个 chunk 处于 free 状态，那么会有两个位置记录其相应的大小</p>
@@ -538,18 +491,18 @@
 <p>其中 fastbin 是单链表，其他都是双向链表。</p>
 <p>不同的bin链是由arena管理的。因此一个线程中会有很多的bin链，这些bin链都有arena所表示的struct malloc_state结构体的以下成员保存：</p>
 <figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">fastbinY数组：大小为<span class="number">10</span>。记录的是fast bin链</span><br><span class="line">bins数组：大小为<span class="number">129</span>。记录的是unsorted bin（<span class="number">1</span>）、small bin（<span class="number">2</span>~<span class="number">63</span>）、large bin链（<span class="number">64</span>~<span class="number">126</span>）</span><br><span class="line">Bin <span class="number">1</span> – Unsorted bin</span><br><span class="line">Bin <span class="number">2</span> to Bin <span class="number">63</span> – Small bin</span><br><span class="line">Bin <span class="number">64</span> to Bin <span class="number">126</span> – Large bin</span><br></pre></td></tr></table></figure>
-<p><img src="https://i.loli.net/2020/11/18/SrZ4HK5msI9qxTz.png" class="lazyload" data-srcset="https://i.loli.net/2020/11/18/SrZ4HK5msI9qxTz.png" srcset="data:image/png;base64,666" alt="bin_"></p>
+<p><img src="https://i.loli.net/2020/11/18/SrZ4HK5msI9qxTz.png" alt="bin_"></p>
 <h3 id="Fast-Bin">Fast Bin</h3>
 <p>大多数程序经常会申请以及释放一些比较小的内存块。如果将一些较小的 chunk 释放之后发现存在与之相邻的空闲的 chunk 并将它们进行合并，那么当下一次再次申请相应大小的 chunk 时，就需要对 chunk 进行分割，这样就大大降低了堆的利用效率。<strong>因为我们把大部分时间花在了合并、分割以及中间检查的过程中</strong>。因此，ptmalloc 中专门设计了 fast bin，对应的变量就是 malloc state 中的 fastbinsY</p>
 <p><strong>chunk的大小在32字节~128字节（0x20~0x80）的chunk称为“fast chunk”</strong>（大小不是malloc时的大小，而是在内存中struct malloc_chunk的大小，包含前2个成员，鉴于设计fast bin的初衷就是进行快速的小内存分配和释放，因此<strong>系统将属于fast bin的chunk的PREV_INUSE位总是设置为1</strong>，这样即使当fast bin中有某个chunk同一个free chunk相邻的时候，系统也不会进行自动合并操作，而是保留两者。虽然这样做可能会造成额外的碎片化问题，但瑕不掩瑜。</p>
 <p>为了更加高效地利用 fast bin，glibc 采用单向链表对其中的每个 bin 进行组织，并且<strong>每个 bin 采取 LIFO 策略</strong>，最近释放的 chunk 会更早地被分配，所以会更加适合于局部性。也就是说，<strong>当用户需要的 chunk 的大小小于 fastbin 的最大大小时， ptmalloc 会首先判断 fastbin 中相应的 bin 中是否有对应大小的空闲块</strong>，如果有的话，就会直接从这个 bin 中获取 chunk。如果没有的话，ptmalloc 才会做接下来的一系列操作。</p>
 <figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">fastbinsY数组存储fastbins的规则：</span><br><span class="line"><span class="number">1</span>.每个<span class="keyword">fast</span> bin链表都是单链表（使用fd指针）。因此，<span class="keyword">fast</span> bin中无论是添加还是移除<span class="keyword">fast</span> chunk，都是对“链表尾”进行操作，而不会对某个中间的<span class="keyword">fast</span> chunk进行操作</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>.单个fastbin链表中的chunk大小都是相同的，各个fastbin链表中的chunk大小是不同的</span><br><span class="line"></span><br><span class="line"><span class="number">3</span>.fastbinY数组中的每个bin链表的排序，是按照链表元素的大小进行排序的。数组的第一个元素的<span class="keyword">fast</span> bin链表中的每个chunk的大小是<span class="number">32</span>字节的，数组的第二个元素的<span class="keyword">fast</span> bin链表中的每个chunk的大小是<span class="number">48</span>字节的......每个元素都比前面的<span class="keyword">fast</span> bin链大<span class="number">16</span>字节，以此类推进行排序</span><br></pre></td></tr></table></figure>
 <p><strong>概念图如下：</strong></p>
-<p><img src="https://i.loli.net/2020/11/18/xbjR3ACUH9F1tQg.jpg" class="lazyload" data-srcset="https://i.loli.net/2020/11/18/xbjR3ACUH9F1tQg.jpg" srcset="data:image/png;base64,666" alt="fastbin1"></p>
+<p><img src="https://i.loli.net/2020/11/18/xbjR3ACUH9F1tQg.jpg" alt="fastbin1"></p>
 <p><strong>详细图示：</strong></p>
-<p><img src="https://i.loli.net/2020/11/18/V4kc57rfqJEY1QG.png" class="lazyload" data-srcset="https://i.loli.net/2020/11/18/V4kc57rfqJEY1QG.png" srcset="data:image/png;base64,666" alt="fastbin2"></p>
+<p><img src="https://i.loli.net/2020/11/18/V4kc57rfqJEY1QG.png" alt="fastbin2"></p>
 <h4 id="fd指示位置：">fd指示位置：</h4>
-<p><img src="https://i.loli.net/2020/11/18/z2alGCFJneIE47L.png" class="lazyload" data-srcset="https://i.loli.net/2020/11/18/z2alGCFJneIE47L.png" srcset="data:image/png;base64,666" alt="fastbin3"></p>
+<p><img src="https://i.loli.net/2020/11/18/z2alGCFJneIE47L.png" alt="fastbin3"></p>
 <h4 id="Malloc操作与Fastbins的初始化：">Malloc操作与Fastbins的初始化：</h4>
 <h5 id="malloc">malloc</h5>
 <p>当应用层通过malloc函数<strong>第一次申请</strong>的chunk属于16字节~80字节之间时，因为初始化的时候fast bin支持的最大内存大小以及所有fast bin链表都是空的，所以它也不会交由fast bin来处理，而是向下传递交由small bin来处理，如果small bin也为空的话就交给unsorted bin处理。</p>
@@ -659,7 +612,7 @@
 </tbody>
 </table>
 <p><strong>在同一个largebin中</strong>，每个chunk的大小不一定相同，因此为了加快内存分配和释放的速度，就将同一个largebin中的所有chunk按照chunksize进行从大到小的排列：<strong>最大的chunk放在一个链表的front end，最小的chunk放在rear end；相同大小的chunk按照最近使用顺序排序</strong></p>
-<p><img src="https://i.loli.net/2020/11/18/eBSlwh9RGizVYNr.png" class="lazyload" data-srcset="https://i.loli.net/2020/11/18/eBSlwh9RGizVYNr.png" srcset="data:image/png;base64,666" alt="largebin"></p>
+<p><img src="https://i.loli.net/2020/11/18/eBSlwh9RGizVYNr.png" alt="largebin"></p>
 <h4 id="Malloc操作与large-bin的初始化">Malloc操作与large bin的初始化</h4>
 <h5 id="初始化-3">初始化</h5>
 <p>初始化完成之前的操作类似于small bin<br>
@@ -690,19 +643,19 @@
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> ()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">void</span> *a,*b,*c,*d,*e = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line">    a = <span class="built_in">malloc</span>(<span class="number">0x500</span>);</span><br><span class="line">    b = <span class="built_in">malloc</span>(<span class="number">0x100</span>);        <span class="comment">// 防止a，c释放后合并</span></span><br><span class="line">    c = <span class="built_in">malloc</span>(<span class="number">0x500</span>);</span><br><span class="line">    d = <span class="built_in">malloc</span>(<span class="number">0x100</span>);        <span class="comment">// 防止c 释放后与top_chunk合并</span></span><br><span class="line"> </span><br><span class="line">  <span class="comment">// 第 2 步</span></span><br><span class="line">    <span class="built_in">free</span>(a);    <span class="comment">// 执行后unsorted bin有1个0x500的块</span></span><br><span class="line">    <span class="built_in">free</span>(c);    <span class="comment">// 执行后unsorted bin有2个0x500的块</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 第 3 步</span></span><br><span class="line">    c = <span class="built_in">malloc</span>(<span class="number">0x400</span>);  <span class="comment">// 从unsorted bin中分配，还剩下0x100的块2放到unsorted bin中，另一个0x500的块1放到了large bin中</span></span><br><span class="line">    a = <span class="built_in">malloc</span>(<span class="number">0x400</span>);  <span class="comment">// 从large bin中分配，还剩下0x100的块1放到unsorted bin中，原来0x100的块2放到small bin</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 第 4 步   </span></span><br><span class="line">    e = <span class="built_in">malloc</span>(<span class="number">0x500</span>);  <span class="comment">// 从top_chunk分配，unsorted bin中的块1也放到small bin中</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 第 5 步</span></span><br><span class="line">    <span class="built_in">free</span>(a);</span><br><span class="line">    <span class="built_in">free</span>(b);</span><br><span class="line">    <span class="built_in">free</span>(c);</span><br><span class="line">    <span class="built_in">free</span>(d);</span><br><span class="line">    <span class="built_in">free</span>(e);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>接着用gcc编译生成程序，并使用安装了pwngdb插件的gdb来调试程序。</p>
 <p>本来打算截取pwndbg输出的堆状态来说明，但是发现不够清晰，而且每个chunk还有头大小，导致不能够很好说明，所以我自己画了一个简化的堆状态图来说明。图中没有画出来的bin，默认都为空。其中，初始化堆图如下：</p>
-<p><img src="https://i.loli.net/2020/11/18/7OJs1haf3MuQb9C.png" class="lazyload" data-srcset="https://i.loli.net/2020/11/18/7OJs1haf3MuQb9C.png" srcset="data:image/png;base64,666" alt="1"></p>
+<p><img src="https://i.loli.net/2020/11/18/7OJs1haf3MuQb9C.png" alt="1"></p>
 <p>首先程序运行完第一步，分配了abcd 4个内存块，其中b和d是为了防止a和c 释放后发生合并，此时简化的堆如下：</p>
-<p><img src="https://i.loli.net/2020/11/18/GunJ1SmW2Vk8YN7.png" class="lazyload" data-srcset="https://i.loli.net/2020/11/18/GunJ1SmW2Vk8YN7.png" srcset="data:image/png;base64,666" alt="2"></p>
+<p><img src="https://i.loli.net/2020/11/18/GunJ1SmW2Vk8YN7.png" alt="2"></p>
 <p>第二步，程序释放了a和c的内存，此时的a和c对应的chunk保存到unsorted bin中，简化的堆如下：</p>
-<p><img src="https://i.loli.net/2020/11/18/TSUMrF2sApHWqeh.png" class="lazyload" data-srcset="https://i.loli.net/2020/11/18/TSUMrF2sApHWqeh.png" srcset="data:image/png;base64,666" alt="3"></p>
+<p><img src="https://i.loli.net/2020/11/18/TSUMrF2sApHWqeh.png" alt="3"></p>
 <p>第三步，第1句，申请分配0x400大小的内存赋值给c，这时系统首先会遍历unsorted bin，发现块2的chunk大小是0x500，满足申请，返回0x400大小，剩下的0x100放回到unsorted bin中，并对其他chunk进行排序，这时的另一个0x500块1会被放到large bin中。简化的堆如下：</p>
-<p><img src="https://i.loli.net/2020/11/18/JhboOCVqZMQPX4t.png" class="lazyload" data-srcset="https://i.loli.net/2020/11/18/JhboOCVqZMQPX4t.png" srcset="data:image/png;base64,666" alt="4"></p>
+<p><img src="https://i.loli.net/2020/11/18/JhboOCVqZMQPX4t.png" alt="4"></p>
 <p>第2句，申请0x400大小的内存赋值给a，此时系统还是遍历unsorted bin，发现没有满足的chunk，然后把其中0x100的chunk块2放到small bin中。接着搜索large bin，发现了一个0x500的chunk块1满足要求，返回0x400大小，剩下的0x100的chunk块1保存到unsorted bin中。简化的堆如下：</p>
-<p><img src="https://i.loli.net/2020/11/18/dy51icUxJBNsPf4.png" class="lazyload" data-srcset="https://i.loli.net/2020/11/18/dy51icUxJBNsPf4.png" srcset="data:image/png;base64,666" alt="5"></p>
+<p><img src="https://i.loli.net/2020/11/18/dy51icUxJBNsPf4.png" alt="5"></p>
 <p>第四步：申请0x500大小的内存赋值给e，此时unsorted bin还是没有满足的chunk，而且0x100的chunk块1会被放到small bin中。接着large bin中也没有合适的chunk。最后系统从top chunk中分配内存。简化的堆如下：</p>
-<p><img src="https://i.loli.net/2020/11/18/1HbPkvJeX4EZAgj.png" class="lazyload" data-srcset="https://i.loli.net/2020/11/18/1HbPkvJeX4EZAgj.png" srcset="data:image/png;base64,666" alt="6"></p>
+<p><img src="https://i.loli.net/2020/11/18/1HbPkvJeX4EZAgj.png" alt="6"></p>
 <p>第五步：释放所有内存，状态回到一开始：</p>
-<p><img src="https://i.loli.net/2020/11/18/IBicylsAKXSGaEW.png" class="lazyload" data-srcset="https://i.loli.net/2020/11/18/IBicylsAKXSGaEW.png" srcset="data:image/png;base64,666" alt="7"></p>
+<p><img src="https://i.loli.net/2020/11/18/IBicylsAKXSGaEW.png" alt="7"></p>
 <p>上面的小实验解决了前面提到的2个问题：fast bin和small bin回收chunk的途径不一样，所以大小重叠也是正常，实验同时也说明了在申请内存的时候，unsorted bin被会遍历，这时就有可能会将满足条件的chunk移动到small bin和large bin中。</p>
 <p>当然，上面只是一个很简单的场景，更详细的内容可以阅读linux源码和其他分析文章。</p>
 <h3 id="参考博客">参考博客</h3>
@@ -713,43 +666,82 @@
 <p><a href="https://blog.csdn.net/qq_29343201/article/details/59614863" target="_blank" rel="noopener">linux 堆溢出学习之malloc堆管理机制原理详解</a></p>
 <p><a href="https://www.dazhuanlan.com/2020/02/03/5e371c376b781/" target="_blank" rel="noopener">从一个linux堆分配例子中理解4种bins(fast、unsorted、small和large bin)</a></p>
 
-  
+          
+            <div class='article_footer'>
+              
+                
   
     
-    <div class='footer'>
-      
-      
-      
-        <div class='copyright'>
-          <blockquote>
-            
-              
-                <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+    
+
+
+
+  
+
+  
+    
+    
+
+
+
+  
+
+  
+    
+    
+
+<section class="widget copyright  desktop mobile">
+  <div class='content'>
+    
+      <blockquote>
+        
+          
+            <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+          
+        
+          
+            <p>本文永久链接是：<a href=http://x1ngg3.github.io/2020/11/06/pwn_heap_data_structure/>http://x1ngg3.github.io/2020/11/06/pwn_heap_data_structure/</a></p>
+          
+        
+      </blockquote>
+    
+  </div>
+</section>
+
+  
+
+  
+    
+    
+
+<section class="widget qrcode  desktop mobile">
+  
+
+  <div class='content article-entry'>
+    
+  </div>
+</section>
+
+  
+
 
               
-            
-              
-                <p>本文永久链接是：<a href=http://x1ngg3.github.io/2020/11/06/pwn_heap_data_structure/>http://x1ngg3.github.io/2020/11/06/pwn_heap_data_structure/</a></p>
-              
-            
-          </blockquote>
+            </div>
+          
         </div>
-      
-      
-    </div>
-  
-  
-    
+        
+          
 
 
-  <div class='article-meta' id="bottom">
+  <section class='meta' id="footer-meta">
     <div class='new-meta-box'>
       
         
           <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-11-21T11:48:08+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：Nov 21, 2020</p>
+    <p>最后更新于：Nov 21, 2020</p>
   </a>
 </div>
 
@@ -765,6 +757,11 @@
       
         
           
+
+        
+      
+        
+          
   <div class="new-meta-item share -mob-share-list">
   <div class="-mob-share-list share-body">
     
@@ -775,7 +772,7 @@
           
           >
           
-            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" srcset="data:image/png;base64,666">
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qq.png">
           
         </a>
       
@@ -787,7 +784,7 @@
           
           >
           
-            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" srcset="data:image/png;base64,666">
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qzone.png">
           
         </a>
       
@@ -799,13 +796,9 @@
           
           >
           
-            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" srcset="data:image/png;base64,666">
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/weibo.png">
           
         </a>
-      
-    
-      
-    
       
     
   </div>
@@ -816,58 +809,84 @@
         
       
     </div>
-  </div>
+  </section>
 
 
-  
-  
-
-  
-    <div class="prev-next">
-      
-      
-        <a class='next' href='/2020/11/05/nothing_diary/'>
-          <p class='title'>浮生杂记<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-          <p class='content'>
+        
+        
+          <div class="prev-next">
+            
+            
+              <a class='next' href='/2020/11/05/nothing_diary/'>
+                <p class='title'>浮生杂记<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>
   
   
     这里没有任何东西
     
   
   c28b702bf304fc0279f65532cddbb8621b2552734d20b8b6cf9af9ae2b7ff646caf...</p>
-        </a>
+              </a>
+            
+          </div>
+        
+      </section>
+    </article>
+  
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box reveal comments shadow">
+    <section class="article typo">
+      <p ct><i class='fas fa-comments'></i> 评论</p>
       
-    </div>
-  
-</article>
-
-
-  
-
-  <article class="post white-box reveal shadow" id="comments">
-    <p ct><i class='fas fa-comments'></i> 评论</p>
-    
-    <div id="valine_container" class="valine_thread">
-  <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
-</div>
-
+      
+      
+      
+      
+      
+        <section id="comments">
+          <div id="valine_container" class="valine_thread">
+            <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
+          </div>
+        </section>
+      
+      
+    </section>
   </article>
 
 
+  
 
 
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: 'Heap Related Data Structure',
+      tools: true
+    }
+  </script>
 
 
 </div>
 <aside class='l_side'>
   
   
+
+  
     
     
 
 
-
-  <section class="widget toc-wrapper shadow desktop mobile" id="toc-div" >
+  <section class="widget toc-wrapper shadow desktop mobile">
     
   <header>
     
@@ -877,7 +896,7 @@
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Arena-heap-and-chunk"><span class="toc-text">Arena, heap and chunk</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#malloc-state"><span class="toc-text">malloc_state</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#malloc-chunk"><span class="toc-text">malloc_chunk</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Bins"><span class="toc-text">Bins</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Fast-Bin"><span class="toc-text">Fast Bin</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#fd指示位置："><span class="toc-text">fd指示位置：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Malloc操作与Fastbins的初始化："><span class="toc-text">Malloc操作与Fastbins的初始化：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#malloc"><span class="toc-text">malloc</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#初始化"><span class="toc-text">初始化</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#free"><span class="toc-text">free</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Small-Bin"><span class="toc-text">Small Bin</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Malloc操作与small-bin的初始化"><span class="toc-text">Malloc操作与small bin的初始化</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#malloc-2"><span class="toc-text">malloc</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#初始化-2"><span class="toc-text">初始化</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#free-2"><span class="toc-text">free</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Large-Bin"><span class="toc-text">Large Bin</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Malloc操作与large-bin的初始化"><span class="toc-text">Malloc操作与large bin的初始化</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#初始化-3"><span class="toc-text">初始化</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#free-3"><span class="toc-text">free</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Unsorted-Bin"><span class="toc-text">Unsorted Bin</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Top-Chunk"><span class="toc-text">Top Chunk</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#last-remainder"><span class="toc-text">last remainder</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#从一个linux堆分配例子中理解4种bins（复制的大佬的）"><span class="toc-text">从一个linux堆分配例子中理解4种bins（复制的大佬的）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考博客"><span class="toc-text">参考博客</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Arena-heap-and-chunk"><span class="toc-text">Arena, heap and chunk</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#malloc-state"><span class="toc-text">malloc_state</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#malloc-chunk"><span class="toc-text">malloc_chunk</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Bins"><span class="toc-text">Bins</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Fast-Bin"><span class="toc-text">Fast Bin</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#fd指示位置："><span class="toc-text">fd指示位置：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Malloc操作与Fastbins的初始化："><span class="toc-text">Malloc操作与Fastbins的初始化：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#malloc"><span class="toc-text">malloc</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#初始化"><span class="toc-text">初始化</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#free"><span class="toc-text">free</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Small-Bin"><span class="toc-text">Small Bin</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Malloc操作与small-bin的初始化"><span class="toc-text">Malloc操作与small bin的初始化</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#malloc-2"><span class="toc-text">malloc</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#初始化-2"><span class="toc-text">初始化</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#free-2"><span class="toc-text">free</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Large-Bin"><span class="toc-text">Large Bin</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Malloc操作与large-bin的初始化"><span class="toc-text">Malloc操作与large bin的初始化</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#初始化-3"><span class="toc-text">初始化</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#free-3"><span class="toc-text">free</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Unsorted-Bin"><span class="toc-text">Unsorted Bin</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Top-Chunk"><span class="toc-text">Top Chunk</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#last-remainder"><span class="toc-text">last remainder</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#从一个linux堆分配例子中理解4种bins（复制的大佬的）"><span class="toc-text">从一个linux堆分配例子中理解4种bins（复制的大佬的）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考博客"><span class="toc-text">参考博客</span></a></li></ol>
     </div>
   </section>
 
@@ -888,30 +907,8 @@
 </aside>
 
 
-
-        
-        
-          <!--此文件用来存放一些不方便取值的变量-->
-<!--思路大概是将值藏到重加载的区域内-->
-
-<script>
-  window.pdata={}
-  pdata.ispage=true;
-  pdata.postTitle="Heap Related Data Structure";
-  pdata.commentPath="";
-  pdata.commentPlaceholder="";
-
-  var l_header=document.getElementById("l_header");
   
-  l_header.classList.add("show");
-  
-</script>
-
-        
-      </div>
-      
-  
-  <footer class="footer clearfix">
+  <footer class="clearfix">
     <br><br>
     
       
@@ -927,9 +924,35 @@
         <div class="social-wrapper">
           
             
-          
+              <a href="https://x1ngg3.github.io"
+                class="social fas fa-rss flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
             
           
+            
+              <a href="mailto:x1ngg3@foxmail.com"
+                class="social fas fa-envelope flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+            
+              <a href="https://github.com/x1ngg3"
+                class="social fab fa-github flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+            
+              <a href="https://music.163.com/#/user/home?id=395984459"
+                class="social fas fa-headphones-alt flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
             
           
         </div>
@@ -941,216 +964,117 @@
       
     
       
-        
-          <div><p><span id="lc-sv">本站总访问量为 <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 次</span> <span id="lc-uv">访客数为 <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 人</span></p>
-</div>
-        
-      
-    
-      
         Use
-        <a href="https://github.com/volantis-x/hexo-theme-volantis/tree/4.1.6" target="_blank" class="codename">Volantis</a>
-        as theme
+        <a href="https://x1ngg3.github.io" target="_blank" class="codename">x1ngg3</a>
+        as theme, total visits
+          <span id="busuanzi_value_site_pv"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+          times
+        
       
     
       
         <div class='copyright'>
-        <p><a href="/">Copyright © 2017-2020 XXX</a></p>
+        <p><a href="https://x1ngg3.github.io">Copyright © 2020-2020 X1ngg3</a></p>
 
         </div>
       
     
   </footer>
 
+<script>setLoadingBarProgress(80);</script>
 
-      <a id="s-top" class="fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+
+      <script>setLoadingBarProgress(60);</script>
     </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
   </div>
-  <div>
-    <script>
-window.volantis={};
-window.volantis.loadcss=document.getElementById("loadcss");
-/********************脚本懒加载函数********************************/
-function loadScript(src, cb) {
-var HEAD = document.getElementsByTagName('head')[0] || document.documentElement;
-var script = document.createElement('script');
-script.setAttribute('type','text/javascript');
-if (cb) script.onload = cb;
-script.setAttribute('src', src);
-HEAD.appendChild(script);
-}
-//https://github.com/filamentgroup/loadCSS
-var loadCSS = function( href, before, media, attributes ){
-	var doc = window.document;
-	var ss = doc.createElement( "link" );
-	var ref;
-	if( before ){
-		ref = before;
-	}
-	else {
-		var refs = ( doc.body || doc.getElementsByTagName( "head" )[ 0 ] ).childNodes;
-		ref = refs[ refs.length - 1];
-	}
-	var sheets = doc.styleSheets;
-	if( attributes ){
-		for( var attributeName in attributes ){
-			if( attributes.hasOwnProperty( attributeName ) ){
-				ss.setAttribute( attributeName, attributes[attributeName] );
-			}
-		}
-	}
-	ss.rel = "stylesheet";
-	ss.href = href;
-	ss.media = "only x";
-	function ready( cb ){
-		if( doc.body ){
-			return cb();
-		}
-		setTimeout(function(){
-			ready( cb );
-		});
-	}
-	ready( function(){
-		ref.parentNode.insertBefore( ss, ( before ? ref : ref.nextSibling ) );
-	});
-	var onloadcssdefined = function( cb ){
-		var resolvedHref = ss.href;
-		var i = sheets.length;
-		while( i-- ){
-			if( sheets[ i ].href === resolvedHref ){
-				return cb();
-			}
-		}
-		setTimeout(function() {
-			onloadcssdefined( cb );
-		});
-	};
-	function loadCB(){
-		if( ss.addEventListener ){
-			ss.removeEventListener( "load", loadCB );
-		}
-		ss.media = media || "all";
-	}
-	if( ss.addEventListener ){
-		ss.addEventListener( "load", loadCB);
-	}
-	ss.onloadcssdefined = onloadcssdefined;
-	onloadcssdefined( loadCB );
-	return ss;
-};
-</script>
-<script>
   
-  loadCSS("https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14/css/all.min.css", window.volantis.loadcss);
-  
-  
-  
-  
-</script>
-<!-- required -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4/dist/jquery.min.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5/dist/jquery.min.js"></script>
 
-<script>
-  function pjax_fancybox() {
-    $(".md .gallery").find("img").each(function () { //渲染 fancybox
-      var element = document.createElement("a"); // a 标签
-      $(element).attr("class", "fancybox");
-      $(element).attr("pjax-fancybox", "");  // 过滤 pjax
-      $(element).attr("href", $(this).attr("src"));
-      if ($(this).attr("data-original")) {
-        $(element).attr("href", $(this).attr("data-original"));
-      }
-      $(element).attr("data-fancybox", "images");
-      var caption = "";   // 描述信息
-      if ($(this).attr('alt')) {  // 判断当前页面是否存在描述信息
-        $(element).attr('data-caption', $(this).attr('alt'));
-        caption = $(this).attr('alt');
-      }
-      var div = document.createElement("div");
-      $(div).addClass("fancybox");
-      $(this).wrap(div); // 最外层套 div ，其实主要作用还是 class 样式
-      var span = document.createElement("span");
-      $(span).addClass("image-caption");
-      $(span).text(caption); // 加描述
-      $(this).after(span);  // 再套一层描述
-      $(this).wrap(element);  // 最后套 a 标签
-    })
-    $(".md .gallery").find("img").fancybox({
-      selector: '[data-fancybox="images"]',
-      hash: false,
-      loop: false,
-      closeClick: true,
-      helpers: {
-        overlay: {closeClick: true}
-      },
-      buttons: [
-        "zoom",
-        "close"
-      ]
+  <script>
+    
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/" || "/";
+    if (!ROOT.endsWith('/')) ROOT += '/';
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/instant_page.js" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.6/dist/scrollreveal.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      ScrollReveal().reveal('.l_main .reveal', {
+        distance: '8px',
+        duration: '800',
+        interval: '100',
+        scale: '1'
+      });
     });
-  };
-  function SCload_fancybox() {
-    if ($(".md .gallery").find("img").length == 0) return;
-    loadCSS("https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css", document.getElementById("loadcss"));
-    setTimeout(function() {
-      loadScript('https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', pjax_fancybox)
-    }, 1);
-  };
-  $(function () {
-    SCload_fancybox();
-  });
-</script>
+  </script>
 
 
-<!-- internal -->
+  
+<script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
 
 
-
-
-
-
-
-  <script defer src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.1.0/dist/lazyload.min.js"></script>
-<script>
-  // https://www.npmjs.com/package/vanilla-lazyload
-  // Set the options globally
-  // to make LazyLoad self-initialize
-  window.lazyLoadOptions = {
-    elements_selector: ".lazyload",
-    threshold: 0
-  };
-  // Listen to the initialization event
-  // and get the instance of LazyLoad
-  window.addEventListener(
-    "LazyLoad::Initialized",
-    function (event) {
-      window.lazyLoadInstance = event.detail.instance;
-    },
-    false
-  );
-  document.addEventListener('DOMContentLoaded', function () {
-    lazyLoadInstance.update();
-  });
-  document.addEventListener('pjax:complete', function () {
-    lazyLoadInstance.update();
-  });
-</script>
-
+  <script defer src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script>
 
 
 
   
   
-    <script>
-      window.FPConfig = {
-        delay: 0,
-        ignoreKeywords: [],
-        maxRPS: 5,
-        hoverDelay: 25
-      };
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script>
+
+    <script type="text/javascript">
+      $(function(){
+        var imgs=["https://cdn.jsdelivr.net/gh/xaoxuu/cdn-wallpaper/abstract/41F215B9-261F-48B4-80B5-4E86E165259E.jpeg", "https://cdn.jsdelivr.net/gh/xaoxuu/cdn-wallpaper/abstract/BBC19066-E176-47C2-9D22-48C81EE5DF6B.jpeg", "https://cdn.jsdelivr.net/gh/xaoxuu/cdn-wallpaper/abstract/67239FBB-E15D-4F4F-8EE8-0F1C9F3C4E7C.jpeg", "https://cdn.jsdelivr.net/gh/xaoxuu/cdn-wallpaper/landscape/AEB33F9D-7294-4CF1-B8C5-3020748A9D45.jpeg", "https://cdn.jsdelivr.net/gh/xaoxuu/cdn-wallpaper/abstract/2884F904-F1F3-479E-AE27-5EBC291B63B0.jpeg", "https://cdn.jsdelivr.net/gh/xaoxuu/cdn-wallpaper/landscape/298468D7-E388-44A8-8CC5-8213BDC33CED.jpeg"];
+        if ('true' == 'true') {
+          function shuffle(arr){
+            /*From countercurrent-time*/
+            var n = arr.length;
+            while(n--) {
+              var index = Math.floor(Math.random() * n);
+              var temp = arr[index];
+              arr[index] = arr[n];
+              arr[n] = temp;
+            }
+          }
+          shuffle(imgs);
+        }
+        if ('') {
+          $('').backstretch(
+            imgs,
+          {
+            duration: "20000",
+            fade: "1500"
+          });
+        } else {
+          $.backstretch(
+            imgs,
+          {
+            duration: "20000",
+            fade: "1500"
+          });
+        }
+      });
     </script>
-    <script defer src="https://cdn.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"></script>
   
 
 
@@ -1162,25 +1086,25 @@ var loadCSS = function( href, before, media, attributes ){
 
 
 
-  
-  
-<script src="https://cdn.jsdelivr.net/npm/hexo-theme-volantis@4.1.6/source/js/valine.min.js"></script>
 
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4/dist/Valine.min.js"></script>
 
-<script>
-  var GUEST_INFO = ['nick', 'mail', 'link'];
-  var meta = 'nick,mail,link'.split(',').filter(function (item) {
+  
+  <script>
+  var GUEST_INFO = ['nick','mail','link'];
+  var meta = 'nick,mail,link'.split(',').filter(function(item){
     return GUEST_INFO.indexOf(item) > -1
   });
-  var REQUIRED_FIELDS = ['nick', 'mail', 'link'];
-  var requiredFields = 'nick,mail'.split(',').filter(function (item) {
+  var REQUIRED_FIELDS = ['nick','mail','link'];
+  var requiredFields = 'nick,mail'.split(',').filter(function(item){
     return REQUIRED_FIELDS.indexOf(item) > -1
   });
-
+  var valine = new Valine();
   function emoji(path, idx, ext) {
-    return path + "/" + path + "-" + idx + "." + ext;
+      return path + "/" + path + "-" + idx + "." + ext;
   }
-
   var emojiMaps = {};
   for (var i = 1; i <= 54; i++) {
     emojiMaps['tieba-' + i] = emoji('tieba', i, 'png');
@@ -1197,495 +1121,160 @@ var loadCSS = function( href, before, media, attributes ){
   for (var i = 1; i <= 4; i++) {
     emojiMaps['weibo-' + i] = emoji('weibo', i, 'png');
   }
+  valine.init({
+    el: '#valine_container',
+    meta: meta,
+    
+    appId: "VqJdqrLLhJVaQMiPLwPCBSc3-gzGzoHsz",
+    appKey: "5yKLlbbNmjEzqjXsB8Xq3vfL",
+    placeholder: "快来评论吧~",
+    pageSize:'10',
+    avatar:'robohash',
+    lang:'zh-cn',
+    visitor: 'true',
+    highlight: 'true',
+    mathJax: 'false',
+    enableQQ: 'true',
+    requiredFields: requiredFields,
+    emojiCDN: 'https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/emoji/valine/',
+    emojiMaps: emojiMaps
+  })
+  </script>
 
-  function pjax_valine() {
-    if(!document.querySelectorAll("#valine_container")[0])return;
 
-    let pagePlaceholder = pdata.commentPlaceholder || "快来评论吧~";
 
-    let path = pdata.commentPath;
-    if (path.length == 0) {
-      let defaultPath = '';
-      path = defaultPath || decodeURI(window.location.pathname);
+
+
+  
+<script src="/js/app.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.6.5/js/search.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/comment_typing.js"></script>
+
+
+
+
+
+
+<!-- 复制 -->
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="fas fa-copy"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-check-circle');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('fa-check-circle');
+          $icon.addClass('fa-copy');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-times-circle');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('fa-times-circle');
+          $icon.addClass('fa-copy');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
     }
+    initCopyCode();
+  }(window, document);
+</script>
 
-    var valine = new Valine();
-    valine.init({
-      el: '#valine_container',
-      meta: meta,
-      placeholder: pagePlaceholder,
-      path: path,
-      appId: "",
-      appKey: "",
-      pageSize: '10',
-      avatar: 'robohash',
-      lang: 'zh-cn',
-      visitor: 'true',
-      highlight: 'true',
-      mathJax: 'false',
-      enableQQ: 'true',
-      recordIP: 'false',
-      requiredFields: requiredFields,
-      emojiCDN: 'https://cdn.jsdelivr.net/gh/volantis-x/cdn-emoji/valine/',
-      emojiMaps: emojiMaps
+
+
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  function pjax_fancybox() {
+    $(".article-entry").find("img").not('.inline').not('a img').each(function () { //渲染 fancybox
+      var element = document.createElement("a"); // a 标签
+      $(element).attr("pjax-fancybox", "");  // 过滤 pjax
+      $(element).attr("href", $(this).attr("src"));
+      if ($(this).attr("data-original")) {
+        $(element).attr("href", $(this).attr("data-original"));
+      }
+      $(element).attr("data-fancybox", "images");
+      var caption = "";   // 描述信息
+      if ($(this).attr('alt')) {  // 标准 markdown 描述信息
+        $(element).attr('data-caption', $(this).attr('alt'));
+        caption = $(this).attr('alt');
+      }
+      var div = document.createElement("div");
+      $(div).addClass("fancybox");
+      $(this).wrap(div); // 最外层套 div ，其实主要作用还是 class 样式
+      var span = document.createElement("span");
+      $(span).addClass("image-caption");
+      $(span).text(caption); // 加描述
+      $(this).after(span);  // 再套一层描述
+      $(this).wrap(element);  // 最后套 a 标签
     })
-  }
-
-  $(function () {
-    pjax_valine();
-  });
-</script>
-
-
-
-
-
-  
-<script src="https://cdn.jsdelivr.net/npm/hexo-theme-volantis@4.1.6/source/js/app.min.js"></script>
-
-
-
-<!-- optional -->
-
-  <script>
-const SearchServiceimagePath="https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@master/img/";
-const ROOT =  ("/" || "/").endsWith('/') ? ("/" || "/") : ("//" || "/" );
-
-$('.input.u-search-input').one('focus',function(){
-	
-		loadScript('https://cdn.jsdelivr.net/npm/hexo-theme-volantis@4.1.6/source/js/search/hexo.min.js',setSearchService);
-	
-})
-
-function listenSearch(){
-  
-    customSearch = new HexoSearch({
-      imagePath: SearchServiceimagePath
-    });
-  
-}
-function setSearchService() {
-	listenSearch();
-	
-}
-</script>
-
-
-
-
-
-
-
-
-
-
-
-  <script defer>
-
-  const LCCounter = {
-    app_id: 'u9j57bwJod4EDmXWdxrwuqQT-MdYXbMMI',
-    app_key: 'jfHtEKVE24j0IVCGHbvuFClp',
-    custom_api_server: '',
-
-    // 查询存储的记录
-    getRecord(Counter, url, title) {
-      return new Promise(function (resolve, reject) {
-        Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({url})))
-          .then(resp => resp.json())
-          .then(({results, code, error}) => {
-            if (code === 401) {
-              throw error;
-            }
-            if (results && results.length > 0) {
-              var record = results[0];
-              resolve(record);
-            } else {
-              Counter('post', '/classes/Counter', {url, title: title, times: 0})
-                .then(resp => resp.json())
-                .then((record, error) => {
-                  if (error) {
-                    throw error;
-                  }
-                  resolve(record);
-                }).catch(error => {
-                console.error('Failed to create', error);
-                reject(error);
-              });
-            }
-          }).catch((error) => {
-          console.error('LeanCloud Counter Error:', error);
-          reject(error);
-        });
-      })
-    },
-
-    // 发起自增请求
-    increment(Counter, incrArr) {
-      return new Promise(function (resolve, reject) {
-        Counter('post', '/batch', {
-          "requests": incrArr
-        }).then((res) => {
-          res = res.json();
-          if (res.error) {
-            throw res.error;
-          }
-          resolve(res);
-        }).catch((error) => {
-          console.error('Failed to save visitor count', error);
-          reject(error);
-        });
-      });
-    },
-
-    // 构建自增请求体
-    buildIncrement(objectId) {
-      return {
-        "method": "PUT",
-        "path": `/1.1/classes/Counter/${ objectId }`,
-        "body": {
-          "times": {
-            '__op': 'Increment',
-            'amount': 1
-          }
-        }
-      }
-    },
-
-    // 校验是否为有效的 UV
-    validUV() {
-      var key = 'LeanCloudUVTimestamp';
-      var flag = localStorage.getItem(key);
-      if (flag) {
-        // 距离标记小于 24 小时则不计为 UV
-        if (new Date().getTime() - parseInt(flag) <= 86400000) {
-          return false;
-        }
-      }
-      localStorage.setItem(key, new Date().getTime().toString());
-      return true;
-    },
-
-    addCount(Counter) {
-      var enableIncr = '' === 'true' && window.location.hostname !== 'localhost';
-      enableIncr = true;
-      var getterArr = [];
-      var incrArr = [];
-      // 请求 PV 并自增
-      var pvCtn = document.querySelector('#lc-sv');
-      if (pvCtn || enableIncr) {
-        var pvGetter = this.getRecord(Counter, 'http://x1ngg3.github.io' + '/#lc-sv', 'Visits').then((record) => {
-          incrArr.push(this.buildIncrement(record.objectId))
-          var eles = document.querySelectorAll('#lc-sv #number');
-          if (eles.length > 0) {
-            eles.forEach((el,index,array)=>{
-              el.innerText = record.times + 1;
-              if (pvCtn) {
-                pvCtn.style.display = 'inline';
-              }
-            })
-          }
-        });
-        getterArr.push(pvGetter);
-      }
-
-      // 请求 UV 并自增
-      var uvCtn = document.querySelector('#lc-uv');
-      if (uvCtn || enableIncr) {
-        var uvGetter = this.getRecord(Counter, 'http://x1ngg3.github.io' + '/#lc-uv', 'Visitors').then((record) => {
-          var vuv = this.validUV();
-          vuv && incrArr.push(this.buildIncrement(record.objectId))
-          var eles = document.querySelectorAll('#lc-uv #number');
-          if (eles.length > 0) {
-            eles.forEach((el,index,array)=>{
-              el.innerText = record.times + (vuv ? 1 : 0);
-              if (uvCtn) {
-                uvCtn.style.display = 'inline';
-              }
-            })
-          }
-        });
-        getterArr.push(uvGetter);
-      }
-
-      // 请求文章的浏览数，如果是当前页面就自增
-      var allPV = document.querySelectorAll('#lc-pv');
-      if (allPV.length > 0 || enableIncr) {
-        for (i = 0; i < allPV.length; i++) {
-          let pv = allPV[i];
-          let title = pv.getAttribute('data-title');
-          var url = 'http://x1ngg3.github.io' + pv.getAttribute('data-path');
-          if (url) {
-            var viewGetter = this.getRecord(Counter, url, title).then((record) => {
-              // 是当前页面就自增
-              let curPath = window.location.pathname;
-              if (curPath.includes('index.html')) {
-                curPath = curPath.substring(0, curPath.lastIndexOf('index.html'));
-              }
-              if (pv.getAttribute('data-path') == curPath) {
-                incrArr.push(this.buildIncrement(record.objectId));
-              }
-              if (pv) {
-                var ele = pv.querySelector('#lc-pv #number');
-                if (ele) {
-                  if (pv.getAttribute('data-path') == curPath) {
-                    ele.innerText = (record.times || 0) + 1;
-                  } else {
-                    ele.innerText = record.times || 0;
-                  }
-                  pv.style.display = 'inline';
-                }
-              }
-            });
-            getterArr.push(viewGetter);
-          }
-        }
-      }
-
-      // 如果启动计数自增，批量发起自增请求
-      if (enableIncr) {
-        Promise.all(getterArr).then(() => {
-          incrArr.length > 0 && this.increment(Counter, incrArr);
-        })
-      }
-
-    },
-
-
-    fetchData(api_server) {
-      var Counter = (method, url, data) => {
-        return fetch(`${ api_server }/1.1${ url }`, {
-          method,
-          headers: {
-            'X-LC-Id': this.app_id,
-            'X-LC-Key': this.app_key,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data)
-        });
-      };
-      this.addCount(Counter);
-    },
-
-    refreshCounter() {
-      var api_server = this.app_id.slice(-9) !== '-MdYXbMMI' ? this.custom_api_server : `https://${ this.app_id.slice(0, 8).toLowerCase() }.api.lncldglobal.com`;
-      if (api_server) {
-        this.fetchData(api_server);
-      } else {
-        fetch('https://app-router.leancloud.cn/2/route?appId=' + this.app_id)
-          .then(resp => resp.json())
-          .then(({api_server}) => {
-            this.fetchData('https://' + api_server);
-          });
-      }
-    }
-
-  };
-
-  LCCounter.refreshCounter();
-
-  document.addEventListener('pjax:complete', function () {
-    LCCounter.refreshCounter();
-  });
-</script>
-
-
-
-
-
-
-
-
-<script>
-function listennSidebarTOC() {
-  const navItems = document.querySelectorAll(".toc li");
-  if (!navItems.length) return;
-  const sections = [...navItems].map((element) => {
-    const link = element.querySelector(".toc-link");
-    const target = document.getElementById(
-      decodeURI(link.getAttribute("href")).replace("#", "")
-    );
-    link.addEventListener("click", (event) => {
-      event.preventDefault();
-      window.scrollTo({
-		top: target.offsetTop + 100,
-		
-		behavior: "smooth"
-		
-	  });
-    });
-    return target;
-  });
-
-  function activateNavByIndex(target) {
-    if (target.classList.contains("active-current")) return;
-
-    document.querySelectorAll(".toc .active").forEach((element) => {
-      element.classList.remove("active", "active-current");
-    });
-    target.classList.add("active", "active-current");
-    let parent = target.parentNode;
-    while (!parent.matches(".toc")) {
-      if (parent.matches("li")) parent.classList.add("active");
-      parent = parent.parentNode;
-    }
-  }
-
-  function findIndex(entries) {
-    let index = 0;
-    let entry = entries[index];
-    if (entry.boundingClientRect.top > 0) {
-      index = sections.indexOf(entry.target);
-      return index === 0 ? 0 : index - 1;
-    }
-    for (; index < entries.length; index++) {
-      if (entries[index].boundingClientRect.top <= 0) {
-        entry = entries[index];
-      } else {
-        return sections.indexOf(entry.target);
-      }
-    }
-    return sections.indexOf(entry.target);
-  }
-
-  function createIntersectionObserver(marginTop) {
-    marginTop = Math.floor(marginTop + 10000);
-    let intersectionObserver = new IntersectionObserver(
-      (entries, observe) => {
-        let scrollHeight = document.documentElement.scrollHeight + 100;
-        if (scrollHeight > marginTop) {
-          observe.disconnect();
-          createIntersectionObserver(scrollHeight);
-          return;
-        }
-        let index = findIndex(entries);
-        activateNavByIndex(navItems[index]);
+    $(".article-entry").find("img").fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+      closeClick: true,
+      helpers: {
+        overlay: {closeClick: true}
       },
-      {
-        rootMargin: marginTop + "px 0px -100% 0px",
-        threshold: 0,
-      }
-    );
-    sections.forEach((element) => {
-      element && intersectionObserver.observe(element);
+      buttons: [
+        "zoom",
+        "close"
+      ]
     });
-  }
-  createIntersectionObserver(document.documentElement.scrollHeight);
-}
-
-document.addEventListener("DOMContentLoaded", listennSidebarTOC);
-document.addEventListener("pjax:success", listennSidebarTOC);
+  };
+  $(function () {
+    pjax_fancybox();
+  });
 </script>
 
-<!-- more -->
 
 
 
-
-    
-      
-
-
-<script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script>
-
-
-<script>
-    var pjax;
-    document.addEventListener('DOMContentLoaded', function () {
-      pjax = new Pjax({
-        elements: 'a[href]:not([href^="#"]):not([href="javascript:void(0)"]):not([pjax-fancybox])',
-        selectors: [
-          "title",
-          "#l_cover",
-          "#pjax-container",
-          "#pjax-header-nav-list"
-        ],
-        cacheBust: false,   // url 地址追加时间戳，用以避免浏览器缓存
-        timeout: 5000
-      });
-    });
-
-    document.addEventListener('pjax:send', function (e) {
-      //window.stop(); // 相当于点击了浏览器的停止按钮
-
-      try {
-        var currentUrl = window.location.pathname;
-        var targetUrl = e.triggerElement.href;
-        var banUrl = [""];
-        if (banUrl[0] != "") {
-          banUrl.forEach(item => {
-            if(currentUrl.indexOf(item) != -1 || targetUrl.indexOf(item) != -1) {
-              window.location.href = targetUrl;
-            }
-          });
-        }
-      } catch (error) {}
-
-      window.subData = null; // 移除标题（用于一二级导航栏切换处）
-      if (typeof $.fancybox != "undefined") {
-        $.fancybox.close();    // 关闭弹窗
-      }
-      volantis.$switcher.removeClass('active'); // 关闭移动端激活的搜索框
-      volantis.$header.removeClass('z_search-open'); // 关闭移动端激活的搜索框
-      volantis.$wrapper.removeClass('sub'); // 跳转页面时关闭二级导航
-
-      // 解绑事件 避免重复监听
-      volantis.$topBtn.unbind('click');
-      $('.menu a').unbind('click');
-      $(window).unbind('resize');
-      $(window).unbind('scroll');
-      $(document).unbind('scroll');
-      $(document).unbind('click');
-      $('body').unbind('click');
-	  
-    });
-
-    document.addEventListener('pjax:complete', function () {
-      // 关于百度统计对 SPA 页面的处理：
-      // 方案一：百度统计>管理>单页应用设置中，打开开启按钮即可对SPA进行统计。 https://tongji.baidu.com/web/help/article?id=324
-      // 方案二：取消注释下列代码。 https://tongji.baidu.com/web/help/article?id=235
-       
-
-      // 关于谷歌统计对 SPA 页面的处理：
-      // 当应用以动态方式加载内容并更新地址栏中的网址时，也应该更新通过 gtag.js 存储的网页网址。
-      // https://developers.google.cn/analytics/devguides/collection/gtagjs/single-page-applications?hl=zh-cn
-      
-	 
-
-      $('.nav-main').find('.list-v').not('.menu-phone').removeAttr("style",""); // 移除小尾巴的移除
-      $('.menu-phone.list-v').removeAttr("style",""); // 移除小尾巴的移除
-      $('script[data-pjax], .pjax-reload script').each(function () {
-        $(this).parent().append($(this).remove());
-      });
-      try{
-          if (typeof $.fancybox == "undefined") {
-            SCload_fancybox();
-          } else {
-            pjax_fancybox();
-          }
-        
-        
-        
-        
-        
-        
-          pjax_valine();
-        
-        
-        
-        
-      } catch (e) {
-        console.log(e);
-      }
-	  
-    });
-
-    document.addEventListener('pjax:error', function (e) {
-	  
-      window.location.href = e.triggerElement.href;
-    });
+  <script>setLoadingBarProgress(100);</script>
+ <!-- ҳ������Ч�� -->
+<script type="text/javascript" src="/js/firework.js">
 </script>
-
-    
-  </div>
 </body>
 </html>
+
