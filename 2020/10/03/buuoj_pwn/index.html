@@ -464,17 +464,17 @@
 <li><strong>首先是满足one_gadget的条件：</strong></li>
 </ul>
 <p>根据题目提供的Libc查看one_gadget:</p>
-<p><img src="https://i.loli.net/2020/10/07/u8RvOdQZqAwN3JY.png" class="lazyload" data-srcset="https://i.loli.net/2020/10/07/u8RvOdQZqAwN3JY.png" srcset="data:image/png;base64,666" alt="image-20201007195646212"></p>
+<p><img src="https://i.loli.net/2020/10/07/u8RvOdQZqAwN3JY.png" alt="image-20201007195646212"></p>
 <p>这里记录一下查看第四个的过程，前面三个试了下不太行，不知道是不是我操作问题，因为开启了PIE是没法直接下地址的，然后下函数的断点又报错，只能直接开跑然后看状态了，但是因为会错误退出所以我觉得也问题不大，大不了达成条件的时候用手段构造一下。</p>
 <p>gdb直接运行，然后输入，然后就自动停了。</p>
-<p><img src="https://i.loli.net/2020/10/07/DgqEoSV73zpyhub.png" class="lazyload" data-srcset="https://i.loli.net/2020/10/07/DgqEoSV73zpyhub.png" srcset="data:image/png;base64,666" alt="image-20201007200030263"></p>
+<p><img src="https://i.loli.net/2020/10/07/DgqEoSV73zpyhub.png" alt="image-20201007200030263"></p>
 <ul>
 <li><strong>为什么打过去就有权限</strong></li>
 </ul>
 <p>ok那现在知道了第四个gadget是满足条件的，那为什么把gadget打过去就能拿到权限呢，毕竟反汇编代码可是这样的：</p>
-<p><img src="https://i.loli.net/2020/10/07/jR4PDUzS1gdsZev.png" class="lazyload" data-srcset="https://i.loli.net/2020/10/07/jR4PDUzS1gdsZev.png" srcset="data:image/png;base64,666" alt="image-20201007200229799"></p>
+<p><img src="https://i.loli.net/2020/10/07/jR4PDUzS1gdsZev.png" alt="image-20201007200229799"></p>
 <p>其实看到这种代码，心里大概就有个数了，八成是IDA犯病了，我他妈直接看汇编。</p>
-<p><img src="https://i.loli.net/2020/10/07/rg1Ex9NnQXKSF8d.png" class="lazyload" data-srcset="https://i.loli.net/2020/10/07/rg1Ex9NnQXKSF8d.png" srcset="data:image/png;base64,666" alt="image-20201007200422351"></p>
+<p><img src="https://i.loli.net/2020/10/07/rg1Ex9NnQXKSF8d.png" alt="image-20201007200422351"></p>
 <p>好的那现在只差最后一步打过去了。</p>
 <ul>
 <li><strong>为什么是str()不是p64()</strong></li>
