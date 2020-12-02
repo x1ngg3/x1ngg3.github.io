@@ -18,7 +18,7 @@
   
     <title>Heap Related Data Structure - X1ngg3</title>
   
-    <meta name="keywords" content="pwn_heap">
+    <meta name="keywords" content="pwn,heap">
   
   
     <meta name="description" content="好难啊">
@@ -452,8 +452,7 @@
 <figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="deletion">- fd_nextsize 指向前一个与当前 chunk 大小不同的第一个空闲块，不包含 bin 的头指针。</span></span><br><span class="line"><span class="deletion">- bk_nextsize 指向后一个与当前 chunk 大小不同的第一个空闲块，不包含 bin 的头指针。</span></span><br><span class="line"><span class="deletion">- 一般空闲的 large chunk 在 fd 的遍历顺序中，按照由大到小的顺序排列。这样做可以避免在寻找合适 chunk 时挨个遍历。</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<p><strong>下图是一个已经分配的chunk的结构</strong>：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">chunk-&gt; +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">        |             Size of previous chunk, if unallocated (P clear)  |</span><br><span class="line">        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">        |             Size of chunk, in bytes                     |A|M|P|</span><br><span class="line">  mem-&gt; +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">        |             User data starts here...                          .</span><br><span class="line">        .                                                               .</span><br><span class="line">        .             (malloc_usable_size() bytes)                      .</span><br><span class="line">next    .                                                               |</span><br><span class="line">chunk-&gt; +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">        |             (size of chunk, but used <span class="keyword">for</span> application data)    |</span><br><span class="line">        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">        |             Size of next chunk, in bytes                |A|<span class="number">0</span>|<span class="number">1</span>|</span><br><span class="line">        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">  </span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">**下图是一个已经分配的chunk的结构**：</span><br><span class="line"></span><br><span class="line">​```c</span><br><span class="line">chunk-&gt; +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">        |             Size of previous chunk, if unallocated (P clear)  |</span><br><span class="line">        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">        |             Size of chunk, in bytes                     |A|M|P|</span><br><span class="line">  mem-&gt; +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">        |             User data starts here...                          .</span><br><span class="line">        .                                                               .</span><br><span class="line">        .             (malloc_usable_size() bytes)                      .</span><br><span class="line">next    .                                                               |</span><br><span class="line">chunk-&gt; +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">        |             (size of chunk, but used for application data)    |</span><br><span class="line">        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br><span class="line">        |             Size of next chunk, in bytes                |A|0|1|</span><br><span class="line">        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span><br></pre></td></tr></table></figure>
 <p><strong>我们称前两个字段称为 chunk header (prev_size + size)，后面的部分称为 user data。每次 malloc 申请得到的内存指针，其实指向 user data 的起始处</strong>。</p>
 <p>当一个 chunk 处于使用状态时，它的下一个 chunk 的 prev_size 域无效，所以下一个 chunk 的该部分也可以被当前 chunk 使用。<strong>这就是 chunk 中的空间复用</strong>。如下图：</p>
 <p><img src="https://i.loli.net/2020/11/17/IDC7POfl6GvzE5j.png" alt="chunk空间复用"></p>
@@ -740,10 +739,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-11-21T11:48:08+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-12-02T19:50:49+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>最后更新于：Nov 21, 2020</p>
+    <p>最后更新于：Dec 2, 2020</p>
   </a>
 </div>
 
@@ -752,7 +751,7 @@
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/pwn-heap/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>pwn_heap</p></a></div>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/pwn/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>pwn</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/heap/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>heap</p></a></div>
 
 
         
@@ -817,6 +816,14 @@
         
         
           <div class="prev-next">
+            
+              <a class='prev' href='/2020/12/02/pwn_off-by-one/'>
+                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>Off-by-one</p>
+                <p class='content'>:aru-39:
+
+what is off-by-one
+严格来说，off-by-one漏洞是一种特殊的溢出漏洞，指程序向缓冲区中写入时，写入的字节数超过了缓冲区本身的大小，并且只越界了一个字节...</p>
+              </a>
             
             
               <a class='next' href='/2020/11/05/nothing_diary/'>

