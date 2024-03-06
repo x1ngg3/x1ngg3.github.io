@@ -35,7 +35,7 @@
   <!-- feed -->
   <!-- 页面元数据 -->
   <title>Off-by-one - x1ngg3's blog</title>
-  <meta name="keywords" content="pwn,heap,off_by_one,null">
+  <meta name="keywords" content="pwn,ctf,null">
   <meta desc name="description" content="(；′⌒&#96;) - John Doe - x1ngg3's blog">
   
 <meta property="og:type" content="article">
@@ -46,11 +46,10 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png">
 <meta property="article:published_time" content="2020-10-15T00:00:00.000Z">
-<meta property="article:modified_time" content="2024-02-27T13:11:45.023Z">
+<meta property="article:modified_time" content="2024-03-06T09:55:07.358Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="pwn">
-<meta property="article:tag" content="heap">
-<meta property="article:tag" content="off_by_one">
+<meta property="article:tag" content="ctf">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png">
   <style>
@@ -2115,7 +2114,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     root: '/',
     debug: "env",
     default: {"avatar":"https://unpkg.com/volantis-static@0.0.1660614606622/media/placeholder/avatar/round/3442075.svg","link":"https://unpkg.com/volantis-static@0.0.1660614606622/media/placeholder/link/8f277b4ee0ecd.svg","cover":"https://unpkg.com/volantis-static@0.0.1660614606622/media/placeholder/cover/76b86c0226ffd.svg","image":"https://unpkg.com/volantis-static@0.0.1660614606622/media/placeholder/image/2659360.svg"},
-    lastupdate: new Date(1709717193106),
+    lastupdate: new Date(1709720167902),
     cdn: {
       izitoast_css: 'https://cdn.bootcdn.net/ajax/libs/izitoast/1.4.0/css/iziToast.min.css',
       izitoast_js: 'https://cdn.bootcdn.net/ajax/libs/izitoast/1.4.0/js/iziToast.min.js',
@@ -2474,9 +2473,9 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
           
             
 <div class='new-meta-item author' itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <a itemprop="url" class='author' href="/" rel="nofollow">
-    <img itemprop="image" src="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/apple-touch-icon.png" class="lazyload" data-srcset="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/apple-touch-icon.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
-    <p itemprop="name">请设置文章作者</p>
+  <a itemprop="url" class='author' target="_blank" href="https://x1ngg3.github.io/" rel="nofollow noopener">
+    <img itemprop="image" src="https://x1ngg3-pic.oss-cn-beijing.aliyuncs.com/myimg/2018.jpg" class="lazyload" data-srcset="https://x1ngg3-pic.oss-cn-beijing.aliyuncs.com/myimg/2018.jpg" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+    <p itemprop="name">X1ngg3</p>
   </a>
 </div>
 
@@ -2606,10 +2605,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateModified" datetime="2024-02-27T21:11:45+08:00">
+          <div class="new-meta-item date" itemprop="dateModified" datetime="2024-03-06T17:55:07+08:00">
   <a class='notlink'>
     <i class="fa-solid fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：Feb 27, 2024</p>
+    <p>更新于：Mar 6, 2024</p>
   </a>
 </div>
 
@@ -2620,8 +2619,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
   
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/pwn/" rel="nofollow"><i class="fa-solid fa-hashtag fa-fw" aria-hidden="true"></i><p>pwn</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/heap/" rel="nofollow"><i class="fa-solid fa-hashtag fa-fw" aria-hidden="true"></i><p>heap</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/off-by-one/" rel="nofollow"><i class="fa-solid fa-hashtag fa-fw" aria-hidden="true"></i><p>off_by_one</p></a></div>
-  <span hidden itemprop="keywords">pwn heap off_by_one</span>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/pwn/" rel="nofollow"><i class="fa-solid fa-hashtag fa-fw" aria-hidden="true"></i><p>pwn</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/ctf/" rel="nofollow"><i class="fa-solid fa-hashtag fa-fw" aria-hidden="true"></i><p>ctf</p></a></div>
+  <span hidden itemprop="keywords">pwn ctf</span>
   
 
 
@@ -2692,24 +2691,23 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     <div class="prev-next">
       
-        <a class='prev' href='/2020/10/17/nothing_memo/'>
-          <p class='title'><i class="fa-solid fa-chevron-left" aria-hidden="true"></i>x1ngg3's memo</p>
-          <p class='content'>我的备忘录，仅此而已
+        <a class='prev' href='/2020/10/22/pwn_heap_data_structure/'>
+          <p class='title'><i class="fa-solid fa-chevron-left" aria-hidden="true"></i>Heap Related Data Structure</p>
+          <p class='content'>好难啊
 
 
-linux turn off ALSR1234echo 0 &gt;/proc/sys/kernel/randomize_va_space 0 - 表示关闭进程地址空间...</p>
+Arena, heap and chunkPtmalloc2通过几种数据结构来进行管理，主要有arena,heap,chunk三种层级。Chunk为分配给用户的内存的一个单位。 对于...</p>
         </a>
       
       
-        <a class='next' href='/2020/10/14/web_xss/'>
-          <p class='title'>XSS<i class="fa-solid fa-chevron-right" aria-hidden="true"></i></p>
-          <p class='content'>网络安全课作业需要，菜鸡被迫了解一下xss。
+        <a class='next' href='/2020/10/11/pwn_heap_overview/'>
+          <p class='title'>Heap Overview<i class="fa-solid fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>heap~
 
 
-alert("X1NGG3")
+sbrk()&amp;&amp;brk()reference:sbrk(2) - Linux man page
 
-环境搭建首先下载好这三个工具：phpstudy + pikachu + firefox
-以及一个好用的编辑器来...</p>
+Descriptionbrk() and sbrk() chan...</p>
         </a>
       
     </div>
@@ -3264,7 +3262,7 @@ alert("X1NGG3")
 </script>
 
 
-  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"x1ngg3's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"John Doe","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","sameAs":["https://github.com/volantis-x"],"description":"welcome to x1ngg3's blog"},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://example.com/","name":"x1ngg3's blog"}},{"@type":"ListItem","position":2,"item":{"@id":"http://example.com/categories/PWN/","name":"PWN"}},{"@type":"ListItem","position":3,"item":{"@id":"http://example.com/2020/10/15/pwn_off-by-one/","name":"Off-by-one"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"x1ngg3's blog","url":"http://example.com/","keywords":null,"description":"welcome to x1ngg3's blog","author":{"@type":"Person","name":"John Doe","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","description":"welcome to x1ngg3's blog"},"publisher":{"@type":"Organization","name":"x1ngg3's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"http://example.com?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"Off-by-one","description":"(；′⌒&#96;)","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2020/10/15/pwn_off-by-one/"},"author":{"@type":"Person","name":"John Doe","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/"},"publisher":{"@type":"Organization","name":"x1ngg3's blog","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"http://example.com/2020/10/15/pwn_off-by-one/","wordCount":10,"datePublished":"2020-10-15T00:00:00.000Z","dateModified":"2024-02-27T13:11:45.023Z","articleSection":"PWN","keywords":"pwn,heap,off_by_one","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
+  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"x1ngg3's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"John Doe","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","sameAs":["https://github.com/volantis-x"],"description":"welcome to x1ngg3's blog"},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://example.com/","name":"x1ngg3's blog"}},{"@type":"ListItem","position":2,"item":{"@id":"http://example.com/categories/PWN/","name":"PWN"}},{"@type":"ListItem","position":3,"item":{"@id":"http://example.com/2020/10/15/pwn_off-by-one/","name":"Off-by-one"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"x1ngg3's blog","url":"http://example.com/","keywords":null,"description":"welcome to x1ngg3's blog","author":{"@type":"Person","name":"John Doe","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","description":"welcome to x1ngg3's blog"},"publisher":{"@type":"Organization","name":"x1ngg3's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"http://example.com?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"Off-by-one","description":"(；′⌒&#96;)","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2020/10/15/pwn_off-by-one/"},"author":{"@type":"Person","name":"John Doe","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/"},"publisher":{"@type":"Organization","name":"x1ngg3's blog","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"http://example.com/2020/10/15/pwn_off-by-one/","wordCount":10,"datePublished":"2020-10-15T00:00:00.000Z","dateModified":"2024-03-06T09:55:07.358Z","articleSection":"PWN","keywords":"pwn,ctf","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
 
 
 
