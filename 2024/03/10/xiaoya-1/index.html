@@ -46,7 +46,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png">
 <meta property="article:published_time" content="2024-03-09T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-03-11T15:08:36.498Z">
+<meta property="article:modified_time" content="2024-03-11T15:14:35.089Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="iot">
 <meta property="article:tag" content="智能音箱">
@@ -2082,7 +2082,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     root: '/',
     debug: "env",
     default: {"avatar":"https://unpkg.com/volantis-static@0.0.1660614606622/media/placeholder/avatar/round/3442075.svg","link":"https://unpkg.com/volantis-static@0.0.1660614606622/media/placeholder/link/8f277b4ee0ecd.svg","cover":"https://unpkg.com/volantis-static@0.0.1660614606622/media/placeholder/cover/76b86c0226ffd.svg","image":"https://unpkg.com/volantis-static@0.0.1660614606622/media/placeholder/image/2659360.svg"},
-    lastupdate: new Date(1710169729006),
+    lastupdate: new Date(1710170436776),
     cdn: {
       izitoast_css: 'https://cdn.bootcdn.net/ajax/libs/izitoast/1.4.0/css/iziToast.min.css',
       izitoast_js: 'https://cdn.bootcdn.net/ajax/libs/izitoast/1.4.0/js/iziToast.min.js',
@@ -2511,7 +2511,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <div galleryFlag itemscope itemtype="http://schema.org/ImageGallery" class="gallery " data-group='default'><div class='fancybox'><a class='fancybox' itemscope itemtype="http://schema.org/ImageObject" itemprop="url" target="_blank" rel="noopener" href='https://x1ngg3-pic.oss-cn-beijing.aliyuncs.com/myimg/image-20240308121538748.png' data-fancybox='default' data-caption='image-20240308121538748'><img fancybox itemprop="contentUrl" src="https://x1ngg3-pic.oss-cn-beijing.aliyuncs.com/myimg/image-20240308121538748.png" class="lazyload" data-srcset="https://x1ngg3-pic.oss-cn-beijing.aliyuncs.com/myimg/image-20240308121538748.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240308121538748"></a><span class='image-caption'>image-20240308121538748</span></div></div>
 
 <h2 id="中间人攻击思路"><a href="#中间人攻击思路" class="headerlink" title="中间人攻击思路"></a>中间人攻击思路</h2><p>出现http请求肯定是要重点关注的，毕竟http明文传输，可以利用的空间大。</p>
-<p>根据请求的格式来看<code>GET /smart-os-ws-register/register/service/get?</code>，看名字似乎是在请求音箱的服务，同时返回值返回了一长串websocker地址和api地址<code>&quot;apiDomainNames&quot;:[&quot;http://api.xiaoyastar.com&quot;]</code>。</p>
+<p>根据请求的格式<code>GET /smart-os-ws-register/register/service/get?</code>来看，似乎是在请求音箱的服务，这和返回的一长串websocket地址和api地址正好能够对应。</p>
 <p><code>wss协议</code>是负责客户端和服务端的数据传输，在进行tcp握手之后，可建立长连接，允许服务器和客户端进行双向数据传输。考虑到wss的作用，推测这是音箱与服务器的语音交互的连接，当用户通过音箱使用语音对话服务的时候，使用的就是wss建立的长连接。</p>
 <blockquote>
 <p>WebSocket （WS）是HTML5一种新的协议，它实现了浏览器与服务器全双工通信，能更好地节省服务器资源和带宽并达到实时通讯。WebSocket建立在TCP之上，同HTTP一样通过TCP来传输数据，但是它和HTTP最大不同是：WebSocket是一种双向通信协议，在建立连接后，WebSocket服务器和Browser&#x2F;Client Agent都能主动的向对方发送或接收数据，就像Socket一样；WebSocket需要类似TCP的客户端和服务器端通过握手连接，连接成功后才能相互通信。WSS（Web Socket Secure）是WebSocket的加密版本。</p>
@@ -2523,8 +2523,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <p><img src="https://x1ngg3-pic.oss-cn-beijing.aliyuncs.com/myimg/image-20240308122743655.png" class="lazyload" data-srcset="https://x1ngg3-pic.oss-cn-beijing.aliyuncs.com/myimg/image-20240308122743655.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240308122743655"></p>
 <p>那梳理一下逻辑，在音箱开机的时候，完成dhcp+arp+dns之后，通过http协议来请求了进行交互的云服务地址，这次请求获得的地址用在了音箱之后的对话长连接中。那么如果可以控制这条http请求，对请求的response的进行篡改，强行把wss降级到ws，那么就可以通过中间人攻击来对音箱进行监听了。</p>
 <blockquote>
-<p>这里我不知道大佬是怎么看出可以进行降级攻击的，毕竟这里并没有给出ws的连接，只给了wss的，可能是经验或者试出来的吧。</p>
-<p>并且在我的返回地址中，ws05直接给的是ws:&#x2F;&#x2F;，大佬的博客里面显示的是wss:&#x2F;&#x2F;，这一点我不知道是为啥，或许是我之前已经进行过攻击了，攻击后连接的正是ws:&#x2F;&#x2F;ws05，所以这里服务器直接给我返回ws:&#x2F;&#x2F;了？</p>
+<p>这里我不知道大佬是怎么看出可以进行降级攻击的，毕竟这里并没有给出ws的连接，只给了wss的，理论上服务器能够接收的连接是都得给出来让用户选择的，但这或许就是理论与实际的区别。</p>
+<p>并且在我的返回地址中，ws05直接给的是ws:&#x2F;&#x2F;，大佬的博客里面显示的是wss:&#x2F;&#x2F;，这一点我不知道是为啥，或许是我之前已经进行过攻击了，攻击后连接的正是ws:&#x2F;&#x2F;ws05，所以这里服务器直接给我返回ws:&#x2F;&#x2F;了？这一点想不通，或许可以买个音箱再试一试…</p>
 </blockquote>
 <p>想要控制http的话，就得能拦截到其对应的流量，如果是在自己的笔记本上开热点进行的话，直接修改hosts文件就行了；但如果是在公网上进行的话（假设已经获取了路由器的控制权），需要有个自己的攻击服务器，然后将流量劫持到服务器上进行修改。</p>
 <p>不管是内网还是公网，第一步都是进行dns劫持，将请求的地址转发到攻击服务器上。</p>
@@ -2586,7 +2586,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateModified" datetime="2024-03-11T23:08:36+08:00">
+          <div class="new-meta-item date" itemprop="dateModified" datetime="2024-03-11T23:14:35+08:00">
   <a class='notlink'>
     <i class="fa-solid fa-edit fa-fw" aria-hidden="true"></i>
     <p>更新于：Mar 11, 2024</p>
@@ -3284,7 +3284,7 @@ fastbin 的堆块被释放后 next_chun...</p>
 </script>
 
 
-  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"x1ngg3's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"John Doe","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","sameAs":["https://github.com/volantis-x"],"description":"welcome to x1ngg3's blog"},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://example.com/","name":"x1ngg3's blog"}},{"@type":"ListItem","position":2,"item":{"@id":"http://example.com/categories/iot/","name":"iot"}},{"@type":"ListItem","position":3,"item":{"@id":"http://example.com/2024/03/10/xiaoya-1/","name":"小雅音箱中间人攻击（一）"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"x1ngg3's blog","url":"http://example.com/","keywords":null,"description":"welcome to x1ngg3's blog","author":{"@type":"Person","name":"John Doe","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","description":"welcome to x1ngg3's blog"},"publisher":{"@type":"Organization","name":"x1ngg3's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"http://example.com?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"小雅音箱中间人攻击（一）","description":"流量分析与漏洞利用","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2024/03/10/xiaoya-1/"},"author":{"@type":"Person","name":"John Doe","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/"},"publisher":{"@type":"Organization","name":"x1ngg3's blog","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"http://example.com/2024/03/10/xiaoya-1/","wordCount":9,"datePublished":"2024-03-09T16:00:00.000Z","dateModified":"2024-03-11T15:08:36.498Z","articleSection":"iot","keywords":"iot,智能音箱","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
+  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"x1ngg3's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"John Doe","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","sameAs":["https://github.com/volantis-x"],"description":"welcome to x1ngg3's blog"},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://example.com/","name":"x1ngg3's blog"}},{"@type":"ListItem","position":2,"item":{"@id":"http://example.com/categories/iot/","name":"iot"}},{"@type":"ListItem","position":3,"item":{"@id":"http://example.com/2024/03/10/xiaoya-1/","name":"小雅音箱中间人攻击（一）"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"x1ngg3's blog","url":"http://example.com/","keywords":null,"description":"welcome to x1ngg3's blog","author":{"@type":"Person","name":"John Doe","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","description":"welcome to x1ngg3's blog"},"publisher":{"@type":"Organization","name":"x1ngg3's blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"http://example.com?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"小雅音箱中间人攻击（一）","description":"流量分析与漏洞利用","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2024/03/10/xiaoya-1/"},"author":{"@type":"Person","name":"John Doe","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/"},"publisher":{"@type":"Organization","name":"x1ngg3's blog","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"http://example.com/2024/03/10/xiaoya-1/","wordCount":9,"datePublished":"2024-03-09T16:00:00.000Z","dateModified":"2024-03-11T15:14:35.089Z","articleSection":"iot","keywords":"iot,智能音箱","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1660614606622/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
 
 
 
