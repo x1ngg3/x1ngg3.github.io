@@ -1,0 +1,200 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+// 获取所有说说并按日期排序
+const allThoughts = (await getCollection('thoughts'))
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+// 渲染说说内容
+const thoughtsWithContent = await Promise.all(
+  allThoughts.map(async (thought) => {
+    const { Content } = await thought.render();
+    return { thought, Content };
+  })
+);
+---
+
+<BaseLayout title="说说 - x1ngg3 的博客" description="我的碎碎念和生活随想">
+  <div class="container">
+    <header class="page-header">
+      <h1>说说</h1>
+      <p>记录生活的点点滴滴 · 共 {allThoughts.length} 条</p>
+    </header>
+
+    {thoughtsWithContent.length > 0 ? (
+      <div class="thoughts-timeline">
+        {thoughtsWithContent.map(({ thought, Content }, index) => (
+          <div class="thought-item">
+            <div class="thought-marker"></div>
+            <div class="thought-card card">
+              <div class="thought-header">
+                <time datetime={thought.data.date.toISOString()}>
+                  {thought.data.date.toLocaleDateString('zh-CN', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                  })}
+                </time>
+                {thought.data.mood && (
+                  <span class="thought-mood">{thought.data.mood}</span>
+                )}
+              </div>
+              <div class="thought-content">
+                <Content />
+              </div>
+              {thought.data.tags && thought.data.tags.length > 0 && (
+                <div class="thought-tags">
+                  {thought.data.tags.map(tag => (
+                    <span class="tag">{tag}</span>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    ) : (
+      <div class="empty-state">
+        <p>还没有说说</p>
+        <p class="hint">在 <code>src/content/thoughts/</code> 目录创建 <code>.md</code> 文件来添加你的第一条说说吧！</p>
+      </div>
+    )}
+  </div>
+</BaseLayout>
+
+<style>
+  .page-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid var(--color-border);
+  }
+
+  .page-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .page-header p {
+    color: var(--color-text-secondary);
+    font-size: 1rem;
+  }
+
+  .thoughts-timeline {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  .thoughts-timeline::before {
+    content: '';
+    position: absolute;
+    left: 0.5rem;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--color-border);
+  }
+
+  .thought-item {
+    position: relative;
+    margin-bottom: 2rem;
+  }
+
+  .thought-marker {
+    position: absolute;
+    left: -1.5rem;
+    top: 0.5rem;
+    width: 12px;
+    height: 12px;
+    background: var(--color-primary);
+    border: 3px solid var(--color-bg);
+    border-radius: 50%;
+    box-shadow: 0 0 0 2px var(--color-primary);
+  }
+
+  .thought-card {
+    margin-left: 1rem;
+  }
+
+  .thought-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+  }
+
+  .thought-mood {
+    font-size: 1.25rem;
+  }
+
+  .thought-content {
+    color: var(--color-text);
+    line-height: 1.6;
+    margin-bottom: 0.75rem;
+  }
+
+  .thought-content :global(p) {
+    margin: 0.5rem 0;
+  }
+
+  .thought-content :global(p:first-child) {
+    margin-top: 0;
+  }
+
+  .thought-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .thought-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.75rem;
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: var(--color-bg-secondary);
+    border-radius: 12px;
+  }
+
+  .empty-state p {
+    color: var(--color-text-secondary);
+    font-size: 1.125rem;
+  }
+
+  .empty-state .hint {
+    font-size: 0.875rem;
+    margin-top: 1rem;
+  }
+
+  .empty-state code {
+    color: var(--color-primary);
+  }
+
+  @media (max-width: 768px) {
+    .page-header h1 {
+      font-size: 2rem;
+    }
+
+    .thoughts-timeline {
+      padding-left: 1.5rem;
+    }
+
+    .thought-marker {
+      left: -1.25rem;
+    }
+
+    .thought-card {
+      margin-left: 0.5rem;
+    }
+  }
+</style>

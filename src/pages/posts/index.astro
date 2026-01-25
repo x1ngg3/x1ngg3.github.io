@@ -1,0 +1,153 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+// 获取所有文章并按日期排序
+const allPosts = (await getCollection('posts'))
+  .filter(post => !post.data.draft)
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+---
+
+<BaseLayout title="文章列表 - x1ngg3 的博客" description="查看所有技术文章">
+  <div class="container">
+    <header class="page-header">
+      <h1>所有文章</h1>
+      <p>共 {allPosts.length} 篇文章</p>
+    </header>
+
+    {allPosts.length > 0 ? (
+      <div class="posts-list">
+        {allPosts.map(post => (
+          <a href={`/posts/${post.slug}`} class="post-item-link">
+            <article class="post-item card">
+              <h2 class="post-title">{post.data.title}</h2>
+              <p class="post-description">{post.data.description}</p>
+              <div class="post-meta">
+                <time datetime={post.data.date.toISOString()}>
+                  {post.data.date.toLocaleDateString('zh-CN', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                  })}
+                </time>
+                {post.data.tags && post.data.tags.length > 0 && (
+                  <div class="post-tags">
+                    {post.data.tags.map(tag => (
+                      <span class="tag">{tag}</span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </article>
+          </a>
+        ))}
+      </div>
+    ) : (
+      <div class="empty-state">
+        <p>还没有文章</p>
+        <p class="hint">在 <code>src/content/posts/</code> 目录创建 <code>.md</code> 或 <code>.mdx</code> 文件来添加你的第一篇文章吧！</p>
+      </div>
+    )}
+  </div>
+</BaseLayout>
+
+<style>
+  .page-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid var(--color-border);
+  }
+
+  .page-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .page-header p {
+    color: var(--color-text-secondary);
+    font-size: 1rem;
+  }
+
+  .posts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .post-item-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  .post-item {
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+
+  .post-title {
+    font-size: 1.75rem;
+    margin: 0 0 0.75rem;
+    color: var(--color-text);
+    transition: color 0.2s;
+  }
+
+  .post-item-link:hover .post-title {
+    color: var(--color-primary);
+  }
+
+  .post-description {
+    color: var(--color-text-secondary);
+    margin: 0 0 1rem;
+    line-height: 1.6;
+  }
+
+  .post-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+  }
+
+  .post-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: var(--color-bg-secondary);
+    border-radius: 12px;
+  }
+
+  .empty-state p {
+    color: var(--color-text-secondary);
+    font-size: 1.125rem;
+  }
+
+  .empty-state .hint {
+    font-size: 0.875rem;
+    margin-top: 1rem;
+  }
+
+  .empty-state code {
+    color: var(--color-primary);
+  }
+
+  @media (max-width: 768px) {
+    .page-header h1 {
+      font-size: 2rem;
+    }
+
+    .post-meta {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

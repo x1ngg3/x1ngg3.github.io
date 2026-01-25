@@ -1,0 +1,181 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="关于 - x1ngg3 的博客" description="关于我和这个博客">
+  <div class="container">
+    <article class="about-content">
+      <header class="page-header">
+        <h1>关于我</h1>
+      </header>
+
+      <section class="about-section">
+        <h2>👋 你好！</h2>
+        <p>
+          我是 <strong>x1ngg3</strong>，欢迎来到我的个人博客！
+        </p>
+        <p>
+          这里是我分享技术学习、项目经验和生活感悟的地方。
+        </p>
+      </section>
+
+      <section class="about-section">
+        <h2>💻 技术栈</h2>
+        <p>
+          我主要关注以下技术领域（你可以在这里修改成你的技术栈）：
+        </p>
+        <ul>
+          <li>前端开发：JavaScript, TypeScript, React, Vue</li>
+          <li>后端开发：Node.js, Python</li>
+          <li>数据库：MySQL, MongoDB</li>
+          <li>工具：Git, Docker, Linux</li>
+        </ul>
+      </section>
+
+      <section class="about-section">
+        <h2>📝 关于这个博客</h2>
+        <p>
+          这个博客使用 <a href="https://astro.build" target="_blank" rel="noopener noreferrer">Astro</a> 构建，
+          部署在 <a href="https://pages.github.com" target="_blank" rel="noopener noreferrer">GitHub Pages</a> 上。
+        </p>
+        <p>
+          博客代码开源在 GitHub：
+          <a href="https://github.com/x1ngg3/blog" target="_blank" rel="noopener noreferrer">
+            github.com/x1ngg3/blog
+          </a>
+        </p>
+      </section>
+
+      <section class="about-section">
+        <h2>📬 联系方式</h2>
+        <ul class="contact-list">
+          <li>
+            <strong>GitHub:</strong>
+            <a href="https://github.com/x1ngg3" target="_blank" rel="noopener noreferrer">
+              @x1ngg3
+            </a>
+          </li>
+          <li>
+            <strong>Email:</strong>
+            <a href="mailto:your-email@example.com">your-email@example.com</a>
+          </li>
+          <li>
+            <strong>旧博客:</strong>
+            <a href="https://x1ngg3.github.io" target="_blank" rel="noopener noreferrer">
+              x1ngg3.github.io
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <section class="about-section">
+        <p class="note">
+          💡 <em>提示：你可以直接编辑 <code>src/pages/about/index.astro</code> 文件来修改这个页面的内容！</em>
+        </p>
+      </section>
+    </article>
+  </div>
+</BaseLayout>
+
+<style>
+  .about-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .page-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid var(--color-border);
+  }
+
+  .page-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0;
+  }
+
+  .about-section {
+    margin-bottom: 3rem;
+  }
+
+  .about-section h2 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    color: var(--color-primary);
+  }
+
+  .about-section p {
+    line-height: 1.8;
+    margin: 1rem 0;
+    font-size: 1.125rem;
+  }
+
+  .about-section ul {
+    line-height: 1.8;
+    margin: 1rem 0;
+    font-size: 1.125rem;
+  }
+
+  .about-section li {
+    margin: 0.75rem 0;
+  }
+
+  .about-section a {
+    color: var(--color-primary);
+    text-decoration: underline;
+  }
+
+  .about-section a:hover {
+    color: var(--color-primary-hover);
+  }
+
+  .contact-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .contact-list li {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .contact-list strong {
+    min-width: 80px;
+    color: var(--color-text-secondary);
+  }
+
+  .note {
+    padding: 1.5rem;
+    background: var(--color-bg-secondary);
+    border-radius: 8px;
+    border-left: 4px solid var(--color-primary);
+    font-size: 0.875rem;
+  }
+
+  .note code {
+    font-size: 0.875rem;
+  }
+
+  @media (max-width: 768px) {
+    .page-header h1 {
+      font-size: 2rem;
+    }
+
+    .about-section h2 {
+      font-size: 1.5rem;
+    }
+
+    .about-section p,
+    .about-section ul {
+      font-size: 1rem;
+    }
+
+    .contact-list li {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.25rem;
+    }
+  }
+</style>

@@ -1,0 +1,138 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'x1ngg3 的博客',
+  description = '技术分享与生活碎碎念'
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content={description}>
+  <meta name="generator" content={Astro.generator}>
+  <title>{title}</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+</head>
+<body>
+  <header class="header">
+    <nav class="container">
+      <div class="nav-wrapper">
+        <a href="/" class="logo">
+          <span class="logo-text">x1ngg3</span>
+        </a>
+        <div class="nav-links">
+          <a href="/">首页</a>
+          <a href="/posts">文章</a>
+          <a href="/thoughts">说说</a>
+          <a href="/tags">标签</a>
+          <a href="/about">关于</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="main">
+    <slot />
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; {new Date().getFullYear()} x1ngg3. All rights reserved.</p>
+      <p>
+        <a href="https://github.com/x1ngg3" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <span> · </span>
+        <a href="https://x1ngg3.github.io" target="_blank" rel="noopener noreferrer">旧博客</a>
+      </p>
+    </div>
+  </footer>
+</body>
+</html>
+
+<style>
+  .header {
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.9);
+  }
+
+  .nav-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  .logo:hover {
+    color: var(--color-primary);
+  }
+
+  .logo-text {
+    background: linear-gradient(135deg, var(--color-primary), #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .nav-links a {
+    color: var(--color-text);
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover {
+    color: var(--color-primary);
+  }
+
+  .main {
+    min-height: calc(100vh - 200px);
+    padding: 3rem 0;
+  }
+
+  .footer {
+    background: var(--color-bg-secondary);
+    padding: 2rem 0;
+    text-align: center;
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+    margin-top: 4rem;
+  }
+
+  .footer a {
+    color: var(--color-text-secondary);
+  }
+
+  .footer a:hover {
+    color: var(--color-primary);
+  }
+
+  @media (max-width: 768px) {
+    .nav-links {
+      gap: 1rem;
+      font-size: 0.875rem;
+    }
+  }
+</style>
