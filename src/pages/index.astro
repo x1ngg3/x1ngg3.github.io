@@ -25,8 +25,8 @@ const thoughtsWithContent = await Promise.all(
 ---
 
 <BaseLayout title="x1ngg3 的博客 - 首页">
-  <!-- 第一屏：全屏 Hero -->
-  <div class="hero-screen">
+  <div class="container">
+    <!-- Apple 风格 Hero Section -->
     <section class="hero">
       <h1 class="hero-title">Hi, 我是 x1ngg3</h1>
       <p class="hero-subtitle">
@@ -40,98 +40,83 @@ const thoughtsWithContent = await Promise.all(
         <a href="/thoughts" class="button button-secondary">看看说说</a>
       </div>
     </section>
-  </div>
 
-  <!-- 第二屏：最新内容 -->
-  <div class="content-section">
-    <div class="container">
-      <!-- 双列布局：最新文章 + 最新说说 -->
-      <div class="two-column-layout">
-        <!-- 左列：最新文章 -->
-        <section class="column">
-          <div class="section-header">
-            <h2>最新文章</h2>
-            <a href="/posts" class="view-all">查看全部 →</a>
-          </div>
+    <!-- 双列布局：最新文章 + 最新说说 -->
+    <div class="two-column-layout">
+      <!-- 左列：最新文章 -->
+      <section class="column">
+        <div class="section-header">
+          <h2>最新文章</h2>
+          <a href="/posts" class="view-all">查看全部 →</a>
+        </div>
 
-          {recentPosts.length > 0 ? (
-            <div class="posts-list">
-              {recentPosts.map(post => (
-                <a href={`/posts/${post.slug}`} class="post-item-link">
-                  <article class="post-item card">
-                    <h3 class="post-title">{post.data.title}</h3>
-                    <p class="post-description">{post.data.description}</p>
-                    <time class="post-date" datetime={post.data.date.toISOString()}>
-                      {post.data.date.toLocaleDateString('zh-CN', {
-                        month: 'long',
-                        day: 'numeric'
-                      })}
-                    </time>
-                  </article>
-                </a>
-              ))}
-            </div>
-          ) : (
-            <p class="empty-state">还没有文章</p>
-          )}
-        </section>
-
-        <!-- 右列：最新说说 -->
-        <section class="column">
-          <div class="section-header">
-            <h2>最新说说</h2>
-            <a href="/thoughts" class="view-all">查看全部 →</a>
-          </div>
-
-          {thoughtsWithContent.length > 0 ? (
-            <div class="thoughts-list">
-              {thoughtsWithContent.map(({ thought, Content }) => (
-                <div class="thought-item card">
-                  <div class="thought-content">
-                    <Content />
-                  </div>
-                  <time class="thought-time" datetime={thought.data.date.toISOString()}>
-                    {thought.data.date.toLocaleDateString('zh-CN', {
+        {recentPosts.length > 0 ? (
+          <div class="posts-list">
+            {recentPosts.map(post => (
+              <a href={`/posts/${post.slug}`} class="post-item-link">
+                <article class="post-item card">
+                  <h3 class="post-title">{post.data.title}</h3>
+                  <p class="post-description">{post.data.description}</p>
+                  <time class="post-date" datetime={post.data.date.toISOString()}>
+                    {post.data.date.toLocaleDateString('zh-CN', {
                       month: 'long',
-                      day: 'numeric',
-                      hour: '2-digit',
-                      minute: '2-digit'
+                      day: 'numeric'
                     })}
                   </time>
+                </article>
+              </a>
+            ))}
+          </div>
+        ) : (
+          <p class="empty-state">还没有文章</p>
+        )}
+      </section>
+
+      <!-- 右列：最新说说 -->
+      <section class="column">
+        <div class="section-header">
+          <h2>最新说说</h2>
+          <a href="/thoughts" class="view-all">查看全部 →</a>
+        </div>
+
+        {thoughtsWithContent.length > 0 ? (
+          <div class="thoughts-list">
+            {thoughtsWithContent.map(({ thought, Content }) => (
+              <div class="thought-item card">
+                <div class="thought-content">
+                  <Content />
                 </div>
-              ))}
-            </div>
-          ) : (
-            <p class="empty-state">还没有说说</p>
-          )}
-        </section>
-      </div>
+                <time class="thought-time" datetime={thought.data.date.toISOString()}>
+                  {thought.data.date.toLocaleDateString('zh-CN', {
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                  })}
+                </time>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p class="empty-state">还没有说说</p>
+        )}
+      </section>
     </div>
   </div>
 </BaseLayout>
 
 <style>
-  /* 第一屏：满屏 Hero */
-  .hero-screen {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    /* 考虑导航栏，视觉上向上偏移 8% */
-    padding-bottom: 8vh;
-  }
-
-  /* Apple 风格 Hero - 极简纯净 */
+  /* Apple 风格 Hero - 紧凑版 */
   .hero {
     text-align: center;
-    max-width: 900px;
-    padding: 0 2rem;
+    padding: 5rem 0 4rem;
+    margin-bottom: 4rem;
   }
 
   .hero-title {
-    font-size: 5rem;
+    font-size: 4rem;
     font-weight: 700;
-    margin-bottom: 2rem;
+    margin-bottom: 1.25rem;
     background: linear-gradient(135deg, var(--color-text) 0%, var(--color-text-secondary) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -142,19 +127,19 @@ const thoughtsWithContent = await Promise.all(
   }
 
   .hero-subtitle {
-    font-size: 1.75rem;
+    font-size: 1.5rem;
     color: var(--color-text-secondary);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     font-weight: 500;
     letter-spacing: -0.01em;
     animation: fadeInUp 0.8s ease-out 0.1s backwards;
   }
 
   .hero-description {
-    font-size: 1.375rem;
+    font-size: 1.125rem;
     color: var(--color-text-secondary);
-    max-width: 700px;
-    margin: 0 auto 3.5rem;
+    max-width: 600px;
+    margin: 0 auto 2.5rem;
     line-height: 1.5;
     font-weight: 400;
     opacity: 0.88;
@@ -163,7 +148,7 @@ const thoughtsWithContent = await Promise.all(
 
   .hero-actions {
     display: flex;
-    gap: 1.25rem;
+    gap: 1rem;
     justify-content: center;
     flex-wrap: wrap;
     animation: fadeInUp 0.8s ease-out 0.3s backwards;
@@ -185,17 +170,11 @@ const thoughtsWithContent = await Promise.all(
     color: white;
   }
 
-  /* 第二屏：内容区域 */
-  .content-section {
-    padding: 5rem 0;
-    background: var(--color-bg);
-  }
-
   /* Apple 风格双列布局 */
   .two-column-layout {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 4rem;
+    gap: 3rem;
     align-items: start;
   }
 
@@ -208,12 +187,12 @@ const thoughtsWithContent = await Promise.all(
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    margin-bottom: 2rem;
+    margin-bottom: 1.75rem;
   }
 
   .section-header h2 {
     margin: 0;
-    font-size: 2.25rem;
+    font-size: 2rem;
     font-weight: 700;
     letter-spacing: -0.02em;
     color: var(--color-text);
@@ -222,7 +201,7 @@ const thoughtsWithContent = await Promise.all(
   .view-all {
     color: var(--color-primary);
     font-weight: 500;
-    font-size: 1rem;
+    font-size: 0.9375rem;
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     opacity: 0.88;
   }
@@ -236,7 +215,7 @@ const thoughtsWithContent = await Promise.all(
   .posts-list {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 1rem;
   }
 
   .post-item-link {
@@ -246,7 +225,7 @@ const thoughtsWithContent = await Promise.all(
   }
 
   .post-item {
-    padding: 2rem;
+    padding: 1.5rem;
     cursor: pointer;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     background: var(--glass-bg);
@@ -259,8 +238,8 @@ const thoughtsWithContent = await Promise.all(
   }
 
   .post-title {
-    margin: 0 0 0.75rem;
-    font-size: 1.375rem;
+    margin: 0 0 0.5rem;
+    font-size: 1.25rem;
     font-weight: 600;
     color: var(--color-text);
     transition: color 0.3s;
@@ -274,8 +253,8 @@ const thoughtsWithContent = await Promise.all(
 
   .post-description {
     color: var(--color-text-secondary);
-    margin: 0 0 1rem;
-    font-size: 1rem;
+    margin: 0 0 0.75rem;
+    font-size: 0.9375rem;
     line-height: 1.6;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -284,7 +263,7 @@ const thoughtsWithContent = await Promise.all(
   }
 
   .post-date {
-    font-size: 0.875rem;
+    font-size: 0.8125rem;
     color: var(--color-text-tertiary);
     font-weight: 500;
     letter-spacing: 0.01em;
@@ -294,11 +273,11 @@ const thoughtsWithContent = await Promise.all(
   .thoughts-list {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 1rem;
   }
 
   .thought-item {
-    padding: 1.75rem;
+    padding: 1.5rem;
     background: var(--glass-bg);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
@@ -311,8 +290,8 @@ const thoughtsWithContent = await Promise.all(
 
   .thought-content {
     color: var(--color-text);
-    margin-bottom: 1rem;
-    font-size: 1rem;
+    margin-bottom: 0.75rem;
+    font-size: 0.9375rem;
     line-height: 1.6;
   }
 
@@ -329,7 +308,7 @@ const thoughtsWithContent = await Promise.all(
   }
 
   .thought-time {
-    font-size: 0.875rem;
+    font-size: 0.8125rem;
     color: var(--color-text-tertiary);
     font-weight: 500;
     letter-spacing: 0.01em;
@@ -337,11 +316,11 @@ const thoughtsWithContent = await Promise.all(
 
   .empty-state {
     text-align: center;
-    padding: 4rem 2rem;
+    padding: 3rem 2rem;
     color: var(--color-text-secondary);
     background: var(--color-bg-secondary);
     border-radius: var(--border-radius);
-    font-size: 1rem;
+    font-size: 0.9375rem;
   }
 
   /* 优雅的淡入动画 */
@@ -360,7 +339,7 @@ const thoughtsWithContent = await Promise.all(
   @media (max-width: 968px) {
     .two-column-layout {
       grid-template-columns: 1fr;
-      gap: 4rem;
+      gap: 3rem;
     }
 
     .column {
@@ -369,39 +348,30 @@ const thoughtsWithContent = await Promise.all(
   }
 
   @media (max-width: 768px) {
-    .hero-screen {
-      min-height: 100vh;
-      padding-bottom: 5vh;
-    }
-
     .hero {
-      padding: 0 1.5rem;
+      padding: 4rem 0 3rem;
+      margin-bottom: 3rem;
     }
 
     .hero-title {
-      font-size: 3rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .hero-subtitle {
-      font-size: 1.25rem;
+      font-size: 2.5rem;
       margin-bottom: 1rem;
     }
 
-    .hero-description {
+    .hero-subtitle {
       font-size: 1.125rem;
-      margin-bottom: 2.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-description {
+      font-size: 1rem;
+      margin-bottom: 2rem;
     }
 
     .hero-actions {
       flex-direction: column;
       max-width: 280px;
       margin: 0 auto;
-      gap: 1rem;
-    }
-
-    .content-section {
-      padding: 3rem 0;
     }
 
     .section-header h2 {
@@ -410,11 +380,11 @@ const thoughtsWithContent = await Promise.all(
 
     .post-item,
     .thought-item {
-      padding: 1.5rem;
+      padding: 1.25rem;
     }
 
     .post-title {
-      font-size: 1.25rem;
+      font-size: 1.125rem;
     }
   }
 </style>
