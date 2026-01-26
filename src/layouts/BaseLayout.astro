@@ -57,15 +57,17 @@ const {
 </html>
 
 <style>
+  /* Apple 风格导航栏 - 毛玻璃效果 */
   .header {
-    background: var(--color-bg);
-    border-bottom: 1px solid var(--color-border);
-    padding: 1rem 0;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid var(--glass-border);
+    padding: 1.25rem 0;
     position: sticky;
     top: 0;
-    z-index: 100;
-    backdrop-filter: blur(10px);
-    background: rgba(255, 255, 255, 0.9);
+    z-index: 1000;
+    box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.05);
   }
 
   .nav-wrapper {
@@ -78,14 +80,17 @@ const {
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--color-text);
+    letter-spacing: -0.02em;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .logo:hover {
     color: var(--color-primary);
+    opacity: 1;
   }
 
   .logo-text {
-    background: linear-gradient(135deg, var(--color-primary), #8b5cf6);
+    background: linear-gradient(135deg, var(--color-primary), #7c3aed);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -94,44 +99,91 @@ const {
   .nav-links {
     display: flex;
     gap: 2rem;
+    align-items: center;
   }
 
   .nav-links a {
-    color: var(--color-text);
+    color: var(--color-text-secondary);
     font-weight: 500;
-    transition: color 0.2s;
+    font-size: 1rem;
+    letter-spacing: -0.01em;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%) scaleX(0);
+    width: 100%;
+    height: 2px;
+    background: var(--color-primary);
+    border-radius: 2px;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .nav-links a:hover {
-    color: var(--color-primary);
+    color: var(--color-text);
+    opacity: 1;
+  }
+
+  .nav-links a:hover::after {
+    transform: translateX(-50%) scaleX(1);
   }
 
   .main {
     min-height: calc(100vh - 200px);
-    padding: 3rem 0;
+    padding: 4rem 0;
   }
 
+  /* Apple 风格 Footer */
   .footer {
     background: var(--color-bg-secondary);
-    padding: 2rem 0;
+    padding: 3rem 0;
     text-align: center;
     color: var(--color-text-secondary);
-    font-size: 0.875rem;
-    margin-top: 4rem;
+    font-size: 0.9375rem;
+    margin-top: 6rem;
+    border-top: 1px solid var(--color-border-light);
+  }
+
+  .footer p {
+    margin: 0.5rem 0;
   }
 
   .footer a {
     color: var(--color-text-secondary);
+    transition: color 0.2s;
   }
 
   .footer a:hover {
     color: var(--color-primary);
+    opacity: 1;
   }
 
   @media (max-width: 768px) {
+    .header {
+      padding: 1rem 0;
+    }
+
     .nav-links {
-      gap: 1rem;
-      font-size: 0.875rem;
+      gap: 1.5rem;
+      font-size: 0.9375rem;
+    }
+
+    .logo {
+      font-size: 1.25rem;
+    }
+
+    .main {
+      padding: 3rem 0;
+    }
+
+    .footer {
+      margin-top: 4rem;
+      padding: 2rem 0;
     }
   }
 </style>

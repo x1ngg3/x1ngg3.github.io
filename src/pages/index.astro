@@ -26,14 +26,17 @@ const thoughtsWithContent = await Promise.all(
 
 <BaseLayout title="x1ngg3 的博客 - 首页">
   <div class="container">
-    <!-- Hero Section -->
+    <!-- Apple 风格 Hero Section -->
     <section class="hero">
-      <h1 class="hero-title">Hi, 我是 x1ngg3 👋</h1>
-      <p class="hero-description">
-        欢迎来到我的个人博客！这里记录我的技术学习、项目经验和生活感悟。
+      <h1 class="hero-title">Hi, 我是 x1ngg3</h1>
+      <p class="hero-subtitle">
+        技术创造者 · 终身学习者
       </p>
-      <div class="hero-links">
-        <a href="/posts" class="button">查看文章</a>
+      <p class="hero-description">
+        在这里记录技术探索的点滴，分享学习与成长的故事
+      </p>
+      <div class="hero-actions">
+        <a href="/posts" class="button button-primary">浏览文章</a>
         <a href="/thoughts" class="button button-secondary">看看说说</a>
       </div>
     </section>
@@ -103,51 +106,70 @@ const thoughtsWithContent = await Promise.all(
 </BaseLayout>
 
 <style>
+  /* Apple 风格 Hero Section - 大标题、大留白 */
   .hero {
     text-align: center;
-    padding: 4rem 0 3rem;
-    margin-bottom: 3rem;
-    border-bottom: 1px solid var(--color-border);
+    padding: 8rem 0 6rem;
+    margin-bottom: 5rem;
   }
 
   .hero-title {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    background: linear-gradient(135deg, var(--color-primary), #8b5cf6);
+    font-size: 4.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(135deg, var(--color-text) 0%, var(--color-text-secondary) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+  }
+
+  .hero-subtitle {
+    font-size: 1.5rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 1rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
   }
 
   .hero-description {
     font-size: 1.25rem;
     color: var(--color-text-secondary);
-    max-width: 600px;
-    margin: 0 auto 2rem;
-    line-height: 1.6;
+    max-width: 700px;
+    margin: 0 auto 3rem;
+    line-height: 1.5;
+    font-weight: 400;
   }
 
-  .hero-links {
+  .hero-actions {
     display: flex;
     gap: 1rem;
     justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .button-primary {
+    background: var(--color-primary);
+    color: white;
   }
 
   .button-secondary {
-    background: var(--color-bg-secondary);
-    color: var(--color-text);
+    background: transparent;
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
   }
 
   .button-secondary:hover {
-    background: var(--color-border);
-    color: var(--color-text);
+    background: var(--color-primary);
+    color: white;
   }
 
-  /* 双列布局 */
+  /* Apple 风格双列布局 */
   .two-column-layout {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 3rem;
+    gap: 4rem;
     align-items: start;
   }
 
@@ -155,37 +177,40 @@ const thoughtsWithContent = await Promise.all(
     min-height: 400px;
   }
 
+  /* Section 标题样式 */
   .section-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 2px solid var(--color-border);
+    align-items: baseline;
+    margin-bottom: 2rem;
   }
 
   .section-header h2 {
     margin: 0;
-    font-size: 1.75rem;
+    font-size: 2.25rem;
     font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
   }
 
   .view-all {
     color: var(--color-primary);
     font-weight: 500;
-    font-size: 0.875rem;
-    transition: transform 0.2s;
+    font-size: 1rem;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0.88;
   }
 
   .view-all:hover {
-    transform: translateX(4px);
+    transform: translateX(6px);
+    opacity: 1;
   }
 
-  /* 文章列表样式 */
+  /* 文章列表 - Apple 风格卡片 */
   .posts-list {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.25rem;
   }
 
   .post-item-link {
@@ -195,24 +220,26 @@ const thoughtsWithContent = await Promise.all(
   }
 
   .post-item {
-    padding: 1.25rem;
+    padding: 2rem;
     cursor: pointer;
-    transition: all 0.2s;
-    border-left: 3px solid transparent;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
   }
 
   .post-item:hover {
-    border-left-color: var(--color-primary);
-    transform: translateX(4px);
+    transform: translateY(-4px) scale(1.01);
   }
 
   .post-title {
-    margin: 0 0 0.5rem;
-    font-size: 1.125rem;
+    margin: 0 0 0.75rem;
+    font-size: 1.375rem;
     font-weight: 600;
     color: var(--color-text);
-    transition: color 0.2s;
-    line-height: 1.4;
+    transition: color 0.3s;
+    line-height: 1.3;
+    letter-spacing: -0.015em;
   }
 
   .post-item-link:hover .post-title {
@@ -221,9 +248,9 @@ const thoughtsWithContent = await Promise.all(
 
   .post-description {
     color: var(--color-text-secondary);
-    margin: 0 0 0.75rem;
-    font-size: 0.9375rem;
-    line-height: 1.5;
+    margin: 0 0 1rem;
+    font-size: 1rem;
+    line-height: 1.6;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -231,33 +258,35 @@ const thoughtsWithContent = await Promise.all(
   }
 
   .post-date {
-    font-size: 0.8125rem;
-    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+    color: var(--color-text-tertiary);
     font-weight: 500;
+    letter-spacing: 0.01em;
   }
 
-  /* 说说列表样式 */
+  /* 说说列表 - Apple 风格 */
   .thoughts-list {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.25rem;
   }
 
   .thought-item {
-    padding: 1.25rem;
-    background: var(--color-bg);
-    transition: all 0.2s;
+    padding: 1.75rem;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .thought-item:hover {
-    box-shadow: 0 4px 12px var(--color-shadow);
-    transform: translateY(-2px);
+    transform: translateY(-4px);
   }
 
   .thought-content {
     color: var(--color-text);
-    margin-bottom: 0.75rem;
-    font-size: 0.9375rem;
+    margin-bottom: 1rem;
+    font-size: 1rem;
     line-height: 1.6;
   }
 
@@ -274,25 +303,26 @@ const thoughtsWithContent = await Promise.all(
   }
 
   .thought-time {
-    font-size: 0.8125rem;
-    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+    color: var(--color-text-tertiary);
     font-weight: 500;
+    letter-spacing: 0.01em;
   }
 
   .empty-state {
     text-align: center;
-    padding: 2rem;
+    padding: 4rem 2rem;
     color: var(--color-text-secondary);
     background: var(--color-bg-secondary);
-    border-radius: 12px;
-    font-size: 0.9375rem;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
   }
 
   /* 响应式设计 */
   @media (max-width: 968px) {
     .two-column-layout {
       grid-template-columns: 1fr;
-      gap: 3rem;
+      gap: 4rem;
     }
 
     .column {
@@ -302,25 +332,40 @@ const thoughtsWithContent = await Promise.all(
 
   @media (max-width: 768px) {
     .hero {
-      padding: 3rem 0 2rem;
+      padding: 5rem 0 4rem;
+      margin-bottom: 3rem;
     }
 
     .hero-title {
-      font-size: 2rem;
+      font-size: 2.75rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1.125rem;
     }
 
     .hero-description {
       font-size: 1rem;
+      margin-bottom: 2rem;
     }
 
-    .hero-links {
+    .hero-actions {
       flex-direction: column;
-      max-width: 200px;
+      max-width: 280px;
       margin: 0 auto;
     }
 
     .section-header h2 {
-      font-size: 1.5rem;
+      font-size: 1.75rem;
+    }
+
+    .post-item,
+    .thought-item {
+      padding: 1.5rem;
+    }
+
+    .post-title {
+      font-size: 1.25rem;
     }
   }
 </style>
