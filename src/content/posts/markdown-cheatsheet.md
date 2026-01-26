@@ -2,7 +2,6 @@
 title: "Markdown 语法速查"
 description: "一份简洁的 Markdown 语法参考指南，包含常用的格式化技巧。"
 date: 2024-01-23
-tags: ["Markdown", "教程", "参考"]
 category: "技术"
 draft: false
 ---

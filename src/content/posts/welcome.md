@@ -2,7 +2,6 @@
 title: "欢迎来到我的新博客"
 description: "这是我用 Astro 构建的全新个人博客，记录了搭建过程和一些思考。"
 date: 2024-01-24
-tags: ["博客", "Astro", "Web开发"]
 category: "技术"
 author: "x1ngg3"
 draft: false

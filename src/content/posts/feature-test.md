@@ -2,7 +2,6 @@
 title: "功能测试文章"
 description: "测试代码高亮、图片、各种 Markdown 语法"
 date: 2024-01-25
-tags: ["测试"]
 ---
 
 ## 代码高亮测试
