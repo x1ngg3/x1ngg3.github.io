@@ -3,9 +3,6 @@ title: 随便调调，关于暮色
 date: 2020-6-17
 author: x1ngg3
 description: "突然出现的调色分享，yeah~"
-category: LR
-tags:
-- 调色
 ---
 
 突然出现的调色分享，yeah~

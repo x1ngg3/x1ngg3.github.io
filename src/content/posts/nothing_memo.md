@@ -3,9 +3,6 @@ title: x1ngg3's memo
 date: 2020-10-3
 author: x1ngg3
 description: "我的备忘录"
-category: NOTHING
-tags:
-- ctf
 ---
 
 我的备忘录

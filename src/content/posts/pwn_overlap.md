@@ -3,10 +3,6 @@ title: about chunk
 date: 2020-10-27
 author: x1ngg3
 description: "Chunkextend & Overlap"
-category: PWN
-tags:
-- pwn
-- ctf
 ---
 
 Chunk_extend & Overlap

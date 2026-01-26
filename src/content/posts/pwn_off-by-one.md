@@ -3,10 +3,6 @@ title: Off-by-one
 date: 2020-10-15
 author: x1ngg3
 description: "(；′⌒)"
-category: PWN
-tags:
-- pwn
-- ctf
 ---
 
 (；′⌒`)

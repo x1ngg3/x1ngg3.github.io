@@ -3,9 +3,6 @@ title: 为你读诗
 date: 2020-5-25
 author: x1ngg3
 description: "和我一起读诗吧！"
-category: NOTHING
-tags:
-- nothing
 ---
 
 

@@ -3,10 +3,6 @@ title: Fastbin Attack related
 date: 2020-11-1
 author: x1ngg3
 description: "ಥಥ"
-category: PWN
-tags:
-- pwn
-- ctf
 ---
 
  ಥ_ಥ

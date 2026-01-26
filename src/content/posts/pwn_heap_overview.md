@@ -3,10 +3,6 @@ title: Heap Overview
 date: 2020-10-11
 author: x1ngg3
 description: "heap~"
-category: PWN
-tags:
-- pwn
-- ctf
 ---
 
 heap~

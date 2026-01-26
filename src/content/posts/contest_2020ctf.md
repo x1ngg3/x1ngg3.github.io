@@ -3,10 +3,6 @@ title: 2020ctf
 date: 2020-7-30
 author: x1ngg3
 description: "比赛中的几个题。"
-category: NOTHING
-tags:
-- re
-- ctf
 ---
 
 比赛中的几个题。

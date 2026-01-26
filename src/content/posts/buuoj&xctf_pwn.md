@@ -3,10 +3,6 @@ title: buuoj_pwn
 date: 2020-10-26
 author: x1ngg3
 description: "youhavebeenpwned"
-category: PWN
-tags:
-- pwn
-- ctf
 ---
 
 you_have_been_pwned

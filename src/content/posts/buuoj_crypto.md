@@ -3,10 +3,6 @@ title: buuoj_crypto
 date: 2020-9-3
 author: x1ngg3
 description: "Encyypto & decrypto"
-category: CRYPTO
-tags:
-- crypto
-- ctf
 ---
 
 Encyypto & decrypto

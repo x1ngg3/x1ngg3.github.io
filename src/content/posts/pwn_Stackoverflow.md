@@ -3,10 +3,6 @@ title: StackOverFlow
 date: 2020-9-29
 author: x1ngg3
 description: "from basic to dead"
-category: PWN
-tags:
-- pwn
-- ctf
 ---
 
 from basic to dead

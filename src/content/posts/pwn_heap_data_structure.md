@@ -3,10 +3,6 @@ title: Heap Related Data Structure
 date: 2020-10-22
 author: x1ngg3
 description: "好难啊"
-category: PWN
-tags:
-- pwn
-- ctf
 ---
 
 好难啊

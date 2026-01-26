@@ -7,11 +7,8 @@ const posts = defineCollection({
     title: z.string(),
     description: z.string(),
     date: z.coerce.date(),
-    tags: z.array(z.string()).optional(),
-    category: z.string().optional(),
     author: z.string().default('x1ngg3'),
     draft: z.boolean().default(false),
-    cover: z.string().optional(),
   }),
 });
 
@@ -21,7 +18,6 @@ const thoughts = defineCollection({
   schema: z.object({
     date: z.coerce.date(),
     mood: z.string().optional(),
-    tags: z.array(z.string()).optional(),
   }),
 });
 

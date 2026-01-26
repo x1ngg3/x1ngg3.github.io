@@ -3,10 +3,6 @@ title: 亿天一道RE题（XCTF&&buuoj）
 date: 2020-8-30
 author: x1ngg3
 description: "XCTF-RE进阶区部分实现（持续更新）"
-category: RE
-tags:
-- re
-- ctf
 ---
 
 XCTF-RE进阶区部分实现（持续更新）

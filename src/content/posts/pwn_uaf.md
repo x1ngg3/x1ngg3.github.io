@@ -3,10 +3,6 @@ title: uaf
 date: 2020-10-27
 author: x1ngg3
 description: "ヽ(✿ﾟ▽ﾟ)ノ"
-category: PWN
-tags:
-- pwn
-- ctf
 ---
 
 ヽ(✿ﾟ▽ﾟ)ノ
