@@ -1,10 +1,32 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+// 获取最新的文章和说说
+const allPosts = await getCollection('posts');
+const allThoughts = await getCollection('thoughts');
+
+// 按日期排序并获取最新的几篇
+const recentPosts = allPosts
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+  .slice(0, 6);
+
+const recentThoughts = allThoughts
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+  .slice(0, 8);
+
+// 渲染说说内容
+const thoughtsWithContent = await Promise.all(
+  recentThoughts.map(async (thought) => {
+    const { Content } = await thought.render();
+    return { thought, Content };
+  })
+);
 ---
 
 <BaseLayout title="x1ngg3 的博客 - 首页">
-  <div class="home-container">
-    <!-- Apple 风格全屏 Hero Section -->
+  <!-- 第一屏：全屏 Hero -->
+  <div class="hero-screen">
     <section class="hero">
       <h1 class="hero-title">Hi, 我是 x1ngg3</h1>
       <p class="hero-subtitle">
@@ -19,18 +41,87 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
     </section>
   </div>
+
+  <!-- 第二屏：最新内容 -->
+  <div class="content-section">
+    <div class="container">
+      <!-- 双列布局：最新文章 + 最新说说 -->
+      <div class="two-column-layout">
+        <!-- 左列：最新文章 -->
+        <section class="column">
+          <div class="section-header">
+            <h2>最新文章</h2>
+            <a href="/posts" class="view-all">查看全部 →</a>
+          </div>
+
+          {recentPosts.length > 0 ? (
+            <div class="posts-list">
+              {recentPosts.map(post => (
+                <a href={`/posts/${post.slug}`} class="post-item-link">
+                  <article class="post-item card">
+                    <h3 class="post-title">{post.data.title}</h3>
+                    <p class="post-description">{post.data.description}</p>
+                    <time class="post-date" datetime={post.data.date.toISOString()}>
+                      {post.data.date.toLocaleDateString('zh-CN', {
+                        month: 'long',
+                        day: 'numeric'
+                      })}
+                    </time>
+                  </article>
+                </a>
+              ))}
+            </div>
+          ) : (
+            <p class="empty-state">还没有文章</p>
+          )}
+        </section>
+
+        <!-- 右列：最新说说 -->
+        <section class="column">
+          <div class="section-header">
+            <h2>最新说说</h2>
+            <a href="/thoughts" class="view-all">查看全部 →</a>
+          </div>
+
+          {thoughtsWithContent.length > 0 ? (
+            <div class="thoughts-list">
+              {thoughtsWithContent.map(({ thought, Content }) => (
+                <div class="thought-item card">
+                  <div class="thought-content">
+                    <Content />
+                  </div>
+                  <time class="thought-time" datetime={thought.data.date.toISOString()}>
+                    {thought.data.date.toLocaleDateString('zh-CN', {
+                      month: 'long',
+                      day: 'numeric',
+                      hour: '2-digit',
+                      minute: '2-digit'
+                    })}
+                  </time>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p class="empty-state">还没有说说</p>
+          )}
+        </section>
+      </div>
+    </div>
+  </div>
 </BaseLayout>
 
 <style>
-  /* 全屏容器 */
-  .home-container {
-    min-height: calc(100vh - 80px);
+  /* 第一屏：满屏 Hero */
+  .hero-screen {
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    /* 考虑导航栏，视觉上向上偏移 8% */
+    padding-bottom: 8vh;
   }
 
-  /* Apple 风格全屏 Hero - 极简纯净 */
+  /* Apple 风格 Hero - 极简纯净 */
   .hero {
     text-align: center;
     max-width: 900px;
@@ -94,6 +185,165 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     color: white;
   }
 
+  /* 第二屏：内容区域 */
+  .content-section {
+    padding: 5rem 0;
+    background: var(--color-bg);
+  }
+
+  /* Apple 风格双列布局 */
+  .two-column-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .column {
+    min-height: 400px;
+  }
+
+  /* Section 标题样式 */
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 2rem;
+  }
+
+  .section-header h2 {
+    margin: 0;
+    font-size: 2.25rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+  }
+
+  .view-all {
+    color: var(--color-primary);
+    font-weight: 500;
+    font-size: 1rem;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0.88;
+  }
+
+  .view-all:hover {
+    transform: translateX(6px);
+    opacity: 1;
+  }
+
+  /* 文章列表 - Apple 风格卡片 */
+  .posts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .post-item-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  .post-item {
+    padding: 2rem;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+  }
+
+  .post-item:hover {
+    transform: translateY(-4px) scale(1.01);
+  }
+
+  .post-title {
+    margin: 0 0 0.75rem;
+    font-size: 1.375rem;
+    font-weight: 600;
+    color: var(--color-text);
+    transition: color 0.3s;
+    line-height: 1.3;
+    letter-spacing: -0.015em;
+  }
+
+  .post-item-link:hover .post-title {
+    color: var(--color-primary);
+  }
+
+  .post-description {
+    color: var(--color-text-secondary);
+    margin: 0 0 1rem;
+    font-size: 1rem;
+    line-height: 1.6;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .post-date {
+    font-size: 0.875rem;
+    color: var(--color-text-tertiary);
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+
+  /* 说说列表 - Apple 风格 */
+  .thoughts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .thought-item {
+    padding: 1.75rem;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .thought-item:hover {
+    transform: translateY(-4px);
+  }
+
+  .thought-content {
+    color: var(--color-text);
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .thought-content :global(p) {
+    margin: 0.5rem 0;
+  }
+
+  .thought-content :global(p:first-child) {
+    margin-top: 0;
+  }
+
+  .thought-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .thought-time {
+    font-size: 0.875rem;
+    color: var(--color-text-tertiary);
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--color-text-secondary);
+    background: var(--color-bg-secondary);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+  }
+
   /* 优雅的淡入动画 */
   @keyframes fadeInUp {
     from {
@@ -107,9 +357,21 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
 
   /* 响应式设计 */
+  @media (max-width: 968px) {
+    .two-column-layout {
+      grid-template-columns: 1fr;
+      gap: 4rem;
+    }
+
+    .column {
+      min-height: auto;
+    }
+  }
+
   @media (max-width: 768px) {
-    .home-container {
-      min-height: calc(100vh - 60px);
+    .hero-screen {
+      min-height: 100vh;
+      padding-bottom: 5vh;
     }
 
     .hero {
@@ -136,6 +398,23 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       max-width: 280px;
       margin: 0 auto;
       gap: 1rem;
+    }
+
+    .content-section {
+      padding: 3rem 0;
+    }
+
+    .section-header h2 {
+      font-size: 1.75rem;
+    }
+
+    .post-item,
+    .thought-item {
+      padding: 1.5rem;
+    }
+
+    .post-title {
+      font-size: 1.25rem;
     }
   }
 </style>
