@@ -77,7 +77,7 @@ const { Content, headings } = await post.render();
   .article-container {
     max-width: 800px;
     margin: 0 auto;
-    padding: 3rem 3rem;
+    padding: 3rem 2rem;
     /* 左右留出侧边栏空间 */
     margin-left: 280px;
     margin-right: 240px;
@@ -340,22 +340,29 @@ const { Content, headings } = await post.render();
     color: #9ca3af;
   }
 
-  /* 滚动条样式 */
+  /* 滚动条样式 - 始终显示 */
   .toc-sidebar::-webkit-scrollbar {
-    width: 6px;
+    width: 8px;
   }
 
   .toc-sidebar::-webkit-scrollbar-thumb {
-    background: #e5e7eb;
-    border-radius: 3px;
+    background: #d1d5db;
+    border-radius: 4px;
   }
 
   .toc-sidebar::-webkit-scrollbar-thumb:hover {
-    background: #d1d5db;
+    background: #9ca3af;
   }
 
   .toc-sidebar::-webkit-scrollbar-track {
-    background: transparent;
+    background: #f9fafb;
+    border-right: 1px solid #f3f4f6;
+  }
+
+  /* 确保滚动条始终显示 */
+  .toc-sidebar {
+    scrollbar-width: thin;
+    scrollbar-color: #d1d5db #f9fafb;
   }
 
   /* 响应式设计 */

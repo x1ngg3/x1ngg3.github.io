@@ -131,22 +131,29 @@ const currentPath = Astro.url.pathname;
     font-weight: 400;
   }
 
-  /* 滚动条样式 */
+  /* 滚动条样式 - 始终显示 */
   .sidebar::-webkit-scrollbar {
-    width: 6px;
+    width: 8px;
   }
 
   .sidebar::-webkit-scrollbar-track {
-    background: transparent;
+    background: #f9fafb;
+    border-left: 1px solid #f3f4f6;
   }
 
   .sidebar::-webkit-scrollbar-thumb {
-    background: #e5e7eb;
-    border-radius: 3px;
+    background: #d1d5db;
+    border-radius: 4px;
   }
 
   .sidebar::-webkit-scrollbar-thumb:hover {
-    background: #d1d5db;
+    background: #9ca3af;
+  }
+
+  /* 确保滚动条始终显示 */
+  .sidebar {
+    scrollbar-width: thin;
+    scrollbar-color: #d1d5db #f9fafb;
   }
 
   @media (max-width: 1200px) {
