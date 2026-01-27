@@ -78,9 +78,9 @@ const { Content, headings } = await post.render();
     max-width: 800px;
     margin: 0 auto;
     padding: 3rem 2rem;
-    /* 左右留出侧边栏空间 */
+    /* 左右留出侧边栏空间 - 使用相同宽度实现完美居中 */
     margin-left: 280px;
-    margin-right: 240px;
+    margin-right: 280px;
   }
 
   .article-header {
@@ -280,7 +280,7 @@ const { Content, headings } = await post.render();
     position: fixed;
     right: 0;
     top: 5.5rem;
-    width: 240px;
+    width: 280px;
     height: calc(100vh - 5.5rem);
     overflow-y: auto;
     padding: 3rem 0;
@@ -369,12 +369,12 @@ const { Content, headings } = await post.render();
   @media (max-width: 1400px) {
     .article-container {
       margin-left: 260px;
-      margin-right: 220px;
+      margin-right: 260px;
       padding: 3rem 2rem;
     }
 
     .toc-sidebar {
-      width: 220px;
+      width: 260px;
     }
   }
 
