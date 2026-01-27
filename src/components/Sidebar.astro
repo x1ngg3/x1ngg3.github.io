@@ -41,16 +41,18 @@ const currentPath = Astro.url.pathname;
 
 <style>
   .sidebar {
-    position: sticky;
+    position: fixed;
+    left: 0;
     top: 5.5rem;
-    height: calc(100vh - 6.5rem);
+    width: 280px;
+    height: calc(100vh - 5.5rem);
     overflow-y: auto;
-    border-right: 1px solid #e5e7eb;
     background: #fff;
+    padding: 2rem 0;
   }
 
   .sidebar-nav {
-    padding: 2rem 1.5rem;
+    padding: 0 2rem 0 max(2rem, calc((100vw - 1600px) / 2 + 2rem));
   }
 
   .sidebar-header {
@@ -114,11 +116,11 @@ const currentPath = Astro.url.pathname;
   }
 
   .post-link:hover .post-link-title {
-    color: #0071e3;
+    color: #3b82f6;
   }
 
   .post-link.active .post-link-title {
-    color: #0071e3;
+    color: #3b82f6;
     font-weight: 600;
   }
 
@@ -145,5 +147,11 @@ const currentPath = Astro.url.pathname;
 
   .sidebar::-webkit-scrollbar-thumb:hover {
     background: #d1d5db;
+  }
+
+  @media (max-width: 1200px) {
+    .sidebar {
+      display: none;
+    }
   }
 </style>
