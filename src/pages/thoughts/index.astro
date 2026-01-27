@@ -87,7 +87,7 @@ const thoughtsWithContent = await Promise.all(
     max-width: 800px;
     margin: 0 auto;
     position: relative;
-    padding-left: 2rem;
+    padding-left: 0;
   }
 
   .thoughts-timeline::before {
@@ -103,11 +103,12 @@ const thoughtsWithContent = await Promise.all(
   .thought-item {
     position: relative;
     margin-bottom: 2rem;
+    padding-left: 2.5rem;
   }
 
   .thought-marker {
     position: absolute;
-    left: -1.5rem;
+    left: 0;
     top: 0.5rem;
     width: 12px;
     height: 12px;
@@ -118,7 +119,7 @@ const thoughtsWithContent = await Promise.all(
   }
 
   .thought-card {
-    margin-left: 1rem;
+    margin-left: 0;
   }
 
   .thought-header {
@@ -185,16 +186,16 @@ const thoughtsWithContent = await Promise.all(
       font-size: 2rem;
     }
 
-    .thoughts-timeline {
-      padding-left: 1.5rem;
+    .thoughts-timeline::before {
+      left: 0.25rem;
+    }
+
+    .thought-item {
+      padding-left: 1.75rem;
     }
 
     .thought-marker {
-      left: -1.25rem;
-    }
-
-    .thought-card {
-      margin-left: 0.5rem;
+      left: 0;
     }
   }
 </style>
