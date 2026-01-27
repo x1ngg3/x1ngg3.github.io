@@ -1,0 +1,149 @@
+---
+import { getCollection } from 'astro:content';
+
+const allPosts = (await getCollection('posts'))
+  .filter(post => !post.data.draft)
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+const currentPath = Astro.url.pathname;
+---
+
+<aside class="sidebar">
+  <nav class="sidebar-nav">
+    <div class="sidebar-header">
+      <h3 class="sidebar-title">所有文章</h3>
+      <span class="post-count">{allPosts.length} 篇</span>
+    </div>
+    <ul class="post-list">
+      {allPosts.map((post) => {
+        const isActive = currentPath.includes(post.slug);
+        return (
+          <li>
+            <a
+              href={`/posts/${post.slug}`}
+              class={`post-link ${isActive ? 'active' : ''}`}
+            >
+              <span class="post-link-title">{post.data.title}</span>
+              <time class="post-link-date">
+                {post.data.date.toLocaleDateString('zh-CN', {
+                  year: 'numeric',
+                  month: '2-digit',
+                  day: '2-digit'
+                })}
+              </time>
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+  </nav>
+</aside>
+
+<style>
+  .sidebar {
+    position: sticky;
+    top: 5.5rem;
+    height: calc(100vh - 6.5rem);
+    overflow-y: auto;
+    border-right: 1px solid #e5e7eb;
+    background: #fff;
+  }
+
+  .sidebar-nav {
+    padding: 2rem 1.5rem;
+  }
+
+  .sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #f3f4f6;
+  }
+
+  .sidebar-title {
+    margin: 0;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #111827;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .post-count {
+    font-size: 0.75rem;
+    color: #9ca3af;
+    font-weight: 500;
+  }
+
+  .post-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .post-list li {
+    margin: 0;
+  }
+
+  .post-link {
+    display: block;
+    padding: 0.75rem 1rem;
+    margin: 0 -1rem;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .post-link:hover {
+    background: #f9fafb;
+  }
+
+  .post-link.active {
+    background: #f3f4f6;
+  }
+
+  .post-link-title {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #374151;
+    margin-bottom: 0.25rem;
+    line-height: 1.4;
+  }
+
+  .post-link:hover .post-link-title {
+    color: #0071e3;
+  }
+
+  .post-link.active .post-link-title {
+    color: #0071e3;
+    font-weight: 600;
+  }
+
+  .post-link-date {
+    display: block;
+    font-size: 0.75rem;
+    color: #9ca3af;
+    font-weight: 400;
+  }
+
+  /* 滚动条样式 */
+  .sidebar::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .sidebar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .sidebar::-webkit-scrollbar-thumb {
+    background: #e5e7eb;
+    border-radius: 3px;
+  }
+
+  .sidebar::-webkit-scrollbar-thumb:hover {
+    background: #d1d5db;
+  }
+</style>

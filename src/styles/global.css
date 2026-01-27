@@ -43,14 +43,12 @@
 body {
   font-family: var(--font-sans);
   color: var(--color-text);
-  background: #f9fafb;
-  background-attachment: fixed;
+  background: #fafbfc;
   line-height: 1.6;
   font-size: 17px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   letter-spacing: -0.003em;
-  position: relative;
 }
 
 /* 苹果风格的链接 */
