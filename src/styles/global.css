@@ -13,9 +13,9 @@
   --color-text: #1d1d1f;
   --color-text-secondary: #86868b;
   --color-text-tertiary: #a1a1a6;
-  --color-primary: #0071e3;
-  --color-primary-hover: #0077ed;
-  --color-primary-light: rgba(0, 113, 227, 0.08);
+  --color-primary: #BC6C4D;
+  --color-primary-hover: #CB7E61;
+  --color-primary-light: rgba(188, 108, 77, 0.08);
   --color-border: #d2d2d7;
   --color-border-light: #f5f5f7;
 
@@ -43,7 +43,7 @@
 body {
   font-family: var(--font-sans);
   color: var(--color-text);
-  background: #fdfdf8;
+  background: #FAF9F5;
   line-height: 1.6;
   font-size: 17px;
   -webkit-font-smoothing: antialiased;
