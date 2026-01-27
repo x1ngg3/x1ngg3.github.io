@@ -43,7 +43,7 @@
 body {
   font-family: var(--font-sans);
   color: var(--color-text);
-  background: #fafbfc;
+  background: #fdfdf8;
   line-height: 1.6;
   font-size: 17px;
   -webkit-font-smoothing: antialiased;
