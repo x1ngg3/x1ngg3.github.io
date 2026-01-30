@@ -2,7 +2,7 @@
 title: Hello World!
 date: 2024-01-30
 author: x1ngg3
-description: 我们终其一生，不过是为了能在午后悠闲的享用一杯咖啡
+description: 我们终此一生，不过是为了能在午后悠闲的享用一杯咖啡
 ---
 
 ## 序
