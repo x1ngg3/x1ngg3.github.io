@@ -10,6 +10,12 @@ const {
   title = 'x1ngg3 的博客',
   description = '技术分享与生活碎碎念'
 } = Astro.props;
+
+const currentPath = Astro.url.pathname;
+const isActive = (href: string) => {
+  if (href === '/') return currentPath === '/';
+  return currentPath.startsWith(href);
+};
 ---
 
 <!DOCTYPE html>
@@ -23,20 +29,22 @@ const {
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 </head>
 <body>
-  <header class="header">
-    <nav class="container">
-      <div class="nav-wrapper">
-        <a href="/" class="logo">
-          <span class="logo-text">x1ngg3</span>
+  <header class="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo" aria-label="回到首页">x1ngg3</a>
+
+      <nav class="nav-links" aria-label="主导航">
+        <a href="/posts" class:list={["nav-link", { 'is-active': isActive('/posts') }]}>
+          Writing
         </a>
-        <div class="nav-links">
-          <a href="/">首页</a>
-          <a href="/posts">文章</a>
-          <a href="/thoughts">说说</a>
-          <a href="/about">关于</a>
-        </div>
-      </div>
-    </nav>
+        <a href="/thoughts" class:list={["nav-link", { 'is-active': isActive('/thoughts') }]}>
+          Notes
+        </a>
+        <a href="/about" class:list={["nav-link", { 'is-active': isActive('/about') }]}>
+          About
+        </a>
+      </nav>
+    </div>
   </header>
 
   <main class="main">
@@ -44,140 +52,236 @@ const {
   </main>
 
   <footer class="footer">
-    <div class="container">
-      <p>&copy; {new Date().getFullYear()} x1ngg3. All rights reserved.</p>
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-col footer-brand">
+          <p class="footer-logo">x1ngg3</p>
+          <p class="footer-tagline">
+            A quiet place for notes on security, code, and life.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Sections</h4>
+          <ul class="footer-list">
+            <li><a href="/">Home</a></li>
+            <li><a href="/posts">Writing</a></li>
+            <li><a href="/thoughts">Notes</a></li>
+            <li><a href="/about">About</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Elsewhere</h4>
+          <ul class="footer-list">
+            <li><a href="https://github.com/x1ngg3" target="_blank" rel="noopener noreferrer">GitHub ↗</a></li>
+            <li><a href="https://x1ngg3.github.io" target="_blank" rel="noopener noreferrer">Archive ↗</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-base">
+        <p>© {new Date().getFullYear()} x1ngg3. Built with Astro.</p>
+      </div>
     </div>
   </footer>
 </body>
 </html>
 
 <style>
-  /* Apple 风格导航栏 - 毛玻璃效果 */
-  .header {
-    background: rgba(250, 249, 245, 0.80);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border-bottom: 1px solid var(--glass-border);
-    padding: 1.25rem 0;
+  /* ================== 导航栏 ================== */
+  .nav {
     position: sticky;
     top: 0;
-    z-index: 1000;
-    box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.05);
+    z-index: 100;
+    background: rgba(240, 238, 230, 0.88);
+    backdrop-filter: saturate(180%) blur(12px);
+    -webkit-backdrop-filter: saturate(180%) blur(12px);
+    border-bottom: 1px solid var(--color-rule-soft);
   }
 
-  .nav-wrapper {
+  .nav-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 2rem;
   }
 
-  .logo {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--color-text);
-    letter-spacing: -0.02em;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  .nav-logo {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--color-ink);
+    letter-spacing: -0.01em;
   }
 
-  .logo:hover {
-    color: var(--color-primary);
-    opacity: 1;
-  }
-
-  .logo-text {
-    color: #1d1d1f;
+  .nav-logo:hover {
+    color: var(--color-accent);
   }
 
   .nav-links {
     display: flex;
-    gap: 2rem;
     align-items: center;
+    gap: 2rem;
   }
 
-  .nav-links a {
-    color: var(--color-text-secondary);
-    font-weight: 500;
-    font-size: 1rem;
-    letter-spacing: -0.01em;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  .nav-link {
     position: relative;
+    font-family: var(--font-sans);
+    color: var(--color-ink-soft);
+    font-size: 0.92rem;
+    font-weight: 400;
+    letter-spacing: 0.005em;
+    padding: 0.3rem 0;
+    transition: color var(--duration) var(--ease);
   }
 
-  .nav-links a::after {
-    content: '';
+  .nav-link::after {
+    content: "";
     position: absolute;
-    bottom: -4px;
-    left: 50%;
-    transform: translateX(-50%) scaleX(0);
-    width: 100%;
-    height: 2px;
-    background: var(--color-primary);
-    border-radius: 2px;
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--duration) var(--ease);
   }
 
-  .nav-links a:hover {
-    color: var(--color-text);
-    opacity: 1;
+  .nav-link:hover {
+    color: var(--color-ink);
   }
 
-  .nav-links a:hover::after {
-    transform: translateX(-50%) scaleX(1);
+  .nav-link:hover::after {
+    transform: scaleX(1);
   }
 
+  .nav-link.is-active {
+    color: var(--color-ink);
+  }
+
+  .nav-link.is-active::after {
+    background: var(--color-accent);
+    transform: scaleX(1);
+  }
+
+  /* ================== Main ================== */
   .main {
-    min-height: calc(100vh - 200px);
-    padding: 4rem 0;
-    position: relative;
-    z-index: 1;
+    min-height: calc(100vh - 400px);
   }
 
-  /* Apple 风格 Footer */
+  /* ================== Footer ================== */
   .footer {
-    background: var(--color-bg-secondary);
-    padding: 3rem 0;
-    text-align: center;
-    color: var(--color-text-secondary);
-    font-size: 0.9375rem;
     margin-top: 6rem;
-    border-top: 1px solid var(--color-border-light);
+    padding: 4rem 0 2.5rem;
+    background: var(--color-bg-offset);
+    border-top: 1px solid var(--color-rule-soft);
   }
 
-  .footer p {
-    margin: 0.5rem 0;
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid var(--color-rule);
   }
 
-  .footer a {
-    color: var(--color-text-secondary);
-    transition: color 0.2s;
+  .footer-col {
+    min-width: 0;
   }
 
-  .footer a:hover {
-    color: var(--color-primary);
-    opacity: 1;
+  .footer-brand {
+    max-width: 400px;
   }
 
+  .footer-logo {
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--color-ink);
+    margin: 0 0 0.6rem;
+    letter-spacing: -0.01em;
+  }
+
+  .footer-tagline {
+    color: var(--color-ink-mute);
+    font-size: 0.92rem;
+    line-height: 1.55;
+    margin: 0;
+    font-style: italic;
+  }
+
+  .footer-heading {
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-ink-mute);
+    margin: 0 0 1rem;
+  }
+
+  .footer-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .footer-list a {
+    color: var(--color-ink-soft);
+    font-size: 0.92rem;
+    transition: color var(--duration) var(--ease);
+  }
+
+  .footer-list a:hover {
+    color: var(--color-accent);
+  }
+
+  .footer-base {
+    padding-top: 2rem;
+    color: var(--color-ink-mute);
+    font-size: 0.82rem;
+  }
+
+  .footer-base p {
+    margin: 0;
+    color: inherit;
+  }
+
+  /* ================== 响应式 ================== */
   @media (max-width: 768px) {
-    .header {
-      padding: 1rem 0;
+    .nav-inner {
+      padding: 0.85rem 1.25rem;
+    }
+
+    .nav-logo {
+      font-size: 1.05rem;
     }
 
     .nav-links {
-      gap: 1.5rem;
-      font-size: 0.9375rem;
+      gap: 1.25rem;
     }
 
-    .logo {
-      font-size: 1.25rem;
-    }
-
-    .main {
-      padding: 3rem 0;
+    .nav-link {
+      font-size: 0.88rem;
     }
 
     .footer {
       margin-top: 4rem;
-      padding: 2rem 0;
+      padding: 3rem 0 2rem;
+    }
+
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: 2.25rem;
+      padding-bottom: 2rem;
     }
   }
 </style>

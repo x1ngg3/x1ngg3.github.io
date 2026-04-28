@@ -2,139 +2,372 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
-// 获取所有文章并按日期排序
 const allPosts = (await getCollection('posts'))
   .filter(post => !post.data.draft)
   .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+function inferCategory(post: typeof allPosts[number]): string {
+  const title = post.data.title || '';
+  const slug = post.slug || '';
+  const hay = `${title} ${slug}`.toLowerCase();
+  if (/(attention|ai|model|transformer|llm|gpt|neural)/.test(hay)) return 'AI';
+  if (/(经济|economy|market|finance)/.test(hay)) return 'Reading';
+  if (/(security|iot|pwn|cve|vuln|exploit)/.test(hay)) return 'Security';
+  if (/(photo|travel|旅|摄)/.test(hay)) return 'Life';
+  return 'Writing';
+}
+
+// 按年份分组
+const groupedByYear = allPosts.reduce((acc, post) => {
+  const year = new Date(post.data.date).getFullYear();
+  if (!acc[year]) acc[year] = [];
+  acc[year].push(post);
+  return acc;
+}, {} as Record<number, typeof allPosts>);
+
+const years = Object.keys(groupedByYear).map(Number).sort((a, b) => b - a);
+
+// 分类统计（用于顶部 chip 显示计数）
+const categoryCount = allPosts.reduce((acc, post) => {
+  const cat = inferCategory(post);
+  acc[cat] = (acc[cat] || 0) + 1;
+  return acc;
+}, {} as Record<string, number>);
+const categories = Object.entries(categoryCount).sort((a, b) => b[1] - a[1]);
+
+const formatDate = (d: Date) =>
+  d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 ---
 
-<BaseLayout title="文章列表 - x1ngg3 的博客" description="查看所有技术文章">
-  <div class="container">
-    <header class="page-header">
-      <h1>所有文章</h1>
-      <p>共 {allPosts.length} 篇文章</p>
+<BaseLayout title="Writing · x1ngg3" description="All essays and notes">
+  <div class="wrap page">
+    <!-- ========= 顶部 ========= -->
+    <header class="page-head">
+      <p class="eyebrow">
+        <span class="eyebrow-dot"></span>
+        Archive
+      </p>
+      <h1 class="page-title">Writing</h1>
+      <p class="page-lede">
+        Longform essays and field notes. {allPosts.length} {allPosts.length === 1 ? 'piece' : 'pieces'} so far.
+      </p>
+
+      {categories.length > 0 && (
+        <div class="chips" role="list">
+          <span class="chip chip-active" role="listitem">
+            All <span class="chip-count">{allPosts.length}</span>
+          </span>
+          {categories.map(([cat, count]) => (
+            <span class="chip" role="listitem">
+              {cat} <span class="chip-count">{count}</span>
+            </span>
+          ))}
+        </div>
+      )}
     </header>
 
+    <!-- ========= 列表主体 ========= -->
     {allPosts.length > 0 ? (
-      <div class="posts-list">
-        {allPosts.map(post => (
-          <a href={`/posts/${post.slug}`} class="post-item-link">
-            <article class="post-item card">
-              <h2 class="post-title">{post.data.title}</h2>
-              <p class="post-description">{post.data.description}</p>
-              <div class="post-meta">
-                <time datetime={post.data.date.toISOString()}>
-                  {post.data.date.toLocaleDateString('zh-CN', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                  })}
-                </time>
-              </div>
-            </article>
-          </a>
+      <div class="archive">
+        {years.map((year) => (
+          <section class="year-block">
+            <header class="year-head">
+              <h2 class="year-label">{year}</h2>
+              <span class="year-count">
+                {groupedByYear[year].length} {groupedByYear[year].length === 1 ? 'piece' : 'pieces'}
+              </span>
+            </header>
+
+            <ul class="rows">
+              {groupedByYear[year].map((post) => (
+                <li class="row">
+                  <a href={`/posts/${post.slug}`} class="row-link">
+                    <time class="row-date" datetime={post.data.date.toISOString()}>
+                      {formatDate(post.data.date)}
+                    </time>
+                    <span class="row-category">{inferCategory(post)}</span>
+                    <div class="row-body">
+                      <h3 class="row-title">{post.data.title}</h3>
+                      {post.data.description && (
+                        <p class="row-desc">{post.data.description}</p>
+                      )}
+                    </div>
+                    <span class="row-arrow" aria-hidden="true">→</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
         ))}
       </div>
     ) : (
-      <div class="empty-state">
-        <p>还没有文章</p>
-        <p class="hint">在 <code>src/content/posts/</code> 目录创建 <code>.md</code> 或 <code>.mdx</code> 文件来添加你的第一篇文章吧！</p>
+      <div class="empty">
+        <p>Nothing here yet.</p>
+        <p class="empty-hint">
+          Add your first <code>.md</code> in <code>src/content/posts/</code>.
+        </p>
       </div>
     )}
   </div>
 </BaseLayout>
 
 <style>
-  .page-header {
-    text-align: center;
-    margin-bottom: 3rem;
-    padding-bottom: 2rem;
-    border-bottom: 2px solid var(--color-border);
+  .page {
+    padding: 4rem 0 2rem;
   }
 
-  .page-header h1 {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
+  /* ========= 顶部 ========= */
+  .page-head {
+    margin-bottom: 4rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--color-rule);
   }
 
-  .page-header p {
-    color: var(--color-text-secondary);
-    font-size: 1rem;
+  .page-head .eyebrow {
+    margin-bottom: 1.5rem;
   }
 
-  .posts-list {
+  .page-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2.75rem, 6vw, 4.5rem);
+    font-weight: 400;
+    letter-spacing: -0.025em;
+    line-height: 1;
+    color: var(--color-ink);
+    margin: 0 0 1.5rem;
+  }
+
+  .page-lede {
+    font-family: var(--font-sans);
+    font-size: 1.05rem;
+    line-height: 1.5;
+    color: var(--color-ink-soft);
+    max-width: 50ch;
+    margin: 0 0 2.5rem;
+  }
+
+  /* ========= 分类 chips ========= */
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.42rem 0.9rem;
+    background: transparent;
+    border: 1px solid var(--color-rule);
+    border-radius: 999px;
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--color-ink-soft);
+    letter-spacing: 0.005em;
+  }
+
+  .chip-active {
+    background: var(--color-ink);
+    border-color: var(--color-ink);
+    color: var(--color-bg);
+  }
+
+  .chip-count {
+    color: var(--color-ink-faint);
+    font-variant-numeric: tabular-nums;
+    font-weight: 400;
+    font-size: 0.78rem;
+  }
+
+  .chip-active .chip-count {
+    color: rgba(240, 238, 230, 0.6);
+  }
+
+  /* ========= 归档列表 ========= */
+  .archive {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 4rem;
   }
 
-  .post-item-link {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-  }
-
-  .post-item {
-    transition: all 0.2s;
-    cursor: pointer;
-  }
-
-  .post-title {
-    font-size: 1.75rem;
-    margin: 0 0 0.75rem;
-    color: var(--color-text);
-    transition: color 0.2s;
-  }
-
-  .post-item-link:hover .post-title {
-    color: var(--color-primary);
-  }
-
-  .post-description {
-    color: var(--color-text-secondary);
-    margin: 0 0 1rem;
-    line-height: 1.6;
-  }
-
-  .post-meta {
+  .year-head {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
+    align-items: baseline;
     gap: 1rem;
-    font-size: 0.875rem;
-    color: var(--color-text-secondary);
+    margin-bottom: 1.25rem;
   }
 
-  .empty-state {
+  .year-label {
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    color: var(--color-ink);
+    margin: 0;
+  }
+
+  .year-count {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    color: var(--color-ink-mute);
+    letter-spacing: 0.01em;
+  }
+
+  .rows {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid var(--color-rule-soft);
+  }
+
+  .row {
+    border-bottom: 1px solid var(--color-rule-soft);
+  }
+
+  .row-link {
+    display: grid;
+    grid-template-columns: 130px 110px 1fr 24px;
+    gap: 1.75rem;
+    align-items: baseline;
+    padding: 1.25rem 0;
+    color: inherit;
+    transition: padding var(--duration) var(--ease);
+  }
+
+  .row-link:hover {
+    padding-left: 0.5rem;
+  }
+
+  .row-date {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    color: var(--color-ink-mute);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.01em;
+  }
+
+  .row-category {
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--color-ink-soft);
+    letter-spacing: 0.01em;
+  }
+
+  .row-body {
+    min-width: 0;
+  }
+
+  .row-title {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    font-weight: 400;
+    letter-spacing: -0.005em;
+    color: var(--color-ink);
+    margin: 0 0 0.3rem;
+    line-height: 1.35;
+    transition: color var(--duration) var(--ease);
+  }
+
+  .row-link:hover .row-title {
+    color: var(--color-accent);
+  }
+
+  .row-desc {
+    font-family: var(--font-sans);
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: var(--color-ink-mute);
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .row-arrow {
+    font-family: var(--font-sans);
+    color: var(--color-ink-faint);
+    font-size: 1rem;
+    opacity: 0;
+    transform: translateX(-4px);
+    transition: all var(--duration) var(--ease);
+  }
+
+  .row-link:hover .row-arrow {
+    opacity: 1;
+    transform: translateX(0);
+    color: var(--color-accent);
+  }
+
+  /* ========= 空状态 ========= */
+  .empty {
     text-align: center;
-    padding: 4rem 2rem;
-    background: #E6E4DC;
-    border-radius: 12px;
+    padding: 5rem 2rem;
+    color: var(--color-ink-mute);
   }
 
-  .empty-state p {
-    color: var(--color-text-secondary);
-    font-size: 1.125rem;
+  .empty-hint {
+    font-size: 0.85rem;
+    color: var(--color-ink-faint);
+    margin-top: 0.5rem;
   }
 
-  .empty-state .hint {
-    font-size: 0.875rem;
-    margin-top: 1rem;
+  .empty code {
+    color: var(--color-accent);
+    background: var(--color-bg-offset);
   }
 
-  .empty-state code {
-    color: var(--color-primary);
-  }
-
+  /* ========= 响应式 ========= */
   @media (max-width: 768px) {
-    .page-header h1 {
-      font-size: 2rem;
+    .page {
+      padding: 2rem 0 1rem;
     }
 
-    .post-meta {
-      flex-direction: column;
-      align-items: flex-start;
+    .page-head {
+      margin-bottom: 2.5rem;
+      padding-bottom: 2rem;
+    }
+
+    .page-title {
+      font-size: 2.5rem;
+    }
+
+    .archive {
+      gap: 3rem;
+    }
+
+    .year-label {
+      font-size: 1.5rem;
+    }
+
+    .row-link {
+      grid-template-columns: 1fr;
+      gap: 0.3rem;
+      padding: 1rem 0;
+    }
+
+    .row-link:hover {
+      padding-left: 0;
+    }
+
+    .row-date {
+      font-size: 0.78rem;
+    }
+
+    .row-category {
+      font-size: 0.78rem;
+      color: var(--color-accent);
+    }
+
+    .row-title {
+      font-size: 1.05rem;
+    }
+
+    .row-arrow {
+      display: none;
     }
   }
 </style>

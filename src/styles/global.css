@@ -1,283 +1,350 @@
-/* Apple 风格全局样式 */
-* {
+/* ------------------------------------------------------------------
+ * x1ngg3 的博客 — Anthropic-inspired 设计系统
+ *
+ * 视觉语言参考：anthropic.com/news, /research, /engineering
+ * 核心特征：暖奶油背景 + 墨色文本 + 锈橙点睛 + 衬线大标题
+ * ------------------------------------------------------------------ */
+
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
 :root {
-  /* Apple 配色系统 */
-  --color-bg: #ffffff;
-  --color-bg-secondary: #fafafa;
-  --color-bg-elevated: #fbfbfd;
-  --color-text: #1d1d1f;
-  --color-text-secondary: #86868b;
-  --color-text-tertiary: #a1a1a6;
-  --color-primary: #BC6C4D;
-  --color-primary-hover: #CB7E61;
-  --color-primary-light: rgba(188, 108, 77, 0.08);
-  --color-border: #d2d2d7;
-  --color-border-light: #f5f5f7;
+  /* —— 色板（Anthropic Book Paper 基调）—— */
+  --color-bg: #F0EEE6;              /* 主背景：暖奶油纸色 */
+  --color-bg-offset: #E8E5DA;       /* 次级背景：分区/高亮 */
+  --color-bg-deep: #DCD8C9;         /* 更深底色：code bg */
+  --color-ink: #141413;             /* 主文本：近黑墨色 */
+  --color-ink-soft: #3D3D3A;        /* 次要文本 */
+  --color-ink-mute: #706F6A;        /* 辅助文本：日期/分类 */
+  --color-ink-faint: #A0A098;       /* 最淡：占位/水印 */
+  --color-rule: #D5D1C3;            /* 分隔线 */
+  --color-rule-soft: #E2DED1;       /* 淡分隔线 */
 
-  /* 苹果风格阴影 - 增强深度 */
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
-  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.06);
-  --shadow-xl: 0 20px 64px rgba(0, 0, 0, 0.12), 0 4px 16px rgba(0, 0, 0, 0.08);
+  --color-accent: #CC785C;          /* Claude 锈橙：点睛色 */
+  --color-accent-deep: #B05E43;     /* 悬浮/激活 */
+  --color-accent-wash: rgba(204, 120, 92, 0.10);
 
-  /* 玻璃拟态效果 - 增强质感 */
-  --glass-bg: rgba(255, 255, 255, 0.80);
-  --glass-border: rgba(255, 255, 255, 0.25);
-  --glass-highlight: rgba(255, 255, 255, 0.5);
+  /* —— 字体栈 ——
+   * 标题：衬线（Anthropic "Tiempos" → Source Serif / 思源宋体 / 系统衬线）
+   * 正文：无衬线（Anthropic "Styrene B" → system-ui / PingFang SC）
+   * 代码：等宽
+   */
+  --font-serif: "Source Serif 4", "Source Serif Pro", "Noto Serif SC",
+    "Source Han Serif SC", "Songti SC", "STSong", "SimSun", Georgia,
+    "Times New Roman", serif;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "PingFang SC",
+    "HarmonyOS Sans SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", ui-monospace, "Cascadia Code",
+    "Source Code Pro", Menlo, Consolas, monospace;
 
-  /* 布局 */
-  --max-width: 1200px;
-  --border-radius: 18px;
-  --border-radius-sm: 12px;
+  /* —— 布局 ——
+   * Anthropic 使用更宽的内容容器（约 1280px），内部再细分
+   */
+  --max-width: 1280px;
+  --reading-width: 720px;
 
-  /* 字体 */
-  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
-  --font-mono: "SF Mono", ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas, monospace;
+  /* —— 尺寸/韵律 —— */
+  --radius-sm: 3px;
+  --radius-md: 6px;
+
+  /* —— 过渡 —— */
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --duration: 240ms;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--color-bg);
 }
 
 body {
   font-family: var(--font-sans);
-  color: var(--color-text);
-  background: #FAF9F5;
+  color: var(--color-ink);
+  background: var(--color-bg);
+  font-size: 16px;
   line-height: 1.6;
-  font-size: 17px;
+  letter-spacing: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  letter-spacing: -0.003em;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern", "liga", "calt";
 }
 
-/* 苹果风格的链接 */
+/* 选中高亮 */
+::selection {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+/* —— 链接 —— */
 a {
-  color: var(--color-primary);
+  color: var(--color-ink);
   text-decoration: none;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: color var(--duration) var(--ease);
 }
 
 a:hover {
-  color: var(--color-primary-hover);
-  opacity: 0.88;
+  color: var(--color-accent);
 }
 
-/* 苹果风格的标题 */
-h1, h2, h3, h4, h5, h6 {
-  margin: 1.5rem 0 1rem;
-  line-height: 1.1;
-  font-weight: 600;
-  letter-spacing: -0.015em;
-  color: var(--color-text);
+/* —— 标题：衬线体（Anthropic 关键视觉特征） —— */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-serif);
+  color: var(--color-ink);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
 }
 
 h1 {
-  font-size: 3.5rem;
-  font-weight: 700;
-  letter-spacing: -0.025em;
-}
-h2 {
-  font-size: 2.5rem;
-  font-weight: 600;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 400;
   letter-spacing: -0.02em;
+  line-height: 1.05;
 }
+
+h2 {
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+}
+
 h3 {
-  font-size: 1.75rem;
-  font-weight: 600;
+  font-size: 1.4rem;
+  font-weight: 500;
 }
-h4 { font-size: 1.5rem; }
-h5 { font-size: 1.25rem; }
-h6 { font-size: 1rem; }
+
+h4 {
+  font-size: 1.15rem;
+  font-weight: 500;
+}
+
+h5,
+h6 {
+  font-size: 1rem;
+  font-weight: 500;
+}
 
 p {
-  margin: 1rem 0;
-  color: var(--color-text);
-  line-height: 1.6;
+  color: var(--color-ink);
+  line-height: 1.7;
 }
 
-/* 代码块样式 */
+strong {
+  font-weight: 600;
+}
+
+/* —— 代码 —— */
 code {
   font-family: var(--font-mono);
-  font-size: 0.92em;
-  background: rgba(142, 142, 147, 0.12);
-  padding: 0.2em 0.5em;
-  border-radius: 6px;
+  font-size: 0.88em;
+  background: var(--color-bg-offset);
+  padding: 0.1em 0.35em;
+  border-radius: var(--radius-sm);
+  color: var(--color-ink);
   font-weight: 400;
 }
 
 pre {
-  margin: 1.5rem 0;
-  padding: 1.25rem;
+  margin: 1.75rem 0;
+  padding: 1.25rem 1.4rem;
   overflow-x: auto;
-  border-radius: var(--border-radius-sm);
-  background: #1d1d1f !important;
-  box-shadow: var(--shadow-md);
+  border-radius: var(--radius-md);
+  background: #1A1918 !important;
+  font-size: 0.88rem;
+  line-height: 1.65;
+  border: 1px solid #2A2826;
 }
 
 pre code {
   background: transparent;
   padding: 0;
-  font-size: 0.9rem;
-  line-height: 1.6;
+  color: #E8E4DB;
+  font-size: inherit;
 }
 
-/* 图片样式 */
+/* —— 图片 —— */
 img {
   max-width: 100%;
   height: auto;
-  border-radius: var(--border-radius-sm);
-  box-shadow: var(--shadow-sm);
+  border-radius: var(--radius-sm);
 }
 
-/* 引用块 */
+/* —— 引用 —— */
 blockquote {
-  margin: 2rem 0;
-  padding: 1rem 1.5rem;
-  border-left: 3px solid #BC6C4D;
-  background: #E6E4DC;
-  border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
+  margin: 1.75rem 0;
+  padding: 0.25rem 0 0.25rem 1.25rem;
+  border-left: 2px solid var(--color-accent);
+  color: var(--color-ink-soft);
   font-style: normal;
-  color: var(--color-text-secondary);
 }
 
-ul, ol {
-  margin: 1rem 0;
-  padding-left: 2rem;
+blockquote p {
+  color: inherit;
+}
+
+/* —— 列表 —— */
+ul,
+ol {
+  padding-left: 1.5rem;
+  line-height: 1.7;
 }
 
 li {
-  margin: 0.5rem 0;
-  line-height: 1.6;
+  margin: 0.35rem 0;
 }
 
+/* —— 分隔线 —— */
 hr {
-  margin: 3rem 0;
+  margin: 2.5rem 0;
   border: none;
-  border-top: 1px solid var(--color-border-light);
+  border-top: 1px solid var(--color-rule);
 }
 
-/* 容器 */
-.container {
+/* —— 容器 —— */
+.wrap {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0 1.5rem;
-  position: relative;
-  z-index: 1;
+  padding: 0 2rem;
 }
 
-/* 苹果风格卡片 - 玻璃拟态效果 */
-.card {
-  background: #E6E4DC;
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(230, 228, 220, 0.3);
-  border-radius: var(--border-radius);
-  padding: 1.75rem;
-  box-shadow:
-    var(--shadow-md),
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.2);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
+.wrap-narrow {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 2rem;
 }
 
-.card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(188, 108, 77, 0.05),
-    transparent
-  );
-  transition: left 0.5s ease;
+.wrap-reading {
+  max-width: var(--reading-width);
+  margin: 0 auto;
+  padding: 0 2rem;
 }
 
-.card:hover {
-  transform: translateY(-2px);
-  box-shadow:
-    var(--shadow-lg),
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.2);
-  border-color: rgba(188, 108, 77, 0.2);
-  background: #EBE9E2;
-}
-
-.card:hover::before {
-  left: 100%;
-}
-
-/* 苹果风格按钮 */
-.button {
+/* —— 小标签（Eyebrow / Category tag） ——
+ * Anthropic 的关键视觉元素：文章上方的小分类标签
+ */
+.eyebrow {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  padding: 0.75rem 1.5rem;
-  background: var(--color-primary);
-  color: white;
-  border: none;
-  border-radius: 980px;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  font-size: 1rem;
+  gap: 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
   font-weight: 500;
-  letter-spacing: -0.01em;
-  box-shadow: var(--shadow-sm);
+  letter-spacing: 0.02em;
+  color: var(--color-ink-mute);
+  text-transform: none;
 }
 
-.button:hover {
-  background: var(--color-primary-hover);
-  color: white;
-  transform: scale(1.02);
-  box-shadow: var(--shadow-md);
-}
-
-.button:active {
-  transform: scale(0.98);
-}
-
-/* 标签 */
-.tag {
+.eyebrow-dot {
   display: inline-block;
-  padding: 0.375rem 1rem;
-  background: var(--color-bg-secondary);
-  color: var(--color-text-secondary);
-  border-radius: 980px;
-  font-size: 0.875rem;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-accent);
+}
+
+/* —— 文本链接按钮（Anthropic "Learn more →" 风格） —— */
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4ch;
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
   font-weight: 500;
-  margin: 0.25rem;
-  transition: all 0.2s;
-  border: 1px solid var(--color-border-light);
+  border-bottom: 1px solid var(--color-ink);
+  padding-bottom: 0.05rem;
+  transition: color var(--duration) var(--ease),
+    border-color var(--duration) var(--ease);
+}
+
+.link-arrow::after {
+  content: "→";
+  transition: transform var(--duration) var(--ease);
+}
+
+.link-arrow:hover {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+.link-arrow:hover::after {
+  transform: translateX(3px);
+}
+
+/* —— 实心按钮（用作导航栏 CTA 等） —— */
+.button-solid {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.55rem 1.1rem;
+  background: var(--color-ink);
+  color: var(--color-bg);
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-radius: 999px;
+  border: 1px solid var(--color-ink);
+  transition: all var(--duration) var(--ease);
+}
+
+.button-solid:hover {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #fff;
+}
+
+/* —— 标签 —— */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-ink-mute);
+  font-size: 0.78rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  transition: color var(--duration) var(--ease);
+}
+
+.tag::before {
+  content: "#";
+  margin-right: 0.15em;
+  color: var(--color-ink-faint);
 }
 
 .tag:hover {
-  background: var(--color-primary);
-  color: white;
-  border-color: var(--color-primary);
-  transform: translateY(-1px);
+  color: var(--color-accent);
 }
 
-/* 响应式 */
+/* —— 响应式 —— */
 @media (max-width: 768px) {
   body {
-    font-size: 15px;
+    font-size: 15.5px;
   }
 
-  h1 { font-size: 2.5rem; }
-  h2 { font-size: 2rem; }
-  h3 { font-size: 1.5rem; }
-  h4 { font-size: 1.25rem; }
-
-  .container {
-    padding: 0 1rem;
+  h1 {
+    font-size: clamp(2rem, 7vw, 2.75rem);
   }
 
-  .card {
-    padding: 1.25rem;
-    border-radius: var(--border-radius-sm);
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+  }
+
+  .wrap,
+  .wrap-narrow,
+  .wrap-reading {
+    padding: 0 1.25rem;
   }
 }

@@ -6,37 +6,44 @@ const allPosts = (await getCollection('posts'))
   .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
 
 const currentPath = Astro.url.pathname;
+
+const formatDate = (d: Date) =>
+  d.toLocaleDateString('zh-CN', {
+    year: '2-digit',
+    month: '2-digit',
+    day: '2-digit',
+  }).replace(/\//g, '.');
 ---
 
 <aside class="sidebar">
-  <nav class="sidebar-nav">
-    <div class="sidebar-header">
+  <div class="sidebar-inner">
+    <header class="sidebar-head">
+      <p class="sidebar-eyebrow">Index</p>
       <h3 class="sidebar-title">所有文章</h3>
-      <span class="post-count">{allPosts.length} 篇</span>
-    </div>
-    <ul class="post-list">
-      {allPosts.map((post) => {
-        const isActive = currentPath.includes(post.slug);
-        return (
-          <li>
-            <a
-              href={`/posts/${post.slug}`}
-              class={`post-link ${isActive ? 'active' : ''}`}
-            >
-              <span class="post-link-title">{post.data.title}</span>
-              <time class="post-link-date">
-                {post.data.date.toLocaleDateString('zh-CN', {
-                  year: 'numeric',
-                  month: '2-digit',
-                  day: '2-digit'
-                })}
-              </time>
-            </a>
-          </li>
-        );
-      })}
-    </ul>
-  </nav>
+      <span class="sidebar-count">{allPosts.length} 篇</span>
+    </header>
+
+    <nav aria-label="文章列表">
+      <ol class="post-list">
+        {allPosts.map((post) => {
+          const isActive = currentPath.includes(post.slug);
+          return (
+            <li class="post-list-item">
+              <a
+                href={`/posts/${post.slug}`}
+                class:list={["post-link", { 'is-active': isActive }]}
+              >
+                <time class="post-link-date">
+                  {formatDate(post.data.date)}
+                </time>
+                <span class="post-link-title">{post.data.title}</span>
+              </a>
+            </li>
+          );
+        })}
+      </ol>
+    </nav>
+  </div>
 </aside>
 
 <style>
@@ -47,113 +54,125 @@ const currentPath = Astro.url.pathname;
     width: 280px;
     height: calc(100vh - 5.5rem);
     overflow-y: auto;
-    background: #FAF9F5;
-    padding: 0;
+    background: transparent;
   }
 
-  .sidebar-nav {
-    padding: 1.5rem 2rem 0 max(2rem, calc((100vw - 1600px) / 2 + 2rem));
+  .sidebar-inner {
+    padding: 2rem 1.5rem 2rem max(1.5rem, calc((100vw - 1440px) / 2 + 1.5rem));
   }
 
-  .sidebar-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    margin-bottom: 1rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 1px solid #e5e5e5;
+  /* —— 标题 —— */
+  .sidebar-head {
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.85rem;
+    border-bottom: 1px solid var(--color-rule-soft);
+  }
+
+  .sidebar-eyebrow {
+    color: var(--color-ink-faint);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
   }
 
   .sidebar-title {
+    display: inline;
     margin: 0;
-    font-size: 0.8125rem;
-    font-weight: 500;
-    color: #6b7280;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-ink);
+    letter-spacing: -0.005em;
   }
 
-  .post-count {
-    font-size: 0.75rem;
-    color: #9ca3af;
-    font-weight: 500;
+  .sidebar-count {
+    margin-left: 0.5ch;
+    color: var(--color-ink-faint);
+    font-size: 0.78rem;
+    font-weight: 400;
   }
 
+  /* —— 文章列表 —— */
   .post-list {
     list-style: none;
     padding: 0;
     margin: 0;
   }
 
-  .post-list li {
+  .post-list-item {
     margin: 0;
   }
 
   .post-link {
     display: block;
-    padding: 0.5rem 0.75rem;
-    margin: 0 -0.75rem;
-    border-radius: 4px;
+    padding: 0.55rem 0.6rem;
+    margin: 0 -0.6rem;
+    border-radius: var(--radius-sm);
     text-decoration: none;
-    transition: background 0.15s;
+    border-bottom: none;
+    transition: background var(--duration) var(--ease);
   }
 
   .post-link:hover {
-    background: #f5f5f5;
+    background: var(--color-paper-deep);
   }
 
-  .post-link.active {
-    background: #e8e8e8;
-  }
-
-  .post-link-title {
-    display: block;
-    font-size: 0.875rem;
-    font-weight: 400;
-    color: #374151;
-    margin-bottom: 0.25rem;
-    line-height: 1.4;
-  }
-
-  .post-link:hover .post-link-title {
-    color: #BC6C4D;
-  }
-
-  .post-link.active .post-link-title {
-    color: #BC6C4D;
-    font-weight: 500;
+  .post-link.is-active {
+    background: var(--color-paper-deep);
   }
 
   .post-link-date {
     display: block;
-    font-size: 0.75rem;
-    color: #9ca3af;
-    font-weight: 400;
+    color: var(--color-ink-faint);
+    font-size: 0.7rem;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.02em;
+    margin-bottom: 0.2rem;
   }
 
-  /* 滚动条样式 - 始终显示 */
+  .post-link-title {
+    display: block;
+    font-size: 0.86rem;
+    line-height: 1.45;
+    color: var(--color-ink-soft);
+    font-weight: 400;
+    transition: color var(--duration) var(--ease);
+  }
+
+  .post-link:hover .post-link-title {
+    color: var(--color-ink);
+  }
+
+  .post-link.is-active .post-link-title {
+    color: var(--color-accent);
+    font-weight: 500;
+  }
+
+  /* —— 滚动条 —— */
   .sidebar::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
   }
 
   .sidebar::-webkit-scrollbar-track {
     background: transparent;
-    border-left: 1px solid #e5e5e5;
   }
 
   .sidebar::-webkit-scrollbar-thumb {
-    background: #c5c5c5;
+    background: transparent;
     border-radius: 3px;
   }
 
-  .sidebar::-webkit-scrollbar-thumb:hover {
-    background: #a0a0a0;
+  .sidebar:hover::-webkit-scrollbar-thumb {
+    background: var(--color-rule);
   }
 
-  /* 确保滚动条始终显示 */
   .sidebar {
     scrollbar-width: thin;
-    scrollbar-color: #c5c5c5 transparent;
+    scrollbar-color: transparent transparent;
+  }
+
+  .sidebar:hover {
+    scrollbar-color: var(--color-rule) transparent;
   }
 
   @media (max-width: 1200px) {

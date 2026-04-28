@@ -2,455 +2,661 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
-// 获取最新的文章和说说
-const allPosts = await getCollection('posts');
-const allThoughts = await getCollection('thoughts');
+const allPosts = (await getCollection('posts'))
+  .filter(post => !post.data.draft)
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
 
-// 按日期排序并获取最新的几篇
-const recentPosts = allPosts
-  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
-  .slice(0, 6);
+const allThoughts = (await getCollection('thoughts'))
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
 
-const recentThoughts = allThoughts
-  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
-  .slice(0, 8);
+// Newsroom 分层：置顶 1 篇 + 网格 4 篇 + 剩余进入 list
+const [featured, ...rest] = allPosts;
+const gridPosts = rest.slice(0, 4);
+const listPosts = rest.slice(4, 12);
 
-// 渲染说说内容
+const recentThoughts = allThoughts.slice(0, 3);
 const thoughtsWithContent = await Promise.all(
   recentThoughts.map(async (thought) => {
     const { Content } = await thought.render();
     return { thought, Content };
   })
 );
+
+// 由于当前 schema 没有 category，按标题/内容启发式推断一个分类；若无则默认 Writing
+function inferCategory(post: typeof allPosts[number]): string {
+  const title = post.data.title || '';
+  const slug = post.slug || '';
+  const hay = `${title} ${slug}`.toLowerCase();
+  if (/(attention|ai|model|transformer|llm|gpt|neural)/.test(hay)) return 'AI';
+  if (/(经济|economy|market|finance)/.test(hay)) return 'Reading';
+  if (/(security|iot|pwn|cve|vuln|exploit)/.test(hay)) return 'Security';
+  if (/(photo|travel|旅|摄)/.test(hay)) return 'Life';
+  return 'Writing';
+}
+
+const formatLongDate = (d: Date) =>
+  d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+const formatShortDate = (d: Date) =>
+  d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+const formatThoughtTime = (d: Date) =>
+  d.toLocaleDateString('zh-CN', {
+    month: 'long',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  });
 ---
 
-<BaseLayout title="x1ngg3 的博客 - 首页">
-  <div class="container">
-    <!-- Apple 风格 Hero Section -->
-    <section class="hero">
-      <h1 class="hero-title">Welcome to x1ngg3's blog</h1>
-      <p class="hero-subtitle">
-        IoT Sec / Photography / Travel / Musings
+<BaseLayout title="x1ngg3 的博客">
+  <!-- ===================== 顶部：编辑部开篇 ===================== -->
+  <section class="masthead">
+    <div class="wrap masthead-inner">
+      <p class="masthead-eyebrow">
+        <span class="eyebrow-dot"></span>
+        x1ngg3 · notes
       </p>
-      <p class="hero-description">
-        我们终此一生，不过是为了能在午后悠闲的享用一杯咖啡
+      <h1 class="masthead-title">A quiet place<br/>for notes on security,<br/>code, and life.</h1>
+      <p class="masthead-lede">
+        这里收藏着我对 IoT 安全、工程与日常的思考。<br/>
+        Writing slowly, and sometimes about coffee.
       </p>
-      <div class="hero-actions">
-        <a href="/posts" class="button button-primary">浏览文章</a>
-        <a href="/thoughts" class="button button-secondary">看看说说</a>
+
+      <div class="masthead-actions">
+        <a href="/posts" class="link-arrow">Browse writing</a>
+        <span class="masthead-sep" aria-hidden="true">·</span>
+        <a href="/thoughts" class="link-arrow">Read notes</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 置顶文章 ===================== -->
+  {featured && (
+    <section class="featured wrap">
+      <a href={`/posts/${featured.slug}`} class="featured-link">
+        <article class="featured-card">
+          <div class="featured-visual" aria-hidden="true">
+            <div class="featured-mark">{inferCategory(featured).slice(0, 1)}</div>
+            <span class="featured-visual-label">{inferCategory(featured)}</span>
+          </div>
+
+          <div class="featured-body">
+            <p class="eyebrow">
+              <span class="eyebrow-dot"></span>
+              Featured · {inferCategory(featured)} · {formatLongDate(featured.data.date)}
+            </p>
+            <h2 class="featured-title">{featured.data.title}</h2>
+            {featured.data.description && (
+              <p class="featured-desc">{featured.data.description}</p>
+            )}
+            <span class="featured-cta">Read essay →</span>
+          </div>
+        </article>
+      </a>
+    </section>
+  )}
+
+  <!-- ===================== 最新文章（2×2 网格）===================== -->
+  {gridPosts.length > 0 && (
+    <section class="section wrap">
+      <header class="section-head">
+        <h2 class="section-title">Recently published</h2>
+        <a href="/posts" class="section-more">All writing →</a>
+      </header>
+
+      <ul class="grid">
+        {gridPosts.map((post) => (
+          <li class="grid-item">
+            <a href={`/posts/${post.slug}`} class="grid-link">
+              <p class="grid-meta">
+                {inferCategory(post)} · {formatShortDate(post.data.date)}
+              </p>
+              <h3 class="grid-title">{post.data.title}</h3>
+              {post.data.description && (
+                <p class="grid-desc">{post.data.description}</p>
+              )}
+              <span class="grid-cta">Read →</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+  <!-- ===================== 文章索引（date · category · title 三列）===================== -->
+  {listPosts.length > 0 && (
+    <section class="section wrap">
+      <header class="section-head">
+        <h2 class="section-title">From the archive</h2>
+      </header>
+
+      <div class="index-table" role="list">
+        {listPosts.map((post) => (
+          <a href={`/posts/${post.slug}`} class="index-row" role="listitem">
+            <time class="index-date" datetime={post.data.date.toISOString()}>
+              {formatShortDate(post.data.date)}
+            </time>
+            <span class="index-category">{inferCategory(post)}</span>
+            <span class="index-title">{post.data.title}</span>
+          </a>
+        ))}
       </div>
     </section>
+  )}
 
-    <!-- 双列布局：最新文章 + 最新说说 -->
-    <div class="two-column-layout">
-      <!-- 左列：最新文章 -->
-      <section class="column">
-        <div class="section-header">
-          <h2>最新文章</h2>
-          <a href="/posts" class="view-all">查看全部</a>
-        </div>
+  <!-- ===================== 说说 ===================== -->
+  {thoughtsWithContent.length > 0 && (
+    <section class="section section-notes wrap">
+      <header class="section-head">
+        <h2 class="section-title">Field notes</h2>
+        <a href="/thoughts" class="section-more">All notes →</a>
+      </header>
 
-        {recentPosts.length > 0 ? (
-          <div class="posts-list">
-            {recentPosts.map(post => (
-              <a href={`/posts/${post.slug}`} class="post-item-link">
-                <article class="post-item card">
-                  <h3 class="post-title">{post.data.title}</h3>
-                  <p class="post-description">{post.data.description}</p>
-                  <time class="post-date" datetime={post.data.date.toISOString()}>
-                    {post.data.date.toLocaleDateString('zh-CN', {
-                      month: 'long',
-                      day: 'numeric'
-                    })}
-                  </time>
-                </article>
-              </a>
-            ))}
-          </div>
-        ) : (
-          <p class="empty-state">还没有文章</p>
-        )}
-      </section>
-
-      <!-- 右列：最新说说 -->
-      <section class="column">
-        <div class="section-header">
-          <h2>最新说说</h2>
-          <a href="/thoughts" class="view-all">查看全部</a>
-        </div>
-
-        {thoughtsWithContent.length > 0 ? (
-          <div class="thoughts-list">
-            {thoughtsWithContent.map(({ thought, Content }) => (
-              <div class="thought-item card">
-                <div class="thought-content">
-                  <Content />
-                </div>
-                <time class="thought-time" datetime={thought.data.date.toISOString()}>
-                  {thought.data.date.toLocaleDateString('zh-CN', {
-                    month: 'long',
-                    day: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit'
-                  })}
-                </time>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p class="empty-state">还没有说说</p>
-        )}
-      </section>
-    </div>
-  </div>
+      <ul class="notes">
+        {thoughtsWithContent.map(({ thought, Content }) => (
+          <li class="note">
+            <time class="note-time" datetime={thought.data.date.toISOString()}>
+              {formatThoughtTime(thought.data.date)}
+            </time>
+            <div class="note-body">
+              <Content />
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
 </BaseLayout>
 
 <style>
-  /* Apple 风格 Hero - 紧凑版 */
-  .hero {
-    text-align: center;
+  /* ====================== Masthead ====================== */
+  .masthead {
     padding: 5rem 0 4rem;
-    margin-bottom: 4rem;
   }
 
-  .hero-title {
-    font-size: 4rem;
-    font-weight: 600;
-    margin-bottom: 1.25rem;
-    color: #1d1d1f;
-    letter-spacing: -0.02em;
-    line-height: 1.15;
-    animation: fadeInUp 0.8s ease-out;
+  .masthead-inner {
+    max-width: 1040px;
   }
 
-  .hero-subtitle {
-    font-size: 1.5rem;
-    color: var(--color-text-secondary);
-    margin-bottom: 1rem;
+  .masthead-eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
     font-weight: 500;
-    letter-spacing: -0.01em;
-    animation: fadeInUp 0.8s ease-out 0.1s backwards;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-ink-mute);
+    margin-bottom: 2rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
   }
 
-  .hero-description {
-    font-size: 1.125rem;
-    color: var(--color-text-secondary);
-    max-width: 600px;
-    margin: 0 auto 2.5rem;
-    line-height: 1.5;
+  .masthead-eyebrow .eyebrow-dot {
+    width: 7px;
+    height: 7px;
+    background: var(--color-accent);
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .masthead-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2.75rem, 6.5vw, 5rem);
     font-weight: 400;
-    opacity: 0.88;
-    animation: fadeInUp 0.8s ease-out 0.2s backwards;
+    letter-spacing: -0.025em;
+    line-height: 1.02;
+    color: var(--color-ink);
+    margin: 0 0 2.25rem;
+    max-width: 18ch;
   }
 
-  .hero-actions {
+  .masthead-lede {
+    font-family: var(--font-sans);
+    font-size: 1.1rem;
+    line-height: 1.55;
+    color: var(--color-ink-soft);
+    max-width: 42ch;
+    margin: 0 0 2rem;
+  }
+
+  .masthead-actions {
     display: flex;
-    gap: 1rem;
-    justify-content: center;
+    align-items: center;
+    gap: 1.25rem;
     flex-wrap: wrap;
-    animation: fadeInUp 0.8s ease-out 0.3s backwards;
   }
 
-  .button-primary {
-    background: var(--color-primary);
-    color: white;
+  .masthead-sep {
+    color: var(--color-ink-faint);
   }
 
-  .button-secondary {
-    background: transparent;
-    color: var(--color-primary);
-    border: 2px solid var(--color-primary);
+  /* ====================== Featured ====================== */
+  .featured {
+    margin: 0 auto 6rem;
   }
 
-  .button-secondary:hover {
-    background: var(--color-primary);
-    color: white;
+  .featured-link {
+    display: block;
+    color: inherit;
   }
 
-  /* Apple 风格双列布局 */
-  .two-column-layout {
+  .featured-card {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    align-items: stretch;
     gap: 3rem;
-    align-items: start;
+    padding: 2.5rem;
+    background: var(--color-bg-offset);
+    border-radius: 10px;
+    transition: background var(--duration) var(--ease);
   }
 
-  .column {
-    min-height: 400px;
+  .featured-link:hover .featured-card {
+    background: var(--color-bg-deep);
   }
 
-  /* Section 标题样式 */
-  .section-header {
+  .featured-visual {
+    position: relative;
+    min-height: 320px;
+    background: linear-gradient(135deg, var(--color-accent) 0%, #E89478 100%);
+    border-radius: 6px;
+    overflow: hidden;
     display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    margin-bottom: 1.75rem;
-    position: relative;
-    padding-bottom: 0.75rem;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
   }
 
-  .section-header::after {
-    content: '';
+  .featured-visual::before {
+    content: "";
     position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 60px;
-    height: 3px;
-    background: linear-gradient(90deg, var(--color-primary) 0%, transparent 100%);
-    border-radius: 3px;
+    inset: 0;
+    background:
+      radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.12) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.08) 0%, transparent 50%);
   }
 
-  .section-header h2 {
-    margin: 0;
-    font-size: 2rem;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    color: var(--color-text);
+  .featured-mark {
+    position: relative;
+    font-family: var(--font-serif);
+    font-size: 8rem;
+    font-weight: 400;
+    line-height: 1;
+    color: rgba(255, 255, 255, 0.92);
+    letter-spacing: -0.04em;
   }
 
-  .view-all {
-    color: var(--color-primary);
+  .featured-visual-label {
+    position: absolute;
+    bottom: 1.25rem;
+    left: 1.5rem;
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
     font-weight: 500;
-    font-size: 0.9375rem;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    opacity: 0.88;
-    position: relative;
-    padding-right: 1.25rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.92);
   }
 
-  .view-all::after {
-    content: '→';
-    position: absolute;
-    right: 0;
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .view-all:hover {
-    opacity: 1;
-  }
-
-  .view-all:hover::after {
-    transform: translateX(4px);
-  }
-
-  /* 文章列表 - Apple 风格卡片 */
-  .posts-list {
+  .featured-body {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    justify-content: center;
+    padding: 1rem 0;
   }
 
-  .post-item-link {
-    text-decoration: none;
-    color: inherit;
-    display: block;
+  .featured-body .eyebrow {
+    margin-bottom: 1.25rem;
   }
 
-  .post-item {
-    padding: 1.5rem;
-    cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    background: #E6E4DC;
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    position: relative;
-    overflow: hidden;
+  .featured-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 3.5vw, 2.75rem);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+    margin: 0 0 1.25rem;
+    transition: color var(--duration) var(--ease);
   }
 
-  .post-item::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(0, 113, 227, 0.03),
-      transparent
-    );
-    transition: left 0.6s ease;
+  .featured-link:hover .featured-title {
+    color: var(--color-accent);
   }
 
-  .post-item:hover {
-    transform: translateY(-4px) scale(1.01);
-  }
-
-  .post-item:hover::before {
-    left: 100%;
-  }
-
-  .post-title {
-    margin: 0 0 0.5rem;
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--color-text);
-    transition: color 0.3s;
-    line-height: 1.3;
-    letter-spacing: -0.015em;
-  }
-
-  .post-item-link:hover .post-title {
-    color: var(--color-primary);
-  }
-
-  .post-description {
-    color: var(--color-text-secondary);
-    margin: 0 0 0.75rem;
-    font-size: 0.9375rem;
+  .featured-desc {
+    font-size: 1rem;
     line-height: 1.6;
+    color: var(--color-ink-soft);
+    margin: 0 0 1.5rem;
+    max-width: 50ch;
+  }
+
+  .featured-cta {
+    font-family: var(--font-sans);
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: var(--color-ink);
+    border-bottom: 1px solid var(--color-ink);
+    padding-bottom: 0.05rem;
+    align-self: flex-start;
+    transition: all var(--duration) var(--ease);
+  }
+
+  .featured-link:hover .featured-cta {
+    color: var(--color-accent);
+    border-bottom-color: var(--color-accent);
+  }
+
+  /* ====================== Section 通用 ====================== */
+  .section {
+    margin: 0 auto 5rem;
+  }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--color-rule);
+  }
+
+  .section-title {
+    font-family: var(--font-serif);
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    color: var(--color-ink);
+    margin: 0;
+  }
+
+  .section-more {
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    color: var(--color-ink-soft);
+    white-space: nowrap;
+    transition: color var(--duration) var(--ease);
+  }
+
+  .section-more:hover {
+    color: var(--color-accent);
+  }
+
+  /* ====================== 2×2 网格 ====================== */
+  .grid {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--color-rule-soft);
+  }
+
+  .grid-item {
+    border-bottom: 1px solid var(--color-rule-soft);
+    border-right: 1px solid var(--color-rule-soft);
+  }
+
+  .grid-item:nth-child(2n) {
+    border-right: none;
+  }
+
+  .grid-link {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 2rem 2rem 0;
+    margin-right: 2rem;
+    color: inherit;
+    height: 100%;
+    transition: transform var(--duration) var(--ease);
+  }
+
+  .grid-item:nth-child(2n) .grid-link {
+    padding-left: 2rem;
+    padding-right: 0;
+    margin-left: 2rem;
+    margin-right: 0;
+  }
+
+  .grid-link:hover {
+    transform: translateY(-2px);
+  }
+
+  .grid-meta {
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    color: var(--color-ink-mute);
+    margin: 0 0 0.85rem;
+  }
+
+  .grid-title {
+    font-family: var(--font-serif);
+    font-size: 1.45rem;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    color: var(--color-ink);
+    margin: 0 0 0.75rem;
+    transition: color var(--duration) var(--ease);
+  }
+
+  .grid-link:hover .grid-title {
+    color: var(--color-accent);
+  }
+
+  .grid-desc {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: var(--color-ink-soft);
+    margin: 0 0 1.25rem;
+    flex: 1;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
 
-  .post-date {
-    font-size: 0.8125rem;
-    color: var(--color-text-tertiary);
+  .grid-cta {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
     font-weight: 500;
+    color: var(--color-ink-soft);
+    margin-top: auto;
+    transition: color var(--duration) var(--ease);
+  }
+
+  .grid-link:hover .grid-cta {
+    color: var(--color-accent);
+  }
+
+  /* ====================== 归档三列列表 ====================== */
+  .index-table {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--color-rule-soft);
+  }
+
+  .index-row {
+    display: grid;
+    grid-template-columns: 140px 120px 1fr;
+    gap: 2rem;
+    align-items: baseline;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--color-rule-soft);
+    color: inherit;
+    transition: padding var(--duration) var(--ease);
+  }
+
+  .index-row:hover {
+    padding-left: 0.5rem;
+  }
+
+  .index-date {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    color: var(--color-ink-mute);
+    font-variant-numeric: tabular-nums;
     letter-spacing: 0.01em;
   }
 
-  /* 说说列表 - Apple 风格 */
-  .thoughts-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+  .index-category {
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--color-ink-soft);
+    letter-spacing: 0.01em;
   }
 
-  .thought-item {
-    padding: 1.5rem;
-    background: #E6E4DC;
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    overflow: hidden;
+  .index-title {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    font-weight: 400;
+    letter-spacing: -0.005em;
+    color: var(--color-ink);
+    line-height: 1.4;
+    transition: color var(--duration) var(--ease);
   }
 
-  .thought-item::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(124, 58, 237, 0.03),
-      transparent
-    );
-    transition: left 0.6s ease;
+  .index-row:hover .index-title {
+    color: var(--color-accent);
   }
 
-  .thought-item:hover {
-    transform: translateY(-4px);
+  /* ====================== 说说 ====================== */
+  .section-notes .notes {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
   }
 
-  .thought-item:hover::before {
-    left: 100%;
+  .note {
+    padding-top: 1.25rem;
+    border-top: 2px solid var(--color-ink);
   }
 
-  .thought-content {
-    color: var(--color-text);
-    margin-bottom: 0.75rem;
-    font-size: 0.9375rem;
-    line-height: 1.6;
+  .note-time {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--color-ink-mute);
+    letter-spacing: 0.01em;
+    margin-bottom: 0.85rem;
   }
 
-  .thought-content :global(p) {
-    margin: 0.5rem 0;
+  .note-body {
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: var(--color-ink);
   }
 
-  .thought-content :global(p:first-child) {
+  .note-body :global(p) {
+    margin: 0.4rem 0;
+  }
+
+  .note-body :global(p:first-child) {
     margin-top: 0;
   }
 
-  .thought-content :global(p:last-child) {
+  .note-body :global(p:last-child) {
     margin-bottom: 0;
   }
 
-  .thought-time {
-    font-size: 0.8125rem;
-    color: var(--color-text-tertiary);
-    font-weight: 500;
-    letter-spacing: 0.01em;
-  }
-
-  .empty-state {
-    text-align: center;
-    padding: 3rem 2rem;
-    color: var(--color-text-secondary);
-    background: #E6E4DC;
-    border-radius: var(--border-radius);
-    font-size: 0.9375rem;
-  }
-
-  /* 优雅的淡入动画 */
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  /* 响应式设计 */
-  @media (max-width: 968px) {
-    .two-column-layout {
+  /* ====================== 响应式 ====================== */
+  @media (max-width: 960px) {
+    .featured-card {
       grid-template-columns: 1fr;
-      gap: 3rem;
+      gap: 2rem;
+      padding: 2rem;
     }
 
-    .column {
-      min-height: auto;
+    .featured-visual {
+      min-height: 200px;
+    }
+
+    .featured-mark {
+      font-size: 5rem;
+    }
+
+    .grid {
+      grid-template-columns: 1fr;
+    }
+
+    .grid-item {
+      border-right: none;
+    }
+
+    .grid-link,
+    .grid-item:nth-child(2n) .grid-link {
+      padding: 1.5rem 0;
+      margin: 0;
+    }
+
+    .section-notes .notes {
+      grid-template-columns: 1fr;
     }
   }
 
   @media (max-width: 768px) {
-    .hero {
-      padding: 4rem 0 3rem;
-      margin-bottom: 3rem;
+    .masthead {
+      padding: 3rem 0 2.5rem;
     }
 
-    .hero-title {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
+    .masthead-title {
+      font-size: 2.25rem;
+      max-width: 100%;
     }
 
-    .hero-subtitle {
-      font-size: 1.125rem;
-      margin-bottom: 0.75rem;
+    .masthead-lede {
+      font-size: 0.98rem;
     }
 
-    .hero-description {
+    .featured {
+      margin-bottom: 4rem;
+    }
+
+    .featured-title {
+      font-size: 1.6rem;
+    }
+
+    .section {
+      margin-bottom: 3.5rem;
+    }
+
+    .section-title {
+      font-size: 1.35rem;
+    }
+
+    .index-row {
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+      padding: 0.9rem 0;
+    }
+
+    .index-row:hover {
+      padding-left: 0;
+    }
+
+    .index-date,
+    .index-category {
+      font-size: 0.78rem;
+    }
+
+    .index-category {
+      color: var(--color-accent);
+    }
+
+    .index-title {
       font-size: 1rem;
-      margin-bottom: 2rem;
-    }
-
-    .hero-actions {
-      flex-direction: column;
-      max-width: 280px;
-      margin: 0 auto;
-    }
-
-    .section-header h2 {
-      font-size: 1.75rem;
-    }
-
-    .post-item,
-    .thought-item {
-      padding: 1.25rem;
-    }
-
-    .post-title {
-      font-size: 1.125rem;
     }
   }
 </style>
