@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Comments from '../../components/Comments.astro';
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -96,6 +97,8 @@ const related = allPosts
             </div>
           </div>
         </footer>
+
+        <Comments term={post.data.commentId} />
       </div>
 
       {tocHeadings.length > 0 && (

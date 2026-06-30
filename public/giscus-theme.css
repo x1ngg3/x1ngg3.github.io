@@ -1,0 +1,83 @@
+/* giscus 自定义主题 —— 对齐博客暖奶油纸色 + 锈橙 + 衬线 */
+main {
+  /* 文本 */
+  --color-fg-default: #141413;
+  --color-fg-muted: #706F6A;
+  --color-fg-subtle: #A0A098;
+  --color-fg-on-emphasis: #F0EEE6;
+
+  /* 背景：canvas 透明，让页面奶油底透出 */
+  --color-canvas-default: transparent;
+  --color-canvas-overlay: #F0EEE6;
+  --color-canvas-inset: #E8E5DA;
+  --color-canvas-subtle: #E8E5DA;
+
+  /* 边框 / 分隔线 */
+  --color-border-default: #D5D1C3;
+  --color-border-muted: #E2DED1;
+  --color-neutral-muted: rgba(213, 209, 195, 0.45);
+  --color-neutral-emphasis: #706F6A;
+
+  /* 强调色：锈橙，用于链接 / 选中 */
+  --color-accent-fg: #CC785C;
+  --color-accent-emphasis: #CC785C;
+  --color-accent-muted: rgba(204, 120, 92, 0.4);
+  --color-accent-subtle: rgba(204, 120, 92, 0.10);
+
+  --color-success-fg: #5C7A52;
+  --color-danger-fg: #B05E43;
+
+  /* 次级按钮（登录 / 取消） */
+  --color-btn-text: #141413;
+  --color-btn-bg: #E8E5DA;
+  --color-btn-border: #D5D1C3;
+  --color-btn-shadow: none;
+  --color-btn-hover-bg: #DCD8C9;
+  --color-btn-hover-border: #D5D1C3;
+  --color-btn-active-bg: #DCD8C9;
+  --color-btn-active-border: #D5D1C3;
+  --color-btn-selected-bg: #DCD8C9;
+
+  /* 主按钮（提交评论）：墨色底 + 奶油字，悬浮转锈橙，与站点 .btn 一致 */
+  --color-btn-primary-text: #F0EEE6;
+  --color-btn-primary-bg: #141413;
+  --color-btn-primary-border: #141413;
+  --color-btn-primary-shadow: none;
+  --color-btn-primary-hover-bg: #CC785C;
+  --color-btn-primary-hover-border: #CC785C;
+  --color-btn-primary-selected-bg: #B05E43;
+  --color-btn-primary-disabled-text: rgba(240, 238, 230, 0.8);
+  --color-btn-primary-disabled-bg: rgba(20, 20, 19, 0.5);
+  --color-btn-primary-disabled-border: transparent;
+
+  /* 分段控件 / 列表 hover / reaction */
+  --color-segmented-control-bg: #E8E5DA;
+  --color-segmented-control-button-bg: #F0EEE6;
+  --color-segmented-control-button-selected-border: #D5D1C3;
+  --color-action-list-item-default-hover-bg: rgba(213, 209, 195, 0.35);
+  --color-social-reaction-bg-hover: #E8E5DA;
+  --color-social-reaction-bg-reacted-hover: rgba(204, 120, 92, 0.18);
+
+  --color-primer-fg-disabled: #A0A098;
+  --color-primer-border-active: #CC785C;
+  --color-timeline-badge-bg: #E8E5DA;
+
+  color-scheme: light;
+  font-family: ui-sans-serif, system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+main .markdown-body {
+  font-family: ui-sans-serif, system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 0.95rem;
+}
+
+/* 代码用等宽 */
+main .markdown-body code,
+main .markdown-body pre {
+  font-family: "JetBrains Mono", "SF Mono", ui-monospace, "Cascadia Code", monospace;
+}
+
+/* 让整体背景透明，融入页面 */
+body, main {
+  background: transparent !important;
+}

@@ -10,6 +10,8 @@ const posts = defineCollection({
     author: z.string().default('x1ngg3'),
     draft: z.boolean().default(false),
     tags: z.array(z.string()).optional(),
+    // 评论绑定键：写一次永不改，与文件名/标题/URL 解耦
+    commentId: z.string(),
   }),
 });
 
