@@ -8,6 +8,7 @@ const posts = defineCollection({
     description: z.string().nullable().optional().default(''),
     date: z.coerce.date(),
     author: z.string().default('x1ngg3'),
+    category: z.string().trim().min(1).default('Writing'),
     draft: z.boolean().default(false),
     tags: z.array(z.string()).optional(),
     // 评论绑定键：写一次永不改，与文件名/标题/URL 解耦

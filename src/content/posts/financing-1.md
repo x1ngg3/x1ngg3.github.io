@@ -2,6 +2,7 @@
 title: 理财入门学习
 date: 2026-07-01
 author: x1ngg3
+category: Reading
 description: 看了一两年股票后，易师傅终于决心开始学习科学配置资产
 commentId: financing-1
 ---

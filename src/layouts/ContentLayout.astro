@@ -1,0 +1,18 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import BlogSidebar from '../components/BlogSidebar.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="site-grid wrap">
+    <div class="page-main"><slot /></div>
+    <BlogSidebar />
+  </div>
+</BaseLayout>

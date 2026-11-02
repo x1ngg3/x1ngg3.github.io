@@ -3,7 +3,7 @@ interface Props {
   term: string;
 }
 const { term } = Astro.props;
-const theme = new URL('/giscus-theme.css', Astro.site).href;
+const theme = 'light';
 ---
 
 <section class="comments" aria-label="评论">

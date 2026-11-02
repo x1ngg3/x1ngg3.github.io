@@ -1,333 +1,48 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import ContentLayout from '../../layouts/ContentLayout.astro';
+import Icon from '../../components/Icon.astro';
 ---
 
-<BaseLayout title="About · x1ngg3" description="About me and this site">
-  <div class="wrap page">
-    <!-- ========= 顶部 ========= -->
-    <header class="page-head">
-      <p class="eyebrow">
-        <span class="eyebrow-dot"></span>
-        Colophon
-      </p>
-      <h1 class="page-title">About</h1>
-      <p class="page-lede">
-        I'm <strong>x1ngg3</strong> — writing about IoT security, code, and the occasional afternoon coffee.<br/>
-        This site is where I put down what I've learned, noticed, or stumbled upon.
-      </p>
+<ContentLayout title="关于 · x1ngg3" description="关于我和这个小站">
+  <article class="about-card surface">
+    <header class="about-header">
+      <p class="eyebrow"><Icon name="coffee" size={17} />很高兴在这里遇见你</p>
+      <h1>关于我</h1>
+      <p>我是 <strong>x1ngg3</strong>，关注 IoT 安全与工程，也喜欢阅读和午后的一杯咖啡。</p>
+      <p>这个小站用来记录学到的东西、遇到的问题，以及生活中偶尔冒出的想法。</p>
     </header>
 
-    <!-- ========= 我在关注什么（四个研究方向卡片）========= -->
-    <section class="focus">
-      <h2 class="section-h">What I'm working on</h2>
-      <ul class="focus-grid">
-        <li class="focus-item">
-          <h3 class="focus-title">Security</h3>
-          <p class="focus-desc">
-            IoT firmware analysis, vulnerability research, and understanding how systems break.
-          </p>
-        </li>
-        <li class="focus-item">
-          <h3 class="focus-title">Engineering</h3>
-          <p class="focus-desc">
-            TypeScript &amp; Python. Tooling, automation, and the craft of writing code that lasts.
-          </p>
-        </li>
-        <li class="focus-item">
-          <h3 class="focus-title">Reading</h3>
-          <p class="focus-desc">
-            Economics, philosophy, essays. Books as notes from someone who already did the thinking.
-          </p>
-        </li>
-        <li class="focus-item">
-          <h3 class="focus-title">Life</h3>
-          <p class="focus-desc">
-            Photography, travel, coffee. The quiet things that make the rest of it worth it.
-          </p>
-        </li>
-      </ul>
-    </section>
-
-    <!-- ========= 联系 ========= -->
-    <section class="contact">
-      <h2 class="section-h">Get in touch</h2>
-      <dl class="kv">
-        <div class="kv-row">
-          <dt>GitHub</dt>
-          <dd>
-            <a href="https://github.com/x1ngg3" target="_blank" rel="noopener noreferrer">
-              @x1ngg3 ↗
-            </a>
-          </dd>
-        </div>
-        <div class="kv-row">
-          <dt>Email</dt>
-          <dd>
-            <a href="mailto:your-email@example.com">your-email@example.com</a>
-          </dd>
-        </div>
-        <div class="kv-row">
-          <dt>Archive</dt>
-          <dd>
-            <a href="https://x1ngg3.github.io" target="_blank" rel="noopener noreferrer">
-              Previous site ↗
-            </a>
-          </dd>
-        </div>
-      </dl>
-    </section>
-
-    <!-- ========= Colophon ========= -->
-    <section class="meta-section">
-      <h2 class="section-h">Colophon</h2>
-      <div class="meta-body">
-        <p>
-          Typeset in a serif stack (Source Serif 4, falling back to Noto Serif SC and the system serif) for headings,
-          and a modern sans (system UI with PingFang SC on macOS / HarmonyOS Sans on Android) for body text.
-          Code is set in JetBrains Mono.
-        </p>
-        <p>
-          Built with <a href="https://astro.build" target="_blank" rel="noopener noreferrer">Astro</a>,
-          hosted on <a href="https://pages.github.com" target="_blank" rel="noopener noreferrer">GitHub Pages</a>,
-          source on <a href="https://github.com/x1ngg3/blog" target="_blank" rel="noopener noreferrer">GitHub</a>.
-          Design inspired by the editorial language of anthropic.com.
-        </p>
+    <section>
+      <h2>我在关注什么</h2>
+      <div class="focus-grid">
+        <div class="focus-item"><span class="focus-icon"><Icon name="shield" size={23} /></span><h3>安全</h3><p>IoT 固件分析、漏洞研究，以及系统背后的工作方式。</p></div>
+        <div class="focus-item"><span class="focus-icon"><Icon name="code" size={23} /></span><h3>工程</h3><p>Python、TypeScript、工具与自动化。</p></div>
+        <div class="focus-item"><span class="focus-icon"><Icon name="book" size={23} /></span><h3>阅读</h3><p>经济、哲学与随笔，记下一些有意思的思考。</p></div>
+        <div class="focus-item"><span class="focus-icon"><Icon name="leaf" size={23} /></span><h3>生活</h3><p>摄影、旅行、咖啡，还有平常日子里的小事。</p></div>
       </div>
     </section>
-  </div>
-</BaseLayout>
+
+    <section><h2>找到我</h2><a class="contact-link" href="https://github.com/x1ngg3" target="_blank" rel="noopener noreferrer">GitHub · @x1ngg3 ↗</a></section>
+    <section class="site-info">
+      <h2>关于本站</h2>
+      <p>使用 Astro 构建，托管于 GitHub Pages。布局参考 Volantis 的封面与卡片式博客，保留本站独立实现。封面采用本地海浪照片，正文使用系统字体。</p>
+      <a href="https://github.com/x1ngg3/blog" target="_blank" rel="noopener noreferrer">查看本站源码 ↗</a>
+    </section>
+  </article>
+</ContentLayout>
 
 <style>
-  .page {
-    padding: 4rem 0 2rem;
-    max-width: 1040px;
-    margin: 0 auto;
-  }
-
-  /* ========= 顶部 ========= */
-  .page-head {
-    margin-bottom: 5rem;
-    padding-bottom: 2.5rem;
-    border-bottom: 1px solid var(--color-rule);
-  }
-
-  .page-head .eyebrow {
-    margin-bottom: 1.5rem;
-  }
-
-  .page-title {
-    font-family: var(--font-serif);
-    font-size: clamp(2.75rem, 6vw, 4.5rem);
-    font-weight: 400;
-    letter-spacing: -0.025em;
-    line-height: 1;
-    color: var(--color-ink);
-    margin: 0 0 1.5rem;
-  }
-
-  .page-lede {
-    font-family: var(--font-sans);
-    font-size: 1.15rem;
-    line-height: 1.55;
-    color: var(--color-ink-soft);
-    max-width: 55ch;
-    margin: 0;
-  }
-
-  .page-lede strong {
-    color: var(--color-accent);
-    font-weight: 500;
-  }
-
-  /* ========= 通用分区标题 ========= */
-  .section-h {
-    font-family: var(--font-serif);
-    font-size: 1.9rem;
-    font-weight: 400;
-    letter-spacing: -0.015em;
-    color: var(--color-ink);
-    margin: 0 0 2rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid var(--color-rule);
-  }
-
-  /* ========= 研究方向网格 ========= */
-  .focus {
-    margin-bottom: 5rem;
-  }
-
-  .focus-grid {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0;
-    border-top: 1px solid var(--color-rule-soft);
-  }
-
-  .focus-item {
-    padding: 2rem 2rem 2rem 0;
-    margin-right: 2rem;
-    border-bottom: 1px solid var(--color-rule-soft);
-    border-right: 1px solid var(--color-rule-soft);
-  }
-
-  .focus-item:nth-child(2n) {
-    padding-left: 2rem;
-    padding-right: 0;
-    margin-left: 2rem;
-    margin-right: 0;
-    border-right: none;
-  }
-
-  .focus-title {
-    font-family: var(--font-serif);
-    font-size: 1.4rem;
-    font-weight: 500;
-    letter-spacing: -0.01em;
-    color: var(--color-ink);
-    margin: 0 0 0.75rem;
-  }
-
-  .focus-desc {
-    font-family: var(--font-sans);
-    font-size: 0.98rem;
-    line-height: 1.6;
-    color: var(--color-ink-soft);
-    margin: 0;
-  }
-
-  /* ========= 联系（键值对）========= */
-  .contact {
-    margin-bottom: 5rem;
-  }
-
-  .kv {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    margin: 0;
-    border-top: 1px solid var(--color-rule-soft);
-  }
-
-  .kv-row {
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 2rem;
-    align-items: baseline;
-    padding: 1.25rem 0;
-    border-bottom: 1px solid var(--color-rule-soft);
-  }
-
-  .kv-row dt {
-    font-family: var(--font-sans);
-    font-size: 0.82rem;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--color-ink-mute);
-  }
-
-  .kv-row dd {
-    font-family: var(--font-sans);
-    font-size: 1rem;
-    color: var(--color-ink);
-    margin: 0;
-    line-height: 1.5;
-  }
-
-  .kv-row dd a {
-    color: var(--color-ink);
-    border-bottom: 1px solid var(--color-rule);
-    padding-bottom: 0.05rem;
-    transition: color var(--duration) var(--ease),
-      border-color var(--duration) var(--ease);
-  }
-
-  .kv-row dd a:hover {
-    color: var(--color-accent);
-    border-bottom-color: var(--color-accent);
-  }
-
-  /* ========= Colophon meta ========= */
-  .meta-section {
-    margin-bottom: 3rem;
-  }
-
-  .meta-body {
-    font-family: var(--font-sans);
-    color: var(--color-ink-soft);
-    font-size: 0.95rem;
-    line-height: 1.7;
-    max-width: 65ch;
-  }
-
-  .meta-body p {
-    color: inherit;
-    margin: 0.75rem 0;
-  }
-
-  .meta-body a {
-    color: var(--color-ink);
-    border-bottom: 1px solid var(--color-rule);
-    padding-bottom: 0.05rem;
-    transition: color var(--duration) var(--ease),
-      border-color var(--duration) var(--ease);
-  }
-
-  .meta-body a:hover {
-    color: var(--color-accent);
-    border-bottom-color: var(--color-accent);
-  }
-
-  /* ========= 响应式 ========= */
-  @media (max-width: 768px) {
-    .page {
-      padding: 2rem 0 1rem;
-    }
-
-    .page-head {
-      margin-bottom: 3rem;
-      padding-bottom: 2rem;
-    }
-
-    .page-title {
-      font-size: 2.5rem;
-    }
-
-    .page-lede {
-      font-size: 1rem;
-    }
-
-    .section-h {
-      font-size: 1.5rem;
-    }
-
-    .focus-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .focus-item,
-    .focus-item:nth-child(2n) {
-      padding: 1.5rem 0;
-      margin: 0;
-      border-right: none;
-    }
-
-    .focus,
-    .contact {
-      margin-bottom: 3rem;
-    }
-
-    .kv-row {
-      grid-template-columns: 1fr;
-      gap: 0.25rem;
-      padding: 1rem 0;
-    }
-
-    .kv-row dt {
-      font-size: 0.75rem;
-    }
-  }
+  .about-card { padding: var(--card-padding); }
+  .about-header h1 { font-size: 1.65rem; margin: 10px 0 18px; }
+  .about-card p { color: var(--color-ink-soft); font-size: 0.94rem; margin: 10px 0; }
+  .about-card strong { color: var(--color-accent-deep); }
+  section { margin-top: 32px; }
+  section h2 { font-size: 1.2rem; margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1px solid var(--color-rule-soft); }
+  .focus-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .focus-item { padding: 20px; background: #f7f9fa; border-radius: 8px; }
+  .focus-icon { display: inline-flex; color: var(--color-accent); margin-bottom: 4px; }
+  .focus-item h3 { font-size: 0.95rem; margin-top: 7px; }
+  .focus-item p { font-size: 0.85rem; margin-bottom: 0; }
+  .contact-link, .site-info a { font-size: 0.9rem; color: var(--color-accent-deep); }
+  @media (max-width: 600px) { .about-card { padding: 24px; } .focus-grid { grid-template-columns: minmax(0, 1fr); } }
 </style>

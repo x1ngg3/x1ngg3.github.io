@@ -2,6 +2,7 @@
 title: (updating) Attention is all you need
 date: 2026-02-08
 author: x1ngg3
+category: Life
 description: 此Attention非彼Attention，我是说，我们大脑的Attention
 commentId: attention-is-all-you-need
 ---

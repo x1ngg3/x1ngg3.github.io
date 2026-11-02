@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import Icon from '../components/Icon.astro';
 
 interface Props {
   title?: string;
@@ -12,276 +13,87 @@ const {
 } = Astro.props;
 
 const currentPath = Astro.url.pathname;
-const isActive = (href: string) => {
-  if (href === '/') return currentPath === '/';
-  return currentPath.startsWith(href);
-};
+const navigation = [
+  { href: '/', label: '首页', icon: 'home' },
+  { href: '/posts', label: '文章', icon: 'writing' },
+  { href: '/thoughts', label: '说说', icon: 'chat' },
+  { href: '/about', label: '关于', icon: 'coffee' },
+] as const;
+const isActive = (href: string) => href === '/' ? currentPath === '/' : currentPath.startsWith(href);
 ---
 
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content={description}>
-  <meta name="generator" content={Astro.generator}>
-  <title>{title}</title>
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-</head>
-<body>
-  <header class="nav">
-    <div class="nav-inner">
-      <a href="/" class="nav-logo" aria-label="回到首页">x1ngg3</a>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content={description}>
+    <meta name="generator" content={Astro.generator}>
+    <title>{title}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    {Astro.slots.has('cover') && <link rel="preload" as="image" type="image/webp" href="/images/DJI_20240916081052_0037_D.webp" />}
+  </head>
+  <body id="page-top">
+    <a class="skip-link" href="#main-content">跳到正文</a>
+    <slot name="cover" />
 
-      <nav class="nav-links" aria-label="主导航">
-        <a href="/posts" class:list={["nav-link", { 'is-active': isActive('/posts') }]}>
-          Writing
-        </a>
-        <a href="/thoughts" class:list={["nav-link", { 'is-active': isActive('/thoughts') }]}>
-          Notes
-        </a>
-        <a href="/about" class:list={["nav-link", { 'is-active': isActive('/about') }]}>
-          About
-        </a>
-      </nav>
-    </div>
-  </header>
-
-  <main class="main">
-    <slot />
-  </main>
-
-  <footer class="footer">
-    <div class="wrap">
-      <div class="footer-grid">
-        <div class="footer-col footer-brand">
-          <p class="footer-logo">x1ngg3</p>
-          <p class="footer-tagline">
-            A quiet place for notes on security, code, and life.
-          </p>
-        </div>
-
-        <div class="footer-col">
-          <h4 class="footer-heading">Sections</h4>
-          <ul class="footer-list">
-            <li><a href="/">Home</a></li>
-            <li><a href="/posts">Writing</a></li>
-            <li><a href="/thoughts">Notes</a></li>
-            <li><a href="/about">About</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <h4 class="footer-heading">Elsewhere</h4>
-          <ul class="footer-list">
-            <li><a href="https://github.com/x1ngg3" target="_blank" rel="noopener noreferrer">GitHub ↗</a></li>
-            <li><a href="https://x1ngg3.github.io" target="_blank" rel="noopener noreferrer">Archive ↗</a></li>
-          </ul>
-        </div>
+    <header class="nav">
+      <div class="wrap nav-inner">
+        <a href="/" class="nav-logo" aria-label="x1ngg3 的博客首页"><img class="logo-mark" src="/images/avatar.webp" alt="" width="30" height="30" decoding="async" />x1ngg3</a>
+        <nav class="nav-links" aria-label="主导航">
+          {navigation.map(item => (
+            <a href={item.href} class:list={["nav-link", { 'is-active': isActive(item.href) }]} aria-current={isActive(item.href) ? 'page' : undefined}>
+              <span class="nav-icon"><Icon name={item.icon} size={17} /></span>{item.label}
+            </a>
+          ))}
+        </nav>
+        <a class="nav-github" href="https://github.com/x1ngg3" target="_blank" rel="noopener noreferrer"><Icon name="github" size={17} />GitHub ↗</a>
       </div>
+    </header>
 
-      <div class="footer-base">
-        <p>© {new Date().getFullYear()} x1ngg3. Built with Astro.</p>
+    <main class="main" id="main-content" tabindex="-1"><slot /></main>
+
+    <footer class="footer">
+      <div class="wrap footer-inner">
+        <p class="footer-motto">记录所学，也记录生活。</p>
+        <nav class="footer-links" aria-label="页脚链接">
+          <a href="/posts">文章归档</a>
+          <span aria-hidden="true">·</span>
+          <a href="/about">关于本站</a>
+          <span aria-hidden="true">·</span>
+          <a href="https://github.com/x1ngg3" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+        </nav>
+        <p class="footer-copyright">© {new Date().getFullYear()} x1ngg3 · Built with Astro</p>
       </div>
-    </div>
-  </footer>
-</body>
+    </footer>
+  </body>
 </html>
 
 <style>
-  /* ================== 导航栏 ================== */
-  .nav {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: rgba(240, 238, 230, 0.88);
-    backdrop-filter: saturate(180%) blur(12px);
-    -webkit-backdrop-filter: saturate(180%) blur(12px);
-    border-bottom: 1px solid var(--color-rule-soft);
-  }
-
-  .nav-inner {
-    max-width: var(--max-width);
-    margin: 0 auto;
-    padding: 1rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 2rem;
-  }
-
-  .nav-logo {
-    font-family: var(--font-serif);
-    font-size: 1.2rem;
-    font-weight: 500;
-    color: var(--color-ink);
-    letter-spacing: -0.01em;
-  }
-
-  .nav-logo:hover {
-    color: var(--color-accent);
-  }
-
-  .nav-links {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-  }
-
-  .nav-link {
-    position: relative;
-    font-family: var(--font-sans);
-    color: var(--color-ink-soft);
-    font-size: 0.92rem;
-    font-weight: 400;
-    letter-spacing: 0.005em;
-    padding: 0.3rem 0;
-    transition: color var(--duration) var(--ease);
-  }
-
-  .nav-link::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -1px;
-    height: 1px;
-    background: currentColor;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform var(--duration) var(--ease);
-  }
-
-  .nav-link:hover {
-    color: var(--color-ink);
-  }
-
-  .nav-link:hover::after {
-    transform: scaleX(1);
-  }
-
-  .nav-link.is-active {
-    color: var(--color-ink);
-  }
-
-  .nav-link.is-active::after {
-    background: var(--color-accent);
-    transform: scaleX(1);
-  }
-
-  /* ================== Main ================== */
-  .main {
-    min-height: calc(100vh - 400px);
-  }
-
-  /* ================== Footer ================== */
-  .footer {
-    margin-top: 6rem;
-    padding: 4rem 0 2.5rem;
-    background: var(--color-bg-offset);
-    border-top: 1px solid var(--color-rule-soft);
-  }
-
-  .footer-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    gap: 3rem;
-    padding-bottom: 3rem;
-    border-bottom: 1px solid var(--color-rule);
-  }
-
-  .footer-col {
-    min-width: 0;
-  }
-
-  .footer-brand {
-    max-width: 400px;
-  }
-
-  .footer-logo {
-    font-family: var(--font-serif);
-    font-size: 1.4rem;
-    font-weight: 500;
-    color: var(--color-ink);
-    margin: 0 0 0.6rem;
-    letter-spacing: -0.01em;
-  }
-
-  .footer-tagline {
-    color: var(--color-ink-mute);
-    font-size: 0.92rem;
-    line-height: 1.55;
-    margin: 0;
-    font-style: italic;
-  }
-
-  .footer-heading {
-    font-family: var(--font-sans);
-    font-size: 0.82rem;
-    font-weight: 500;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: var(--color-ink-mute);
-    margin: 0 0 1rem;
-  }
-
-  .footer-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-  }
-
-  .footer-list a {
-    color: var(--color-ink-soft);
-    font-size: 0.92rem;
-    transition: color var(--duration) var(--ease);
-  }
-
-  .footer-list a:hover {
-    color: var(--color-accent);
-  }
-
-  .footer-base {
-    padding-top: 2rem;
-    color: var(--color-ink-mute);
-    font-size: 0.82rem;
-  }
-
-  .footer-base p {
-    margin: 0;
-    color: inherit;
-  }
-
-  /* ================== 响应式 ================== */
-  @media (max-width: 768px) {
-    .nav-inner {
-      padding: 0.85rem 1.25rem;
-    }
-
-    .nav-logo {
-      font-size: 1.05rem;
-    }
-
-    .nav-links {
-      gap: 1.25rem;
-    }
-
-    .nav-link {
-      font-size: 0.88rem;
-    }
-
-    .footer {
-      margin-top: 4rem;
-      padding: 3rem 0 2rem;
-    }
-
-    .footer-grid {
-      grid-template-columns: 1fr;
-      gap: 2.25rem;
-      padding-bottom: 2rem;
-    }
+  body { min-height: 100vh; display: flex; flex-direction: column; }
+  .skip-link { position: fixed; z-index: 200; top: 12px; left: 12px; padding: 8px 16px; background: white; border-radius: 6px; transform: translateY(-160%); }
+  .skip-link:focus { transform: translateY(0); }
+  .nav { position: sticky; top: 0; z-index: 100; flex-shrink: 0; background: rgb(255 255 255 / 95%); backdrop-filter: blur(16px); box-shadow: 0 1px 8px rgb(35 55 75 / 5%); }
+  .nav-inner { min-height: var(--nav-height); display: flex; align-items: center; gap: 40px; }
+  .nav-logo { display: flex; align-items: center; gap: 10px; font-size: 1.08rem; font-weight: 650; color: var(--color-ink); white-space: nowrap; }
+  .logo-mark { display: block; flex-shrink: 0; width: 30px; height: 30px; object-fit: cover; border-radius: 8px; background: var(--color-accent-wash); }
+  .nav-links { display: flex; align-items: center; align-self: stretch; gap: 8px; }
+  .nav-link { display: flex; align-items: center; gap: 7px; position: relative; padding: 0 14px; color: var(--color-ink-soft); font-size: 0.9rem; font-weight: 500; }
+  .nav-icon { color: currentColor; opacity: 0.8; }
+  .nav-link:hover, .nav-link.is-active { color: var(--color-accent-deep); background: #f5f9f8; }
+  .nav-link.is-active::after { content: ""; position: absolute; bottom: 0; left: 14px; right: 14px; height: 3px; border-radius: 3px 3px 0 0; background: var(--color-accent); }
+  .nav-github { display: flex; align-items: center; gap: 8px; margin-left: auto; font-size: 0.8rem; color: var(--color-ink-mute); }
+  .main { flex: 1; width: 100%; }
+  .footer { padding: 40px 0 36px; color: var(--color-ink-mute); text-align: center; }
+  .footer-motto { font-size: 0.9rem; margin-bottom: 8px; }
+  .footer-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; font-size: 0.8rem; }
+  .footer-copyright { margin-top: 8px; font-size: 0.75rem; }
+  @media (max-width: 600px) {
+    .nav-inner { gap: 12px; }
+    .nav-logo { font-size: 1rem; gap: 7px; }
+    .nav-links { gap: 0; margin-left: auto; }
+    .nav-link { padding: 0 9px; font-size: 0.82rem; }
+    .nav-icon, .nav-github { display: none; }
+    .nav-link.is-active::after { left: 9px; right: 9px; }
   }
 </style>

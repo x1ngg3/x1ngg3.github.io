@@ -1,325 +1,70 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import ContentLayout from '../../layouts/ContentLayout.astro';
+import Icon from '../../components/Icon.astro';
 import { getCollection } from 'astro:content';
 
 const allThoughts = (await getCollection('thoughts'))
-  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
-
-const thoughtsWithContent = await Promise.all(
-  allThoughts.map(async (thought) => {
-    const { Content } = await thought.render();
-    return { thought, Content };
-  })
-);
-
-// 按月份分组
-function monthKey(d: Date) {
-  return d.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
-}
-
-const groupedByMonth = thoughtsWithContent.reduce((acc, item) => {
-  const key = monthKey(item.thought.data.date);
-  if (!acc[key]) acc[key] = [];
-  acc[key].push(item);
-  return acc;
-}, {} as Record<string, typeof thoughtsWithContent>);
-
-const months = Object.keys(groupedByMonth);
-
-const formatDay = (d: Date) =>
-  d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-
-const formatTime = (d: Date) =>
-  d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
+  .sort((first, second) => second.data.date.getTime() - first.data.date.getTime());
+const thoughtsWithContent = await Promise.all(allThoughts.map(async thought => {
+  const { Content } = await thought.render();
+  return { thought, Content };
+}));
+const monthKey = (date: Date) => date.toLocaleDateString('zh-CN', { year: 'numeric', month: 'long' });
+const months = [...new Set(allThoughts.map(thought => monthKey(thought.data.date)))];
+const formatDay = (date: Date) => date.toLocaleDateString('zh-CN', { month: '2-digit', day: '2-digit' });
+const formatTime = (date: Date) => date.toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit', hour12: false });
 ---
 
-<BaseLayout title="Notes · x1ngg3" description="Short thoughts and field notes">
-  <div class="wrap page">
-    <!-- ========= 顶部 ========= -->
-    <header class="page-head">
-      <p class="eyebrow">
-        <span class="eyebrow-dot"></span>
-        Logbook
-      </p>
-      <h1 class="page-title">Field notes</h1>
-      <p class="page-lede">
-        Short, dated thoughts. Written in passing, kept for memory.<br/>
-        {allThoughts.length} {allThoughts.length === 1 ? 'entry' : 'entries'} in the log.
-      </p>
-    </header>
+<ContentLayout title="说说 · x1ngg3" description="日常里的片刻想法">
+  <header class="page-head page-heading surface">
+    <p class="eyebrow"><Icon name="chat" size={17} />日常的切片</p>
+    <h1 class="page-title">说说</h1>
+    <p class="page-lede">不必成篇，也值得记下。已经留下了 {allThoughts.length} 条碎碎念。</p>
+  </header>
 
-    <!-- ========= 笔记主体 ========= -->
-    {thoughtsWithContent.length > 0 ? (
-      <div class="log">
-        {months.map((month) => (
-          <section class="month-block">
-            <header class="month-head">
-              <h2 class="month-label">{month}</h2>
-              <span class="month-count">
-                {groupedByMonth[month].length} {groupedByMonth[month].length === 1 ? 'entry' : 'entries'}
-              </span>
-            </header>
-
-            <ol class="entries">
-              {groupedByMonth[month].map(({ thought, Content }) => (
-                <li class="entry">
-                  <aside class="entry-meta">
-                    <time class="entry-day" datetime={thought.data.date.toISOString()}>
-                      {formatDay(thought.data.date)}
-                    </time>
-                    <span class="entry-time">{formatTime(thought.data.date)}</span>
-                    {thought.data.mood && (
-                      <span class="entry-mood" aria-label="mood">{thought.data.mood}</span>
-                    )}
-                  </aside>
-
-                  <div class="entry-content">
-                    <Content />
-                    {thought.data.tags && thought.data.tags.length > 0 && (
-                      <div class="entry-tags">
-                        {thought.data.tags.map((tag: string) => (
-                          <span class="tag">{tag}</span>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </section>
-        ))}
-      </div>
-    ) : (
-      <div class="empty">
-        <p>The logbook is empty.</p>
-        <p class="empty-hint">
-          Add your first entry in <code>src/content/thoughts/</code>.
-        </p>
-      </div>
-    )}
+  <div class="log">
+    {months.map(month => (
+      <section class="month-block">
+        <h2 class="month-label">{month}</h2>
+        <ol class="entries">
+          {thoughtsWithContent.filter(({ thought }) => monthKey(thought.data.date) === month).map(({ thought, Content }) => (
+            <li class="entry surface" id={`note-${thought.slug}`}>
+              <header class="entry-meta">
+                <img class="entry-avatar" src="/images/avatar.webp" alt="" width="40" height="40" loading="lazy" decoding="async" />
+                <div><span class="entry-author">x1ngg3</span><a href={`#note-${thought.slug}`} class="entry-permalink" aria-label={`${formatDay(thought.data.date)} 说说的永久链接`}><time datetime={thought.data.date.toISOString()}>{formatDay(thought.data.date)} · {formatTime(thought.data.date)}</time></a></div>
+                {thought.data.mood && <span class="entry-mood">{thought.data.mood}</span>}
+                <a href={`#note-${thought.slug}`} class="entry-anchor" aria-label="此条说说的链接">#</a>
+              </header>
+              <div class="entry-content"><Content /></div>
+              {thought.data.tags && <div class="entry-tags">{thought.data.tags.map(tag => <span class="tag">{tag}</span>)}</div>}
+            </li>
+          ))}
+        </ol>
+      </section>
+    ))}
+    {allThoughts.length === 0 && <p class="empty surface">还没有说说，过段时间再来看看吧。</p>}
   </div>
-</BaseLayout>
+</ContentLayout>
 
 <style>
-  .page {
-    padding: 4rem 0 2rem;
-    max-width: 1040px;
-    margin: 0 auto;
-  }
-
-  /* ========= 顶部 ========= */
-  .page-head {
-    margin-bottom: 4rem;
-    padding-bottom: 2.5rem;
-    border-bottom: 1px solid var(--color-rule);
-  }
-
-  .page-head .eyebrow {
-    margin-bottom: 1.5rem;
-  }
-
-  .page-title {
-    font-family: var(--font-serif);
-    font-size: clamp(2.75rem, 6vw, 4.5rem);
-    font-weight: 400;
-    letter-spacing: -0.025em;
-    line-height: 1;
-    color: var(--color-ink);
-    margin: 0 0 1.5rem;
-  }
-
-  .page-lede {
-    font-family: var(--font-sans);
-    font-size: 1.05rem;
-    line-height: 1.5;
-    color: var(--color-ink-soft);
-    max-width: 50ch;
-    margin: 0;
-  }
-
-  /* ========= 月份分组 ========= */
-  .log {
-    display: flex;
-    flex-direction: column;
-    gap: 4rem;
-  }
-
-  .month-head {
-    display: flex;
-    align-items: baseline;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .month-label {
-    font-family: var(--font-serif);
-    font-size: 1.6rem;
-    font-weight: 400;
-    letter-spacing: -0.01em;
-    color: var(--color-ink);
-    margin: 0;
-  }
-
-  .month-count {
-    font-family: var(--font-sans);
-    font-size: 0.82rem;
-    color: var(--color-ink-mute);
-    letter-spacing: 0.01em;
-  }
-
-  /* ========= 条目列表 ========= */
-  .entries {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-
-  .entry {
-    display: grid;
-    grid-template-columns: 140px 1fr;
-    gap: 2rem;
-    align-items: start;
-    padding: 1.75rem 0;
-    border-top: 1px solid var(--color-rule-soft);
-  }
-
-  .entry:last-child {
-    border-bottom: 1px solid var(--color-rule-soft);
-  }
-
-  /* ========= 左侧元数据 ========= */
-  .entry-meta {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-    padding-top: 0.1rem;
-  }
-
-  .entry-day {
-    font-family: var(--font-sans);
-    font-size: 0.88rem;
-    font-weight: 500;
-    color: var(--color-ink);
-    letter-spacing: 0.005em;
-  }
-
-  .entry-time {
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    color: var(--color-ink-mute);
-    letter-spacing: 0.01em;
-    font-variant-numeric: tabular-nums;
-  }
-
-  .entry-mood {
-    margin-top: 0.3rem;
-    font-size: 1rem;
-  }
-
-  /* ========= 右侧内容 ========= */
-  .entry-content {
-    font-family: var(--font-sans);
-    color: var(--color-ink);
-    font-size: 0.98rem;
-    line-height: 1.7;
-    padding-left: 1.5rem;
-    border-left: 2px solid var(--color-rule);
-    transition: border-color var(--duration) var(--ease);
-  }
-
-  .entry:hover .entry-content {
-    border-left-color: var(--color-accent);
-  }
-
-  .entry-content :global(p) {
-    margin: 0.5rem 0;
-  }
-
-  .entry-content :global(p:first-child) {
-    margin-top: 0;
-  }
-
-  .entry-content :global(p:last-child) {
-    margin-bottom: 0;
-  }
-
-  .entry-content :global(a) {
-    color: var(--color-ink);
-    border-bottom: 1px solid var(--color-rule);
-    transition: color var(--duration) var(--ease),
-      border-color var(--duration) var(--ease);
-  }
-
-  .entry-content :global(a:hover) {
-    color: var(--color-accent);
-    border-bottom-color: var(--color-accent);
-  }
-
-  .entry-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.85rem;
-    margin-top: 1rem;
-  }
-
-  /* ========= 空状态 ========= */
-  .empty {
-    text-align: center;
-    padding: 5rem 2rem;
-    color: var(--color-ink-mute);
-  }
-
-  .empty-hint {
-    font-size: 0.85rem;
-    color: var(--color-ink-faint);
-    margin-top: 0.5rem;
-  }
-
-  .empty code {
-    color: var(--color-accent);
-    background: var(--color-bg-offset);
-  }
-
-  /* ========= 响应式 ========= */
-  @media (max-width: 768px) {
-    .page {
-      padding: 2rem 0 1rem;
-    }
-
-    .page-head {
-      margin-bottom: 2.5rem;
-      padding-bottom: 2rem;
-    }
-
-    .page-title {
-      font-size: 2.5rem;
-    }
-
-    .log {
-      gap: 3rem;
-    }
-
-    .month-label {
-      font-size: 1.3rem;
-    }
-
-    .entry {
-      grid-template-columns: 1fr;
-      gap: 0.6rem;
-      padding: 1.25rem 0;
-    }
-
-    .entry-meta {
-      flex-direction: row;
-      align-items: baseline;
-      gap: 0.85rem;
-    }
-
-    .entry-content {
-      padding-left: 1rem;
-    }
-  }
+  .log { display: grid; gap: 28px; margin-top: 26px; }
+  .month-label { font-size: 1rem; margin: 0 8px 16px; color: var(--color-ink-soft); }
+  .entries { display: grid; gap: 20px; list-style: none; padding: 0; margin: 0; }
+  .entry { padding: 28px var(--card-padding); margin: 0; border: 1px solid transparent; }
+  .entry:target { border-color: var(--color-accent); }
+  .entry-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; }
+  .entry-avatar { display: block; flex-shrink: 0; width: 40px; height: 40px; object-fit: cover; border-radius: 50%; background: var(--color-accent-wash); }
+  .entry-author { display: block; font-size: 0.86rem; font-weight: 600; line-height: 1.5; }
+  .entry-permalink { display: block; color: var(--color-ink-mute); font-size: 0.75rem; }
+  .entry-mood { font-size: 1.2rem; }
+  .entry-anchor { margin-left: auto; color: var(--color-ink-faint); padding: 4px 8px; }
+  .entry-content { font-size: 0.96rem; line-height: 1.9; }
+  .entry-content :global(h2), .entry-content :global(h3) { font-size: 1.15rem; margin: 20px 0 12px; }
+  .entry-content :global(p) { margin: 12px 0; line-height: 1.9; }
+  .entry-content :global(> :first-child) { margin-top: 0; }
+  .entry-content :global(> :last-child) { margin-bottom: 0; }
+  .entry-content :global(a) { color: var(--color-accent-deep); text-decoration: underline; text-underline-offset: 3px; }
+  .entry-tags { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
+  .empty { padding: 32px; color: var(--color-ink-mute); }
+  @media (max-width: 600px) { .entry { padding: 24px; } }
 </style>

@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none">
+  <defs>
+    <linearGradient id="sky" x1="800" y1="0" x2="800" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#397ca3"/>
+      <stop offset=".55" stop-color="#a2c9d8"/>
+      <stop offset="1" stop-color="#e4e4d4"/>
+    </linearGradient>
+    <linearGradient id="valley" x1="800" y1="630" x2="800" y2="1000" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#3b788a"/>
+      <stop offset="1" stop-color="#163e50"/>
+    </linearGradient>
+    <radialGradient id="glow">
+      <stop stop-color="#fff5ce" stop-opacity=".6"/>
+      <stop offset="1" stop-color="#fff5ce" stop-opacity="0"/>
+    </radialGradient>
+    <g id="pine">
+      <path d="M0 0 15 40H7L24 65H13L34 95H18L43 128H4V145H-4V128H-43L-18 95H-34L-13 65H-24L-7 40H-15Z" fill="currentColor"/>
+    </g>
+  </defs>
+  <path fill="url(#sky)" d="M0 0h1600v1000H0z"/>
+  <circle cx="1190" cy="455" r="230" fill="url(#glow)"/>
+  <circle cx="1190" cy="455" r="49" fill="#fff1c9" opacity=".88"/>
+  <path d="M0 603 95 550 156 564 252 470 291 493 417 343 462 398 527 431 615 532 673 507 737 548 851 458 908 501 974 486 1062 537 1158 502 1250 573 1348 499 1420 537 1512 452 1600 490V1000H0Z" fill="#82b4c6"/>
+  <path d="m291 493 126-150 45 55 65 33-62-8-27-30-22 37-25-7-35 41-24-3Z" fill="#c3dce2" opacity=".65"/>
+  <path d="M0 716 118 642 181 655 310 587 416 633 541 494 582 517 624 565 684 586 740 647 806 636 921 706 1067 610 1184 666 1273 584 1382 621 1460 570 1600 624V1000H0Z" fill="#6399ae"/>
+  <path d="m416 633 125-139 41 23 42 48-39-15-22 19-29-28-37 54-22 1Z" fill="#8cbbca" opacity=".62"/>
+  <path d="M0 725c90-70 156-58 228-20s119 52 185 21c87-41 138-87 210-45s114 104 210 57 124-60 204-16 138 31 216-22 152-28 247 23V1000H0Z" fill="#447d94"/>
+  <path d="M0 770c109-92 197-2 270 13s158-21 237 2 95 56 173 40 158-60 233-55 136 79 217 54 121-88 214-74 163 51 256 15V1000H0Z" fill="url(#valley)"/>
+  <path d="M0 841c137-29 231 13 338 40s156 13 267 44 209 25 308-3 208-23 318-49 240-85 369-51v178H0Z" fill="#163d4c"/>
+  <g color="#214e60">
+    <use href="#pine" transform="translate(33 545) scale(2.05)"/>
+    <use href="#pine" transform="translate(116 640) scale(1.4)"/>
+    <use href="#pine" transform="translate(190 694) scale(1.06)"/>
+    <use href="#pine" transform="translate(248 745) scale(.75)"/>
+    <use href="#pine" transform="translate(1475 621) scale(1.66)"/>
+    <use href="#pine" transform="translate(1542 540) scale(2.3)"/>
+    <use href="#pine" transform="translate(1404 717) scale(1.04)"/>
+    <use href="#pine" transform="translate(1338 766) scale(.8)"/>
+  </g>
+  <g color="#123542">
+    <use href="#pine" transform="translate(34 697) scale(2.13)"/>
+    <use href="#pine" transform="translate(113 739) scale(1.6)"/>
+    <use href="#pine" transform="translate(194 814) scale(1.18)"/>
+    <use href="#pine" transform="translate(282 856) scale(.86)"/>
+    <use href="#pine" transform="translate(1583 660) scale(2.4)"/>
+    <use href="#pine" transform="translate(1500 754) scale(1.65)"/>
+    <use href="#pine" transform="translate(1432 803) scale(1.14)"/>
+    <use href="#pine" transform="translate(1360 865) scale(.68)"/>
+  </g>
+  <path d="M290 236q12-11 24 0m0 0q12-11 24 0M352 214q8-7 16 0m0 0q8-7 16 0" stroke="#4a819b" stroke-width="2" stroke-linecap="round"/>
+</svg>

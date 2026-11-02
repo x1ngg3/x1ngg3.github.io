@@ -2,6 +2,7 @@
 title: 《小岛经济学》读书笔记
 date: 2026-03-10
 author: x1ngg3
+category: Reading
 description: 
 commentId: xiaodao-economy
 ---

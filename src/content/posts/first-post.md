@@ -2,6 +2,7 @@
 title: Hello World!
 date: 2026-01-30
 author: x1ngg3
+category: Writing
 description: 我们终此一生，不过是为了能在午后悠闲的享用一杯咖啡
 commentId: first-post
 ---

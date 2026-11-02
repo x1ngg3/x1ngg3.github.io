@@ -1,373 +1,138 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import ContentLayout from '../../layouts/ContentLayout.astro';
+import Icon from '../../components/Icon.astro';
+import { getExcerpt } from '../../utils/content';
 import { getCollection } from 'astro:content';
 
 const allPosts = (await getCollection('posts'))
   .filter(post => !post.data.draft)
-  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
-
-function inferCategory(post: typeof allPosts[number]): string {
-  const title = post.data.title || '';
-  const slug = post.slug || '';
-  const hay = `${title} ${slug}`.toLowerCase();
-  if (/(attention|ai|model|transformer|llm|gpt|neural)/.test(hay)) return 'AI';
-  if (/(经济|economy|market|finance)/.test(hay)) return 'Reading';
-  if (/(security|iot|pwn|cve|vuln|exploit)/.test(hay)) return 'Security';
-  if (/(photo|travel|旅|摄)/.test(hay)) return 'Life';
-  return 'Writing';
-}
-
-// 按年份分组
-const groupedByYear = allPosts.reduce((acc, post) => {
-  const year = new Date(post.data.date).getFullYear();
-  if (!acc[year]) acc[year] = [];
-  acc[year].push(post);
-  return acc;
-}, {} as Record<number, typeof allPosts>);
-
-const years = Object.keys(groupedByYear).map(Number).sort((a, b) => b - a);
-
-// 分类统计（用于顶部 chip 显示计数）
-const categoryCount = allPosts.reduce((acc, post) => {
-  const cat = inferCategory(post);
-  acc[cat] = (acc[cat] || 0) + 1;
-  return acc;
-}, {} as Record<string, number>);
-const categories = Object.entries(categoryCount).sort((a, b) => b[1] - a[1]);
-
-const formatDate = (d: Date) =>
-  d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  .sort((first, second) => second.data.date.getTime() - first.data.date.getTime());
+const years = [...new Set(allPosts.map(post => post.data.date.getFullYear()))];
+const categories = [...new Set(allPosts.map(post => post.data.category))];
+const formatDate = (date: Date) => date.toLocaleDateString('zh-CN', { month: '2-digit', day: '2-digit' });
 ---
 
-<BaseLayout title="Writing · x1ngg3" description="All essays and notes">
-  <div class="wrap page">
-    <!-- ========= 顶部 ========= -->
-    <header class="page-head">
-      <p class="eyebrow">
-        <span class="eyebrow-dot"></span>
-        Archive
-      </p>
-      <h1 class="page-title">Writing</h1>
-      <p class="page-lede">
-        Longform essays and field notes. {allPosts.length} {allPosts.length === 1 ? 'piece' : 'pieces'} so far.
-      </p>
-
-      {categories.length > 0 && (
-        <div class="chips" role="list">
-          <span class="chip chip-active" role="listitem">
-            All <span class="chip-count">{allPosts.length}</span>
-          </span>
-          {categories.map(([cat, count]) => (
-            <span class="chip" role="listitem">
-              {cat} <span class="chip-count">{count}</span>
-            </span>
-          ))}
-        </div>
-      )}
-    </header>
-
-    <!-- ========= 列表主体 ========= -->
-    {allPosts.length > 0 ? (
-      <div class="archive">
-        {years.map((year) => (
-          <section class="year-block">
-            <header class="year-head">
-              <h2 class="year-label">{year}</h2>
-              <span class="year-count">
-                {groupedByYear[year].length} {groupedByYear[year].length === 1 ? 'piece' : 'pieces'}
-              </span>
-            </header>
-
-            <ul class="rows">
-              {groupedByYear[year].map((post) => (
-                <li class="row">
-                  <a href={`/posts/${post.slug}`} class="row-link">
-                    <time class="row-date" datetime={post.data.date.toISOString()}>
-                      {formatDate(post.data.date)}
-                    </time>
-                    <span class="row-category">{inferCategory(post)}</span>
-                    <div class="row-body">
-                      <h3 class="row-title">{post.data.title}</h3>
-                      {post.data.description && (
-                        <p class="row-desc">{post.data.description}</p>
-                      )}
-                    </div>
-                    <span class="row-arrow" aria-hidden="true">→</span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </section>
+<ContentLayout title="文章归档 · x1ngg3" description="技术、阅读与生活的文字记录">
+  <header class="page-head page-heading surface" id="categories">
+    <p class="eyebrow"><Icon name="archive" size={17} />文字的存档</p>
+    <h1 class="page-title">文章归档</h1>
+    <p class="page-lede">把思考写下来。这里一共有 {allPosts.length} 篇文章。</p>
+    {categories.length > 0 && (
+      <div class="chips" role="group" aria-label="按分类筛选文章" hidden>
+        <button type="button" class="chip chip-active" data-category="" aria-pressed="true" aria-controls="posts-archive">全部 <span class="chip-count">{allPosts.length}</span></button>
+        {categories.map(category => (
+          <button type="button" class="chip" data-category={category} aria-pressed="false" aria-controls="posts-archive">{category} <span class="chip-count">{allPosts.filter(post => post.data.category === category).length}</span></button>
         ))}
       </div>
-    ) : (
-      <div class="empty">
-        <p>Nothing here yet.</p>
-        <p class="empty-hint">
-          Add your first <code>.md</code> in <code>src/content/posts/</code>.
-        </p>
-      </div>
     )}
+    <p class="filter-status" role="status" aria-live="polite" hidden></p>
+  </header>
+
+  <div class="archive" id="posts-archive">
+    {years.map(year => (
+      <section class="year-block">
+        <header class="year-head">
+          <h2 class="year-label">{year}</h2>
+          <span class="year-count">{allPosts.filter(post => post.data.date.getFullYear() === year).length} 篇文章</span>
+        </header>
+        <ul class="rows">
+          {allPosts.filter(post => post.data.date.getFullYear() === year).map(post => (
+            <li class="row surface" data-category={post.data.category}>
+              <a href={`/posts/${post.slug}`} class="row-link">
+                <time class="row-date" datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
+                <div class="row-body">
+                  <h3 class="row-title">{post.data.title}</h3>
+                  <p class="row-desc">{post.data.description || getExcerpt(post.body)}</p>
+                  <span class="row-category">{post.data.category}</span>
+                </div>
+                <span class="row-arrow"><Icon name="arrow" size={17} /></span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+    {allPosts.length === 0 && <p class="empty surface">还没有文章，过段时间再来看看吧。</p>}
   </div>
-</BaseLayout>
+</ContentLayout>
+
+<script>
+  const filters = document.querySelector<HTMLElement>('.chips');
+  const filterStatus = document.querySelector<HTMLElement>('.filter-status');
+  const filterButtons = document.querySelectorAll<HTMLButtonElement>('.chip');
+  const yearBlocks = document.querySelectorAll<HTMLElement>('.year-block');
+
+  if (filters && filterStatus) {
+    filters.hidden = false;
+
+    const selectCategory = (requestedCategory: string, updateUrl = false) => {
+      const category = Array.from(filterButtons).some(button => button.dataset.category === requestedCategory) ? requestedCategory : '';
+      let visibleCount = 0;
+
+      for (const yearBlock of yearBlocks) {
+        let yearCount = 0;
+        for (const row of yearBlock.querySelectorAll<HTMLElement>('.row')) {
+          row.hidden = Boolean(category && row.dataset.category !== category);
+          if (!row.hidden) yearCount += 1;
+        }
+        yearBlock.hidden = yearCount === 0;
+        visibleCount += yearCount;
+        const countLabel = yearBlock.querySelector<HTMLElement>('.year-count');
+        if (countLabel) countLabel.textContent = `${yearCount} 篇文章`;
+      }
+
+      for (const button of filterButtons) {
+        const active = button.dataset.category === category;
+        button.classList.toggle('chip-active', active);
+        button.setAttribute('aria-pressed', String(active));
+      }
+
+      filterStatus.hidden = false;
+      filterStatus.textContent = `${category || '全部'} · ${visibleCount} 篇文章`;
+
+      if (updateUrl) {
+        const url = new URL(window.location.href);
+        if (category) url.searchParams.set('category', category);
+        else url.searchParams.delete('category');
+        window.history.replaceState(null, '', url);
+      }
+    };
+
+    for (const button of filterButtons) {
+      button.addEventListener('click', () => selectCategory(button.dataset.category || '', true));
+    }
+
+    const syncCategory = () => selectCategory(new URL(window.location.href).searchParams.get('category') || '');
+    syncCategory();
+    window.addEventListener('popstate', syncCategory);
+  }
+</script>
 
 <style>
-  .page {
-    padding: 4rem 0 2rem;
-  }
-
-  /* ========= 顶部 ========= */
-  .page-head {
-    margin-bottom: 4rem;
-    padding-bottom: 2.5rem;
-    border-bottom: 1px solid var(--color-rule);
-  }
-
-  .page-head .eyebrow {
-    margin-bottom: 1.5rem;
-  }
-
-  .page-title {
-    font-family: var(--font-serif);
-    font-size: clamp(2.75rem, 6vw, 4.5rem);
-    font-weight: 400;
-    letter-spacing: -0.025em;
-    line-height: 1;
-    color: var(--color-ink);
-    margin: 0 0 1.5rem;
-  }
-
-  .page-lede {
-    font-family: var(--font-sans);
-    font-size: 1.05rem;
-    line-height: 1.5;
-    color: var(--color-ink-soft);
-    max-width: 50ch;
-    margin: 0 0 2.5rem;
-  }
-
-  /* ========= 分类 chips ========= */
-  .chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-  }
-
-  .chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.42rem 0.9rem;
-    background: transparent;
-    border: 1px solid var(--color-rule);
-    border-radius: 999px;
-    font-family: var(--font-sans);
-    font-size: 0.82rem;
-    font-weight: 500;
-    color: var(--color-ink-soft);
-    letter-spacing: 0.005em;
-  }
-
-  .chip-active {
-    background: var(--color-ink);
-    border-color: var(--color-ink);
-    color: var(--color-bg);
-  }
-
-  .chip-count {
-    color: var(--color-ink-faint);
-    font-variant-numeric: tabular-nums;
-    font-weight: 400;
-    font-size: 0.78rem;
-  }
-
-  .chip-active .chip-count {
-    color: rgba(240, 238, 230, 0.6);
-  }
-
-  /* ========= 归档列表 ========= */
-  .archive {
-    display: flex;
-    flex-direction: column;
-    gap: 4rem;
-  }
-
-  .year-head {
-    display: flex;
-    align-items: baseline;
-    gap: 1rem;
-    margin-bottom: 1.25rem;
-  }
-
-  .year-label {
-    font-family: var(--font-serif);
-    font-size: 2rem;
-    font-weight: 400;
-    letter-spacing: -0.015em;
-    color: var(--color-ink);
-    margin: 0;
-  }
-
-  .year-count {
-    font-family: var(--font-sans);
-    font-size: 0.85rem;
-    color: var(--color-ink-mute);
-    letter-spacing: 0.01em;
-  }
-
-  .rows {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    border-top: 1px solid var(--color-rule-soft);
-  }
-
-  .row {
-    border-bottom: 1px solid var(--color-rule-soft);
-  }
-
-  .row-link {
-    display: grid;
-    grid-template-columns: 130px 110px 1fr 24px;
-    gap: 1.75rem;
-    align-items: baseline;
-    padding: 1.25rem 0;
-    color: inherit;
-    transition: padding var(--duration) var(--ease);
-  }
-
-  .row-link:hover {
-    padding-left: 0.5rem;
-  }
-
-  .row-date {
-    font-family: var(--font-sans);
-    font-size: 0.85rem;
-    color: var(--color-ink-mute);
-    font-variant-numeric: tabular-nums;
-    letter-spacing: 0.01em;
-  }
-
-  .row-category {
-    font-family: var(--font-sans);
-    font-size: 0.82rem;
-    font-weight: 500;
-    color: var(--color-ink-soft);
-    letter-spacing: 0.01em;
-  }
-
-  .row-body {
-    min-width: 0;
-  }
-
-  .row-title {
-    font-family: var(--font-serif);
-    font-size: 1.15rem;
-    font-weight: 400;
-    letter-spacing: -0.005em;
-    color: var(--color-ink);
-    margin: 0 0 0.3rem;
-    line-height: 1.35;
-    transition: color var(--duration) var(--ease);
-  }
-
-  .row-link:hover .row-title {
-    color: var(--color-accent);
-  }
-
-  .row-desc {
-    font-family: var(--font-sans);
-    font-size: 0.88rem;
-    line-height: 1.5;
-    color: var(--color-ink-mute);
-    margin: 0;
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  .row-arrow {
-    font-family: var(--font-sans);
-    color: var(--color-ink-faint);
-    font-size: 1rem;
-    opacity: 0;
-    transform: translateX(-4px);
-    transition: all var(--duration) var(--ease);
-  }
-
-  .row-link:hover .row-arrow {
-    opacity: 1;
-    transform: translateX(0);
-    color: var(--color-accent);
-  }
-
-  /* ========= 空状态 ========= */
-  .empty {
-    text-align: center;
-    padding: 5rem 2rem;
-    color: var(--color-ink-mute);
-  }
-
-  .empty-hint {
-    font-size: 0.85rem;
-    color: var(--color-ink-faint);
-    margin-top: 0.5rem;
-  }
-
-  .empty code {
-    color: var(--color-accent);
-    background: var(--color-bg-offset);
-  }
-
-  /* ========= 响应式 ========= */
-  @media (max-width: 768px) {
-    .page {
-      padding: 2rem 0 1rem;
-    }
-
-    .page-head {
-      margin-bottom: 2.5rem;
-      padding-bottom: 2rem;
-    }
-
-    .page-title {
-      font-size: 2.5rem;
-    }
-
-    .archive {
-      gap: 3rem;
-    }
-
-    .year-label {
-      font-size: 1.5rem;
-    }
-
-    .row-link {
-      grid-template-columns: 1fr;
-      gap: 0.3rem;
-      padding: 1rem 0;
-    }
-
-    .row-link:hover {
-      padding-left: 0;
-    }
-
-    .row-date {
-      font-size: 0.78rem;
-    }
-
-    .row-category {
-      font-size: 0.78rem;
-      color: var(--color-accent);
-    }
-
-    .row-title {
-      font-size: 1.05rem;
-    }
-
-    .row-arrow {
-      display: none;
-    }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+  .chip { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--color-rule); border-radius: 6px; background: white; color: var(--color-ink-soft); font-size: 0.8rem; line-height: 1.5; padding: 7px 13px; cursor: pointer; }
+  .chip:hover { border-color: var(--color-accent); color: var(--color-accent-deep); }
+  .chip-active { background: var(--color-accent); border-color: var(--color-accent); color: white; }
+  .chip-active:hover { color: white; }
+  .chip-count { opacity: 0.75; font-size: 0.72rem; }
+  .filter-status { margin-top: 12px; font-size: 0.75rem; color: var(--color-ink-mute); }
+  .archive { display: grid; gap: 24px; margin-top: 26px; }
+  .year-head { display: flex; align-items: center; gap: 14px; margin: 0 8px 16px; }
+  .year-label { font-size: 1.2rem; }
+  .year-count { font-size: 0.78rem; color: var(--color-ink-mute); }
+  .rows { list-style: none; padding: 0; margin: 0; display: grid; gap: 16px; }
+  .row { margin: 0; transition: box-shadow var(--duration); }
+  .row:hover { box-shadow: var(--card-shadow-hover); }
+  .row-link { display: grid; grid-template-columns: 62px minmax(0, 1fr) 18px; gap: 20px; padding: 26px var(--card-padding); align-items: baseline; }
+  .row-date { color: var(--color-ink-mute); font-size: 0.82rem; font-variant-numeric: tabular-nums; }
+  .row-title { font-size: 1.05rem; transition: color var(--duration); }
+  .row-link:hover .row-title { color: var(--color-accent-deep); }
+  .row-desc { font-size: 0.88rem; line-height: 1.8; color: var(--color-ink-mute); margin-top: 8px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .row-category { display: inline-block; margin-top: 10px; color: var(--color-accent-deep); font-size: 0.72rem; }
+  .row-arrow { color: var(--color-accent); align-self: center; }
+  .empty { padding: 32px; color: var(--color-ink-mute); }
+  @media (max-width: 600px) {
+    .row-link { grid-template-columns: minmax(0, 1fr); gap: 8px; padding: 24px; }
+    .row-arrow { display: none; }
   }
 </style>
