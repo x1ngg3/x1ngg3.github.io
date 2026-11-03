@@ -30,7 +30,8 @@ const isActive = (href: string) => href === '/' ? currentPath === '/' : currentP
     <meta name="description" content={description}>
     <meta name="generator" content={Astro.generator}>
     <title>{title}</title>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-avatar.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-avatar.png">
     {Astro.slots.has('cover') && <link rel="preload" as="image" type="image/webp" href="/images/DJI_20240916081052_0037_D.webp" />}
   </head>
   <body id="page-top">

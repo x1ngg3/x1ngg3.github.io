@@ -29,6 +29,8 @@
 | `src/components/Comments.astro` | Giscus 加载及评论绑定 |
 | `public/giscus-theme.css` | 保留的旧评论主题，当前未加载 |
 | `public/images/avatar.webp` | 导航、侧栏、首页文章卡片和说说共用的 256×256 本地头像 |
+| `public/favicon-avatar.png` | 从头像生成的 48×48 圆角网站图标 |
+| `public/apple-touch-icon-avatar.png` | 从头像生成的 180×180 触屏图标 |
 | `public/images/DJI_20240916081052_0037_D.webp` | 指定海浪照片的 2560×1440 网页封面 |
 | `public/images/DJI_20240916081052_0037_D-thumb.webp` | 同一照片的 640×360 侧栏缩略图 |
 | `astro.config.mjs` | 站点域名、代码高亮设置 |
